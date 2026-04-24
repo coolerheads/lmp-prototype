@@ -19,54 +19,6 @@ html, body, #root {
   flex-direction: column;
 }
 
-.lmp-nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 10px 20px;
-  background: #ffffff;
-  border-bottom: 1px solid #e5e4e7;
-}
-
-.lmp-nav-brand {
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.3px;
-  color: #08060d;
-}
-
-.lmp-nav-tabs {
-  display: flex;
-  gap: 4px;
-}
-
-.lmp-nav-tab {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  color: #6b6375;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 120ms ease, color 120ms ease;
-}
-
-.lmp-nav-tab:hover {
-  background: rgba(0, 0, 0, 0.05);
-  color: #08060d;
-}
-
-.lmp-nav-tab.is-active {
-  background: #08060d;
-  color: #ffffff;
-}
-
 .lmp-main {
   flex: 1;
   min-width: 0;

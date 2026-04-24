@@ -110,7 +110,7 @@ const THEMES = {
 const teams = [
   // Silverbacks Division
   {
-    id: 1, name: 'The Gridiron Syndicate', abbr: 'SYN', owner: 'C. Peterson', isMe: true,
+    id: 1, name: 'The Gridiron Syndicate', abbr: 'SYN', owner: 'C. Peterson', isMe: true, isPaid: true,
     div: 'silverbacks', record: '6-1-0', pct: .857, pf: 1024.2, pa: 845.7, divRec: '3-0-0', streak: 'W4',
     banner: { bg: 'radial-gradient(ellipse at top left, #3a0f0f 0%, #1a0505 70%), linear-gradient(135deg, #3a0f0f, #1a0505)', color: '#e8c168', font: 'Fraunces', weight: 700, italic: true, size: 'lg', tracking: 0, shadow: '0 2px 8px rgba(0,0,0,0.5)', art: 'syndicate', image: SYNDICATE_PNG },
     avatar: { bg: '#3a0f0f', color: '#e8c168', label: '❦', font: 'Fraunces' },
@@ -122,7 +122,7 @@ const teams = [
     avatar: { bg: '#c8102e', color: '#ffffff', label: 'KA', font: 'Archivo' },
   },
   {
-    id: 3, name: 'Jefferson\'s Airplane', abbr: 'JEF', owner: 'D. Trezise',
+    id: 3, name: 'Jefferson\'s Airplane', abbr: 'JEF', owner: 'D. Trezise', isPaid: true,
     div: 'silverbacks', record: '4-3-0', pct: .571, pf: 901.2, pa: 878.9, divRec: '2-1-0', streak: 'L1',
     banner: { bg: 'linear-gradient(90deg, #4f2683 0%, #7a3fb8 50%, #ffc62f 100%)', color: '#ffffff', font: 'Fraunces', weight: 700, italic: true, size: 'md', tracking: 0, shadow: '0 1px 3px rgba(0,0,0,0.4)', art: 'airplane', image: AIRPLANE_PNG },
     avatar: { bg: '#4f2683', color: '#ffc62f', label: 'JA', font: 'Fraunces' },
@@ -140,7 +140,7 @@ const teams = [
     avatar: { bg: '#d98f1f', color: '#1a1200', label: 'BM', font: 'Archivo' },
   },
   {
-    id: 6, name: 'Hurts Locker', abbr: 'HRT', owner: 'S. Patel',
+    id: 6, name: 'Hurts Locker', abbr: 'HRT', owner: 'S. Patel', isPaid: true,
     div: 'silverbacks', record: '2-5-0', pct: .286, pf: 798.3, pa: 945.1, divRec: '0-3-0', streak: 'L3',
     banner: { bg: 'linear-gradient(135deg, #004c54 0%, #0a6b75 60%, #a5acaf 100%)', color: '#ffffff', font: 'Archivo', weight: 900, size: 'md', tracking: 1, italic: false, shadow: '0 1px 3px rgba(0,0,0,0.5)', art: 'hurtslocker', image: HURTSLOCKER_PNG },
     avatar: { bg: '#004c54', color: '#ffffff', label: 'HL', font: 'Archivo' },
@@ -153,7 +153,7 @@ const teams = [
     avatar: { bg: '#041e42', color: '#869397', label: 'CLD', font: 'Archivo' },
   },
   {
-    id: 8, name: 'Henry\'s Holes', abbr: 'HEN', owner: 'J. Nakamura',
+    id: 8, name: 'Henry\'s Holes', abbr: 'HEN', owner: 'J. Nakamura', isPaid: true,
     div: 'young-bulls', record: '5-2-0', pct: .714, pf: 956.2, pa: 872.6, divRec: '2-1-0', streak: 'W1',
     banner: { bg: 'linear-gradient(135deg, #241773 0%, #3d2ea1 60%, #9e7c0c 100%)', color: '#ffffff', font: 'Fraunces', weight: 900, italic: false, size: 'md', tracking: 0, shadow: '0 2px 4px rgba(0,0,0,0.4)', art: 'holes', image: HOLES_PNG },
     avatar: { bg: '#241773', color: '#9e7c0c', label: 'HH', font: 'Fraunces' },
@@ -171,7 +171,7 @@ const teams = [
     avatar: { bg: '#aa0000', color: '#ffc4d4', label: 'PG', font: 'Fraunces' },
   },
   {
-    id: 11, name: 'The Puka Principle', abbr: 'PUK', owner: 'L. Ashford',
+    id: 11, name: 'The Puka Principle', abbr: 'PUK', owner: 'L. Ashford', isPaid: true,
     div: 'young-bulls', record: '2-5-0', pct: .286, pf: 821.5, pa: 929.3, divRec: '0-3-0', streak: 'L2',
     banner: { bg: 'linear-gradient(135deg, #00274c 0%, #005a9c 60%, #ffa300 100%)', color: '#ffffff', font: 'Archivo', weight: 900, size: 'md', tracking: -0.5, italic: false, shadow: '0 1px 3px rgba(0,0,0,0.4)', art: 'puka', image: PUKA_PNG },
     avatar: { bg: '#00274c', color: '#ffa300', label: 'PP', font: 'Archivo' },
@@ -733,14 +733,20 @@ const lastWeekRecap = {
 // ---------------------------------------------------------------------------
 // Component entry point
 // ---------------------------------------------------------------------------
-export default function LeagueHome() {
+export default function LeagueHome({ onNavigate }) {
   const [themeKey, setThemeKey] = useState('legacy-dynasty');
   const [themeMenuOpen, setThemeMenuOpen] = useState(false);
   const [showCustomHints, setShowCustomHints] = useState(false);
   const [activeNav, setActiveNav] = useState('home');
   const [duesPaid, setDuesPaid] = useState(false);
+  const [viewMode, setViewMode] = useState('premium'); // 'free' | 'mixed' | 'premium'
 
   const t = THEMES[themeKey];
+  // Hero + Division banners are "premium" only when the whole league is premium.
+  // In Mixed mode those league-wide elements stay in Free treatment — only
+  // individual team banners flip based on team.isPaid.
+  const isPremium = viewMode === 'premium';
+  const teamIsPremium = (team) => viewMode === 'premium' || (viewMode === 'mixed' && !!team.isPaid);
 
   // Convenience lookups
   const teamById = useMemo(() => Object.fromEntries(teams.map(x => [x.id, x])), []);
@@ -751,23 +757,23 @@ export default function LeagueHome() {
   return (
     <div style={{ background: t.bgPage, color: t.text, minHeight: '100vh', fontFamily: '"Archivo", system-ui, sans-serif' }}>
       <FontLoader />
-      <Chrome t={t} showCustomHints={showCustomHints} setShowCustomHints={setShowCustomHints} activeNav={activeNav} setActiveNav={setActiveNav} themeKey={themeKey} />
-      <Hero t={t} themeKey={themeKey} setThemeKey={setThemeKey} themeMenuOpen={themeMenuOpen} setThemeMenuOpen={setThemeMenuOpen} showCustomHints={showCustomHints} />
+      <Chrome t={t} showCustomHints={showCustomHints} setShowCustomHints={setShowCustomHints} activeNav={activeNav} setActiveNav={setActiveNav} themeKey={themeKey} viewMode={viewMode} setViewMode={setViewMode} onNavigate={onNavigate} />
+      <Hero t={t} themeKey={themeKey} setThemeKey={setThemeKey} themeMenuOpen={themeMenuOpen} setThemeMenuOpen={setThemeMenuOpen} showCustomHints={showCustomHints} isPremium={isPremium} />
       <StatusStrip t={t} duesPaid={duesPaid} />
       <LeagueSafeStrip t={t} duesPaid={duesPaid} setDuesPaid={setDuesPaid} myTeam={myTeam} />
       <main className="max-w-[1400px] mx-auto px-6 pb-16 space-y-6 mt-6">
         {/* TOP SECTION: My Team (primary) + Standings column (secondary) */}
         <div className="lh-top-grid">
-          <MyTeamModule t={t} myTeam={myTeam} roster={roster} bench={bench} showCustomHints={showCustomHints} />
+          <MyTeamModule t={t} myTeam={myTeam} roster={roster} bench={bench} showCustomHints={showCustomHints} isPremium={teamIsPremium(myTeam)} onNavigate={onNavigate} />
           <div className="space-y-6">
-            <StandingsSection t={t} silverbacks={silverbacks} youngBulls={youngBulls} showCustomHints={showCustomHints} compact={true} />
+            <StandingsSection t={t} silverbacks={silverbacks} youngBulls={youngBulls} showCustomHints={showCustomHints} compact={true} isPremium={isPremium} teamIsPremium={teamIsPremium} />
             <TopPerformersCard t={t} topPerformers={topPerformers} />
-            <LastWeekRecapCard t={t} lastWeekRecap={lastWeekRecap} teamById={teamById} />
+            <LastWeekRecapCard t={t} lastWeekRecap={lastWeekRecap} teamById={teamById} teamIsPremium={teamIsPremium} />
           </div>
         </div>
 
         {/* MIDDLE SECTION: This Week's Matchups — full width */}
-        <MatchupsSection t={t} matchups={matchups} teamById={teamById} showCustomHints={showCustomHints} />
+        <MatchupsSection t={t} matchups={matchups} teamById={teamById} showCustomHints={showCustomHints} teamIsPremium={teamIsPremium} onNavigate={onNavigate} />
 
         {/* BOTTOM SECTION: 3-col — Activity, Free Agents, League Chat */}
         <div className="lh-bottom-grid">
@@ -818,6 +824,49 @@ function FontLoader() {
         box-shadow: 0 1px 3px rgba(0,0,0,0.25);
         pointer-events: none;
         z-index: 2;
+      }
+
+      /* Lock tooltip — hover popup on Free-mode banners */
+      .lh-lock-tooltip {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        flex-shrink: 0;
+        cursor: help;
+      }
+      .lh-lock-tooltip-text {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%) translateY(8px);
+        padding: 6px 10px;
+        background: #0b1221;
+        color: #ffffff;
+        font-family: 'Archivo', sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        border-radius: 6px;
+        white-space: nowrap;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 130ms ease, transform 130ms ease;
+        z-index: 100;
+      }
+      .lh-lock-tooltip-text::before {
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 4px solid transparent;
+        border-bottom-color: #0b1221;
+      }
+      .lh-lock-tooltip:hover .lh-lock-tooltip-text,
+      .lh-lock-tooltip:focus-within .lh-lock-tooltip-text {
+        opacity: 1;
+        transform: translateX(-50%) translateY(4px);
       }
 
       /* Subtle paper texture for cream backgrounds */
@@ -880,15 +929,15 @@ function FontLoader() {
 // ---------------------------------------------------------------------------
 // Placeholder components — will be filled in next
 // ---------------------------------------------------------------------------
-function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNav, themeKey }) {
+function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNav, themeKey, viewMode, setViewMode, onNavigate }) {
   const navItems = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'team', label: 'My Team', icon: Shield },
-    { id: 'league', label: 'League', icon: Users },
-    { id: 'players', label: 'Players', icon: Search },
-    { id: 'scores', label: 'Scores', icon: BarChart3 },
-    { id: 'trades', label: 'Trades', icon: ArrowLeftRight },
-    { id: 'draft', label: 'Draft', icon: Flame },
+    { id: 'home',    label: 'Home',    icon: Home,           pageId: 'home' },
+    { id: 'team',    label: 'My Team', icon: Shield,         pageId: 'franchise' },
+    { id: 'league',  label: 'League',  icon: Users,          pageId: null },
+    { id: 'players', label: 'Players', icon: Search,         pageId: null },
+    { id: 'scores',  label: 'Scores',  icon: BarChart3,      pageId: 'scoring' },
+    { id: 'trades',  label: 'Trades',  icon: ArrowLeftRight, pageId: null },
+    { id: 'draft',   label: 'Draft',   icon: Flame,          pageId: null },
   ];
 
   return (
@@ -904,7 +953,7 @@ function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNa
           </div>
           <button className="flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-md transition-colors hover:bg-black/5 min-w-0" style={{ color: t.text }}>
             <div className="w-6 h-6 rounded flex items-center justify-center text-xs" style={{ background: t.primary, color: t.accent, fontFamily: 'Fraunces' }}>L</div>
-            <span className="truncate">The Legacy League</span>
+            <span className="truncate">The Empire League</span>
             <ChevronDown size={14} style={{ color: t.textMuted }} />
           </button>
         </div>
@@ -917,7 +966,10 @@ function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNa
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveNav(item.id)}
+                onClick={() => {
+                  setActiveNav(item.id);
+                  if (item.pageId && item.pageId !== 'home' && onNavigate) onNavigate(item.pageId);
+                }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[13px] font-medium transition-all"
                 style={{
                   color: isActive ? t.primary : t.textMuted,
@@ -933,8 +985,37 @@ function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNa
           })}
         </nav>
 
-        {/* Right: Customize toggle + actions */}
+        {/* Right: Free/Mixed/Premium view toggle + Customize toggle + actions */}
         <div className="flex items-center gap-2">
+          {/* View mode toggle — three-way segmented control */}
+          <div
+            className="hidden sm:flex items-center p-0.5 rounded-md"
+            style={{ background: t.bgSoft, border: `1px solid ${t.border}` }}
+          >
+            {[
+              { id: 'free', label: 'Free' },
+              { id: 'mixed', label: 'Mixed' },
+              { id: 'premium', label: 'Premium', icon: Crown },
+            ].map(opt => {
+              const isActive = viewMode === opt.id;
+              const isPremiumOpt = opt.id === 'premium';
+              return (
+                <button
+                  key={opt.id}
+                  onClick={() => setViewMode(opt.id)}
+                  className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-semibold transition-all"
+                  style={{
+                    background: isActive ? (isPremiumOpt ? t.primary : t.bgCard) : 'transparent',
+                    color: isActive ? (isPremiumOpt ? t.accent : t.text) : t.textMuted,
+                    boxShadow: isActive ? '0 1px 2px rgba(0,0,0,0.1)' : 'none',
+                  }}
+                >
+                  {opt.icon && <opt.icon size={11} strokeWidth={2.5} />}
+                  <span>{opt.label}</span>
+                </button>
+              );
+            })}
+          </div>
           <button
             onClick={() => setShowCustomHints(v => !v)}
             className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[12px] font-semibold transition-all border"
@@ -963,7 +1044,7 @@ function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNa
     </div>
   );
 }
-function Hero({ t, themeKey, setThemeKey, themeMenuOpen, setThemeMenuOpen, showCustomHints }) {
+function Hero({ t, themeKey, setThemeKey, themeMenuOpen, setThemeMenuOpen, showCustomHints, isPremium }) {
   // The banner's OWN internal palette (independent of app theme) — this
   // represents what the commissioner designed/generated for THIS league.
   // In production: AI-generated from a prompt, or uploaded by the commish.
@@ -972,33 +1053,54 @@ function Hero({ t, themeKey, setThemeKey, themeMenuOpen, setThemeMenuOpen, showC
     accent: '#e8c168',
     light: '#f7f3ea',
   };
+  // Free-mode palette — dark themed gradient using the selected app theme's
+  // primary colors, so the hero still pops and stays visually tied to the
+  // theme switcher. Shared with DivisionBanner so the page reads as one look.
+  const freeBg = `linear-gradient(135deg, ${t.primaryDark} 0%, ${t.primary} 100%)`;
+  const ornamentColor = isPremium ? banner.accent : t.accent;
+  const titleColor = isPremium ? banner.light : '#ffffff';
+  const subheadColor = isPremium ? banner.light : '#ffffff';
 
   return (
     <section className="relative">
-      {/* The custom league banner — designed/generated by the commissioner */}
+      {/* The league banner — custom (Premium) or themed-dark (Free) */}
       <div className={`relative overflow-hidden ${showCustomHints ? 'custom-hint' : ''}`}
-           style={{ background: banner.bg, minHeight: 260 }}>
-        {/* Painted turf — diagonal mowing stripes at the same 115° angle and
-            scale as the division headers, so the hero and division banners
-            read as the same stadium. Same alternating light/dark bands
-            groundskeepers cut into real pro field turf. */}
-        <div className="absolute inset-0 pointer-events-none"
-             style={{
-               background: `repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 22px, rgba(0,0,0,0.06) 22px 44px)`,
-             }} />
-        {/* Soft top-light / bottom-shadow — stadium lighting on turf */}
-        <div className="absolute inset-0 pointer-events-none"
-             style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 40%, transparent 70%, rgba(0,0,0,0.22) 100%)' }} />
-        {/* Decorative top/bottom borders */}
-        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${banner.accent}, transparent)` }} />
-        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${banner.accent}88, transparent)` }} />
-        {/* Radial glow */}
-        <div className="absolute inset-0 pointer-events-none"
-             style={{ background: 'radial-gradient(ellipse at 50% 120%, rgba(232,193,104,0.18), transparent 60%)' }} />
+           style={{
+             background: isPremium ? banner.bg : freeBg,
+             minHeight: isPremium ? 260 : 240,
+           }}>
+        {isPremium ? <>
+          {/* Painted turf — diagonal mowing stripes at the same 115° angle and
+              scale as the division headers, so the hero and division banners
+              read as the same stadium. Same alternating light/dark bands
+              groundskeepers cut into real pro field turf. */}
+          <div className="absolute inset-0 pointer-events-none"
+               style={{
+                 background: `repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 22px, rgba(0,0,0,0.06) 22px 44px)`,
+               }} />
+          {/* Soft top-light / bottom-shadow — stadium lighting on turf */}
+          <div className="absolute inset-0 pointer-events-none"
+               style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 40%, transparent 70%, rgba(0,0,0,0.22) 100%)' }} />
+          {/* Decorative top/bottom borders */}
+          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${banner.accent}, transparent)` }} />
+          <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${banner.accent}88, transparent)` }} />
+          {/* Radial glow */}
+          <div className="absolute inset-0 pointer-events-none"
+               style={{ background: 'radial-gradient(ellipse at 50% 120%, rgba(232,193,104,0.18), transparent 60%)' }} />
+        </> : <>
+          {/* Free-mode decoration — subtle top highlight + accent hairlines.
+              Same gradient skeleton as Premium so the layouts feel cousins. */}
+          <div className="absolute inset-0 pointer-events-none"
+               style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 45%, transparent 70%, rgba(0,0,0,0.18) 100%)' }} />
+          <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${t.accent}, transparent)`, opacity: 0.7 }} />
+          <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${t.accent}, transparent)`, opacity: 0.5 }} />
+          <div className="absolute inset-0 pointer-events-none"
+               style={{ background: `radial-gradient(ellipse at 50% 120%, ${t.accent}22, transparent 60%)` }} />
+        </>}
 
         <div className="relative max-w-[1400px] mx-auto px-6 py-14 md:py-16 flex flex-col items-center text-center">
           {/* Top ornament */}
-          <div className="flex items-center gap-3 mb-5" style={{ color: banner.accent }}>
+          <div className="flex items-center gap-3 mb-5" style={{ color: ornamentColor }}>
             <div className="h-px w-10 md:w-16" style={{ background: 'currentColor', opacity: 0.5 }} />
             <span className="fraunces italic text-[11px] md:text-[12px] tracking-[0.25em] uppercase font-medium" style={{ opacity: 0.85 }}>Est. 2014 · Season XII</span>
             <div className="h-px w-10 md:w-16" style={{ background: 'currentColor', opacity: 0.5 }} />
@@ -1008,20 +1110,39 @@ function Hero({ t, themeKey, setThemeKey, themeMenuOpen, setThemeMenuOpen, showC
           <h1 className="fraunces font-black leading-[0.95] tracking-[-0.02em]"
               style={{
                 fontSize: 'clamp(2.75rem, 6.5vw, 5.25rem)',
-                color: banner.light,
+                color: titleColor,
                 textShadow: '0 2px 24px rgba(0,0,0,0.35)',
               }}>
-            The <span style={{ color: banner.accent, fontStyle: 'italic', fontWeight: 700 }}>Legacy</span> League
+            {isPremium ? (
+              <>The <span style={{ color: banner.accent, fontStyle: 'italic', fontWeight: 700 }}>Empire</span> League</>
+            ) : (
+              <>The Empire League</>
+            )}
           </h1>
 
           {/* Subhead */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12px] md:text-[13px] font-medium tracking-[0.18em] uppercase" style={{ color: banner.light, opacity: 0.85 }}>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[12px] md:text-[13px] font-medium tracking-[0.18em] uppercase" style={{ color: subheadColor, opacity: 0.85 }}>
             <span>12 Teams</span>
-            <span style={{ color: banner.accent, opacity: 0.6 }}>◆</span>
+            <span style={{ color: ornamentColor, opacity: 0.6 }}>◆</span>
             <span>Dynasty · SF · PPR</span>
-            <span style={{ color: banner.accent, opacity: 0.6 }}>◆</span>
+            <span style={{ color: ornamentColor, opacity: 0.6 }}>◆</span>
             <span>Week 7</span>
           </div>
+
+          {/* Free-mode: Upgrade CTA — anchors the conversion story at the Hero level */}
+          {!isPremium && (
+            <button
+              className="mt-6 flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-bold transition-all hover:-translate-y-0.5"
+              style={{
+                background: t.accent,
+                color: t.primaryDark,
+                boxShadow: '0 4px 14px rgba(0,0,0,0.25)',
+              }}
+            >
+              <Crown size={13} strokeWidth={2.5} />
+              <span>Unlock custom league banner — Premium</span>
+            </button>
+          )}
         </div>
 
         {/* Bottom-right: Theme switcher */}
@@ -1032,8 +1153,8 @@ function Hero({ t, themeKey, setThemeKey, themeMenuOpen, setThemeMenuOpen, showC
               className="flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] font-semibold transition-all backdrop-blur-md"
               style={{
                 background: 'rgba(255,255,255,0.14)',
-                color: banner.light,
-                border: `1px solid rgba(255,255,255,0.18)`,
+                color: '#ffffff',
+                border: '1px solid rgba(255,255,255,0.22)',
               }}
               onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.22)'}
               onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.14)'}
@@ -1285,13 +1406,57 @@ function LeagueSafeStrip({ t, duesPaid, setDuesPaid, myTeam }) {
 // these would be uploaded images or AI-generated from a prompt. Here they're
 // CSS compositions to demonstrate the range of styles possible.
 // ---------------------------------------------------------------------------
-function TeamBanner({ team, size = 'md', className = '', style = {} }) {
+// Lock icon with a hover-activated tooltip — used next to team and division
+// names in Free mode to signal "this is customizable on Premium".
+function LockTooltip({ size = 12, color = '#ffffff', tooltipText }) {
+  return (
+    <span className="lh-lock-tooltip" style={{ color }}>
+      <Lock size={size} strokeWidth={2.4} />
+      <span className="lh-lock-tooltip-text">{tooltipText}</span>
+    </span>
+  );
+}
+
+function TeamBanner({ team, size = 'md', className = '', style = {}, t, isPremium = true }) {
   const heights = { sm: 28, row: 36, md: 44, lg: 56, xl: 72 };
   const fontSizes = { sm: 12, row: 14, md: 16, lg: 19, xl: 24 };
   const paddings = { sm: '0 10px', row: '0 14px', md: '0 16px', lg: '0 20px', xl: '0 24px' };
+  const lockSizes = { sm: 10, row: 11, md: 12, lg: 13, xl: 14 };
   const h = heights[size];
   const b = team.banner;
   const ArtComp = b.art ? BANNER_ART[b.art] : null;
+
+  // Free view: a LIGHTER shade of the same theme family than the Hero / Division
+  // banners, so there's a visual ladder — darkest = league/division, medium =
+  // teams. Uses color-mix to lighten the theme's primary against white.
+  if (!isPremium && t) {
+    return (
+      <div className={`relative rounded-md flex items-center ${className}`}
+           style={{
+             background: `linear-gradient(135deg, color-mix(in srgb, ${t.primary} 82%, #ffffff) 0%, color-mix(in srgb, ${t.primary} 62%, #ffffff) 100%)`,
+             height: h,
+             padding: paddings[size],
+             gap: 8,
+             ...style,
+           }}>
+        <LockTooltip size={lockSizes[size]} color="#ffffff" tooltipText="Get custom team logo & banner" />
+        <span
+          className="truncate"
+          style={{
+            color: '#ffffff',
+            fontFamily: 'Archivo, sans-serif',
+            fontWeight: 800,
+            fontSize: fontSizes[size],
+            letterSpacing: '-0.01em',
+            lineHeight: 1.1,
+            textShadow: '0 1px 4px rgba(0,0,0,0.35)',
+          }}
+        >
+          {team.name}
+        </span>
+      </div>
+    );
+  }
 
   // PNG image banner — when a raster image is provided, render it as the entire
   // banner (text is already composited into the image). No gradient, no SVG
@@ -1388,7 +1553,7 @@ function SectionHeader({ t, eyebrow, title, action }) {
   );
 }
 
-function MatchupsSection({ t, matchups, teamById, showCustomHints }) {
+function MatchupsSection({ t, matchups, teamById, showCustomHints, teamIsPremium, onNavigate }) {
   return (
     <section>
       <SectionHeader
@@ -1413,6 +1578,8 @@ function MatchupsSection({ t, matchups, teamById, showCustomHints }) {
           return (
             <div
               key={m.id}
+              onClick={myGame && onNavigate ? () => onNavigate('scoring') : undefined}
+              title={myGame ? 'Open Live Scoring' : undefined}
               className="rounded-xl overflow-hidden transition-all cursor-pointer"
               style={{
                 background: t.bgCard,
@@ -1447,6 +1614,8 @@ function MatchupsSection({ t, matchups, teamById, showCustomHints }) {
                       <TeamBanner
                         team={team}
                         size="row"
+                        t={t}
+                        isPremium={teamIsPremium(team)}
                         style={{ width: 280 }}
                         className={`shrink-0 ${highlightBanner ? 'custom-hint' : ''}`}
                       />
@@ -1475,7 +1644,35 @@ function MatchupsSection({ t, matchups, teamById, showCustomHints }) {
 // ("The Legacy League" treatment) so the standings feel like they belong to
 // the same league identity. Eyebrow with flanking rules, italic-gold
 // emphasis on the distinguishing word, same forest-green + gold palette.
-function DivisionBanner({ division, t, showCustomHints }) {
+function DivisionBanner({ division, t, showCustomHints, isPremium = true }) {
+  // Free view: themed dark gradient tied to the selected theme — same
+  // treatment as the Free-mode Hero so they read as a single look. When
+  // the commissioner switches themes, these update together.
+  if (!isPremium) {
+    return (
+      <div
+        className="relative rounded-md flex items-center justify-center gap-2 py-3 px-4"
+        style={{
+          background: `linear-gradient(135deg, ${t.primaryDark} 0%, ${t.primary} 100%)`,
+          minHeight: 68,
+          color: '#ffffff',
+        }}
+      >
+        <div className="absolute top-0 left-0 right-0 h-px rounded-t-md" style={{ background: `linear-gradient(90deg, transparent, ${t.accent}, transparent)`, opacity: 0.7 }} />
+        <div className="absolute bottom-0 left-0 right-0 h-px rounded-b-md" style={{ background: `linear-gradient(90deg, transparent, ${t.accent}, transparent)`, opacity: 0.4 }} />
+        <LockTooltip size={12} color={t.accent} tooltipText="Get custom division banner" />
+        <div className="flex flex-col items-center text-center">
+          <div className="text-[9px] font-bold uppercase tracking-[0.22em]" style={{ color: t.accent, opacity: 0.9 }}>
+            {division.subtitle}
+          </div>
+          <div className="text-[17px] font-bold leading-tight mt-0.5" style={{ color: '#ffffff', fontFamily: 'Archivo, sans-serif', textShadow: '0 1px 8px rgba(0,0,0,0.3)' }}>
+            The {division.italicPart}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className={`relative overflow-hidden rounded-md ${showCustomHints ? 'custom-hint' : ''}`}
@@ -1532,7 +1729,7 @@ function DivisionBanner({ division, t, showCustomHints }) {
   );
 }
 
-function StandingsSection({ t, silverbacks, youngBulls, showCustomHints, compact = false }) {
+function StandingsSection({ t, silverbacks, youngBulls, showCustomHints, compact = false, isPremium, teamIsPremium }) {
   return (
     <section>
       <SectionHeader
@@ -1546,18 +1743,18 @@ function StandingsSection({ t, silverbacks, youngBulls, showCustomHints, compact
         }
       />
       <div className="rounded-xl overflow-hidden" style={{ background: t.bgCard, border: `1px solid ${t.border}` }}>
-        <DivisionGroup t={t} division={divisions.silverbacks} teams={silverbacks} showCustomHints={showCustomHints} compact={compact} />
+        <DivisionGroup t={t} division={divisions.silverbacks} teams={silverbacks} showCustomHints={showCustomHints} compact={compact} isPremium={isPremium} teamIsPremium={teamIsPremium} />
         <div style={{ height: 1, background: t.border }} />
-        <DivisionGroup t={t} division={divisions['young-bulls']} teams={youngBulls} showCustomHints={showCustomHints} compact={compact} />
+        <DivisionGroup t={t} division={divisions['young-bulls']} teams={youngBulls} showCustomHints={showCustomHints} compact={compact} isPremium={isPremium} teamIsPremium={teamIsPremium} />
       </div>
     </section>
   );
 }
 
-function DivisionGroup({ t, division, teams, showCustomHints, compact = false }) {
+function DivisionGroup({ t, division, teams, showCustomHints, compact = false, isPremium, teamIsPremium }) {
   return (
     <div className="p-3">
-      <DivisionBanner division={division} t={t} showCustomHints={showCustomHints} />
+      <DivisionBanner division={division} t={t} showCustomHints={showCustomHints} isPremium={isPremium} />
       {/* Column headers */}
       <div className="flex items-center gap-3 mt-3 px-2 pb-1.5 text-[10px] font-bold uppercase tracking-wider"
            style={{ color: t.textMuted, borderBottom: `1px solid ${t.border}` }}>
@@ -1573,14 +1770,14 @@ function DivisionGroup({ t, division, teams, showCustomHints, compact = false })
       {/* Team rows */}
       <div className="pt-1">
         {teams.map((team, idx) => (
-          <TeamRow key={team.id} t={t} team={team} rank={idx + 1} showCustomHints={showCustomHints && team.isMe} compact={compact} />
+          <TeamRow key={team.id} t={t} team={team} rank={idx + 1} showCustomHints={showCustomHints && team.isMe} compact={compact} isPremium={teamIsPremium(team)} />
         ))}
       </div>
     </div>
   );
 }
 
-function TeamRow({ t, team, rank, showCustomHints, compact = false }) {
+function TeamRow({ t, team, rank, showCustomHints, compact = false, isPremium }) {
   const streakColor = team.streak.startsWith('W') ? t.success : t.danger;
   return (
     <div
@@ -1600,6 +1797,8 @@ function TeamRow({ t, team, rank, showCustomHints, compact = false }) {
       <TeamBanner
         team={team}
         size={compact ? 'sm' : 'row'}
+        t={t}
+        isPremium={isPremium}
         style={{ width: compact ? 220 : 280 }}
         className={`shrink-0 ${showCustomHints ? 'custom-hint' : ''}`}
       />
@@ -1702,7 +1901,7 @@ const POS_COLORS = {
 // Includes banner header, live matchup bar, full starting lineup with
 // start/bench actions, and collapsible bench.
 // ---------------------------------------------------------------------------
-function MyTeamModule({ t, myTeam, roster, bench, showCustomHints }) {
+function MyTeamModule({ t, myTeam, roster, bench, showCustomHints, isPremium, onNavigate }) {
   const [benchOpen, setBenchOpen] = useState(true);
 
   // Compute aggregate scores
@@ -1727,12 +1926,20 @@ function MyTeamModule({ t, myTeam, roster, bench, showCustomHints }) {
       <div className="rounded-xl overflow-hidden" style={{ background: t.bgCard, border: `1px solid ${t.border}` }}>
         {/* Header: banner + stat trio */}
         <div className="p-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4" style={{ borderBottom: `1px solid ${t.border}` }}>
-          <TeamBanner
-            team={myTeam}
-            size="lg"
+          <div
+            onClick={() => onNavigate && onNavigate('franchise')}
+            title="View My Franchise"
+            className={`cursor-pointer transition-opacity hover:opacity-90 ${showCustomHints ? 'custom-hint' : ''}`}
             style={{ width: '100%', maxWidth: 440 }}
-            className={showCustomHints ? 'custom-hint' : ''}
-          />
+          >
+            <TeamBanner
+              team={myTeam}
+              size="lg"
+              t={t}
+              isPremium={isPremium}
+              style={{ width: '100%' }}
+            />
+          </div>
           <div className="flex-1 flex items-stretch justify-around gap-2">
             {[
               { label: 'Rec',  value: myTeam.record, sub: 'Rank #1' },
@@ -2115,7 +2322,7 @@ function TopPerformersCard({ t, topPerformers }) {
 // ---------------------------------------------------------------------------
 // LAST WEEK RECAP — Team of the Week 🏆 and Toilet Bowl 🚽
 // ---------------------------------------------------------------------------
-function LastWeekRecapCard({ t, lastWeekRecap, teamById }) {
+function LastWeekRecapCard({ t, lastWeekRecap, teamById, teamIsPremium }) {
   const best = teamById[lastWeekRecap.best.teamId];
   const worst = teamById[lastWeekRecap.worst.teamId];
 
@@ -2126,7 +2333,7 @@ function LastWeekRecapCard({ t, lastWeekRecap, teamById }) {
         <div className="text-[10px] font-bold uppercase tracking-[0.18em]" style={{ color: labelColor }}>
           {label}
         </div>
-        <TeamBanner team={team} size="sm" style={{ width: '100%', maxWidth: 260 }} />
+        <TeamBanner team={team} size="sm" t={t} isPremium={teamIsPremium(team)} style={{ width: '100%', maxWidth: 260 }} />
         <div className="text-[11px] flex items-center gap-1.5 flex-wrap" style={{ color: t.textMuted }}>
           <span className="num font-bold text-[13px]" style={{ color: t.text }}>{score.toFixed(1)}</span>
           <span>pts · {verb}</span>
