@@ -637,27 +637,27 @@ const activity = [
 // 12-team Dynasty Superflex PPR: QB, RB, RB, WR, WR, WR, TE, FLEX, SF, K, DST
 // ---------------------------------------------------------------------------
 const roster = [
-  { slot: 'QB',   player: 'Jalen Hurts',      team: 'PHI', pos: 'QB',  opp: 'vs NYG',  kickoff: 'Sun 1:00', proj: 22.4, score: null, status: 'upcoming',   tag: null },
-  { slot: 'RB',   player: 'Bijan Robinson',   team: 'ATL', pos: 'RB',  opp: '@TB',     kickoff: 'Sun 1:00', proj: 16.8, score: 19.2, status: 'final',      tag: null },
-  { slot: 'RB',   player: 'Jonathan Taylor',  team: 'IND', pos: 'RB',  opp: 'vs MIA',  kickoff: 'Sun 4:25', proj: 14.2, score: null, status: 'upcoming',   tag: null },
-  { slot: 'WR',   player: 'CeeDee Lamb',      team: 'DAL', pos: 'WR',  opp: '@SF',     kickoff: 'Sun 8:20', proj: 15.7, score: null, status: 'upcoming',   tag: null },
-  { slot: 'WR',   player: 'Tyreek Hill',      team: 'MIA', pos: 'WR',  opp: '@IND',    kickoff: 'Sun 4:25', proj: 17.3, score: 21.4, status: 'final',      tag: null },
-  { slot: 'WR',   player: 'DK Metcalf',       team: 'SEA', pos: 'WR',  opp: '@ARI',    kickoff: 'Sun 4:05', proj: 12.1, score: 8.6,  status: 'final',      tag: null },
-  { slot: 'TE',   player: 'Travis Kelce',     team: 'KC',  pos: 'TE',  opp: 'vs DEN',  kickoff: 'LIVE',     proj: 11.8, score: 14.2, status: 'live',       tag: 'Q3' },
-  { slot: 'FLEX', player: 'Jahmyr Gibbs',     team: 'DET', pos: 'RB',  opp: 'vs CHI',  kickoff: 'Sun 1:00', proj: 13.6, score: 18.9, status: 'final',      tag: null },
-  { slot: 'SF',   player: 'C.J. Stroud',      team: 'HOU', pos: 'QB',  opp: 'vs NE',   kickoff: 'Sun 1:00', proj: 19.8, score: 24.1, status: 'final',      tag: null },
-  { slot: 'K',    player: 'Justin Tucker',    team: 'BAL', pos: 'K',   opp: 'vs CLE',  kickoff: 'MNF 8:15', proj: 8.5,  score: null, status: 'upcoming',   tag: null },
-  { slot: 'DST',  player: 'Ravens D/ST',      team: 'BAL', pos: 'DST', opp: 'vs CLE',  kickoff: 'MNF 8:15', proj: 7.2,  score: null, status: 'upcoming',   tag: null },
+  { id: 'hurts',   slot: 'QB',   player: 'Jalen Hurts',      team: 'PHI', pos: 'QB',  opp: 'vs NYG',  kickoff: 'Sun 1:00', proj: 22.4, score: null, status: 'upcoming',   tag: null },
+  { id: 'bijan',   slot: 'RB',   player: 'Bijan Robinson',   team: 'ATL', pos: 'RB',  opp: '@TB',     kickoff: 'Sun 1:00', proj: 16.8, score: 19.2, status: 'final',      tag: null },
+  { id: 'jtaylor', slot: 'RB',   player: 'Jonathan Taylor',  team: 'IND', pos: 'RB',  opp: 'vs MIA',  kickoff: 'Sun 4:25', proj: 14.2, score: null, status: 'upcoming',   tag: null },
+  { id: 'lamb',    slot: 'WR',   player: 'CeeDee Lamb',      team: 'DAL', pos: 'WR',  opp: '@SF',     kickoff: 'Sun 8:20', proj: 15.7, score: null, status: 'upcoming',   tag: null },
+  { id: 'thill',   slot: 'WR',   player: 'Tyreek Hill',      team: 'MIA', pos: 'WR',  opp: '@IND',    kickoff: 'Sun 4:25', proj: 17.3, score: 21.4, status: 'final',      tag: null },
+  { id: 'metcalf', slot: 'WR',   player: 'DK Metcalf',       team: 'SEA', pos: 'WR',  opp: '@ARI',    kickoff: 'Sun 4:05', proj: 12.1, score: 8.6,  status: 'final',      tag: null },
+  { id: 'kelce',   slot: 'TE',   player: 'Travis Kelce',     team: 'KC',  pos: 'TE',  opp: 'vs DEN',  kickoff: 'LIVE',     proj: 11.8, score: 14.2, status: 'live',       tag: 'Q3' },
+  { id: 'gibbs',   slot: 'FLEX', player: 'Jahmyr Gibbs',     team: 'DET', pos: 'RB',  opp: 'vs CHI',  kickoff: 'Sun 1:00', proj: 13.6, score: 18.9, status: 'final',      tag: null },
+  { id: 'stroud',  slot: 'SF',   player: 'C.J. Stroud',      team: 'HOU', pos: 'QB',  opp: 'vs NE',   kickoff: 'Sun 1:00', proj: 19.8, score: 24.1, status: 'final',      tag: null },
+  { id: 'tucker',  slot: 'K',    player: 'Justin Tucker',    team: 'BAL', pos: 'K',   opp: 'vs CLE',  kickoff: 'MNF 8:15', proj: 8.5,  score: null, status: 'upcoming',   tag: null },
+  { id: 'ravens',  slot: 'DST',  player: 'Ravens D/ST',      team: 'BAL', pos: 'DST', opp: 'vs CLE',  kickoff: 'MNF 8:15', proj: 7.2,  score: null, status: 'upcoming',   tag: null },
 ];
 
 const bench = [
-  { slot: 'BN', player: 'Saquon Barkley',    team: 'PHI', pos: 'RB', opp: 'vs NYG', proj: 17.1, score: null, tag: null },
-  { slot: 'BN', player: "Ja'Marr Chase",     team: 'CIN', pos: 'WR', opp: 'BYE',    proj: 0.0,  score: null, tag: 'BYE' },
-  { slot: 'BN', player: 'Mark Andrews',      team: 'BAL', pos: 'TE', opp: 'vs CLE', proj: 9.4,  score: null, tag: null },
-  { slot: 'BN', player: 'James Cook',        team: 'BUF', pos: 'RB', opp: '@HOU',   proj: 11.8, score: 14.7, tag: null },
-  { slot: 'BN', player: 'Rashod Bateman',    team: 'BAL', pos: 'WR', opp: 'vs CLE', proj: 8.2,  score: null, tag: null },
-  { slot: 'BN', player: 'Dak Prescott',      team: 'DAL', pos: 'QB', opp: '@SF',    proj: 18.6, score: null, tag: null },
-  { slot: 'BN', player: 'Chase Brown',       team: 'CIN', pos: 'RB', opp: 'BYE',    proj: 0.0,  score: null, tag: 'BYE' },
+  { id: 'barkley', player: 'Saquon Barkley',    team: 'PHI', pos: 'RB', opp: 'vs NYG', proj: 17.1, score: null, tag: null },
+  { id: 'chase',   player: "Ja'Marr Chase",     team: 'CIN', pos: 'WR', opp: 'BYE',    proj: 0.0,  score: null, tag: 'BYE' },
+  { id: 'andrews', player: 'Mark Andrews',      team: 'BAL', pos: 'TE', opp: 'vs CLE', proj: 9.4,  score: null, tag: null },
+  { id: 'jcook',   player: 'James Cook',        team: 'BUF', pos: 'RB', opp: '@HOU',   proj: 11.8, score: 14.7, tag: null },
+  { id: 'bateman', player: 'Rashod Bateman',    team: 'BAL', pos: 'WR', opp: 'vs CLE', proj: 8.2,  score: null, tag: null },
+  { id: 'dak',     player: 'Dak Prescott',      team: 'DAL', pos: 'QB', opp: '@SF',    proj: 18.6, score: null, tag: null },
+  { id: 'cbrown',  player: 'Chase Brown',       team: 'CIN', pos: 'RB', opp: 'BYE',    proj: 0.0,  score: null, tag: 'BYE' },
 ];
 
 const freeAgents = [
@@ -1907,16 +1907,152 @@ const POS_COLORS = {
 };
 
 // ---------------------------------------------------------------------------
+// ROSTER KIT — mirrors My Franchise so player silhouettes + swap mechanics
+// feel identical across the two pages.
+// ---------------------------------------------------------------------------
+const NFL_TEAM_COLORS = {
+  ARI: '#97233F', ATL: '#A71930', BAL: '#241773', BUF: '#00338D',
+  CAR: '#0085CA', CHI: '#0B162A', CIN: '#FB4F14', CLE: '#311D00',
+  DAL: '#003594', DEN: '#FB4F14', DET: '#0076B6', GB:  '#203731',
+  HOU: '#03202F', IND: '#002C5F', JAX: '#006778', KC:  '#E31837',
+  LAC: '#0080C6', LAR: '#003594', LV:  '#000000', MIA: '#008E97',
+  MIN: '#4F2683', NE:  '#002244', NO:  '#D3BC8D', NYG: '#0B2265',
+  NYJ: '#125740', PHI: '#004C54', PIT: '#101820', SEA: '#002244',
+  SF:  '#AA0000', TB:  '#D50A0A', TEN: '#0C2340', WAS: '#5A1414',
+};
+
+// Solid colored pills for the clickable slot / position labels on each
+// roster row (matches MyFranchise's POSITION_COLORS palette).
+const PLAYER_SLOT_COLORS = {
+  QB:   { bg: '#DC2626', text: '#ffffff' },
+  RB:   { bg: '#16A34A', text: '#ffffff' },
+  WR:   { bg: '#2563EB', text: '#ffffff' },
+  TE:   { bg: '#EA580C', text: '#ffffff' },
+  FLEX: { bg: '#7C3AED', text: '#ffffff' },
+  SF:   { bg: '#4F46E5', text: '#ffffff' },
+  K:    { bg: '#CA8A04', text: '#ffffff' },
+  DST:  { bg: '#475569', text: '#ffffff' },
+  BN:   { bg: '#6B7280', text: '#ffffff' },
+};
+
+// Which NFL positions can fill each lineup slot when swapping.
+const SLOT_ELIGIBILITY = {
+  QB:   ['QB'],
+  RB:   ['RB'],
+  WR:   ['WR'],
+  TE:   ['TE'],
+  FLEX: ['RB', 'WR', 'TE'],
+  SF:   ['QB', 'RB', 'WR', 'TE'],
+  K:    ['K'],
+  DST:  ['DST'],
+};
+
+// Team-colored circular silhouette — placeholder for the real NFL headshot.
+// DST slots show the team abbreviation instead of a silhouette.
+function PlayerAvatar({ player, size = 32 }) {
+  const teamColor = NFL_TEAM_COLORS[player.team] || '#4a5568';
+  const isDST = player.pos === 'DST';
+
+  return (
+    <div style={{
+      width: size, height: size,
+      borderRadius: '50%',
+      overflow: 'hidden',
+      flex: '0 0 auto',
+      background: teamColor,
+      boxShadow: '0 0 0 1px rgba(0,0,0,0.08), inset 0 -2px 6px rgba(0,0,0,0.15), inset 0 2px 3px rgba(255,255,255,0.12)',
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+      {isDST ? (
+        <div style={{
+          color: 'rgba(247,243,234,0.95)',
+          fontFamily: 'Archivo, sans-serif',
+          fontWeight: 900,
+          fontSize: size * 0.34,
+          letterSpacing: '-0.02em',
+          lineHeight: 1,
+        }}>
+          {player.team}
+        </div>
+      ) : (
+        <svg viewBox="0 0 40 40" style={{ display: 'block', width: '100%', height: '100%' }}>
+          <circle cx="13" cy="10" r="10" fill="rgba(255,255,255,0.09)"/>
+          <path d="M 2.5 40 Q 2.5 23.5 20 23.5 Q 37.5 23.5 37.5 40 Z" fill="rgba(247,243,234,0.92)"/>
+          <circle cx="20" cy="13.5" r="6.8" fill="rgba(247,243,234,0.94)"/>
+        </svg>
+      )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // MY TEAM MODULE — left column of the League Home top section.
 // Includes banner header, live matchup bar, full starting lineup with
 // start/bench actions, and collapsible bench.
 // ---------------------------------------------------------------------------
 function MyTeamModule({ t, myTeam, roster, bench, showCustomHints, isPremium, onNavigate }) {
   const [benchOpen, setBenchOpen] = useState(true);
+  // Combined roster state so swap mechanics work the same way as on My Franchise.
+  const [rosterState, setRosterState] = useState({ starters: roster, bench: bench });
+  const [selectedId, setSelectedId] = useState(null);
 
-  // Compute aggregate scores
-  const liveOrFinalPts = roster.reduce((sum, r) => sum + (r.score ?? 0), 0);
-  const pending = roster.filter(r => r.score == null).reduce((sum, r) => sum + r.proj, 0);
+  const allPlayers = useMemo(
+    () => [...rosterState.starters, ...rosterState.bench],
+    [rosterState]
+  );
+  const selectedPlayer = useMemo(
+    () => allPlayers.find(p => p.id === selectedId) || null,
+    [selectedId, allPlayers]
+  );
+  const selectedIsStarter = useMemo(
+    () => rosterState.starters.some(p => p.id === selectedId),
+    [selectedId, rosterState]
+  );
+
+  function isEligibleSwap(otherPlayer) {
+    if (!selectedPlayer) return false;
+    if (otherPlayer.id === selectedPlayer.id) return false;
+    if (otherPlayer.injured) return false;
+    const otherIsStarter = rosterState.starters.some(p => p.id === otherPlayer.id);
+    if (selectedIsStarter === otherIsStarter) return false;
+    const starter   = selectedIsStarter ? selectedPlayer : otherPlayer;
+    const benchSide = selectedIsStarter ? otherPlayer    : selectedPlayer;
+    const eligiblePositions = SLOT_ELIGIBILITY[starter.slot] || [];
+    return eligiblePositions.includes(benchSide.pos);
+  }
+
+  function executeSwap(a, b) {
+    const aIsStarter = rosterState.starters.some(p => p.id === a.id);
+    const starter   = aIsStarter ? a : b;
+    const benchSide = aIsStarter ? b : a;
+    const starterIdx = rosterState.starters.findIndex(p => p.id === starter.id);
+    const benchIdx   = rosterState.bench.findIndex(p => p.id === benchSide.id);
+    const newStarters = [...rosterState.starters];
+    const newBench    = [...rosterState.bench];
+    newStarters[starterIdx] = { ...benchSide, slot: starter.slot };
+    const { slot, ...starterAsBench } = starter;
+    newBench[benchIdx] = starterAsBench;
+    setRosterState({ starters: newStarters, bench: newBench });
+  }
+
+  function handlePillClick(player) {
+    if (player.injured) return;
+    if (!selectedId) { setSelectedId(player.id); return; }
+    if (selectedId === player.id) { setSelectedId(null); return; }
+    if (isEligibleSwap(player)) {
+      executeSwap(selectedPlayer, player);
+      setSelectedId(null);
+    } else {
+      setSelectedId(player.id);
+    }
+  }
+
+  // Compute aggregate scores from live roster state
+  const liveOrFinalPts = rosterState.starters.reduce((sum, r) => sum + (r.score ?? 0), 0);
+  const pending = rosterState.starters.filter(r => r.score == null).reduce((sum, r) => sum + r.proj, 0);
   const projectedTotal = liveOrFinalPts + pending;
   const oppTotal = 84.2; // static for mockup
 
@@ -1979,14 +2115,45 @@ function MyTeamModule({ t, myTeam, roster, bench, showCustomHints, isPremium, on
           </div>
         </div>
 
+        {/* Swap banner — appears when a player is selected for swap */}
+        {selectedPlayer && (
+          <div
+            className="px-4 py-2 flex items-center gap-2 text-[11px] flex-wrap"
+            style={{ background: `${t.accent}1f`, borderBottom: `1px solid ${t.accent}66` }}
+          >
+            <ArrowLeftRight size={12} style={{ color: t.accentDark || t.accent }} />
+            <span className="font-bold" style={{ color: t.text }}>Swapping {selectedPlayer.player}</span>
+            <span style={{ color: t.textMuted }}>
+              · Tap an eligible {selectedIsStarter ? 'bench' : 'starter'} pill to complete · or tap the same pill to cancel
+            </span>
+            <button
+              onClick={() => setSelectedId(null)}
+              className="ml-auto text-[11px] font-bold px-2 py-0.5 rounded"
+              style={{ background: t.bgCard, color: t.textMuted, border: `1px solid ${t.border}` }}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
+
         {/* STARTERS */}
         <div className="px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] flex items-center justify-between"
              style={{ background: t.bgSoft, color: t.textMuted, borderBottom: `1px solid ${t.border}` }}>
-          <span>Starters · {roster.length}</span>
-          <span className="num">Proj {roster.reduce((s, r) => s + r.proj, 0).toFixed(1)}</span>
+          <span>Starters · {rosterState.starters.length}</span>
+          <span className="num">Proj {rosterState.starters.reduce((s, r) => s + r.proj, 0).toFixed(1)}</span>
         </div>
         <div>
-          {roster.map((r, i) => <RosterRow key={`s-${i}`} t={t} row={r} isStarter={true} />)}
+          {rosterState.starters.map(p => (
+            <RosterRow
+              key={p.id}
+              t={t}
+              player={p}
+              isBench={false}
+              isSelected={selectedId === p.id}
+              isEligible={selectedPlayer != null && selectedId !== p.id && isEligibleSwap(p)}
+              onPillClick={() => handlePillClick(p)}
+            />
+          ))}
         </div>
 
         {/* BENCH */}
@@ -1995,15 +2162,25 @@ function MyTeamModule({ t, myTeam, roster, bench, showCustomHints, isPremium, on
           className="w-full px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] flex items-center justify-between transition-colors"
           style={{ background: t.bgSoft, color: t.textMuted, borderTop: `1px solid ${t.border}`, borderBottom: benchOpen ? `1px solid ${t.border}` : 'none' }}
         >
-          <span>Bench · {bench.length}</span>
+          <span>Bench · {rosterState.bench.length}</span>
           <span className="flex items-center gap-1">
-            <span className="num">Proj {bench.reduce((s, r) => s + r.proj, 0).toFixed(1)}</span>
+            <span className="num">Proj {rosterState.bench.reduce((s, r) => s + r.proj, 0).toFixed(1)}</span>
             <ChevronDown size={12} className={`transition-transform ${benchOpen ? 'rotate-180' : ''}`} />
           </span>
         </button>
         {benchOpen && (
           <div className="lh-bench-scroll">
-            {bench.map((r, i) => <RosterRow key={`b-${i}`} t={t} row={r} isStarter={false} />)}
+            {rosterState.bench.map(p => (
+              <RosterRow
+                key={p.id}
+                t={t}
+                player={p}
+                isBench={true}
+                isSelected={selectedId === p.id}
+                isEligible={selectedPlayer != null && selectedId !== p.id && isEligibleSwap(p)}
+                onPillClick={() => handlePillClick(p)}
+              />
+            ))}
           </div>
         )}
 
@@ -2023,51 +2200,81 @@ function MyTeamModule({ t, myTeam, roster, bench, showCustomHints, isPremium, on
   );
 }
 
-function RosterRow({ t, row, isStarter }) {
-  const slotColor = POS_COLORS[row.slot] || POS_COLORS[row.pos] || t.textMuted;
-  const posColor = POS_COLORS[row.pos] || t.textMuted;
-  const isLive = row.status === 'live';
-  const isFinal = row.status === 'final';
-  const onBye = row.tag === 'BYE';
+function RosterRow({ t, player, isBench, isSelected, isEligible, onPillClick }) {
+  const isLive = player.status === 'live';
+  const onBye = player.tag === 'BYE';
+  const isInjured = player.injured;
+  // Starter rows pill shows the slot (QB / FLEX / DST …); bench rows show the
+  // player's actual NFL position. Matches My Franchise behavior.
+  const displayLabel = isBench ? player.pos : player.slot;
+  const pillColors = PLAYER_SLOT_COLORS[displayLabel] || PLAYER_SLOT_COLORS.BN;
+  const posAccent = POS_COLORS[player.pos] || t.textMuted;
 
-  const initials = row.player.split(' ').filter(Boolean).map(p => p[0]).slice(0, 2).join('');
+  // Row-level highlight states: selected (picking) vs eligible swap target.
+  const rowBg = isSelected
+    ? `${t.accent}26`
+    : isEligible
+      ? `${t.success}1a`
+      : 'transparent';
+  const rowBorderLeft = isSelected
+    ? `3px solid ${t.accentDark || t.accent}`
+    : isEligible
+      ? `3px solid ${t.success}`
+      : '3px solid transparent';
 
   return (
-    <div className="flex items-center gap-3 px-4 py-2 transition-colors"
-         style={{ borderBottom: `1px solid ${t.border}` }}
-         onMouseEnter={e => e.currentTarget.style.background = t.bgSoft}
-         onMouseLeave={e => e.currentTarget.style.background = 'transparent'}>
-      {/* Slot label pill */}
-      <div className="w-11 shrink-0">
-        <div className="text-[10px] font-bold uppercase tracking-wider text-center py-0.5 rounded"
-             style={{ background: `${slotColor}1f`, color: slotColor }}>
-          {row.slot}
-        </div>
-      </div>
+    <div
+      className="flex items-center gap-3 px-4 py-2 transition-colors"
+      style={{
+        borderBottom: `1px solid ${t.border}`,
+        borderLeft: rowBorderLeft,
+        background: rowBg,
+        opacity: isInjured ? 0.65 : 1,
+      }}
+      onMouseEnter={e => { if (!isSelected && !isEligible) e.currentTarget.style.background = t.bgSoft; }}
+      onMouseLeave={e => { if (!isSelected && !isEligible) e.currentTarget.style.background = rowBg; }}
+    >
+      {/* Clickable slot / position pill — triggers swap flow */}
+      <button
+        onClick={(e) => { e.stopPropagation(); onPillClick(player); }}
+        disabled={isInjured}
+        title={isSelected ? 'Cancel swap' : `Swap ${player.player}`}
+        className="w-11 shrink-0 text-[10px] font-bold uppercase tracking-wider text-center py-1 rounded transition-all"
+        style={{
+          background: pillColors.bg,
+          color: pillColors.text,
+          cursor: isInjured ? 'not-allowed' : 'pointer',
+          boxShadow: isSelected
+            ? `0 0 0 2px ${t.bgCard}, 0 0 0 4px ${t.accentDark || t.accent}`
+            : isEligible
+              ? `0 0 0 2px ${t.bgCard}, 0 0 0 4px ${t.success}`
+              : 'none',
+        }}
+      >
+        {displayLabel}
+      </button>
 
-      {/* Player avatar (initials in circle) */}
-      <div className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-[11px] font-bold"
-           style={{ background: `${posColor}22`, color: posColor }}>
-        {initials}
-      </div>
+      {/* Team-colored silhouette avatar */}
+      <PlayerAvatar player={player} size={32} />
 
       {/* Player info */}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-1.5">
-          <span className="text-[13px] font-semibold truncate" style={{ color: t.text }}>{row.player}</span>
-          {onBye && <span className="text-[9px] font-bold px-1 py-0.5 rounded" style={{ background: `${t.danger}22`, color: t.danger }}>BYE</span>}
+          <span className="text-[13px] font-semibold truncate" style={{ color: t.text }}>{player.player}</span>
+          {onBye    && <span className="text-[9px] font-bold px-1 py-0.5 rounded" style={{ background: `${t.danger}22`, color: t.danger }}>BYE</span>}
+          {isInjured && <span className="text-[9px] font-bold px-1 py-0.5 rounded" style={{ background: `${t.danger}22`, color: t.danger }}>OUT</span>}
         </div>
         <div className="text-[11px] flex items-center gap-1" style={{ color: t.textMuted }}>
-          <span className="font-semibold" style={{ color: posColor }}>{row.pos}</span>
+          <span className="font-semibold" style={{ color: posAccent }}>{player.pos}</span>
           <span>·</span>
-          <span>{row.team}</span>
-          {!onBye && <><span>·</span><span>{row.opp}</span></>}
+          <span>{player.team}</span>
+          {!onBye && <><span>·</span><span>{player.opp}</span></>}
           {isLive && (
             <>
               <span>·</span>
               <span className="flex items-center gap-1 font-bold" style={{ color: t.danger }}>
                 <span className="w-1 h-1 rounded-full animate-pulse" style={{ background: t.danger }} />
-                {row.tag || 'LIVE'}
+                {player.tag || 'LIVE'}
               </span>
             </>
           )}
@@ -2076,10 +2283,10 @@ function RosterRow({ t, row, isStarter }) {
 
       {/* Score / projection */}
       <div className="text-right shrink-0 min-w-[50px]">
-        {row.score != null ? (
+        {player.score != null ? (
           <>
             <div className="num text-[15px] font-bold leading-none" style={{ color: isLive ? t.danger : t.text }}>
-              {row.score.toFixed(1)}
+              {player.score.toFixed(1)}
             </div>
             <div className="text-[10px] mt-0.5" style={{ color: t.textMuted }}>
               {isLive ? 'live' : 'final'}
@@ -2087,27 +2294,19 @@ function RosterRow({ t, row, isStarter }) {
           </>
         ) : (
           <>
-            <div className="num text-[15px] font-bold leading-none" style={{ color: onBye ? t.textMuted : t.text, opacity: onBye ? 0.4 : 1 }}>
-              {row.proj.toFixed(1)}
+            <div
+              className="num text-[15px] font-bold leading-none"
+              style={{
+                color: onBye || isInjured ? t.textMuted : t.text,
+                opacity: onBye || isInjured ? 0.4 : 1,
+              }}
+            >
+              {player.proj.toFixed(1)}
             </div>
             <div className="text-[10px] mt-0.5" style={{ color: t.textMuted }}>proj</div>
           </>
         )}
       </div>
-
-      {/* Action button: Start / Bench */}
-      <button
-        className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1.5 rounded-md shrink-0 transition-all"
-        style={{
-          background: isStarter ? 'transparent' : t.primary,
-          color: isStarter ? t.textMuted : t.accent,
-          border: `1px solid ${isStarter ? t.border : t.primary}`,
-          opacity: onBye && !isStarter ? 0.4 : 1,
-        }}
-        title={isStarter ? 'Move to bench' : 'Move to starting lineup'}
-      >
-        {isStarter ? 'Bench' : 'Start'}
-      </button>
     </div>
   );
 }
