@@ -4,7 +4,7 @@ import {
   ChevronDown, ChevronRight, Palette, Sparkles, TrendingUp, Clock, Activity,
   Pencil, Shield, Award, Flame, ArrowUpRight, MessageSquare, Check, CircleDot,
   Zap, DollarSign, Eye, Search, Plus, MoreHorizontal, Crown, Lock, AlertCircle,
-  CheckCircle2
+  CheckCircle2, X, CreditCard, Smartphone
 } from 'lucide-react';
 
 // ---------------------------------------------------------------------------
@@ -739,6 +739,7 @@ export default function LeagueHome({ onNavigate }) {
   const [showCustomHints, setShowCustomHints] = useState(false);
   const [activeNav, setActiveNav] = useState('home');
   const [duesPaid, setDuesPaid] = useState(false);
+  const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState('premium'); // 'free' | 'mixed' | 'premium'
 
   const t = THEMES[themeKey];
@@ -760,7 +761,7 @@ export default function LeagueHome({ onNavigate }) {
       <Chrome t={t} showCustomHints={showCustomHints} setShowCustomHints={setShowCustomHints} activeNav={activeNav} setActiveNav={setActiveNav} themeKey={themeKey} viewMode={viewMode} setViewMode={setViewMode} onNavigate={onNavigate} />
       <Hero t={t} themeKey={themeKey} setThemeKey={setThemeKey} themeMenuOpen={themeMenuOpen} setThemeMenuOpen={setThemeMenuOpen} showCustomHints={showCustomHints} isPremium={isPremium} />
       <StatusStrip t={t} duesPaid={duesPaid} />
-      <LeagueSafeStrip t={t} duesPaid={duesPaid} setDuesPaid={setDuesPaid} myTeam={myTeam} />
+      <LeagueSafeStrip t={t} duesPaid={duesPaid} setDuesPaid={setDuesPaid} myTeam={myTeam} onOpenPayment={() => setPaymentModalOpen(true)} />
       <main className="max-w-[1400px] mx-auto px-6 pb-16 space-y-6 mt-6">
         {/* TOP SECTION: My Team (primary) + Standings column (secondary) */}
         <div className="lh-top-grid">
@@ -783,6 +784,15 @@ export default function LeagueHome({ onNavigate }) {
         </div>
       </main>
       <Footer t={t} />
+
+      {paymentModalOpen && (
+        <PaymentModal
+          t={t}
+          myTeam={myTeam}
+          onClose={() => setPaymentModalOpen(false)}
+          onComplete={() => { setDuesPaid(true); setPaymentModalOpen(false); }}
+        />
+      )}
     </div>
   );
 }
@@ -932,7 +942,7 @@ function FontLoader() {
 function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNav, themeKey, viewMode, setViewMode, onNavigate }) {
   const navItems = [
     { id: 'home',    label: 'Home',    icon: Home,           pageId: 'home' },
-    { id: 'team',    label: 'My Team', icon: Shield,         pageId: 'franchise' },
+    { id: 'team',    label: 'My Franchise', icon: Shield,   pageId: 'franchise' },
     { id: 'league',  label: 'League',  icon: Users,          pageId: null },
     { id: 'players', label: 'Players', icon: Search,         pageId: null },
     { id: 'scores',  label: 'Scores',  icon: BarChart3,      pageId: 'scoring' },
@@ -1287,7 +1297,7 @@ function StatusStrip({ t, duesPaid }) {
 //   - Paid:   neutral/branded strip reinforcing LeagueSafe integration
 // The Pay Now button flips the state so you can see both views in the mockup.
 // ---------------------------------------------------------------------------
-function LeagueSafeStrip({ t, duesPaid, setDuesPaid, myTeam }) {
+function LeagueSafeStrip({ t, duesPaid, setDuesPaid, myTeam, onOpenPayment }) {
   // League economics
   const totalTeams = 12;
   const duesPerTeam = 500;
@@ -1335,9 +1345,9 @@ function LeagueSafeStrip({ t, duesPaid, setDuesPaid, myTeam }) {
               </div>
             </div>
 
-            {/* Pay button — inline with text */}
+            {/* Pay button — opens the 3-step LeagueSafe-style payment modal */}
             <button
-              onClick={() => setDuesPaid(true)}
+              onClick={() => onOpenPayment && onOpenPayment()}
               className="shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-lg text-[13px] font-bold transition-all shadow-sm"
               style={{ background: warnAccent, color: '#fff' }}
               onMouseEnter={e => e.currentTarget.style.background = warnDeep}
@@ -1915,7 +1925,7 @@ function MyTeamModule({ t, myTeam, roster, bench, showCustomHints, isPremium, on
       <SectionHeader
         t={t}
         eyebrow="Week 7 · Dynasty SF PPR"
-        title="My Team"
+        title="My Franchise"
         action={
           <button className="flex items-center gap-1 text-[12px] font-semibold" style={{ color: t.primary }}>
             Full team page <ArrowUpRight size={13} />
@@ -2375,6 +2385,406 @@ function LastWeekRecapCard({ t, lastWeekRecap, teamById, teamIsPremium }) {
         />
       </div>
     </section>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// PAYMENT MODAL — 3-step LeagueSafe-style dues flow. Shown when the user
+// clicks "Pay $500 Now". Mirrors the real LeagueSafe onboarding sequence
+// (review → pay → confirm) but streamlined to stay inside the app.
+// ---------------------------------------------------------------------------
+const LEAGUE_PAYOUTS = [
+  { label: '1st Place',               amount: 3000 },
+  { label: '2nd Place',               amount: 1500 },
+  { label: '3rd Place',               amount:  750 },
+  { label: 'Regular Season Champion', amount:  450 },
+  { label: 'Weekly High Score Pool',  amount:  300 },
+];
+
+const PAYMENT_METHODS = [
+  { id: 'card',   label: 'Credit or Debit Card', fee: 15, icon: CreditCard,
+    sub: 'Visa, Mastercard, Amex, Discover' },
+  { id: 'venmo',  label: 'Venmo',                fee: 5,  icon: DollarSign,
+    sub: 'Pay directly from your Venmo balance' },
+  { id: 'apple',  label: 'Apple Pay',            fee: 5,  icon: Smartphone,
+    sub: 'One-tap checkout with Touch ID / Face ID' },
+];
+
+function PaymentModal({ t, myTeam, onClose, onComplete }) {
+  const [step, setStep] = useState(1);
+  const [agreedRules, setAgreedRules] = useState(false);
+  const [agreedTOS, setAgreedTOS] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(PAYMENT_METHODS[0].id);
+
+  const dues = 500;
+  const selectedMethod = PAYMENT_METHODS.find(m => m.id === paymentMethod);
+  const fee = selectedMethod?.fee ?? 0;
+  const total = dues + fee;
+  const totalPayouts = LEAGUE_PAYOUTS.reduce((s, p) => s + p.amount, 0);
+
+  const canContinueStep1 = agreedRules && agreedTOS;
+
+  const handlePrimary = () => {
+    if (step === 1 && canContinueStep1) setStep(2);
+    else if (step === 2) setStep(3);
+    else if (step === 3) onComplete();
+  };
+
+  const steps = [
+    { n: 1, label: 'Review' },
+    { n: 2, label: 'Pay' },
+    { n: 3, label: 'Done' },
+  ];
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-start justify-center p-4 overflow-y-auto"
+      style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(2px)' }}
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-xl rounded-xl shadow-2xl my-8"
+        style={{ background: t.bgCard, fontFamily: '"Archivo", system-ui, sans-serif' }}
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: t.border }}>
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-md flex items-center justify-center" style={{ background: t.primary, color: t.accent }}>
+              <Shield size={16} strokeWidth={2.2} />
+            </div>
+            <div>
+              <div className="fraunces font-bold text-[15px]" style={{ color: t.text }}>LeagueSafe</div>
+              <div className="text-[10px] font-medium tracking-wider uppercase" style={{ color: t.textMuted }}>Secure dues collection</div>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 rounded-full flex items-center justify-center transition-colors hover:bg-black/5"
+            style={{ color: t.textMuted }}
+            aria-label="Close"
+          >
+            <X size={16} />
+          </button>
+        </div>
+
+        {/* Step indicator */}
+        <div className="px-5 pt-4 pb-1 flex items-center gap-2">
+          {steps.map((s, i) => {
+            const isDone = step > s.n;
+            const isActive = step === s.n;
+            return (
+              <React.Fragment key={s.n}>
+                <div className="flex items-center gap-2">
+                  <div
+                    className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold transition-all"
+                    style={{
+                      background: isActive ? t.primary : isDone ? t.success : t.bgSoft,
+                      color: isActive ? t.accent : isDone ? '#fff' : t.textMuted,
+                      border: isActive ? 'none' : `1px solid ${t.border}`,
+                    }}
+                  >
+                    {isDone ? <Check size={12} strokeWidth={3} /> : s.n}
+                  </div>
+                  <span
+                    className="text-[11px] font-semibold whitespace-nowrap"
+                    style={{ color: isActive || isDone ? t.text : t.textMuted }}
+                  >
+                    {s.label}
+                  </span>
+                </div>
+                {i < steps.length - 1 && (
+                  <div className="flex-1 h-px" style={{ background: isDone ? t.success : t.border }} />
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
+
+        {/* Content */}
+        <div className="px-5 py-5" style={{ maxHeight: 'calc(90vh - 220px)', overflowY: 'auto' }}>
+          {step === 1 && (
+            <PaymentStepReview
+              t={t}
+              myTeam={myTeam}
+              dues={dues}
+              totalPayouts={totalPayouts}
+              agreedRules={agreedRules} setAgreedRules={setAgreedRules}
+              agreedTOS={agreedTOS}     setAgreedTOS={setAgreedTOS}
+            />
+          )}
+          {step === 2 && (
+            <PaymentStepPay
+              t={t}
+              dues={dues}
+              total={total}
+              paymentMethod={paymentMethod}
+              setPaymentMethod={setPaymentMethod}
+            />
+          )}
+          {step === 3 && (
+            <PaymentStepDone
+              t={t}
+              total={total}
+              myTeam={myTeam}
+              methodLabel={selectedMethod?.label}
+            />
+          )}
+        </div>
+
+        {/* Footer — action buttons */}
+        <div
+          className="px-5 py-4 flex items-center justify-between gap-3"
+          style={{ borderTop: `1px solid ${t.border}`, background: t.bgSoft, borderBottomLeftRadius: 12, borderBottomRightRadius: 12 }}
+        >
+          {step > 1 && step < 3 ? (
+            <button
+              onClick={() => setStep(step - 1)}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-md text-[12px] font-semibold transition-colors"
+              style={{ color: t.textMuted }}
+              onMouseEnter={e => e.currentTarget.style.color = t.text}
+              onMouseLeave={e => e.currentTarget.style.color = t.textMuted}
+            >
+              ← Back
+            </button>
+          ) : step === 1 ? (
+            <button
+              onClick={onClose}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-md text-[12px] font-semibold transition-colors"
+              style={{ color: t.textMuted }}
+              onMouseEnter={e => e.currentTarget.style.color = t.text}
+              onMouseLeave={e => e.currentTarget.style.color = t.textMuted}
+            >
+              Cancel
+            </button>
+          ) : <div />}
+
+          <button
+            onClick={handlePrimary}
+            disabled={step === 1 && !canContinueStep1}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-md text-[13px] font-bold transition-all shadow-sm"
+            style={{
+              background: step === 1 && !canContinueStep1 ? t.border : t.primary,
+              color: step === 1 && !canContinueStep1 ? t.textMuted : t.accent,
+              cursor: step === 1 && !canContinueStep1 ? 'not-allowed' : 'pointer',
+              opacity: step === 1 && !canContinueStep1 ? 0.7 : 1,
+            }}
+          >
+            {step === 1 && <>Continue <ArrowUpRight size={14} strokeWidth={2.5} /></>}
+            {step === 2 && <>Pay ${total} <ArrowUpRight size={14} strokeWidth={2.5} /></>}
+            {step === 3 && <>Return to league <ArrowUpRight size={14} strokeWidth={2.5} /></>}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PaymentStepReview({ t, myTeam, dues, totalPayouts, agreedRules, setAgreedRules, agreedTOS, setAgreedTOS }) {
+  const infoRows = [
+    { label: 'League',            value: 'The Empire League' },
+    { label: 'Season',            value: 'NFL 2026' },
+    { label: 'Your Team',         value: myTeam.name },
+    { label: 'Commissioner',      value: 'Christian Peterson (coolerheads)' },
+    { label: 'Payment Deadline',  value: 'September 1, 2026' },
+    { label: 'Accepted Payment',  value: 'Credit/Debit · Venmo · Apple Pay' },
+    { label: 'Payout Rule',       value: 'Commissioner has total control' },
+  ];
+
+  return (
+    <div className="space-y-5">
+      {/* Amount due */}
+      <div className="flex items-baseline justify-between p-4 rounded-lg" style={{ background: t.primarySoft, border: `1px solid ${t.primary}22` }}>
+        <div>
+          <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: t.textMuted }}>Your dues</div>
+          <div className="fraunces font-black text-[32px] leading-none mt-0.5 num" style={{ color: t.primary }}>${dues}.00</div>
+        </div>
+        <div className="text-right">
+          <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: t.textMuted }}>Status</div>
+          <div className="text-[13px] font-bold mt-0.5" style={{ color: t.danger }}>37 days overdue</div>
+        </div>
+      </div>
+
+      {/* League details */}
+      <div className="rounded-lg overflow-hidden" style={{ border: `1px solid ${t.border}` }}>
+        <div className="px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em]" style={{ background: t.bgSoft, color: t.textMuted }}>
+          League details
+        </div>
+        <div>
+          {infoRows.map((row, i) => (
+            <div
+              key={row.label}
+              className="flex items-center justify-between px-4 py-2.5 text-[12px]"
+              style={{ borderTop: i === 0 ? 'none' : `1px solid ${t.border}` }}
+            >
+              <span style={{ color: t.textMuted }}>{row.label}</span>
+              <span className="font-semibold text-right" style={{ color: t.text }}>{row.value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Proposed payouts */}
+      <div className="rounded-lg overflow-hidden" style={{ border: `1px solid ${t.border}` }}>
+        <div className="px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] flex items-center gap-2" style={{ background: t.bgSoft, color: t.textMuted }}>
+          <Trophy size={11} style={{ color: t.accent }} /> Proposed payouts
+        </div>
+        <div>
+          {LEAGUE_PAYOUTS.map((payout, i) => (
+            <div
+              key={payout.label}
+              className="flex items-center justify-between px-4 py-2 text-[12px]"
+              style={{ borderTop: i === 0 ? 'none' : `1px solid ${t.border}` }}
+            >
+              <span style={{ color: t.text }}>{payout.label}</span>
+              <span className="font-bold num" style={{ color: t.text }}>${payout.amount.toLocaleString()}</span>
+            </div>
+          ))}
+          <div
+            className="flex items-center justify-between px-4 py-2.5 text-[12px]"
+            style={{ borderTop: `1px solid ${t.border}`, background: t.primarySoft }}
+          >
+            <span className="font-bold uppercase tracking-wider text-[10px]" style={{ color: t.primary }}>Total pool</span>
+            <span className="fraunces font-black text-[16px] num" style={{ color: t.primary }}>${totalPayouts.toLocaleString()}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Agreements */}
+      <div className="space-y-2">
+        <label className="flex items-start gap-2.5 cursor-pointer group">
+          <input
+            type="checkbox"
+            checked={agreedRules}
+            onChange={e => setAgreedRules(e.target.checked)}
+            className="mt-0.5 w-4 h-4 rounded"
+            style={{ accentColor: t.primary }}
+          />
+          <span className="text-[12px] leading-snug" style={{ color: t.text }}>
+            I've reviewed the league rules, payout structure, and commissioner's payout rule.
+          </span>
+        </label>
+        <label className="flex items-start gap-2.5 cursor-pointer group">
+          <input
+            type="checkbox"
+            checked={agreedTOS}
+            onChange={e => setAgreedTOS(e.target.checked)}
+            className="mt-0.5 w-4 h-4 rounded"
+            style={{ accentColor: t.primary }}
+          />
+          <span className="text-[12px] leading-snug" style={{ color: t.text }}>
+            I agree to the <span className="font-semibold underline" style={{ color: t.primary }}>LeagueSafe Terms of Service</span> and understand funds are held in escrow until the season ends.
+          </span>
+        </label>
+      </div>
+    </div>
+  );
+}
+
+function PaymentStepPay({ t, dues, total, paymentMethod, setPaymentMethod }) {
+  const selected = PAYMENT_METHODS.find(m => m.id === paymentMethod);
+  const fee = selected?.fee ?? 0;
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h3 className="fraunces font-bold text-[18px]" style={{ color: t.text }}>How would you like to pay?</h3>
+        <p className="text-[12px] mt-0.5" style={{ color: t.textMuted }}>
+          LeagueSafe holds your dues in escrow until the season ends.
+        </p>
+      </div>
+
+      {/* Payment method cards */}
+      <div className="space-y-2">
+        {PAYMENT_METHODS.map(method => {
+          const Icon = method.icon;
+          const isSelected = method.id === paymentMethod;
+          return (
+            <button
+              key={method.id}
+              onClick={() => setPaymentMethod(method.id)}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all"
+              style={{
+                background: isSelected ? t.primarySoft : t.bgCard,
+                border: `2px solid ${isSelected ? t.primary : t.border}`,
+                boxShadow: isSelected ? `0 0 0 3px ${t.primarySoft}` : 'none',
+              }}
+            >
+              <div
+                className="w-10 h-10 rounded-md flex items-center justify-center shrink-0"
+                style={{ background: isSelected ? t.primary : t.bgSoft, color: isSelected ? t.accent : t.textMuted }}
+              >
+                <Icon size={18} strokeWidth={2} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="font-bold text-[13px]" style={{ color: t.text }}>{method.label}</div>
+                <div className="text-[11px] mt-0.5" style={{ color: t.textMuted }}>{method.sub}</div>
+              </div>
+              <div className="text-right shrink-0">
+                <div className="text-[10px] font-bold uppercase tracking-wider" style={{ color: t.textMuted }}>Fee</div>
+                <div className="font-bold text-[13px] num" style={{ color: t.text }}>${method.fee}</div>
+              </div>
+              <div
+                className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                style={{ background: isSelected ? t.primary : 'transparent', border: `2px solid ${isSelected ? t.primary : t.border}` }}
+              >
+                {isSelected && <Check size={11} strokeWidth={3} style={{ color: t.accent }} />}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Order summary */}
+      <div className="rounded-lg p-4" style={{ background: t.bgSoft, border: `1px solid ${t.border}` }}>
+        <div className="flex items-center justify-between text-[12px]" style={{ color: t.textMuted }}>
+          <span>League dues</span>
+          <span className="num font-semibold" style={{ color: t.text }}>${dues}.00</span>
+        </div>
+        <div className="flex items-center justify-between text-[12px] mt-1.5" style={{ color: t.textMuted }}>
+          <span>Processing fee ({selected?.label})</span>
+          <span className="num font-semibold" style={{ color: t.text }}>${fee}.00</span>
+        </div>
+        <div className="h-px my-3" style={{ background: t.border }} />
+        <div className="flex items-center justify-between">
+          <span className="text-[12px] font-bold uppercase tracking-wider" style={{ color: t.text }}>Total due</span>
+          <span className="fraunces font-black text-[22px] num" style={{ color: t.primary }}>${total}.00</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PaymentStepDone({ t, total, myTeam, methodLabel }) {
+  return (
+    <div className="text-center py-6 space-y-4">
+      <div
+        className="w-16 h-16 rounded-full flex items-center justify-center mx-auto"
+        style={{ background: t.success, color: '#fff', boxShadow: `0 4px 16px ${t.success}55` }}
+      >
+        <Check size={32} strokeWidth={3} />
+      </div>
+      <div>
+        <h3 className="fraunces font-black text-[24px] tracking-tight" style={{ color: t.text }}>Payment successful!</h3>
+        <p className="text-[13px] mt-1" style={{ color: t.textMuted }}>
+          You paid <b className="num" style={{ color: t.text }}>${total}.00</b> to The Empire League via {methodLabel}.
+        </p>
+      </div>
+      <div className="rounded-lg px-4 py-3 max-w-sm mx-auto text-left" style={{ background: t.bgSoft, border: `1px solid ${t.border}` }}>
+        <div className="flex items-center justify-between text-[11px]">
+          <span style={{ color: t.textMuted }}>Team</span>
+          <span className="font-semibold" style={{ color: t.text }}>{myTeam.name}</span>
+        </div>
+        <div className="flex items-center justify-between text-[11px] mt-1">
+          <span style={{ color: t.textMuted }}>Confirmation</span>
+          <span className="font-mono font-semibold" style={{ color: t.text }}>LS-2026-{Math.floor(Math.random() * 900000 + 100000)}</span>
+        </div>
+        <div className="flex items-center justify-between text-[11px] mt-1">
+          <span style={{ color: t.textMuted }}>Receipt</span>
+          <span className="font-semibold" style={{ color: t.text }}>Sent to cpeterson@example.com</span>
+        </div>
+      </div>
+    </div>
   );
 }
 

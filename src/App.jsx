@@ -31,7 +31,7 @@ function AppHeader({ activeId, onNavigate }) {
 
   const navItems = [
     { label: 'Home',    icon: Home,           pageId: 'home' },
-    { label: 'My Team', icon: Shield,         pageId: 'franchise' },
+    { label: 'My Franchise', icon: Shield,    pageId: 'franchise' },
     { label: 'League',  icon: Users,          pageId: null },
     { label: 'Players', icon: Search,         pageId: null },
     { label: 'Scores',  icon: BarChart3,      pageId: 'scoring' },
