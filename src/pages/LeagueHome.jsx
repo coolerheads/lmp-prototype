@@ -4,7 +4,7 @@ import {
   ChevronDown, ChevronRight, Palette, Sparkles, TrendingUp, Clock, Activity,
   Pencil, Shield, Award, Flame, ArrowUpRight, MessageSquare, Check, CircleDot,
   Zap, DollarSign, Eye, Search, Plus, MoreHorizontal, Crown, Lock, AlertCircle,
-  CheckCircle2, X, CreditCard, Smartphone
+  CheckCircle2, X, CreditCard, Smartphone, Sun, Moon
 } from 'lucide-react';
 
 // ---------------------------------------------------------------------------
@@ -99,6 +99,68 @@ const THEMES = {
     border: '#ddd8cf',
     success: '#2e7d32',
     danger: '#c62828',
+  },
+};
+
+// ---------------------------------------------------------------------------
+// PARTNERS — White-label configurations that override the standalone LMP
+// chrome. When a partner is active, the Hero is replaced with partner-supplied
+// branding (overall brand → secondary brand → contest → sponsor), the theme
+// is locked to the partner palette, and league-level customizations (theme
+// switcher, custom league banner) are hidden. Team-level upsell (Free/Mixed/
+// Premium banners) still works since that's per-owner.
+// ---------------------------------------------------------------------------
+const PARTNERS = {
+  nffc: {
+    id: 'nffc',
+    label: 'NFFC',
+    overallBrand:   { name: 'High Stakes',   logoUrl: '/partners/high-stakes.png' },
+    secondaryBrand: { name: 'NFFC',          logoUrl: '/partners/nffc.png',
+                      fullName: 'National Fantasy Football Championships' },
+    contestName: '$350 Online Championship',
+    sponsor:        { name: 'Footballguys',  logoUrl: '/partners/footballguys.png' },
+    theme: {
+      name: 'NFFC',
+      tagline: 'Navy · royal · red',
+      primary: '#0f1e3a',
+      primaryDark: '#060a1a',
+      primarySoft: '#e4eaf4',
+      accent: '#dc2626',
+      accentDark: '#991b1b',
+      bgPage: '#f5f5f7',
+      bgCard: '#ffffff',
+      bgSoft: '#eef0f3',
+      text: '#0b1221',
+      textMuted: '#5a6478',
+      border: '#d6dde9',
+      success: '#059669',
+      danger: '#dc2626',
+    },
+    // Dark variant — same brand identity (royal blue + red), inverted surfaces.
+    // Hero gradient uses primaryDark → primary so it still reads as a banner
+    // distinct from the page; cards sit slightly lighter than the page so
+    // sections separate naturally without needing borders to do all the work.
+    themeDark: {
+      name: 'NFFC Dark',
+      tagline: 'Navy · royal · red',
+      // `primary` does double duty (text/links AND button backgrounds), so it
+      // needs to clear contrast against dark surfaces while still letting white
+      // button text read. Tailwind blue-500 hits both targets — 5+:1 as text on
+      // bgCard, and 3.7+:1 as bg with white text.
+      primary: '#3b82f6',
+      primaryDark: '#020617',
+      primarySoft: '#1e293b',
+      accent: '#ef4444',
+      accentDark: '#dc2626',
+      bgPage: '#0b1120',
+      bgCard: '#1a2236',
+      bgSoft: '#0a0f1c',
+      text: '#f1f5f9',
+      textMuted: '#94a3b8',
+      border: '#1f2a44',
+      success: '#10b981',
+      danger: '#f87171',
+    },
   },
 };
 
@@ -741,12 +803,20 @@ export default function LeagueHome({ onNavigate }) {
   const [duesPaid, setDuesPaid] = useState(false);
   const [paymentModalOpen, setPaymentModalOpen] = useState(false);
   const [viewMode, setViewMode] = useState('premium'); // 'free' | 'mixed' | 'premium'
+  const [partnerKey, setPartnerKey] = useState(null); // null = standalone, 'nffc' = white-label
+  const [partnerMode, setPartnerMode] = useState('light'); // 'light' | 'dark' — only used when partner is set
 
-  const t = THEMES[themeKey];
-  // Hero + Division banners are "premium" only when the whole league is premium.
-  // In Mixed mode those league-wide elements stay in Free treatment — only
-  // individual team banners flip based on team.isPaid.
-  const isPremium = viewMode === 'premium';
+  const partner = partnerKey ? PARTNERS[partnerKey] : null;
+  // In partner mode the theme is locked to the partner's palette — themeKey is ignored.
+  // Partner palette has light + dark variants; partnerMode picks which one.
+  const t = partner
+    ? (partnerMode === 'dark' && partner.themeDark ? partner.themeDark : partner.theme)
+    : THEMES[themeKey];
+  // Hero + Division banners are "premium" only when the whole league is premium
+  // AND we're in standalone mode. In Partner Mode the partner controls the
+  // hero/division frame, so those elements use the Free-style (themed-dark) treatment.
+  const isPremium = !partner && viewMode === 'premium';
+  // Team-level branding still works in Partner Mode — that's the per-owner upsell.
   const teamIsPremium = (team) => viewMode === 'premium' || (viewMode === 'mixed' && !!team.isPaid);
 
   // Convenience lookups
@@ -758,16 +828,18 @@ export default function LeagueHome({ onNavigate }) {
   return (
     <div style={{ background: t.bgPage, color: t.text, minHeight: '100vh', fontFamily: '"Archivo", system-ui, sans-serif' }}>
       <FontLoader />
-      <Chrome t={t} showCustomHints={showCustomHints} setShowCustomHints={setShowCustomHints} activeNav={activeNav} setActiveNav={setActiveNav} themeKey={themeKey} viewMode={viewMode} setViewMode={setViewMode} onNavigate={onNavigate} />
-      <Hero t={t} themeKey={themeKey} setThemeKey={setThemeKey} themeMenuOpen={themeMenuOpen} setThemeMenuOpen={setThemeMenuOpen} showCustomHints={showCustomHints} isPremium={isPremium} />
-      <StatusStrip t={t} duesPaid={duesPaid} />
-      <LeagueSafeStrip t={t} duesPaid={duesPaid} setDuesPaid={setDuesPaid} myTeam={myTeam} onOpenPayment={() => setPaymentModalOpen(true)} />
+      <Chrome t={t} showCustomHints={showCustomHints} setShowCustomHints={setShowCustomHints} activeNav={activeNav} setActiveNav={setActiveNav} themeKey={themeKey} viewMode={viewMode} setViewMode={setViewMode} onNavigate={onNavigate} partner={partner} />
+      <Hero t={t} themeKey={themeKey} setThemeKey={setThemeKey} themeMenuOpen={themeMenuOpen} setThemeMenuOpen={setThemeMenuOpen} showCustomHints={showCustomHints} isPremium={isPremium} partner={partner} partnerKey={partnerKey} setPartnerKey={setPartnerKey} partnerMode={partnerMode} setPartnerMode={setPartnerMode} />
+      <StatusStrip t={t} duesPaid={duesPaid} hideDues={!!partner} />
+      {!partner && (
+        <LeagueSafeStrip t={t} duesPaid={duesPaid} setDuesPaid={setDuesPaid} myTeam={myTeam} onOpenPayment={() => setPaymentModalOpen(true)} />
+      )}
       <main className="max-w-[1400px] mx-auto px-6 pb-16 space-y-6 mt-6">
         {/* TOP SECTION: My Team (primary) + Standings column (secondary) */}
         <div className="lh-top-grid">
           <MyTeamModule t={t} myTeam={myTeam} roster={roster} bench={bench} showCustomHints={showCustomHints} isPremium={teamIsPremium(myTeam)} onNavigate={onNavigate} />
           <div className="space-y-6">
-            <StandingsSection t={t} silverbacks={silverbacks} youngBulls={youngBulls} showCustomHints={showCustomHints} compact={true} isPremium={isPremium} teamIsPremium={teamIsPremium} />
+            <StandingsSection t={t} silverbacks={silverbacks} youngBulls={youngBulls} showCustomHints={showCustomHints} compact={true} isPremium={isPremium} teamIsPremium={teamIsPremium} partner={partner} />
             <TopPerformersCard t={t} topPerformers={topPerformers} />
             <LastWeekRecapCard t={t} lastWeekRecap={lastWeekRecap} teamById={teamById} teamIsPremium={teamIsPremium} />
           </div>
@@ -939,7 +1011,7 @@ function FontLoader() {
 // ---------------------------------------------------------------------------
 // Placeholder components — will be filled in next
 // ---------------------------------------------------------------------------
-function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNav, themeKey, viewMode, setViewMode, onNavigate }) {
+function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNav, themeKey, viewMode, setViewMode, onNavigate, partner }) {
   const navItems = [
     { id: 'home',    label: 'Home',    icon: Home,           pageId: 'home' },
     { id: 'team',    label: 'My Franchise', icon: Shield,   pageId: 'franchise' },
@@ -955,12 +1027,23 @@ function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNa
       <div className="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between gap-6">
         {/* Left: Logo + League picker */}
         <div className="flex items-center gap-6 min-w-0">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-md flex items-center justify-center fraunces font-black text-lg" style={{ background: t.primary, color: t.accent, letterSpacing: '-0.04em' }}>
-              L<span style={{ fontSize: '0.7em', verticalAlign: 'super', marginLeft: '-1px' }}>™</span>
+          {partner ? (
+            // Partner Mode — overall brand replaces LMP entirely (white-label)
+            <div className="flex items-center" title={partner.overallBrand.name}>
+              <img
+                src={partner.overallBrand.logoUrl}
+                alt={partner.overallBrand.name}
+                style={{ height: 38, width: 'auto', display: 'block' }}
+              />
             </div>
-            <span className="fraunces font-semibold text-[15px] tracking-tight hidden sm:inline" style={{ color: t.text }}>LMP</span>
-          </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-md flex items-center justify-center fraunces font-black text-lg" style={{ background: t.primary, color: t.accent, letterSpacing: '-0.04em' }}>
+                L<span style={{ fontSize: '0.7em', verticalAlign: 'super', marginLeft: '-1px' }}>™</span>
+              </div>
+              <span className="fraunces font-semibold text-[15px] tracking-tight hidden sm:inline" style={{ color: t.text }}>LMP</span>
+            </div>
+          )}
           <button className="flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-md transition-colors hover:bg-black/5 min-w-0" style={{ color: t.text }}>
             <div className="w-6 h-6 rounded flex items-center justify-center text-xs" style={{ background: t.primary, color: t.accent, fontFamily: 'Fraunces' }}>L</div>
             <span className="truncate">The Empire League</span>
@@ -1054,7 +1137,165 @@ function Chrome({ t, showCustomHints, setShowCustomHints, activeNav, setActiveNa
     </div>
   );
 }
-function Hero({ t, themeKey, setThemeKey, themeMenuOpen, setThemeMenuOpen, showCustomHints, isPremium }) {
+// Partner Mode toggle — segmented control switching between standalone LMP
+// and any configured white-label partner. Glass styling so it works on the
+// dark hero backdrops (both standalone Free hero and Partner hero).
+function PartnerToggle({ partnerKey, setPartnerKey }) {
+  const items = [
+    { id: null, label: 'Standalone' },
+    ...Object.values(PARTNERS).map(p => ({ id: p.id, label: `Partner: ${p.label}` })),
+  ];
+
+  return (
+    <div
+      className="flex items-center p-0.5 rounded-lg backdrop-blur-md"
+      style={{ background: 'rgba(255,255,255,0.14)', border: '1px solid rgba(255,255,255,0.22)' }}
+    >
+      {items.map(item => {
+        const isActive = partnerKey === item.id;
+        return (
+          <button
+            key={item.label}
+            onClick={() => setPartnerKey(item.id)}
+            className="px-2.5 py-1 rounded text-[11px] font-semibold transition-all whitespace-nowrap"
+            style={{
+              background: isActive ? '#ffffff' : 'transparent',
+              color: isActive ? '#0b1221' : 'rgba(255,255,255,0.85)',
+              boxShadow: isActive ? '0 1px 2px rgba(0,0,0,0.12)' : 'none',
+            }}
+          >
+            {item.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// Light/Dark mode toggle — shown only in Partner Mode (standalone uses the
+// theme switcher instead). Glass styling so it sits cleanly on the dark hero.
+function ModeToggle({ partnerMode, setPartnerMode }) {
+  const items = [
+    { id: 'light', icon: Sun,  label: 'Light' },
+    { id: 'dark',  icon: Moon, label: 'Dark'  },
+  ];
+  return (
+    <div
+      className="flex items-center p-0.5 rounded-lg backdrop-blur-md"
+      style={{ background: 'rgba(255,255,255,0.14)', border: '1px solid rgba(255,255,255,0.22)' }}
+    >
+      {items.map(item => {
+        const Icon = item.icon;
+        const isActive = partnerMode === item.id;
+        return (
+          <button
+            key={item.id}
+            onClick={() => setPartnerMode(item.id)}
+            className="flex items-center gap-1 px-2.5 py-1 rounded text-[11px] font-semibold transition-all"
+            style={{
+              background: isActive ? '#ffffff' : 'transparent',
+              color: isActive ? '#0b1221' : 'rgba(255,255,255,0.85)',
+              boxShadow: isActive ? '0 1px 2px rgba(0,0,0,0.12)' : 'none',
+            }}
+          >
+            <Icon size={11} strokeWidth={2.5} />
+            <span>{item.label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// Partner Hero — white-label hero replacing the standalone league hero.
+// Layout: secondary-brand logo (left, full-height) + contest name (center)
+// + "presented by" sponsor (bottom-right). Theme is the partner's locked
+// palette so it inherits the partner's color identity.
+function PartnerHero({ partner, partnerKey, setPartnerKey, partnerMode, setPartnerMode }) {
+  const pt = partner.theme;
+
+  return (
+    <section className="relative">
+      <div
+        className="relative overflow-hidden"
+        style={{
+          background: `linear-gradient(135deg, ${pt.primaryDark} 0%, ${pt.primary} 100%)`,
+          minHeight: 240,
+        }}
+      >
+        {/* Accent hairlines top/bottom — match partner accent color */}
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${pt.accent}, transparent)`, opacity: 0.7 }} />
+        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${pt.accent}, transparent)`, opacity: 0.4 }} />
+        <div className="absolute inset-0 pointer-events-none"
+             style={{ background: `radial-gradient(ellipse at 50% 120%, ${pt.accent}22, transparent 60%)` }} />
+
+        <div className="relative max-w-[1400px] mx-auto px-6 py-10 md:py-12">
+          {/* NFFC shield + contest title — vertically centered together */}
+          <div className="flex items-center gap-6 md:gap-10 flex-wrap">
+            <div className="flex-shrink-0">
+              <img
+                src={partner.secondaryBrand.logoUrl}
+                alt={partner.secondaryBrand.name}
+                style={{ height: 150, width: 'auto', display: 'block' }}
+              />
+            </div>
+
+            <h1
+              className="flex-1 min-w-0 font-black"
+              style={{
+                fontSize: 'clamp(2rem, 5.75vw, 4.5rem)',
+                color: '#ffffff',
+                lineHeight: 1.02,
+                fontFamily: '"Archivo", system-ui, sans-serif',
+                letterSpacing: '-0.02em',
+                textShadow: '0 2px 18px rgba(0,0,0,0.4)',
+                margin: 0,
+              }}
+            >
+              {partner.contestName}
+            </h1>
+          </div>
+
+          {/* Sponsor row — right-aligned directly under the contest title */}
+          {partner.sponsor && (
+            <div className="flex items-center justify-end gap-3 mt-5 flex-wrap">
+              <span
+                className="text-[11px] md:text-[12px] font-bold tracking-[0.22em] uppercase"
+                style={{ color: '#ffffff', opacity: 0.9 }}
+              >
+                Presented by:
+              </span>
+              <img
+                src={partner.sponsor.logoUrl}
+                alt={partner.sponsor.name}
+                style={{ height: 38, width: 'auto', display: 'block' }}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Bottom-left: Partner toggle so user can switch back to standalone */}
+        <div className="absolute bottom-4 left-4 md:left-6">
+          <PartnerToggle partnerKey={partnerKey} setPartnerKey={setPartnerKey} />
+        </div>
+
+        {/* Bottom-right: Light / Dark mode toggle */}
+        <div className="absolute bottom-4 right-4 md:right-6">
+          <ModeToggle partnerMode={partnerMode} setPartnerMode={setPartnerMode} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Hero({ t, themeKey, setThemeKey, themeMenuOpen, setThemeMenuOpen, showCustomHints, isPremium, partner, partnerKey, setPartnerKey, partnerMode, setPartnerMode }) {
+  // Partner Mode — totally different hero layout: partner-supplied branding,
+  // contest name, and sponsor. The standalone hero (premium/free variants
+  // below) is bypassed entirely.
+  if (partner) {
+    return <PartnerHero partner={partner} partnerKey={partnerKey} setPartnerKey={setPartnerKey} partnerMode={partnerMode} setPartnerMode={setPartnerMode} />;
+  }
+
   // The banner's OWN internal palette (independent of app theme) — this
   // represents what the commissioner designed/generated for THIS league.
   // In production: AI-generated from a prompt, or uploaded by the commish.
@@ -1155,6 +1396,11 @@ function Hero({ t, themeKey, setThemeKey, themeMenuOpen, setThemeMenuOpen, showC
           )}
         </div>
 
+        {/* Bottom-left: Partner Mode toggle (standalone hero) */}
+        <div className="absolute bottom-4 left-4 md:left-6">
+          <PartnerToggle partnerKey={partnerKey} setPartnerKey={setPartnerKey} onLightSurface={false} />
+        </div>
+
         {/* Bottom-right: Theme switcher */}
         <div className="absolute bottom-4 right-4 md:right-6">
           <div className="relative">
@@ -1220,7 +1466,7 @@ function Hero({ t, themeKey, setThemeKey, themeMenuOpen, setThemeMenuOpen, showC
     </section>
   );
 }
-function StatusStrip({ t, duesPaid }) {
+function StatusStrip({ t, duesPaid, hideDues = false }) {
   // League dues economics
   const totalTeams = 12;
   const duesPerTeam = 500;
@@ -1258,6 +1504,7 @@ function StatusStrip({ t, duesPaid }) {
         })}
 
         {/* League Dues — custom item with inline progress bar (replaces Championship) */}
+        {!hideDues && (
         <div className="flex items-center gap-2.5 shrink-0" style={{ minWidth: 280 }}>
           <div className="w-8 h-8 rounded-md flex items-center justify-center" style={{ background: t.primary, color: t.accent }}>
             <Shield size={14} strokeWidth={2.2} />
@@ -1285,6 +1532,7 @@ function StatusStrip({ t, duesPaid }) {
             </div>
           </div>
         </div>
+        )}
       </div>
     </div>
   );
@@ -1654,7 +1902,60 @@ function MatchupsSection({ t, matchups, teamById, showCustomHints, teamIsPremium
 // ("The Legacy League" treatment) so the standings feel like they belong to
 // the same league identity. Eyebrow with flanking rules, italic-gold
 // emphasis on the distinguishing word, same forest-green + gold palette.
-function DivisionBanner({ division, t, showCustomHints, isPremium = true }) {
+function DivisionBanner({ division, t, showCustomHints, isPremium = true, partner, divisionNumber }) {
+  // Partner Mode: divisions aren't named at the league level — show
+  // "Division 1" / "Division 2" with the partner's secondary brand as a
+  // faint watermark on the left for branded flair.
+  if (partner) {
+    return (
+      <div
+        className="relative overflow-hidden rounded-md flex items-center justify-center py-4 px-4"
+        style={{
+          background: `linear-gradient(135deg, ${t.primaryDark} 0%, ${t.primary} 100%)`,
+          minHeight: 92,
+          color: '#ffffff',
+        }}
+      >
+        {/* Faint partner shield watermark — bleeds off the left edge */}
+        <img
+          src={partner.secondaryBrand.logoUrl}
+          alt=""
+          aria-hidden="true"
+          className="absolute"
+          style={{
+            left: -14,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            height: '150%',
+            width: 'auto',
+            opacity: 0.16,
+            pointerEvents: 'none',
+            filter: 'saturate(0.6)',
+          }}
+        />
+        {/* Accent hairlines */}
+        <div className="absolute top-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${t.accent}, transparent)`, opacity: 0.7 }} />
+        <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: `linear-gradient(90deg, transparent, ${t.accent}, transparent)`, opacity: 0.4 }} />
+
+        <div className="relative text-center">
+          <div
+            className="font-black"
+            style={{
+              fontSize: 28,
+              color: '#ffffff',
+              fontFamily: 'Archivo, sans-serif',
+              letterSpacing: '-0.01em',
+              lineHeight: 1,
+              textShadow: '0 2px 10px rgba(0,0,0,0.35)',
+            }}
+          >
+            Division {divisionNumber}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   // Free view: themed dark gradient tied to the selected theme — same
   // treatment as the Free-mode Hero so they read as a single look. When
   // the commissioner switches themes, these update together.
@@ -1739,7 +2040,7 @@ function DivisionBanner({ division, t, showCustomHints, isPremium = true }) {
   );
 }
 
-function StandingsSection({ t, silverbacks, youngBulls, showCustomHints, compact = false, isPremium, teamIsPremium }) {
+function StandingsSection({ t, silverbacks, youngBulls, showCustomHints, compact = false, isPremium, teamIsPremium, partner }) {
   return (
     <section>
       <SectionHeader
@@ -1753,18 +2054,18 @@ function StandingsSection({ t, silverbacks, youngBulls, showCustomHints, compact
         }
       />
       <div className="rounded-xl overflow-hidden" style={{ background: t.bgCard, border: `1px solid ${t.border}` }}>
-        <DivisionGroup t={t} division={divisions.silverbacks} teams={silverbacks} showCustomHints={showCustomHints} compact={compact} isPremium={isPremium} teamIsPremium={teamIsPremium} />
+        <DivisionGroup t={t} division={divisions.silverbacks} teams={silverbacks} showCustomHints={showCustomHints} compact={compact} isPremium={isPremium} teamIsPremium={teamIsPremium} partner={partner} divisionNumber={1} />
         <div style={{ height: 1, background: t.border }} />
-        <DivisionGroup t={t} division={divisions['young-bulls']} teams={youngBulls} showCustomHints={showCustomHints} compact={compact} isPremium={isPremium} teamIsPremium={teamIsPremium} />
+        <DivisionGroup t={t} division={divisions['young-bulls']} teams={youngBulls} showCustomHints={showCustomHints} compact={compact} isPremium={isPremium} teamIsPremium={teamIsPremium} partner={partner} divisionNumber={2} />
       </div>
     </section>
   );
 }
 
-function DivisionGroup({ t, division, teams, showCustomHints, compact = false, isPremium, teamIsPremium }) {
+function DivisionGroup({ t, division, teams, showCustomHints, compact = false, isPremium, teamIsPremium, partner, divisionNumber }) {
   return (
     <div className="p-3">
-      <DivisionBanner division={division} t={t} showCustomHints={showCustomHints} isPremium={isPremium} />
+      <DivisionBanner division={division} t={t} showCustomHints={showCustomHints} isPremium={isPremium} partner={partner} divisionNumber={divisionNumber} />
       {/* Column headers */}
       <div className="flex items-center gap-3 mt-3 px-2 pb-1.5 text-[10px] font-bold uppercase tracking-wider"
            style={{ color: t.textMuted, borderBottom: `1px solid ${t.border}` }}>
