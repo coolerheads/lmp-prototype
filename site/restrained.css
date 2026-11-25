@@ -89,3 +89,4 @@ body.rs .ctslot, body.rs .mkpos { background: color-mix(in srgb, var(--pc) 18%, 
 /* the score/projection columns read first */
 body.rs .lu .n { font: 800 20px 'Saira Condensed', sans-serif !important; }
 body.rs .lu .pn1 { font-size: 16px !important; font-weight: 600; }
+body.rs .pos.flx, body.rs .pos.sflx { letter-spacing: .08em; font-weight: 800 !important; }

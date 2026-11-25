@@ -190,6 +190,17 @@
     }
     if (NAV) NAV.decorate((G.nav || 'compact') !== 'classic');
     frameClasses();
+    flexLetters();
+  }
+  // FLEX / SUPERFLEX slot tags: each eligible position's letter in its own color (R W T, Q R W T)
+  function flexLetters() {
+    var V = { Q: '--qb', R: '--rb', W: '--wr', T: '--te' };
+    root.querySelectorAll('.pos.flx, .pos.sflx').forEach(function (el) {
+      if (el.dataset.rsl) return;
+      var sf = el.classList.contains('sflx'), L = sf ? ['Q', 'R', 'W', 'T'] : ['R', 'W', 'T'];
+      el.innerHTML = L.map(function (c) { return '<span style="color: var(' + V[c] + ')">' + c + '</span>'; }).join('');
+      el.dataset.rsl = '1'; el.setAttribute('aria-label', sf ? 'Superflex: QB, RB, WR or TE' : 'Flex: RB, WR or TE'); el.title = sf ? 'Superflex' : 'Flex';
+    });
   }
   // Restrained frame: theme, easy buttons and league bar classes on <body> (styles in restrained.css)
   var FRAME = { easy: [['rail', 'Rail'], ['tabs', 'Tabs only']], lbar: [['league', 'League color'], ['ink', 'Brand ink'], ['theme', 'Theme'], ['white', 'White']],
