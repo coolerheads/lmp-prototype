@@ -293,7 +293,7 @@ button{font-family:inherit;cursor:pointer}
 <div class="bpview">
 <div class="bptrack" style="transform: translateX({{bpX}})">
 <sc-for list="{{bigPlays}}" as="b" hint-placeholder-count="6">
-<span class="{{b.cls}}" title="{{b.who}} {{b.txt}} · {{b.game}} {{b.when}}"><sc-if value="{{b.isNew}}"><span class="bpnew">NEW</span></sc-if><span class="tt" style="background: {{b.c}}">{{b.team}}</span><span class="{{b.kCls}}">{{b.k}}</span><span class="d"><b>{{b.who}}</b> {{b.txt}}</span><sc-if value="{{b.mine}}"><span class="mine" title="Involves one of your starters"></span></sc-if><span class="w">{{b.game}} · {{b.when}}</span></span>
+<span class="{{b.cls}}" title="{{b.who}} {{b.txt}} · {{b.game}} {{b.when}}"><sc-if value="{{b.isNew}}"><span class="bpnew">NEW</span></sc-if><img class="nl bp-nl" src="/a/nfl/{{b.team}}.svg" alt=""><span class="tt" style="background: {{b.c}}">{{b.team}}</span><span class="{{b.kCls}}">{{b.k}}</span><span class="d"><b>{{b.who}}</b> {{b.txt}}</span><sc-if value="{{b.mine}}"><span class="mine" title="Involves one of your starters"></span></sc-if><span class="w">{{b.game}} · {{b.when}}</span></span>
 </sc-for>
 </div>
 <sc-if value="{{bpPrev}}"><button class="bparr l" onClick="{{bpLeft}}" aria-label="Newer plays"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button></sc-if>
@@ -345,8 +345,8 @@ button{font-family:inherit;cursor:pointer}
 <div class="grow" style="transform: translateX({{gX}})">
 <sc-for list="{{nfl}}" as="n" hint-placeholder-count="10">
 <button class="{{n.cls}}" onClick="{{n.pick}}" title="{{n.tip}}">
-<span class="gl"><span class="t">{{n.a}}</span><sc-if value="{{n.aBall}}"><svg class="fb" width="14" height="9" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if><span class="{{n.aCls}}">{{n.as}}</span></span>
-<span class="gl"><span class="t">{{n.b}}</span><sc-if value="{{n.bBall}}"><svg class="fb" width="14" height="9" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if><span class="{{n.bCls}}">{{n.bs}}</span></span>
+<span class="gl"><img class="nl gb-nl" src="/a/nfl/{{n.a}}.svg" alt=""><span class="t">{{n.a}}</span><sc-if value="{{n.aBall}}"><svg class="fb" width="14" height="9" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if><span class="{{n.aCls}}">{{n.as}}</span></span>
+<span class="gl"><img class="nl gb-nl" src="/a/nfl/{{n.b}}.svg" alt=""><span class="t">{{n.b}}</span><sc-if value="{{n.bBall}}"><svg class="fb" width="14" height="9" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if><span class="{{n.bCls}}">{{n.bs}}</span></span>
 <span style="display: flex; align-items: center; gap: 6px; margin-top: 2px; font-size: 11px; font-weight: 600; min-height: 16px"><sc-if value="{{n.rz}}"><span class="rz" style="height: 16px; font-size: 9px; padding: 0 5px">RED ZONE</span></sc-if><span style="color: {{n.sc}}">{{n.st}}</span></span>
 <sc-if value="{{n.hasXp}}"><span class="gd-xp"><sc-if value="{{n.mN}}"><span class="m">{{n.mN}} yours</span></sc-if><sc-if value="{{n.oN}}"><span class="o">{{n.oN}} facing</span></sc-if></span></sc-if>
 </button>
@@ -361,7 +361,7 @@ button{font-family:inherit;cursor:pointer}
 <section class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
 <div class="sb">
 <div class="tm" style="background: {{g.a.bg}}; --tc: {{g.a.ez}}">
-<span class="nmw"><span class="ab">{{g.a.ab}}</span><span class="nm">{{g.a.nm}} · {{g.a.rec}}</span><span class="to"><sc-for list="{{g.a.to}}" as="t" hint-placeholder-count="3"><i class="{{t}}"></i></sc-for></span></span>
+<img class="nl sb-wm" src="/a/nfl/{{g.a.ab}}.svg" alt=""><img class="nl sb-nl" src="/a/nfl/{{g.a.ab}}.svg" alt=""><span class="nmw"><span class="ab">{{g.a.ab}}</span><span class="nm">{{g.a.nm}} · {{g.a.rec}}</span><span class="to"><sc-for list="{{g.a.to}}" as="t" hint-placeholder-count="3"><i class="{{t}}"></i></sc-for></span></span>
 <sc-if value="{{g.aBall}}"><svg class="fb" width="26" height="17" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if>
 <span class="sc">{{g.a.sc}}</span>
 </div>
@@ -371,14 +371,14 @@ button{font-family:inherit;cursor:pointer}
 <sc-if value="{{g.rz}}"><span class="rz">RED ZONE</span></sc-if>
 </div>
 <div class="tm r" style="background: {{g.b.bg}}; --tc: {{g.b.ez}}">
-<span class="nmw"><span class="ab">{{g.b.ab}}</span><span class="nm">{{g.b.rec}} · {{g.b.nm}}</span><span class="to"><sc-for list="{{g.b.to}}" as="t" hint-placeholder-count="3"><i class="{{t}}"></i></sc-for></span></span>
+<img class="nl sb-wm" src="/a/nfl/{{g.b.ab}}.svg" alt=""><img class="nl sb-nl" src="/a/nfl/{{g.b.ab}}.svg" alt=""><span class="nmw"><span class="ab">{{g.b.ab}}</span><span class="nm">{{g.b.rec}} · {{g.b.nm}}</span><span class="to"><sc-for list="{{g.b.to}}" as="t" hint-placeholder-count="3"><i class="{{t}}"></i></sc-for></span></span>
 <sc-if value="{{g.bBall}}"><svg class="fb" width="26" height="17" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if>
 <span class="sc">{{g.b.sc}}</span>
 </div>
 </div>
 <div class="field">
-<div class="ez l" style="background: {{g.a.ez}}"><span>{{g.a.ab}}</span></div>
-<div class="ez r" style="background: {{g.b.ez}}"><span>{{g.b.ab}}</span></div>
+<div class="ez l" style="background: {{g.a.ez}}"><img class="nl ez-nl" src="/a/nfl/{{g.a.ab}}.svg" alt=""><span>{{g.a.ab}}</span></div>
+<div class="ez r" style="background: {{g.b.ez}}"><img class="nl ez-nl" src="/a/nfl/{{g.b.ab}}.svg" alt=""><span>{{g.b.ab}}</span></div>
 <div class="turf">
 <sc-if value="{{g.rz}}"><div class="rzone" style="left: {{g.rzL}}"></div></sc-if>
 <sc-for list="{{yards}}" as="y" hint-placeholder-count="9"><span class="yn" style="left: {{y.x}}">{{y.n}}</span></sc-for>
@@ -391,7 +391,7 @@ button{font-family:inherit;cursor:pointer}
 </section>
 <!-- YOUR STAKE: net impact by league + your players in this game -->
 <section class="card gd-stake">
-<div class="gd-sh"><h2 class="h3">Your Stake in {{g.a.ab}}–{{g.b.ab}}</h2><span class="gd-sub">Your starters vs. this week’s opponent, league by league</span></div>
+<div class="gd-sh"><h2 class="h3 gd-sth">Your Stake in <img class="nl" src="/a/nfl/{{g.a.ab}}.svg" alt="">{{g.a.ab}}<span class="gd-dash">–</span><img class="nl" src="/a/nfl/{{g.b.ab}}.svg" alt="">{{g.b.ab}}</h2><span class="gd-sub">Your starters vs. this week’s opponent, league by league</span></div>
 <div class="gd-lgs"><sc-for list="{{rsx.lgs}}" as="l" hint-placeholder-count="5"><div class="{{l.cls}}">
 <div class="gd-lh"><span class="{{l.badge}}" style="background: {{l.hue}}">{{l.init}}</span><span class="gd-nn">{{l.name}}</span><b style="color: {{l.c}}">{{l.v}}</b></div>
 <div class="gd-sides">
@@ -407,7 +407,7 @@ button{font-family:inherit;cursor:pointer}
 <sc-for list="{{g.scores}}" as="s" hint-placeholder-count="4">
 <div class="{{s.cls}}">
 <span class="tt">{{s.t}}</span>
-<span class="tab" style="background: {{s.c}}">{{s.team}}</span>
+<span class="tab gd-tab"><img class="nl" src="/a/nfl/{{s.team}}.svg" alt="">{{s.team}}</span>
 <span class="kind">{{s.kind}}</span>
 <span class="tx"><span class="gd-hs sm" style="background-image: {{s.img}}"></span><span class="gd-st"><span>{{s.txt}}</span><sc-if value="{{s.hasFx}}"><span class="fx"><sc-for list="{{s.fx}}" as="f" hint-placeholder-count="2"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></span></sc-if></span></span>
 <span class="num run">{{s.run}}</span>
@@ -492,7 +492,7 @@ button{font-family:inherit;cursor:pointer}
 <sc-for list="{{c.scores}}" as="s" hint-placeholder-count="4">
 <div class="{{s.cls}}">
 <span class="tt">{{s.t}}</span>
-<span class="tab" style="background: {{s.c}}">{{s.team}}</span>
+<span class="tab gd-tab"><img class="nl" src="/a/nfl/{{s.team}}.svg" alt="">{{s.team}}</span>
 <span class="kind">{{s.kind}}</span>
 <span class="tx"><span class="gd-hs sm" style="background-image: {{s.img}}"></span><span class="gd-st"><span>{{s.txt}}</span><sc-if value="{{s.hasFx}}"><span class="fx"><sc-for list="{{s.fx}}" as="f" hint-placeholder-count="2"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></span></sc-if></span></span>
 <span class="num run">{{s.run}}</span>
@@ -652,7 +652,7 @@ exp: [
 ['Sam LaPorta', 'TE', 'DET', '3.4', [['SS', 'ys'], ['EL', 'yb']]],
 ['Colston Loveland', 'TE', 'CHI', '2.8', [['LM', 'ys'], ['SS', 'os']]]
 ],
-net: [['SS', 13.2], ['LM', 1.8], ['EL', -0.7], ['DD', -3.4], ['OP', -3.4]]
+net: [['SS', 10.4], ['LM', 4.6], ['EL', -0.7], ['DD', -3.4], ['OP', -7.5]]
 },
 KCDEN: {
 a: { ab: 'KC', nm: 'Kansas City', rec: '5-1', sc: '21', bg: 'linear-gradient(120deg,#E31837,#a50f26)', ez: '#E31837', to: 1 },

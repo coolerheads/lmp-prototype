@@ -500,3 +500,31 @@ body.rs .gd-pos { flex: 0 0 26px; font-size: 10px; font-weight: 800; text-align:
 body.rs .gd-pos-QB { background: #FF7A93; } body.rs .gd-pos-RB { background: #3EE0B4; } body.rs .gd-pos-WR { background: #62B0FF; } body.rs .gd-pos-TE { background: #FFAE5C; } body.rs .gd-pos-K { background: #E8D867; }
 body.rs .gd-pos-BN { background: transparent; box-shadow: inset 0 0 0 1px var(--ln); color: var(--mut); }
 body.rs .gd-none { font-size: 12px; color: var(--mut); font-style: italic; padding-top: 2px; }
+/* Game Day: NFL team logos (prototype) */
+body.rs .nl { display: inline-block; object-fit: contain; flex: 0 0 auto; }
+body.rs.pg-gameday .gb-nl { width: 20px; height: 16px; margin-right: 5px; vertical-align: middle; }
+body.rs.pg-gameday .gband .gl { align-items: center; }
+body.rs.pg-gameday .bp-nl { width: 22px; height: 18px; margin-right: 2px; }
+body.rs.pg-gameday .bp .tt { display: none !important; }
+body.rs.pg-gameday .sb .tm { overflow: hidden; }
+body.rs.pg-gameday .sb-nl { width: 76px; height: 62px; filter: drop-shadow(0 2px 6px rgba(0,0,0,.45)); position: relative; z-index: 1; }
+body.rs.pg-gameday .sb-wm { position: absolute; width: 260px; height: 220px; left: -40px; top: 50%; transform: translateY(-50%); opacity: .09; filter: grayscale(1) brightness(2.2); pointer-events: none; }
+body.rs.pg-gameday .tm.r .sb-wm { left: auto; right: -40px; }
+body.rs.pg-gameday .tm .nmw, body.rs.pg-gameday .tm .sc, body.rs.pg-gameday .tm .fb { position: relative; z-index: 1; }
+body.rs.pg-gameday .ez .ez-nl { width: 72%; height: 60%; filter: drop-shadow(0 1px 3px rgba(0,0,0,.35)); }
+body.rs.pg-gameday .ez:has(.ez-nl) span { display: none; }
+body.rs.pg-gameday .ez .ez-nl { background: rgba(255,255,255,.92); border-radius: 50%; padding: 6px; width: 64px; height: 64px; box-sizing: border-box; }
+body.rs.pg-gameday .field.sm .ez .ez-nl { width: 30px; height: 30px; padding: 3px; }
+body.rs.pg-gameday .srow .gd-tab { background: transparent !important; color: var(--tx); font-style: normal; gap: 5px; justify-content: flex-start; }
+body.rs.pg-gameday .srow .gd-tab .nl { width: 24px; height: 20px; }
+body.rs .gd-sth { display: flex; align-items: center; gap: 6px; }
+body.rs .gd-sth .nl { width: 34px; height: 28px; margin-left: 4px; }
+body.rs .gd-sth { gap: 0; }
+body.rs .gd-sth .nl { width: 30px; height: 24px; margin: 0 6px 0 10px; }
+body.rs.pg-gameday .gb-nl { width: 22px; height: 17px; }
+body.rs.pg-gameday .sb-nl { width: 70px; height: 56px; }
+body.rs.pg-gameday .ez .ez-nl { padding: 10px; }
+body.rs .gd-sth .gd-dash { margin: 0 2px 0 6px; }
+body.rs .gd-sth .gd-dash + .nl { margin-left: 6px; }
+body.rs.pg-gameday .srow { grid-template-columns: 70px 74px 30px 1fr auto !important; }
+body.rs.pg-gameday .srow .gd-tab { font-size: 15px; }
