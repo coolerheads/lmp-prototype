@@ -339,3 +339,26 @@ body.rs .hshd:has(+ .hswall) { position: relative; display: flex; flex-direction
   background: linear-gradient(90deg, #0b0806 0%, #0b0806 35%, rgba(11,8,6,.2) 70%), #0b0806 url(/a/el-trophy.webp) right center / auto 100% no-repeat; }
 body.rs .hshd:has(+ .hswall) b { font: 800 40px 'Saira Condensed', sans-serif; color: #F4D58A; }
 body.rs .hshd:has(+ .hswall) span { color: rgba(255,255,255,.75); }
+
+/* ---------- League badge: full crest at normal sizes, simplified shield at 32px and below ---------- */
+body.rs .fbd[style*="#b07a1e"][style*="28px"], body.rs .fbd.s28[style*="#b07a1e"], body.rs .fbd.s20[style*="#b07a1e"], body.rs .fbd.s24[style*="#b07a1e"] { background-image: url(/a/el-badge-sm.webp) !important; }
+
+/* ---------- Home playoffs moment: restrained card, league gold instead of the blue gradient ---------- */
+body.rs .hmpo { background: var(--card) !important; color: var(--tx) !important; box-shadow: 0 1px 2px rgba(16,24,40,.05), 0 6px 16px -8px rgba(16,24,40,.12) !important; border: 1px solid var(--ln); border-top: 3px solid #C9A24A; }
+body.rs .hmpoh small { color: #A35A06 !important; }
+body.rs.th-dark .hmpoh small { color: #ECB958 !important; }
+body.rs .hmpoh h2 { font-family: 'Saira Condensed', sans-serif !important; font-weight: 800 !important; font-size: 32px !important; }
+body.rs .hmpath { background: var(--sub) !important; color: var(--mut) !important; box-shadow: inset 0 0 0 1px var(--ln); }
+body.rs .hmpath b { color: var(--tx) !important; }
+body.rs .hmpath.done { background: color-mix(in srgb, var(--up) 12%, transparent) !important; }
+body.rs .hmpath.done b { color: var(--up) !important; }
+body.rs .hmpath.now { background: #C9A24A !important; box-shadow: none; color: rgba(26,18,6,.75) !important; }
+body.rs .hmpath.now b { color: #1a1206 !important; }
+body.rs .hmsemi { background: var(--sub) !important; box-shadow: inset 0 0 0 1px var(--ln) !important; }
+body.rs .hmsemi.me { background: color-mix(in srgb, #C9A24A 10%, var(--card)) !important; box-shadow: inset 0 0 0 2px #C9A24A !important; }
+body.rs .hmsemi small { color: var(--mut) !important; }
+body.rs .hmsr .sn { color: var(--mut) !important; }
+body.rs .hmsr b { font-family: 'Saira Condensed', sans-serif !important; font-weight: 800 !important; font-size: 26px !important; }
+body.rs .hmpob .hmb { background: transparent !important; color: var(--tx) !important; box-shadow: inset 0 0 0 1px var(--ln2) !important; height: 36px; padding: 0 14px; font-size: 13.5px; }
+body.rs .hmpob .hmb.p { background: #ECB958 !important; color: #1a1206 !important; box-shadow: none !important; }
+body.rs .hmpob > span[style] { color: var(--mut) !important; }
