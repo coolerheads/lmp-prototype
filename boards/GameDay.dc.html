@@ -339,7 +339,7 @@ button{font-family:inherit;cursor:pointer}
 <div class="glab">
 <span class="num" style="font-size: 20px; font-weight: 900">NFL</span>
 <span class="num" style="font-size: 14px; font-weight: 800; letter-spacing: .06em; color: #8B93A5">SCOREBOARD</span>
-<span class="pd" style="margin-top: 5px; font-size: 10px; font-weight: 600; color: #8B93A5; gap: 4px"><i class="me"></i>Yours<i class="op" style="margin-left: 4px"></i>Facing</span>
+
 </div>
 <div class="gwrap">
 <div class="grow" style="transform: translateX({{gX}})">
@@ -348,7 +348,7 @@ button{font-family:inherit;cursor:pointer}
 <span class="gl"><span class="t">{{n.a}}</span><sc-if value="{{n.aBall}}"><svg class="fb" width="14" height="9" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if><span class="{{n.aCls}}">{{n.as}}</span></span>
 <span class="gl"><span class="t">{{n.b}}</span><sc-if value="{{n.bBall}}"><svg class="fb" width="14" height="9" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if><span class="{{n.bCls}}">{{n.bs}}</span></span>
 <span style="display: flex; align-items: center; gap: 6px; margin-top: 2px; font-size: 11px; font-weight: 600; min-height: 16px"><sc-if value="{{n.rz}}"><span class="rz" style="height: 16px; font-size: 9px; padding: 0 5px">RED ZONE</span></sc-if><span style="color: {{n.sc}}">{{n.st}}</span></span>
-<span style="display: flex; align-items: center; gap: 6px; font-size: 11px"><span class="pd"><sc-for list="{{n.md}}" as="d" hint-placeholder-count="3"><i class="me"></i></sc-for><span class="sep"></span><sc-for list="{{n.od}}" as="d" hint-placeholder-count="2"><i class="op"></i></sc-for></span></span>
+<sc-if value="{{n.hasXp}}"><span class="gd-xp"><sc-if value="{{n.mN}}"><span class="m">{{n.mN}} yours</span></sc-if><sc-if value="{{n.oN}}"><span class="o">{{n.oN}} facing</span></sc-if></span></sc-if>
 </button>
 </sc-for>
 </div>
@@ -360,7 +360,7 @@ button{font-family:inherit;cursor:pointer}
 <sc-if value="{{isFeat}}">
 <section class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
 <div class="sb">
-<div class="tm" style="background: {{g.a.bg}}">
+<div class="tm" style="background: {{g.a.bg}}; --tc: {{g.a.ez}}">
 <span class="nmw"><span class="ab">{{g.a.ab}}</span><span class="nm">{{g.a.nm}} · {{g.a.rec}}</span><span class="to"><sc-for list="{{g.a.to}}" as="t" hint-placeholder-count="3"><i class="{{t}}"></i></sc-for></span></span>
 <sc-if value="{{g.aBall}}"><svg class="fb" width="26" height="17" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if>
 <span class="sc">{{g.a.sc}}</span>
@@ -370,7 +370,7 @@ button{font-family:inherit;cursor:pointer}
 <span class="dd">{{g.dd}}</span>
 <sc-if value="{{g.rz}}"><span class="rz">RED ZONE</span></sc-if>
 </div>
-<div class="tm r" style="background: {{g.b.bg}}">
+<div class="tm r" style="background: {{g.b.bg}}; --tc: {{g.b.ez}}">
 <span class="nmw"><span class="ab">{{g.b.ab}}</span><span class="nm">{{g.b.rec}} · {{g.b.nm}}</span><span class="to"><sc-for list="{{g.b.to}}" as="t" hint-placeholder-count="3"><i class="{{t}}"></i></sc-for></span></span>
 <sc-if value="{{g.bBall}}"><svg class="fb" width="26" height="17" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if>
 <span class="sc">{{g.b.sc}}</span>
@@ -389,6 +389,12 @@ button{font-family:inherit;cursor:pointer}
 </div>
 <div style="font-size: 13px; color: var(--mut)"><b style="color: var(--tx)">{{g.possName}} drive:</b> {{g.drive}}</div>
 </section>
+<!-- YOUR STAKE: net impact by league + your players in this game -->
+<section class="card gd-stake">
+<div class="gd-sh"><div><small>YOUR STAKE IN {{g.a.ab}}–{{g.b.ab}}</small><h2 class="h3">{{rsx.netLabel}}</h2></div><span class="gd-sub">your starters minus theirs, this game</span></div>
+<div class="gd-net"><sc-for list="{{rsx.net}}" as="n" hint-placeholder-count="5"><div class="{{n.cls}}"><span class="{{n.badge}}" style="background: {{n.hue}}">{{n.init}}</span><span class="gd-nn">{{n.name}}</span><b style="color: {{n.c}}">{{n.v}}</b></div></sc-for></div>
+<div class="gd-ppl"><sc-for list="{{rsx.stake}}" as="x" hint-placeholder-count="6"><div class="{{x.cls}}"><span class="gd-hs"></span><span class="gd-pi"><b>{{x.name}}</b><small>{{x.pos}} · {{x.team}}</small><span class="gd-lg"><sc-for list="{{x.roles}}" as="r" hint-placeholder-count="2"><span class="{{r.cls}}">{{r.init}}</span></sc-for></span></span><span class="gd-pts">{{x.pts}}</span></div></sc-for></div>
+</section>
 <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start">
 <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
 <section class="card" style="padding: 18px 20px 10px">
@@ -398,7 +404,7 @@ button{font-family:inherit;cursor:pointer}
 <span class="tt">{{s.t}}</span>
 <span class="tab" style="background: {{s.c}}">{{s.team}}</span>
 <span class="kind">{{s.kind}}</span>
-<span class="tx">{{s.txt}}<sc-for list="{{s.dots}}" as="d" hint-placeholder-count="0"><i class="{{d.cls}}" title="{{d.tip}}"></i></sc-for></span>
+<span class="tx"><span class="gd-hs sm"></span><span class="gd-st"><span>{{s.txt}}</span><sc-if value="{{s.hasFx}}"><span class="fx"><sc-for list="{{s.fx}}" as="f" hint-placeholder-count="2"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></span></sc-if></span></span>
 <span class="num run">{{s.run}}</span>
 </div>
 </sc-for>
@@ -412,7 +418,7 @@ button{font-family:inherit;cursor:pointer}
 <div class="{{p.cls}}">
 <span class="tt">{{p.t}}</span>
 <div>
-<div class="tx"><sc-if value="{{p.td}}"><span class="td">TD</span></sc-if>{{p.txt}}</div>
+<div class="tx"><sc-if value="{{p.hasHs}}"><span class="gd-hs sm"></span></sc-if><span><sc-if value="{{p.td}}"><span class="td">TD</span></sc-if>{{p.txt}}</span></div>
 <sc-if value="{{p.hasFx}}">
 <div class="fx"><sc-for list="{{p.fx}}" as="f" hint-placeholder-count="3"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></div>
 </sc-if>
@@ -422,19 +428,6 @@ button{font-family:inherit;cursor:pointer}
 </section>
 </div>
 <div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
-<section class="card" style="padding: 18px 20px 10px">
-<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px">
-<h2 class="h3">Net Impact</h2>
-<span style="font-size: 12px; color: var(--mut)">your starters minus theirs, this game</span>
-</div>
-<sc-for list="{{g.net}}" as="n" hint-placeholder-count="5">
-<div class="{{n.cls}}">
-<span class="lsq" style="background: {{n.hue}}">{{n.init}}</span>
-<span style="min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{n.name}}</span><span class="mixd"><sc-for list="{{n.dots}}" as="d" hint-placeholder-count="2"><i class="{{d}}"></i></sc-for></span></span>
-<span class="num" style="font-size: 24px; font-weight: 900; color: {{n.c}}">{{n.v}}</span>
-</div>
-</sc-for>
-</section>
 <section class="card" style="padding: 18px 20px 8px">
 <h2 class="h3">Exposure</h2>
 <div class="legend">
@@ -457,6 +450,7 @@ button{font-family:inherit;cursor:pointer}
 </div>
 </div>
 </sc-if>
+<sc-if value="{{rsx.toast}}"><div class="gd-toast" role="status"><span class="gd-hs"></span><span class="gd-tt"><small>{{rsx.toastGame}} · {{rsx.toastWhen}}</small><b>{{rsx.toastWho}}</b><span>{{rsx.toastTxt}}</span></span><span class="gd-tv">{{rsx.toastV}}</span></div></sc-if>
 <!-- ===== MULTI-VIEW ===== -->
 <sc-if value="{{isGrid}}">
 <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap">
@@ -495,7 +489,7 @@ button{font-family:inherit;cursor:pointer}
 <span class="tt">{{s.t}}</span>
 <span class="tab" style="background: {{s.c}}">{{s.team}}</span>
 <span class="kind">{{s.kind}}</span>
-<span class="tx">{{s.txt}}<sc-for list="{{s.dots}}" as="d" hint-placeholder-count="0"><i class="{{d.cls}}" title="{{d.tip}}"></i></sc-for></span>
+<span class="tx"><span class="gd-hs sm"></span><span class="gd-st"><span>{{s.txt}}</span><sc-if value="{{s.hasFx}}"><span class="fx"><sc-for list="{{s.fx}}" as="f" hint-placeholder-count="2"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></span></sc-if></span></span>
 <span class="num run">{{s.run}}</span>
 </div>
 </sc-for>
@@ -534,8 +528,50 @@ button{font-family:inherit;cursor:pointer}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"view":{"editor":"enum","options":["featured","multi"],"default":"featured"},"$preview":{"width":1440,"height":2300}}'>
+// ---- Restrained Game Day: your stake, impact on scoring plays, headshots, scoring toast ----
+function gdNum(v) { return parseFloat(String(v).replace('−', '-').replace('+', '')) || 0; }
+function gdSgn(n) { return (n > 0 ? '+' : n < 0 ? '−' : '') + Math.abs(n).toFixed(1); }
+function gdEnhance(host, v) {
+(v.nfl || []).forEach(function (n) { n.mN = (n.md || []).length; n.oN = (n.od || []).length; n.hasXp = n.mN + n.oN > 0; });
+  var g = v.g; if (!g) return v;
+  var exp = g.exp || [], hues = {};
+  (g.net || []).forEach(function (n) { hues[n.init] = { hue: n.hue, name: n.name }; });
+  function who(txt) { for (var i = 0; i < exp.length; i++) { var nm = exp[i].name, last = nm.split(' ').slice(-1)[0]; if (txt.indexOf(nm) >= 0 || txt.indexOf(last + ' ') === 0) return exp[i]; } return null; }
+  var tot = 0, net = (g.net || []).map(function (n) { var x = gdNum(n.v); tot += x; return { init: n.init, hue: n.hue, name: n.name, v: n.v, c: n.c, badge: 'lsq gd-b gd-b-' + n.init, cls: 'gd-nr' + (x > 0 ? ' up' : x < 0 ? ' dn' : '') }; });
+  var stake = [];
+  exp.forEach(function (x) {
+    var roles = (x.roles || []).filter(function (r) { return /\b(ys|os)\b/.test(r.dot); });
+    if (!roles.length) return;
+    var yours = roles.some(function (r) { return /ys/.test(r.dot); }), theirs = roles.some(function (r) { return /os/.test(r.dot); });
+    stake.push({ name: x.name, pos: x.pos, team: x.team, pts: x.pts, cls: 'gd-p' + (yours && !theirs ? ' up' : !yours ? ' dn' : ' mx'),
+      roles: roles.map(function (r) { return { init: r.init, cls: 'gd-rl ' + (/ys/.test(r.dot) ? 'up' : 'dn') }; }) });
+  });
+  stake.sort(function (a, b) { return gdNum(b.pts) - gdNum(a.pts); });
+  (g.scores || []).forEach(function (s) {
+    var yd = parseInt((s.txt.match(/(\d+)-yd/) || [])[1] || '0', 10), fx = {}, any = false;
+    exp.forEach(function (x) {
+      var i = s.txt.indexOf(x.name); if (i < 0) return;
+      var after = s.txt.slice(i + x.name.length, i + x.name.length + 14), passer = / pass/.test(after);
+      var pts = s.kind === 'FG' ? 3 : (passer ? 4 + yd * 0.04 : 6 + yd * 0.1);
+      (x.roles || []).forEach(function (r) { if (/ys/.test(r.dot)) fx[r.init] = (fx[r.init] || 0) + pts; else if (/os/.test(r.dot)) fx[r.init] = (fx[r.init] || 0) - pts; });
+    });
+    s.fx = Object.keys(fx).map(function (k) { any = true; var h = hues[k] || {}; return { init: k, hue: h.hue || '#555', tip: h.name || k, v: gdSgn(fx[k]), c: fx[k] >= 0 ? 'var(--up)' : 'var(--dn)', cls: fx[k] >= 0 ? 'fxc mine' : 'fxc' }; });
+    s.hasFx = any;
+  });
+  (g.plays || []).forEach(function (p) { p.hasHs = !!who(p.txt); });
+  var st = host.state || {}, simN = st.sim || 0, rsx = { net: net, stake: stake, netLabel: 'Net ' + gdSgn(tot) + ' across ' + net.length + ' leagues' };
+  if (simN && simN !== host._gdSim) {
+    host._gdSim = simN;
+    var bp = (v.bigPlays || [])[0];
+    if (bp && bp.mine) { host._gdToast = { who: bp.who, txt: bp.txt, game: bp.game, when: bp.when, v: bp.k === 'TD' ? '+6.0' : '+' + ((parseInt(bp.k, 10) || 10) / 10).toFixed(1) }; clearTimeout(host._gdT); host._gdT = setTimeout(function () { host._gdToast = null; host.setState({}); }, 4200); }
+  }
+  if (host._gdToast) { var t = host._gdToast; rsx.toast = true; rsx.toastWho = t.who; rsx.toastTxt = t.txt; rsx.toastGame = t.game; rsx.toastWhen = t.when; rsx.toastV = t.v; }
+  v.rsx = rsx;
+  return v;
+}
 class Component extends DCLogic {
-renderVals() {
+renderVals() { return gdEnhance(this, this._rv()); }
+_rv() {
 var self = this, st = this.state || {};
 var theme = st.theme || 'light', isLt = theme === 'light';
 var view = st.view || this.props.view || 'featured';

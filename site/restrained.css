@@ -414,3 +414,65 @@ body.rs .tbc .tbh:has(.ic-chubb), body.rs .rc .tbh:has(.ic-chubb) { background-i
 body.rs .tbc .tbh:has(.ic-purdy), body.rs .rc .tbh:has(.ic-purdy) { background-image: url(/a/t-purdy-hero.webp); }
 body.rs .tbc .tbh:has(.ic-goff), body.rs .rc .tbh:has(.ic-goff) { background-image: url(/a/t-goff-hero.webp); }
 body.rs .tbc .tbh:has(.ic-hurts), body.rs .rc .tbh:has(.ic-hurts) { background-image: url(/a/t-hurts-hero.webp); }
+
+/* ---------- Game Day: neutral scoreboard, your stake, headshots, impact, scoring toast ---------- */
+body.rs.pg-gameday .sb .tm { background: #14171d !important; box-shadow: inset 0 4px 0 var(--tc); }
+body.rs.pg-gameday .sb .tm .ab { font-style: normal !important; font-weight: 800 !important; font-size: 46px !important; }
+body.rs.pg-gameday .sb .tm .sc { font-weight: 800 !important; font-size: 68px !important; text-shadow: none !important; }
+body.rs.pg-gameday .sb .mid { background: #0b0d11 !important; }
+body.rs.pg-gameday .srow .tab, body.rs.pg-gameday .td { font-style: normal !important; }
+body.rs .gd-hs { flex: 0 0 auto; display: inline-block; width: 52px; height: 46px; border-radius: 10px; background: var(--soft, #EEF0F3) url(/a/4170e5c447395148b28bf4ffbdf45275.svg) center bottom / 82% auto no-repeat; }
+body.rs .gd-hs.sm { width: 40px; height: 36px; border-radius: 9px; }
+body.rs .gd-stake { padding: 18px 20px 16px; display: flex; flex-direction: column; gap: 14px; }
+body.rs .gd-sh { display: flex; justify-content: space-between; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
+body.rs .gd-sh small { display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .08em; color: var(--mut); }
+body.rs .gd-sh .h3 { margin: 2px 0 0; font-size: 26px; }
+body.rs .gd-sub { font-size: 12px; color: var(--mut); }
+body.rs .gd-net { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
+body.rs .gd-nr { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--sub, #F6F7F9); box-shadow: inset 0 0 0 1px var(--ln); }
+body.rs .gd-nr .gd-b { width: 30px; height: 30px; font-size: 11px; border-radius: 8px; }
+body.rs .gd-nr .gd-b-EL { background: url(/a/el-badge-sm.webp) center / contain no-repeat !important; color: transparent; }
+body.rs .gd-nn { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+body.rs .gd-nr b { font: 800 26px 'Saira Condensed', sans-serif; }
+body.rs .gd-nr.up { background: radial-gradient(70% 140% at 100% 0%, color-mix(in srgb, var(--up) 14%, transparent), transparent 70%), var(--sub, #F6F7F9); }
+body.rs .gd-nr.dn { background: radial-gradient(70% 140% at 100% 0%, color-mix(in srgb, var(--dn) 11%, transparent), transparent 70%), var(--sub, #F6F7F9); }
+body.rs .gd-ppl { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+body.rs .gd-p { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; box-shadow: inset 0 0 0 1px var(--ln); }
+body.rs .gd-p.up { background: radial-gradient(70% 140% at 100% 0%, color-mix(in srgb, var(--up) 12%, transparent), transparent 70%); }
+body.rs .gd-p.dn { background: radial-gradient(70% 140% at 100% 0%, color-mix(in srgb, var(--dn) 10%, transparent), transparent 70%); }
+body.rs .gd-pi { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+body.rs .gd-pi b { font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+body.rs .gd-pi small { font-size: 12px; color: var(--mut); }
+body.rs .gd-lg { display: flex; gap: 4px; margin-top: 2px; }
+body.rs .gd-rl { font-size: 10.5px; font-weight: 800; padding: 1px 5px; border-radius: 4px; }
+body.rs .gd-rl.up { color: var(--up); background: color-mix(in srgb, var(--up) 14%, transparent); }
+body.rs .gd-rl.dn { color: var(--dn); background: color-mix(in srgb, var(--dn) 12%, transparent); }
+body.rs .gd-pts { font: 800 32px 'Saira Condensed', sans-serif; }
+/* scoring summary and plays: headshot + impact */
+body.rs.pg-gameday .srow .tx { display: flex; align-items: center; gap: 10px; }
+body.rs.pg-gameday .srow .dt { display: none; }
+body.rs .gd-st { display: flex; flex-direction: column; gap: 2px; }
+body.rs .gd-st .fx { margin-top: 3px; }
+body.rs.pg-gameday .play .tx { display: flex; align-items: center; gap: 10px; }
+body.rs.pg-gameday .play.mine { background: radial-gradient(50% 140% at 100% 0%, color-mix(in srgb, var(--up) 10%, transparent), transparent 70%); box-shadow: none !important; }
+body.rs.pg-gameday .fxc.mine { background: color-mix(in srgb, var(--up) 12%, transparent); }
+body.rs.pg-gameday .fxc:not(.mine) { background: color-mix(in srgb, var(--dn) 10%, transparent); }
+body.rs.pg-gameday .ex .hs { width: 46px; height: 40px; border-radius: 9px; background-size: 82% auto; background-position: center bottom; }
+body.rs.pg-gameday .ex { grid-template-columns: 46px minmax(0,1fr) auto; }
+body.rs.pg-gameday .ex.mine { box-shadow: none !important; background: radial-gradient(50% 140% at 100% 0%, color-mix(in srgb, var(--up) 10%, transparent), transparent 70%) !important; }
+/* scoring toast */
+body.rs .gd-toast { position: fixed; left: 50%; top: 92px; transform: translateX(-50%); z-index: 60; display: flex; align-items: center; gap: 14px; min-width: 420px; padding: 12px 18px 12px 12px; border-radius: 16px; background: #12151B; color: #fff; box-shadow: 0 20px 50px -12px rgba(0,0,0,.5), inset 0 0 0 1px rgba(61,214,140,.4); animation: gdIn .35s ease-out; }
+body.rs .gd-toast .gd-hs { background-color: #1D212A; }
+body.rs .gd-tt { flex: 1; display: flex; flex-direction: column; gap: 1px; font-size: 13.5px; color: rgba(255,255,255,.8); }
+body.rs .gd-tt small { font-size: 11px; color: rgba(255,255,255,.55); }
+body.rs .gd-tt b { font-size: 16px; color: #fff; }
+body.rs .gd-tv { font: 800 34px 'Saira Condensed', sans-serif; color: #3DD68C; }
+@keyframes gdIn { from { opacity: 0; transform: translate(-50%, -12px); } to { opacity: 1; transform: translate(-50%, 0); } }
+/* NFL scoreboard band: pills like the ticker */
+body.rs.pg-gameday .gband .ab, body.rs.pg-gameday .gband .num { font-style: normal !important; }
+body.rs.pg-gameday .gband .gd-xp { display: flex; gap: 4px; margin-top: 2px; }
+body.rs.pg-gameday .gd-xp span { font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 999px; letter-spacing: .02em; }
+body.rs.pg-gameday .gd-xp .m { color: #2F5BFF; background: rgba(47,91,255,.1); }
+body.rs.pg-gameday .gd-xp .o { color: #C2185B; background: rgba(214,40,120,.1); }
+body.rs.pg-gameday .gband button { border-radius: 12px !important; }
+body.rs .gd-net { grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); }
