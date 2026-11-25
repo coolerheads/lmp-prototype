@@ -326,3 +326,16 @@ body.rs .dban.dv-barb > svg, body.rs .dban.dv-glad > svg { display: none; }
 body.rs .dban .dn { font-size: 40px !important; }
 body.rs .dban .ds { margin-left: 24px !important; margin-right: auto; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
 body.rs .dban + .sth, body.rs .divh + .sth { margin-top: 6px; }
+
+/* ---------- League kit: Empire League badge and championship trophy art ---------- */
+body.rs .fbd[style*="#b07a1e"] { background: url(/a/el-badge.webp) center / contain no-repeat !important; color: transparent !important; box-shadow: none !important; border-radius: 0 !important; }
+/* Playoffs champion card: the trophy hall behind it, champion name on the calm left */
+body.rs .pfch { min-height: 280px; background: linear-gradient(90deg, #0b0806 0%, #0b0806 30%, rgba(11,8,6,.55) 55%, rgba(11,8,6,.15) 80%), #0b0806 url(/a/el-trophy.webp) right center / auto 100% no-repeat !important; }
+body.rs .pfch .pfcf, body.rs .pfch .pfcg, body.rs .pfch .pftro { display: none !important; }
+body.rs .pfch { grid-template-columns: minmax(0, 560px) !important; padding: 30px 32px !important; }
+body.rs .pfch .pfchr { background: rgba(8,6,4,.55); padding: 14px 16px; border-radius: 14px; }
+/* History: Wall of Champions opens on the trophy */
+body.rs .hshd:has(+ .hswall) { position: relative; display: flex; flex-direction: column; justify-content: center; gap: 4px; height: 170px; padding: 0 28px; margin-bottom: 16px; border-radius: 16px; color: #fff;
+  background: linear-gradient(90deg, #0b0806 0%, #0b0806 35%, rgba(11,8,6,.2) 70%), #0b0806 url(/a/el-trophy.webp) right center / auto 100% no-repeat; }
+body.rs .hshd:has(+ .hswall) b { font: 800 40px 'Saira Condensed', sans-serif; color: #F4D58A; }
+body.rs .hshd:has(+ .hswall) span { color: rgba(255,255,255,.75); }
