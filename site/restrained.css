@@ -62,3 +62,8 @@ body.rs.lb-ink header .tnav.on, body.rs.th-dark.lb-league header .tnav.on, body.
 body.rs.lb-ink header button, body.rs.th-dark.lb-league header button, body.rs.th-dark.lb-theme header button { color: #EEF1F6 !important; }
 body.rs.lb-ink header > div > div:last-child > span:last-child, body.rs.th-dark.lb-league header > div > div:last-child > span:last-child, body.rs.th-dark.lb-theme header > div > div:last-child > span:last-child { background: #EEF1F6 !important; color: #12151B !important; }
 body.rs.lb-ink header .tnav.on::after { background: #7D9BFF; }
+
+/* ---------- shared pieces used inside pages ---------- */
+body.rs .rs-chip { display: inline-flex !important; align-self: flex-start; align-items: center; height: 22px; padding: 0 9px; border-radius: 6px; font-size: 11px !important; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 4px; }
+/* the per-page "THE EMPIRE LEAGUE" stage strip is retired: the league's art lives in the Home hero and the bar tint */
+body.rs section.empire.compact { display: none !important; }
