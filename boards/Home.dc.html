@@ -847,8 +847,8 @@ button{font-family:inherit;cursor:pointer}
 <!-- Needs your attention -->
 <sc-if value="{{hasAtt}}">
 <section class="{{attCls}}">
-<div class="hmath"><span class="dot"></span><b>{{attHd}}</b><span style="flex: 1"></span><a href="#" style="font-size: 13px; font-weight: 600">All notifications</a></div>
-<div class="hmatg"><sc-for list="{{attention}}" as="a" hint-placeholder-count="3"><div class="{{a.cls}}"><small class="rs-chip" style="color: {{a.col}}; background: color-mix(in srgb, {{a.col}} 14%, transparent)">{{a.tag}}</small><b>{{a.t}}</b><p>{{a.d}}</p><sc-if value="{{a.notDone}}"><div class="hmacts"><sc-for list="{{a.acts}}" as="x" hint-placeholder-count="2"><button class="{{x.cls}}" onClick="{{x.go}}">{{x.label}}</button></sc-for></div></sc-if><sc-if value="{{a.done}}"><div class="hmdone">{{a.doneTxt}}</div></sc-if></div></sc-for></div>
+<div class="hmath"><span class="dot"></span><b>Alerts</b><sc-if value="{{attN}}"><span class="hmcnt">{{attN}}</span></sc-if><sc-if value="{{attClear}}"><span class="hmok">You’re all caught up</span></sc-if><span style="flex: 1"></span><sc-if value="{{attN}}"><button class="hmdis" onClick="{{attDismiss}}">Dismiss All</button></sc-if><a href="/notifications" class="hmall">All Notifications</a></div>
+<sc-if value="{{attAny}}"><div class="hmatg"><sc-for list="{{attention}}" as="a" hint-placeholder-count="3"><div class="{{a.cls}}"><small class="rs-chip" style="color: {{a.col}}; background: color-mix(in srgb, {{a.col}} 14%, transparent)">{{a.tag}}</small><b>{{a.t}}</b><p>{{a.d}}</p><sc-if value="{{a.notDone}}"><div class="hmacts"><sc-for list="{{a.acts}}" as="x" hint-placeholder-count="2"><button class="{{x.cls}}" onClick="{{x.go}}">{{x.label}}</button></sc-for></div></sc-if></sc-if><sc-if value="{{a.done}}"><div class="hmdone">{{a.doneTxt}}</div></sc-if></div></sc-for></div>
 </section>
 </sc-if>
 <!-- Playoffs moment -->
@@ -1398,10 +1398,14 @@ var ATT = [
 ['a3', 'Commissioner', '#C9A24A', 'A trade needs your review', 'Feats of Strength and Stroud 9. Review window ends Mon 8:00 PM.', [['Approve', 1, 'Approved and posted to the league.'], ['Veto', 0, null]], 'comm'],
 ['a4', 'Waivers', '#14B8A6', '1 waiver claim pending', 'Tyler Allgeier for $14 FAAB. Waivers run Wed at 3:00 AM.', [['Review claims', 0, null]], 'mem']
 ].filter(function (a) { return a[6] === 'all' || (a[6] === 'comm') === isComm; });
-var attention = ATT.map(function (a) { var d = hdone[a[0]];
+// alerts: acting on one shows a confirmation for a moment, then it clears out of the strip
+var hgone = st.hgone || {};
+function hclear(id) { setTimeout(function () { var g = Object.assign({}, self.state.hgone || {}); g[id] = 1; hset({ hgone: g }); }, 2400); }
+var attention = ATT.filter(function (a) { return !hgone[a[0]]; }).map(function (a) { var d = hdone[a[0]];
 return { tag: a[1], col: a[2], t: a[3], d: a[4], done: !!d, notDone: !d, doneTxt: d ? '✓ ' + d : '', cls: 'hmat' + (d ? ' done' : ''),
-acts: a[5].map(function (b) { return { label: b[0], cls: b[1] ? 'hmb p' : 'hmb', go: function () { if (b[2]) { var n = Object.assign({}, hdone); n[a[0]] = b[2]; hset({ hdone: n }); } else hset({ toast: b[0], toastSub: a[3] }); } }; }) }; });
+acts: a[5].map(function (b) { return { label: b[0], cls: b[1] ? 'hmb p' : 'hmb', go: function () { if (b[2]) { var n = Object.assign({}, hdone); n[a[0]] = b[2]; hset({ hdone: n }); hclear(a[0]); } else hset({ toast: b[0], toastSub: a[3] }); } }; }) }; });
 var attN = attention.filter(function (a) { return a.notDone; }).length;
+var attDismiss = function () { var g = Object.assign({}, hgone); ATT.forEach(function (a) { g[a[0]] = 1; }); hset({ hgone: g, toast: 'Alerts dismissed', toastSub: 'You can still find them in All Notifications.' }); };
 // playoff picture (if the playoffs started today)
 var PFX = { syndicate: 1024.2, kelce: 978.6, airplane: 901.2, jj: 889.1, mustards: 845.5, hurts: 798.3, lamb: 1003.8, henrys: 956.2, chubb: 912.4, purdy: 876.9, puka: 821.5, goff: 761.8 };
 var seedK = Object.keys(PFX).sort(function (x, y) { var a = +T[x][3].split('-')[0], b = +T[y][3].split('-')[0]; return (b - a) || (PFX[y] - PFX[x]); });
@@ -1413,7 +1417,7 @@ var HM = {
 moments: [['reg', 'Week 7'], ['po', 'Playoffs · Week 16'], ['off', 'Offseason']].map(function (k) { return { label: k[1], cls: k[0] === moment ? 'pbtn on' : 'pbtn', pick: function () { hset({ moment: k[0] }); } }; }),
 hwhos: [['commish', 'Commissioner'], ['member', 'Member']].map(function (k) { return { label: k[1], cls: k[0] === who ? 'pbtn on' : 'pbtn', pick: function () { hset({ who: k[0] }); } }; }),
 isReg: moment === 'reg', isPo: moment === 'po', isOff: moment === 'off',
-attention: attention, hasAtt: moment === 'reg', attHd: attN ? attN + ' thing' + (attN === 1 ? '' : 's') + ' need you' : 'You’re all set', attCls: 'hmatw' + (attN ? '' : ' clear'),
+attention: attention, hasAtt: moment === 'reg', attN: attN, attAny: attention.length > 0, attClear: !attention.length, attDismiss: attDismiss, attCls: 'hmatw' + (attention.length ? '' : ' clear'),
 picture: picture, goPlayoffs: function () { hset({ toast: 'Playoffs', toastSub: 'Opens the full playoff picture' }); },
 record: { now: '139.6', gapTxt: '30.5 short ', rest: 'of the league’s single-game record: 170.1, Coolerheads FC, 2021.' },
 lsRows: [['League pot', '$3,000 · held by LeagueSafe'], ['Dues', '12 of 12 paid'], ['Weekly high score', '$40 · Week 6: you, 161.1'], ['Prizes', '1st $1,400 · 2nd $600 · 3rd $200']].map(function (x) { return { k: x[0], v: x[1] }; }),
