@@ -206,3 +206,5 @@ body.th-dark .wz-card { background: #161A21; color: #EEF1F6; }
 .wz-btn.ghost { background: transparent; color: inherit; border: 1px solid rgba(127,127,127,.4); }
 .wz-btn.off { opacity: .4; cursor: default; }
 @media (max-width: 720px) { .wz-cats, .wz-kit, .wz-opts.b { grid-template-columns: 1fr; } }
+.wz-opts.h2 { grid-template-columns: 1fr 1fr; }
+.wz-opts.b1 { grid-template-columns: minmax(0, 260px); }

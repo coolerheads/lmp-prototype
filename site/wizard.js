@@ -22,7 +22,7 @@
     step: 0, name: 'The Gridiron Syndicate', initials: 'SYN', cat: 'screen', catWhat: 'The Godfather and 1930s gangster films',
     meaning: 'We run this league like a crime family: quiet, organized and ruthless at the trade deadline. The boss sits in the back of a smoky speakeasy pulling the strings. Include a fedora, pinstripes, cash and a chalk football play.',
     refs: [], styles: ['Metallic lettering', 'Cinematic scene'], colors: ['#B3121C', '#111111', '#C0C4CC'], bg: 'dark',
-    brief: null, briefEdited: false, hero: null, badge: null, busy: false, paid: false
+    brief: null, briefEdited: false, hero: null, badge: null, busy: false, paid: false, heroRedo: 2, badgeRedo: 1, heroRound: 0, badgeRound: 0, badgeShown: false
   };
   var STEPS = ['Identity', 'Inspiration', 'Meaning', 'References', 'Style', 'Brief', 'Hero', 'Badge', 'Your kit'];
   var el = null;
@@ -80,14 +80,14 @@
       return '<h3>Here’s your brief</h3><p class="wz-sub">This is what our artist AI will work from. Edit anything that isn’t right.</p>' +
         '<textarea data-k="brief" rows="9">' + esc(S.brief) + '</textarea>' +
         '<div class="wz-note">We turn this into five prompts, one per image, with the layout rules each spot needs. You’ll get the hero first, then a badge drawn from it, then the rest of the kit.</div>'; }
-    if (st === 6) return '<h3>Choose your hero</h3><p class="wz-sub">Three takes on your story. The one you pick sets the look for everything else.</p>' +
-      (S.busy ? spinner('Painting three heroes…') : '<div class="wz-opts h">' + [0, 1, 2].map(function (i) {
-        return '<button type="button" class="wz-opt' + (S.hero === i ? ' on' : '') + '" data-hero="' + i + '"><span class="wz-img v' + i + '" style="background-image:url(' + (i === 1 ? A.heroWide : A.hero) + ')"></span><span>Option ' + (i + 1) + '</span></button>';
-      }).join('') + '</div><button type="button" class="wz-link" data-a="redo-hero">None of these: try again (2 left)</button>');
+    if (st === 6) return '<h3>Choose your hero</h3><p class="wz-sub">Two takes on your story. The one you pick sets the look for everything else.</p>' +
+      (S.busy ? spinner('Painting three heroes…') : '<div class="wz-opts h2">' + [0, 1].map(function (i) {
+        var v = (i + S.heroRound) % 3;
+        return '<button type="button" class="wz-opt' + (S.hero === i ? ' on' : '') + '" data-hero="' + i + '"><span class="wz-img v' + v + '" style="background-image:url(' + (v === 1 ? A.heroWide : A.hero) + ')"></span><span>Option ' + (i + 1) + '</span></button>';
+      }).join('') + '</div>' + (S.heroRedo > 0 ? '<button type="button" class="wz-link" data-a="redo-hero">Neither one: try again (' + S.heroRedo + ' left)</button>' : '<div class="wz-sub" style="margin-top:8px">No redos left. Pick your favorite, or go Back and adjust the brief.</div>'));
     if (st === 7) return '<h3>Choose your badge</h3><p class="wz-sub">Drawn from your hero. It shows next to your team everywhere: standings, scores, news.</p>' +
-      (S.busy ? spinner('Drawing badges from your hero…') : '<div class="wz-opts b">' + [0, 1, 2].map(function (i) {
-        return '<button type="button" class="wz-opt' + (S.badge === i ? ' on' : '') + '" data-badge="' + i + '"><span class="wz-img bd v' + i + '" style="background-image:url(' + A.badge + ')"></span><span class="wz-small"><i style="background-image:url(' + A.badge + ')"></i>24 px</span></button>';
-      }).join('') + '</div>');
+      (S.busy ? spinner('Drawing your badge from your hero') : '<div class="wz-opts b1"><div class="wz-opt on"><span class="wz-img bd v' + S.badgeRound + '" style="background-image:url(' + A.badge + ')"></span><span class="wz-small"><i style="background-image:url(' + A.badge + ')"></i>How it looks at 24 px</span></div></div>' +
+      (S.badgeRedo > 0 ? '<button type="button" class="wz-link" data-a="redo-badge">Try a different badge (' + S.badgeRedo + ' left)</button>' : '<div class="wz-sub" style="margin-top:8px">That was your redo. You can upload your own badge later from Team settings.</div>'));
     if (st === 8) return '<h3>Your kit</h3><p class="wz-sub">How it looks around Fanball. Redo any piece you don’t love.</p>' +
       (S.busy ? spinner('Building matchup banners and your page backdrop…') :
       '<div class="wz-kit">' +
@@ -121,12 +121,13 @@
   function gen(ms) { S.busy = true; render(); setTimeout(function () { S.busy = false; render(); }, ms); }
   function go(d) {
     S.step = Math.max(0, Math.min(STEPS.length - 1, S.step + d)); render();
-    if (d > 0 && (S.step === 6 && S.hero == null || S.step === 7 && S.badge == null || S.step === 8)) gen(S.step === 8 ? 1400 : 1700);
+    if (d > 0 && (S.step === 6 && S.hero == null || S.step === 7 && !S.badgeShown || S.step === 8)) gen(S.step === 8 ? 1400 : 1700);
+    if (S.step === 7) S.badgeShown = true;
     el.querySelector('.wz-body').scrollTop = 0;
   }
   function open() {
     if (!el) { el = document.createElement('div'); el.className = 'wz nvx'; document.body.appendChild(el); wire(); }
-    S.step = 0; S.hero = null; S.badge = null; el.hidden = false; render(); document.body.style.overflow = 'hidden';
+    S.step = 0; S.hero = null; S.badge = 0; S.heroRedo = 2; S.badgeRedo = 1; S.heroRound = 0; S.badgeRound = 0; S.badgeShown = false; el.hidden = false; render(); document.body.style.overflow = 'hidden';
   }
   function close() { el.hidden = true; document.body.style.overflow = ''; }
   function wire() {
@@ -149,7 +150,8 @@
       if (d.a === 'back') return go(-1);
       if (d.a === 'next') { if (!t.classList.contains('off')) go(1); return; }
       if (d.a === 'done') { close(); flash('Kit applied to The Gridiron Syndicate (mock)'); return; }
-      if (d.a === 'redo-hero') { S.hero = null; return gen(1500); }
+      if (d.a === 'redo-hero') { if (S.heroRedo < 1) return; S.heroRedo--; S.heroRound++; S.hero = null; return gen(1500); }
+      if (d.a === 'redo-badge') { if (S.badgeRedo < 1) return; S.badgeRedo--; S.badgeRound = 1; return gen(1300); }
       if (d.a === 'paid') { S.paid = true; return render(); }
       if (d.copy) { try { navigator.clipboard.writeText(d.copy); t.textContent = 'Copied'; } catch (x) {} return; }
       if (d.cat) { S.cat = d.cat; S.briefEdited = false; return render(); }
