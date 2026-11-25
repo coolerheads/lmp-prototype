@@ -3,7 +3,7 @@ window.LMPNav = function (api) {
   'use strict';
   var root = api.root, PAGE = api.PAGE;
   var OPEN_KEY = 'lmp_nv_open';
-  var drawerOpen = false; try { drawerOpen = localStorage.getItem(OPEN_KEY) === '1'; } catch (e) {}
+  var drawerOpen = false; // the menu drawer is retired: the rail never expands (Leagues opens a flyout)
   var I = {
     leagues: '<rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/>',
     gameplan: '<circle cx="6" cy="18" r="2"/><path d="M4 4l4 4M8 4 4 8"/><path d="M16 4h4v4"/><path d="M20 4 13 11"/><path d="M8 16c3-.5 5-2 6.5-4.5"/>',
@@ -153,21 +153,15 @@ window.LMPNav = function (api) {
       e.preventDefault(); e.stopPropagation();
       if (b.dataset.href) { api.go(b.dataset.href); return; }
       if (k === 'league') { api.go('/home'); return; }
-      if (k === 'leagues') { hideFly(true); setDrawer(!drawerOpen, 'top'); return; }
-      if (k === 'chat') { hideFly(true); setDrawer(true, 'chat'); return; }
+      if (k === 'leagues' || k === 'chat') { if (pinnedFly === k) hideFly(true); else showFly(b, k, true); return; }
       if (k === 'expand') { hideFly(true); setDrawer(!drawerOpen); return; }
       if (k === 'more') { if (pinnedFly === 'more') hideFly(true); else showFly(b, 'more', true); }
     });
   }
 
-  function setDrawer(open, scrollTo) {
-    drawerOpen = open; try { localStorage.setItem(OPEN_KEY, open ? '1' : '0'); } catch (e) {}
-    document.body.classList.toggle('nv-open', open);
-    buildRail();
-    if (open && scrollTo) {
-      if (scrollTo === 'top') drawer.scrollTop = 0;
-      if (scrollTo === 'chat' && data.chat) { var c = drawer.querySelector('aside.rail') && [].find.call(drawer.querySelectorAll('.rsec'), function (s) { var h = s.querySelector('.rh'); return h && /chat/i.test(txt(h)); }); if (c) drawer.scrollTop = c.offsetTop - 60; }
-    }
+  function setDrawer(open) {
+    drawerOpen = false; document.body.classList.remove('nv-open');
+    var b = rail.querySelector('[data-k="leagues"]'); if (open && b) showFly(b, 'leagues', true);
   }
 
   // ---------- league switcher in the league bar ----------
@@ -219,8 +213,25 @@ window.LMPNav = function (api) {
     }
   }
 
+  // ---------- status hints on the league tabs (My Franchise 2, Scores live, Standings 1st, Players $FAAB) ----------
+  function tabHints() {
+    var q = data.quick || {}, nav = root.querySelector('header nav'); if (!nav) return;
+    var lineupN = (q['Set lineup'] || '').match(/^(\d+)/), stand = (q['Standings'] || '').match(/^(\d+(st|nd|rd|th))/), faab = (q['Add players'] || '').match(/\$\d+/);
+    var live = /\d/.test(q['Live scoring'] || '');
+    nav.querySelectorAll('a.tnav').forEach(function (a) {
+      if (a.querySelector('.rs-h')) return;
+      var t = txt(a), h = '';
+      if (t === 'My Franchise' && lineupN) h = '<span class="rs-h rs-hc" title="Starters yet to lock">' + lineupN[1] + '</span>';
+      if (t === 'Scores' && live) h = '<span class="rs-h rs-hl" title="Live"></span>';
+      if (t === 'Standings' && stand) h = '<span class="rs-h rs-hm">' + stand[1] + '</span>';
+      if (t === 'Players' && faab) h = '<span class="rs-h rs-hm">' + faab[0] + '</span>';
+      if (h) a.insertAdjacentHTML('beforeend', h);
+    });
+  }
+
   // ---------- per-render hook ----------
   return {
+    refresh: function () { if (data) buildRail(); },
     decorate: function (compact) {
       var r = root.querySelector('aside.rail');
       var band = root.querySelector('.strip') ? root.querySelector('.strip').closest('.ng > div') : null;
@@ -247,6 +258,7 @@ window.LMPNav = function (api) {
         id.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); id.click(); } });
         if (dropOpen) { id.classList.add('open'); var rr = id.getBoundingClientRect(); drop.style.top = (rr.bottom + 8) + 'px'; }
       }
+      tabHints();
       if (pinnedFly) { var b = rail.querySelector('[data-k="' + pinnedFly + '"]'); if (b) showFly(b, pinnedFly, true); else hideFly(true); }
     }
   };

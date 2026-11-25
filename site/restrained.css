@@ -1,0 +1,64 @@
+/* Restrained frame (board 42): one-line ticker, quiet rail, league bar color options, Saira type.
+   Applies on every page on top of nav.css. Body classes set by rt.js:
+   th-light | th-dark, eb-rail | eb-tabs, lb-league | lb-ink | lb-theme | lb-white */
+
+body.rs {
+  --rs-up: #13834A; --rs-dn: #C8312F; --rs-ac: #2F5BFF; --rs-amb: #A35A06;
+  --rs-league: #B8892F; --rs-league-soft: #F6E7C8;
+  --tk-bg: #FFFFFF; --tk-ln: #E3E6EB; --tk-tx: #12151B; --tk-mut: #5C6370;
+}
+body.rs.th-dark { --rs-up: #3DD68C; --rs-dn: #F06A6A; --rs-ac: #5B82FF; --rs-amb: #FFB870;
+  --tk-bg: #0A0C10; --tk-ln: #262B36; --tk-tx: #EEF1F6; --tk-mut: #8B93A5; }
+
+/* ---------- ticker ---------- */
+body.rs.nv-c .nvband { height: 48px !important; background: var(--tk-bg) !important; border-bottom: 1px solid var(--tk-ln) !important; font-family: 'Saira', sans-serif; }
+body.rs.nv-c .nvwk { border-right: 0 !important; padding: 0 6px 0 18px !important; }
+body.rs.nv-c .nvwk .num:first-child { font: 700 12px 'Saira', sans-serif !important; letter-spacing: .06em !important; color: var(--tk-mut) !important; }
+body.rs.nv-c .nvwk .num + .num { display: none !important; }
+body.rs.nv-c .nvband .strip { align-items: center; }
+body.rs.nv-c .nvband .striprow { align-items: center; gap: 8px; padding: 0 10px 0 4px; }
+body.rs.nv-c .nvband .cell { height: 30px !important; flex-direction: row !important; align-items: center; gap: 7px !important; padding: 0 12px !important;
+  border: 1px solid var(--tk-ln) !important; border-radius: 8px; background: transparent !important; box-shadow: none !important; color: var(--tk-tx) !important; text-decoration: none; }
+body.rs.nv-c .nvband .cell.mine { border-color: var(--rs-ac) !important; background: color-mix(in srgb, var(--rs-ac) 9%, transparent) !important; }
+body.rs.nv-c .nvband .cell.mine::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--rs-ac); flex: none; }
+body.rs .nvsr { gap: 5px; }
+body.rs .nvsr .bx, body.rs .nvsr .fbd, body.rs .nvband .tics { display: none !important; }
+body.rs .nvsr .ab { font: 500 13.5px 'Saira', sans-serif !important; font-style: normal !important; color: var(--tk-mut) !important; }
+body.rs .nvsr .s { font: 800 16px 'Saira Condensed', sans-serif !important; color: var(--tk-tx) !important; }
+body.rs .nvsr .s.lose { color: var(--tk-mut) !important; }
+body.rs .nvsep { width: 7px; height: 1.5px; background: var(--tk-mut); opacity: .6; }
+body.rs.nv-c .nvband .cell .ft { font: 500 12px 'Saira', sans-serif !important; color: var(--tk-mut) !important; margin-left: 3px !important; }
+body.rs .nvarr { background: linear-gradient(270deg, var(--tk-bg) 55%, transparent) !important; color: var(--tk-tx) !important; }
+
+/* ---------- rail ---------- */
+body.rs .nvrail { font-family: 'Saira', sans-serif; }
+body.rs .nvrail .nvexp { display: none !important; }
+body.rs.eb-tabs .nvrail .nvlg > :not([data-k="chat"]) { display: none !important; }
+body.rs .nvdrawer { display: none !important; }
+body.rs.nv-open .nvmain, body.rs.nv-open #app { margin-left: 0; }
+body.rs .nvfly .nvffb { display: none !important; }
+
+/* ---------- league bar ---------- */
+body.rs header { font-family: 'Saira', sans-serif; }
+body.rs header .tnav { font-family: 'Saira', sans-serif; border-radius: 0; background: transparent !important; box-shadow: none !important; position: relative; padding: 18px 13px !important; }
+body.rs header .tnav.on::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: -10px; height: 3px; border-radius: 3px 3px 0 0; background: var(--rs-ac); }
+body.rs header > div { padding-top: 0 !important; padding-bottom: 0 !important; min-height: 64px; }
+body.rs header .rs-hc { margin-left: 6px; min-width: 18px; height: 18px; padding: 0 5px; box-sizing: border-box; border-radius: 9px; background: color-mix(in srgb, var(--rs-amb) 20%, transparent); color: var(--rs-amb); font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; }
+body.rs header .rs-hl { margin-left: 6px; width: 7px; height: 7px; border-radius: 50%; background: var(--rs-dn); display: inline-block; }
+body.rs header .rs-hm { margin-left: 6px; font-size: 12.5px; font-weight: 600; opacity: .6; }
+
+/* League color */
+body.rs.lb-league header { background: linear-gradient(90deg, var(--rs-league-soft) 0%, #FBF4E6 45%, #FFFFFF 80%) !important; border-bottom: 2px solid var(--rs-league) !important; }
+body.rs.th-dark.lb-league header { background: linear-gradient(90deg, color-mix(in srgb, var(--rs-league) 30%, #12151B) 0%, color-mix(in srgb, var(--rs-league) 10%, #12151B) 45%, #12151B 80%) !important; }
+/* Brand ink */
+body.rs.lb-ink header { background: #151B34 !important; border-bottom-color: #151B34 !important; }
+/* Follow theme (dark) */
+body.rs.th-dark.lb-theme header { background: #12151B !important; border-bottom-color: #262B36 !important; }
+/* light text on dark bars */
+body.rs.lb-ink header, body.rs.th-dark.lb-league header, body.rs.th-dark.lb-theme header { color: #EEF1F6 !important; }
+body.rs.lb-ink header span[style*="color"], body.rs.th-dark.lb-league header span[style*="color"], body.rs.th-dark.lb-theme header span[style*="color"] { color: #A6AEBF !important; }
+body.rs.lb-ink header .tnav, body.rs.th-dark.lb-league header .tnav, body.rs.th-dark.lb-theme header .tnav { color: #C9CFE0 !important; }
+body.rs.lb-ink header .tnav.on, body.rs.th-dark.lb-league header .tnav.on, body.rs.th-dark.lb-theme header .tnav.on { color: #FFFFFF !important; }
+body.rs.lb-ink header button, body.rs.th-dark.lb-league header button, body.rs.th-dark.lb-theme header button { color: #EEF1F6 !important; }
+body.rs.lb-ink header > div > div:last-child > span:last-child, body.rs.th-dark.lb-league header > div > div:last-child > span:last-child, body.rs.th-dark.lb-theme header > div > div:last-child > span:last-child { background: #EEF1F6 !important; color: #12151B !important; }
+body.rs.lb-ink header .tnav.on::after { background: #7D9BFF; }

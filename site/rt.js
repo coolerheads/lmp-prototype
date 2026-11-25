@@ -186,8 +186,28 @@
       nv.innerHTML = '<span class="dc-dl">Navigation</span><span class="dc-seg"><button type="button" data-v="compact">Compact</button><button type="button" data-v="classic">Classic</button></span>';
       nv.querySelectorAll('button').forEach(function (b) { if ((G.nav || 'compact') === b.dataset.v) b.classList.add('on'); b.onclick = function () { setNav(b.dataset.v); }; });
       extra.insertBefore(nv, extra.firstChild);
+      frameSwitches(extra);
     }
     if (NAV) NAV.decorate((G.nav || 'compact') !== 'classic');
+    frameClasses();
+  }
+  // Restrained frame: theme, easy buttons and league bar classes on <body> (styles in restrained.css)
+  var FRAME = { easy: [['rail', 'Rail'], ['tabs', 'Tabs only']], lbar: [['league', 'League color'], ['ink', 'Brand ink'], ['theme', 'Theme'], ['white', 'White']] };
+  function frameClasses() {
+    var c = document.body.classList, cls = ['rs', 'th-' + (G.theme === 'dark' ? 'dark' : 'light'), 'eb-' + (G.easy || 'rail'), 'lb-' + (G.lbar || 'league')];
+    [].slice.call(c).forEach(function (x) { if (/^(th|eb|lb)-/.test(x)) c.remove(x); });
+    cls.forEach(function (x) { c.add(x); });
+  }
+  function frameSwitches(extra) {
+    [['easy', 'Easy buttons'], ['lbar', 'League bar']].forEach(function (d) {
+      var el = document.createElement('div'); el.className = 'dc-navsw';
+      el.innerHTML = '<span class="dc-dl">' + d[1] + '</span><span class="dc-seg">' + FRAME[d[0]].map(function (o) { return '<button type="button" data-v="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</span>';
+      el.querySelectorAll('button').forEach(function (b) {
+        if ((G[d[0]] || FRAME[d[0]][0][0]) === b.dataset.v) b.classList.add('on');
+        b.onclick = function () { G[d[0]] = b.dataset.v; jset(GKEY, G); el.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); }); frameClasses(); if (NAV && NAV.refresh) NAV.refresh(); };
+      });
+      extra.insertBefore(el, extra.children[1] || null);
+    });
   }
   var fab = document.createElement('button'); fab.className = 'dc-fab'; fab.type = 'button'; fab.textContent = demoOpen ? 'Hide demo controls' : 'Demo controls';
   fab.onclick = function () { demoOpen = !demoOpen; sessionStorage.setItem('lmp_demo', demoOpen ? '1' : '0'); fab.textContent = demoOpen ? 'Hide demo controls' : 'Demo controls'; var b = root.querySelector('.dc-demobar'); if (b) b.classList.toggle('open', demoOpen); };
