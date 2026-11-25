@@ -362,3 +362,55 @@ body.rs .hmsr b { font-family: 'Saira Condensed', sans-serif !important; font-we
 body.rs .hmpob .hmb { background: transparent !important; color: var(--tx) !important; box-shadow: inset 0 0 0 1px var(--ln2) !important; height: 36px; padding: 0 14px; font-size: 13.5px; }
 body.rs .hmpob .hmb.p { background: #ECB958 !important; color: #1a1206 !important; box-shadow: none !important; }
 body.rs .hmpob > span[style] { color: var(--mut) !important; }
+
+/* ---------- Segmented filters: active option is a raised pill, no underline (underlines are for page tabs only) ---------- */
+body.rs .seg button.on, body.rs .seg2 button.on { box-shadow: 0 1px 3px rgba(0,0,0,.15) !important; }
+
+/* ---------- League banners: Empire League uses its league hero (The Wire, Game Plan) ---------- */
+body.rs .lbn.lb-EL { background: #120c06 url(/a/d94e1fab1d0f899e309c6dd0d9f391f0.webp) center 34% / cover no-repeat !important; }
+body.rs .lbn.lb-EL::before, body.rs .lbn.lb-EL::after { display: none !important; }
+body.rs .lbn.lb-EL .bt { visibility: hidden; }
+
+/* ---------- Game Plan: tiles match The Wire's league cards; no colored top/left bars ---------- */
+body.rs .ltile { padding: 0 !important; gap: 0 !important; overflow: hidden; box-shadow: 0 1px 2px rgba(16,24,40,.05), 0 6px 16px -8px rgba(16,24,40,.12) !important; }
+body.rs .ltile .gpb { display: flex; flex-direction: column; gap: 6px; padding: 10px 12px 12px; }
+body.rs .ltile .lbn { height: 62px; }
+body.rs .fixc, body.rs .fixc.ok { box-shadow: 0 1px 2px rgba(16,24,40,.05), 0 6px 16px -8px rgba(16,24,40,.12) !important; }
+
+/* ---------- Colored left bars elsewhere (claims, rosters): retired ---------- */
+body.rs .pr.mineR, body.rs .pr.mineR > .act { box-shadow: none !important; }
+body.rs .lg.on { box-shadow: none !important; }
+
+/* ---------- Waiver Claims: tags match the slot tags everywhere else ---------- */
+body.rs .pos2 { min-width: 40px; height: 22px !important; padding: 0 6px !important; border-radius: 6px !important; clip-path: none !important; font: 700 11px 'Saira', sans-serif !important; letter-spacing: .02em; display: inline-flex !important; align-items: center; justify-content: center; }
+body.rs .pos2.p-QB { background: color-mix(in srgb, var(--qb) 17%, transparent) !important; color: var(--qb) !important; }
+body.rs .pos2.p-RB { background: color-mix(in srgb, var(--rb) 17%, transparent) !important; color: var(--rb) !important; }
+body.rs .pos2.p-WR { background: color-mix(in srgb, var(--wr) 17%, transparent) !important; color: var(--wr) !important; }
+body.rs .pos2.p-TE { background: color-mix(in srgb, var(--te) 17%, transparent) !important; color: var(--te) !important; }
+body.rs .pos2.p-K { background: color-mix(in srgb, var(--k) 20%, transparent) !important; color: var(--k) !important; }
+body.rs .pos2.p-DST, body.rs .pos2.p-DEF { background: color-mix(in srgb, var(--dst) 20%, transparent) !important; color: var(--dst) !important; }
+body.rs .pos2.flx, body.rs .pos2.sflx, body.rs .pos2.bn { background: var(--tagn) !important; color: var(--tagtx) !important; }
+body.rs .pos2.bn { opacity: .75; }
+
+/* ---------- Trades: each team card opens on its franchise hero (Trade Block + League Rosters) ---------- */
+body.rs .tbc .tbh, body.rs .rc .tbh { position: relative; height: 92px; align-items: flex-end; padding: 10px 14px; border-radius: 12px 12px 0 0; color: #fff; background-color: #15171c; background-size: 210% auto; background-position: 92% 38%; }
+body.rs .tbc .tbh { margin: -14px -16px 12px; }
+body.rs .rc .tbh { margin: -14px -14px 12px; }
+body.rs .tbc .tbh::before, body.rs .rc .tbh::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, rgba(8,8,10,.05) 0%, rgba(8,8,10,.35) 45%, rgba(8,8,10,.88) 100%); }
+body.rs .tbc .tbh > *, body.rs .rc .tbh > * { position: relative; }
+body.rs .tbc .tbh b, body.rs .rc .tbh b { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.7); }
+body.rs .tbc .tbh span[style*="var(--mut)"], body.rs .rc .tbh span[style*="var(--mut)"] { color: rgba(255,255,255,.78) !important; }
+body.rs .tbc .tbh .btns { background: rgba(0,0,0,.45); color: #fff; border-color: rgba(255,255,255,.35); }
+body.rs .tbc.mine { box-shadow: inset 0 0 0 1.5px #C9A24A, 0 1px 2px rgba(16,24,40,.05) !important; }
+body.rs .tbc .tbh:has(.ic-syndicate), body.rs .rc .tbh:has(.ic-syndicate) { background-image: url(/a/5f3c2a91d0e84b7cb1f2a6d4e9c0b711.webp); }
+body.rs .tbc .tbh:has(.ic-kelce), body.rs .rc .tbh:has(.ic-kelce) { background-image: url(/a/t-kelce-hero.webp); }
+body.rs .tbc .tbh:has(.ic-puka), body.rs .rc .tbh:has(.ic-puka) { background-image: url(/a/t-puka-hero.webp); }
+body.rs .tbc .tbh:has(.ic-airplane), body.rs .rc .tbh:has(.ic-airplane) { background-image: url(/a/t-airplane-hero.webp); }
+body.rs .tbc .tbh:has(.ic-jj), body.rs .rc .tbh:has(.ic-jj) { background-image: url(/a/t-jj-hero.webp); }
+body.rs .tbc .tbh:has(.ic-lamb), body.rs .rc .tbh:has(.ic-lamb) { background-image: url(/a/t-lamb-hero.webp); }
+body.rs .tbc .tbh:has(.ic-henrys), body.rs .rc .tbh:has(.ic-henrys) { background-image: url(/a/t-henrys-hero.webp); }
+body.rs .tbc .tbh:has(.ic-mustards), body.rs .rc .tbh:has(.ic-mustards) { background-image: url(/a/t-mustards-hero.webp); }
+body.rs .tbc .tbh:has(.ic-chubb), body.rs .rc .tbh:has(.ic-chubb) { background-image: url(/a/t-chubb-hero.webp); }
+body.rs .tbc .tbh:has(.ic-purdy), body.rs .rc .tbh:has(.ic-purdy) { background-image: url(/a/t-purdy-hero.webp); }
+body.rs .tbc .tbh:has(.ic-goff), body.rs .rc .tbh:has(.ic-goff) { background-image: url(/a/t-goff-hero.webp); }
+body.rs .tbc .tbh:has(.ic-hurts), body.rs .rc .tbh:has(.ic-hurts) { background-image: url(/a/t-hurts-hero.webp); }

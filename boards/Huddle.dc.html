@@ -231,6 +231,25 @@ button{font-family:inherit;cursor:pointer}
 .pos.bn,.pos2.bn{background:linear-gradient(#5A6275,#5A6275) left bottom/100% 4px no-repeat,var(--tagbg) !important;color:rgba(255,255,255,.6) !important}
 /* ===== Position tags: smaller size (final) ===== */
 .pos,.pos2{min-width:34px !important;height:18px !important;padding:0 5px 3px !important;border-radius:3px 3px 1px 1px;font-size:9.5px !important;letter-spacing:.04em;background-size:100% 3px,auto !important}
+
+/* league banners (shared with The Wire) */
+.lbn{position:relative;display:flex;align-items:center;justify-content:center;height:62px;overflow:hidden}
+.lbn .bt{position:relative;z-index:1;white-space:nowrap}
+.pmk{position:absolute;z-index:2;top:5px;right:6px;padding:1px 5px;border-radius:3px;background:rgba(0,0,0,.45);color:#fff;font-size:8px;font-weight:800;letter-spacing:.08em}
+.lbn.plain{background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.04)),var(--soft)}
+.lbn.plain .bt{font-family:'Saira Condensed',sans-serif;font-weight:900;font-size:28px;color:var(--dim);letter-spacing:.04em;opacity:.7}
+.lb-EL{background:radial-gradient(60% 120% at 50% 110%,#5a3d14 0%,rgba(90,61,20,0) 70%),linear-gradient(180deg,#07070b,#1c140c)}
+.lb-EL::before{content:'';position:absolute;inset:0;background:conic-gradient(from 160deg at 20% -20%,transparent 0deg,rgba(255,226,150,.18) 8deg,transparent 16deg),conic-gradient(from 185deg at 80% -20%,transparent 0deg,rgba(255,226,150,.18) 8deg,transparent 16deg)}
+.lb-EL::after{content:'';position:absolute;left:0;right:0;bottom:0;height:16px;background:repeating-linear-gradient(90deg,#0b0806 0 6px,rgba(11,8,6,0) 6px 18px);opacity:.9}
+.lb-EL .bt{font-family:'Alfa Slab One',serif;font-size:21px;background:linear-gradient(180deg,#fff7d6 0%,#f2cf72 40%,#b07a1e 55%,#f5dc8f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #2a1a06)}
+.lb-LM{background:linear-gradient(180deg,#9fd8ff 0%,#5aa9e6 42%,#1e4f8a 43%,#0d2c55 100%)}
+.lb-LM::after{content:'';position:absolute;left:-10%;right:-10%;bottom:6px;height:14px;background:repeating-radial-gradient(circle at 10px -4px,transparent 0 7px,rgba(255,255,255,.35) 7px 8.5px,transparent 8.5px 20px);background-size:20px 14px}
+.lb-LM .bt{font-family:'Cinzel',serif;font-weight:700;font-size:17px;letter-spacing:.22em;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.45)}
+.lb-DD{background:repeating-linear-gradient(0deg,rgba(57,255,136,.10) 0 1px,transparent 1px 10px),repeating-linear-gradient(90deg,rgba(57,255,136,.10) 0 1px,transparent 1px 10px),radial-gradient(80% 120% at 50% 100%,#0f3a22,#05110a 70%)}
+.lb-DD .bt{font-family:'Saira Condensed',sans-serif;font-style:italic;font-weight:900;font-size:26px;letter-spacing:.02em;color:#b6ffd2;text-shadow:0 0 8px #39ff88,0 0 18px rgba(57,255,136,.6)}
+.lb-SS{background:repeating-linear-gradient(-45deg,#7a3b12 0 12px,#9a4e1a 12px 24px)}
+.lb-SS::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.35))}
+.lb-SS .bt{font-family:'Alfa Slab One',serif;font-size:20px;color:#fff3e0;letter-spacing:.03em;text-shadow:0 2px 0 #3b1a05}
 </style>
 </helmet>
 <div class="ng" style="min-height: 100vh; background: #0F1218">
@@ -315,9 +334,12 @@ button{font-family:inherit;cursor:pointer}
 <div class="lstrip">
 <sc-for list="{{tiles}}" as="t" hint-placeholder-count="6">
 <a href="#" class="{{t.cls}}">
+<span class="{{t.bannerCls}}"><span class="bt">{{t.bannerTxt}}</span><sc-if value="{{t.prem}}"><span class="pmk">PREMIUM</span></sc-if></span>
+<span class="gpb">
 <span style="display: flex; align-items: center; gap: 8px; min-width: 0"><span class="lsq" style="background: {{t.hue}}">{{t.init}}</span><b class="nm1">{{t.short}}</b></span>
 <span class="num pj">{{t.proj}}</span>
 <span class="{{t.stCls}}">{{t.st}}</span>
+</span>
 </a>
 </sc-for>
 </div>
@@ -405,8 +427,12 @@ button{font-family:inherit;cursor:pointer}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+
+// ---- league banners on the status tiles (same as The Wire) ----
+var GP_PREM = { EL: 'THE EMPIRE', LM: 'MINNETONKA', DD: 'DEGENERATES', SS: 'SUPERFLEX' };
 class Component extends DCLogic {
-renderVals() {
+renderVals() { var v = this._rv(); (v.tiles || []).forEach(function (t) { var b = GP_PREM[t.init]; t.prem = !!b; t.bannerCls = 'lbn ' + (b ? 'lb-' + t.init : 'plain'); t.bannerTxt = b || t.init; }); return v; }
+_rv() {
 var self = this, st = this.state || {};
 var theme = st.theme || 'light', isLt = theme === 'light';
 var T = {
