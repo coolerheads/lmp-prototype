@@ -800,11 +800,11 @@ return (function () {
       var s = style || flexStyle, e = ELIG[slot], name = slot === 'SFLX' ? 'Superflex' : slot === 'FLEX' ? 'Flex' : slot;
       if (!e) return { aria: slot + ' slot', bgs: [{ c: tint(slot) }], parts: [{ t: slot, c: fg(slot) }], dots: [], line: [] };
       var aria = name + ' slot: ' + e.join(', ');
-      var order = slot === 'FLEX' ? ['WR', 'RB', 'TE'] : ['QB', 'WR', 'RB', 'TE'];
+      var order = slot === 'FLEX' ? ['RB', 'WR', 'TE'] : ['QB', 'RB', 'WR', 'TE'];
       if (s === 'split') return { aria: aria, bgs: order.map(function (p) { return { c: tint(p) }; }), parts: [{ t: slot, c: 'var(--tx)' }], dots: [], line: [] };
       if (s === 'dots') return { aria: aria, bgs: [{ c: 'var(--tagn)' }], parts: [{ t: slot, c: 'var(--tx)' }], dots: order.map(function (p) { return { c: fg(p) }; }), line: [] };
       if (s === 'underline') return { aria: aria, bgs: [{ c: 'var(--tagn)' }], parts: [{ t: slot, c: 'var(--tx)' }], dots: [], line: order.map(function (p) { return { c: fg(p) }; }) };
-      var parts = []; order.forEach(function (p, i) { if (i) parts.push({ t: '/', c: 'var(--mut)' }); parts.push({ t: LET[p], c: fg(p) }); });
+      var parts = []; order.forEach(function (p) { parts.push({ t: LET[p], c: fg(p) }); });
       return { aria: aria, bgs: [{ c: 'var(--tagn)' }], parts: parts, dots: [], line: [] };
     }
     function tile(hs, team) {

@@ -119,3 +119,16 @@ body.rs.pg-franchise.bd-hero .rs-page { overflow: hidden; }
 body.rs.pg-franchise.bd-hero .rs-page::before { background-image: url(/a/5f3c2a91d0e84b7cb1f2a6d4e9c0b711.webp); filter: blur(34px) brightness(.42) saturate(1.25); transform: scale(1.15); transform-origin: center top; }
 /* text that sits directly on the backdrop (not in a card) turns light */
 body.rs.pg-franchise:not(.bd-off) .rs-page > main > section:not(.card), body.rs.pg-franchise:not(.bd-off) .rsx .kpis { color: rgba(255,255,255,.75); }
+
+/* ---------- Premium team art in This Week's Matchups cards (same side-aware banners as Live Scoring) ---------- */
+body.rs .mcard .half.sk-syndicate, body.rs .mcard .half.sk-hurts { background-color: #060606 !important; background-repeat: no-repeat !important; background-size: auto 100% !important; }
+body.rs .mcard .half.sk-syndicate:not(.r) { background-image: url(/a/8e8513da401ed6760afe2f450149f773.webp) !important; background-position: left center !important; }
+body.rs .mcard .half.r.sk-syndicate { background-image: url(/a/1ded12be5a54e0c7bf476c11c426be93.webp) !important; background-position: right center !important; }
+body.rs .mcard .half.sk-hurts:not(.r) { background-image: url(/a/a8697593590152b8b50563d3f5b594ad.webp) !important; background-position: left center !important; }
+body.rs .mcard .half.r.sk-hurts { background-image: url(/a/6d2de6a03e0075a68b2360327ce62a48.webp) !important; background-position: right center !important; }
+body.rs .mcard .half.sk-syndicate > .bx, body.rs .mcard .half.sk-syndicate > .nm,
+body.rs .mcard .half.sk-hurts > .bx, body.rs .mcard .half.sk-hurts > .nm { visibility: hidden; }
+
+/* ---------- Team badge (Premium mark) wherever the small team icon appears ---------- */
+body.rs .bx:has(> .ic-syndicate) { background: url(/a/b4d6e8f0a1c3e5079b2d4f6a8c0e2a41.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-syndicate) > span { display: none !important; }
