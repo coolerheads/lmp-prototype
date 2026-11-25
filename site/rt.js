@@ -191,6 +191,28 @@
     if (NAV) NAV.decorate((G.nav || 'compact') !== 'classic');
     frameClasses();
     flexLetters();
+    titleCase();
+  }
+  // Title Case for headings and buttons (small words stay lowercase unless first or last)
+  var SMALL = { a: 1, an: 1, the: 1, and: 1, but: 1, or: 1, nor: 1, for: 1, of: 1, to: 1, in: 1, on: 1, at: 1, by: 1, vs: 1, via: 1, per: 1, as: 1, with: 1 };
+  function tc(str) {
+    var parts = str.split(/(\s+)/), words = parts.filter(function (p) { return /\S/.test(p); }), n = 0;
+    return parts.map(function (p) {
+      if (!/\S/.test(p)) return p;
+      var i = n++, w = p, m = w.match(/^([^A-Za-z]*)([a-z][\w'’-]*)(.*)$/);
+      if (!m) return w;
+      if (i > 0 && i < words.length - 1 && SMALL[m[2].toLowerCase()] && !/[:·]$/.test(words[i - 1])) return w;
+      return m[1] + m[2].charAt(0).toUpperCase() + m[2].slice(1) + m[3];
+    }).join('');
+  }
+  function titleCase() {
+    root.querySelectorAll('h1, h2, h3, h4, .h1, .h2, button, .btn, .btnp, .hb, .rsh-b').forEach(function (el) {
+      if (el.closest('.dc-demobar') || el.closest('.pos') || el.classList.contains('pos')) return;
+      el.childNodes.forEach(function (n) {
+        if (n.nodeType !== 3 || !/[a-z]/.test(n.nodeValue) || /@/.test(n.nodeValue)) return;
+        var v = tc(n.nodeValue); if (v !== n.nodeValue) n.nodeValue = v;
+      });
+    });
   }
   // FLEX / SUPERFLEX slot tags: each eligible position's letter in its own color (R W T, Q R W T)
   function flexLetters() {

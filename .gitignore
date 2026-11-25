@@ -25,3 +25,9 @@ dist-ssr
 
 # build output
 out
+
+# local files that are not part of the site
+Claude outputs/
+screenshots/
+scripts/
+_*.tgz
