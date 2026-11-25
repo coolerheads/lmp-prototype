@@ -391,9 +391,14 @@ button{font-family:inherit;cursor:pointer}
 </section>
 <!-- YOUR STAKE: net impact by league + your players in this game -->
 <section class="card gd-stake">
-<div class="gd-sh"><div><small>YOUR STAKE IN {{g.a.ab}}–{{g.b.ab}}</small><h2 class="h3">{{rsx.netLabel}}</h2></div><span class="gd-sub">your starters minus theirs, this game</span></div>
-<div class="gd-net"><sc-for list="{{rsx.net}}" as="n" hint-placeholder-count="5"><div class="{{n.cls}}"><span class="{{n.badge}}" style="background: {{n.hue}}">{{n.init}}</span><span class="gd-nn">{{n.name}}</span><b style="color: {{n.c}}">{{n.v}}</b></div></sc-for></div>
-<div class="gd-ppl"><sc-for list="{{rsx.stake}}" as="x" hint-placeholder-count="6"><div class="{{x.cls}}"><span class="gd-hs"></span><span class="gd-pi"><b>{{x.name}}</b><small>{{x.pos}} · {{x.team}}</small><span class="gd-lg"><sc-for list="{{x.roles}}" as="r" hint-placeholder-count="2"><span class="{{r.cls}}">{{r.init}}</span></sc-for></span></span><span class="gd-pts">{{x.pts}}</span></div></sc-for></div>
+<div class="gd-sh"><h2 class="h3">Your Stake in {{g.a.ab}}–{{g.b.ab}}</h2><span class="gd-sub">Your starters vs. this week’s opponent, league by league</span></div>
+<div class="gd-lgs"><sc-for list="{{rsx.lgs}}" as="l" hint-placeholder-count="5"><div class="{{l.cls}}">
+<div class="gd-lh"><span class="{{l.badge}}" style="background: {{l.hue}}">{{l.init}}</span><span class="gd-nn">{{l.name}}</span><b style="color: {{l.c}}">{{l.v}}</b></div>
+<div class="gd-sides">
+<div class="gd-sd"><div class="gd-sdh"><span>You</span><b>{{l.ySum}}</b></div><sc-for list="{{l.you}}" as="x" hint-placeholder-count="2"><div class="{{x.cls}}"><span class="{{x.pc}}">{{x.pos}}</span><span class="gd-rn">{{x.name}}</span><span class="gd-rp">{{x.pts}}</span></div></sc-for><sc-if value="{{l.yNone}}"><div class="gd-none">No one in this game</div></sc-if></div>
+<div class="gd-sd"><div class="gd-sdh"><span>Opponent</span><b>{{l.oSum}}</b></div><sc-for list="{{l.opp}}" as="x" hint-placeholder-count="2"><div class="{{x.cls}}"><span class="{{x.pc}}">{{x.pos}}</span><span class="gd-rn">{{x.name}}</span><span class="gd-rp">{{x.pts}}</span></div></sc-for><sc-if value="{{l.oNone}}"><div class="gd-none">No one in this game</div></sc-if></div>
+</div>
+</div></sc-for></div>
 </section>
 <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start">
 <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
@@ -404,7 +409,7 @@ button{font-family:inherit;cursor:pointer}
 <span class="tt">{{s.t}}</span>
 <span class="tab" style="background: {{s.c}}">{{s.team}}</span>
 <span class="kind">{{s.kind}}</span>
-<span class="tx"><span class="gd-hs sm"></span><span class="gd-st"><span>{{s.txt}}</span><sc-if value="{{s.hasFx}}"><span class="fx"><sc-for list="{{s.fx}}" as="f" hint-placeholder-count="2"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></span></sc-if></span></span>
+<span class="tx"><span class="gd-hs sm" style="background-image: {{s.img}}"></span><span class="gd-st"><span>{{s.txt}}</span><sc-if value="{{s.hasFx}}"><span class="fx"><sc-for list="{{s.fx}}" as="f" hint-placeholder-count="2"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></span></sc-if></span></span>
 <span class="num run">{{s.run}}</span>
 </div>
 </sc-for>
@@ -418,7 +423,7 @@ button{font-family:inherit;cursor:pointer}
 <div class="{{p.cls}}">
 <span class="tt">{{p.t}}</span>
 <div>
-<div class="tx"><sc-if value="{{p.hasHs}}"><span class="gd-hs sm"></span></sc-if><span><sc-if value="{{p.td}}"><span class="td">TD</span></sc-if>{{p.txt}}</span></div>
+<div class="tx"><sc-if value="{{p.hasHs}}"><span class="gd-hs sm" style="background-image: {{p.img}}"></span></sc-if><span><sc-if value="{{p.td}}"><span class="td">TD</span></sc-if>{{p.txt}}</span></div>
 <sc-if value="{{p.hasFx}}">
 <div class="fx"><sc-for list="{{p.fx}}" as="f" hint-placeholder-count="3"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></div>
 </sc-if>
@@ -438,7 +443,7 @@ button{font-family:inherit;cursor:pointer}
 </div>
 <sc-for list="{{g.exp}}" as="x" hint-placeholder-count="7">
 <div class="{{x.cls}}">
-<span class="hs"></span>
+<span class="hs" style="background-image: {{x.img}}"></span>
 <div style="min-width: 0">
 <div style="font-weight: 700; font-size: 14px">{{x.name}} <span style="font-size: 12px; font-weight: 700; color: {{x.pc}}">{{x.pos}}</span> <span style="font-size: 12px; font-weight: 500; color: var(--mut)">{{x.team}}</span></div>
 <div class="roles"><sc-for list="{{x.roles}}" as="r" hint-placeholder-count="2"><span class="{{r.cls}}" title="{{r.tip}}"><i class="{{r.dot}}"></i><span class="lsq" style="background: {{r.hue}}">{{r.init}}</span></span></sc-for></div>
@@ -450,7 +455,7 @@ button{font-family:inherit;cursor:pointer}
 </div>
 </div>
 </sc-if>
-<sc-if value="{{rsx.toast}}"><div class="gd-toast" role="status"><span class="gd-hs"></span><span class="gd-tt"><small>{{rsx.toastGame}} · {{rsx.toastWhen}}</small><b>{{rsx.toastWho}}</b><span>{{rsx.toastTxt}}</span></span><span class="gd-tv">{{rsx.toastV}}</span></div></sc-if>
+<sc-if value="{{rsx.toast}}"><div class="gd-toast" role="status"><span class="gd-hs" style="background-image: {{rsx.toastImg}}"></span><span class="gd-tt"><small>{{rsx.toastGame}} · {{rsx.toastWhen}}</small><b>{{rsx.toastWho}}</b><span>{{rsx.toastTxt}}</span></span><span class="gd-tv">{{rsx.toastV}}</span></div></sc-if>
 <!-- ===== MULTI-VIEW ===== -->
 <sc-if value="{{isGrid}}">
 <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap">
@@ -489,7 +494,7 @@ button{font-family:inherit;cursor:pointer}
 <span class="tt">{{s.t}}</span>
 <span class="tab" style="background: {{s.c}}">{{s.team}}</span>
 <span class="kind">{{s.kind}}</span>
-<span class="tx"><span class="gd-hs sm"></span><span class="gd-st"><span>{{s.txt}}</span><sc-if value="{{s.hasFx}}"><span class="fx"><sc-for list="{{s.fx}}" as="f" hint-placeholder-count="2"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></span></sc-if></span></span>
+<span class="tx"><span class="gd-hs sm" style="background-image: {{s.img}}"></span><span class="gd-st"><span>{{s.txt}}</span><sc-if value="{{s.hasFx}}"><span class="fx"><sc-for list="{{s.fx}}" as="f" hint-placeholder-count="2"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></span></sc-if></span></span>
 <span class="num run">{{s.run}}</span>
 </div>
 </sc-for>
@@ -528,27 +533,49 @@ button{font-family:inherit;cursor:pointer}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"view":{"editor":"enum","options":["featured","multi"],"default":"featured"},"$preview":{"width":1440,"height":2300}}'>
-// ---- Restrained Game Day: your stake, impact on scoring plays, headshots, scoring toast ----
+// ---- Restrained Game Day: per-league stake, impact on scoring plays, headshots, scoring toast ----
+var GD_SIL = 'url(/a/4170e5c447395148b28bf4ffbdf45275.svg)';
+var GD_HS = { 'Jahmyr Gibbs': 'gibbs', 'Jared Goff': 'goff', 'Jameson Williams': 'jwilliams', 'Amon-Ra St. Brown': 'stbrown', 'Caleb Williams': 'cwilliams', 'D’Andre Swift': 'swift', 'Sam LaPorta': 'laporta', 'Luther Burden III': 'burden', 'Colston Loveland': 'loveland' };
+function gdImg(nm) { return GD_HS[nm] ? 'url(/a/hs-' + GD_HS[nm] + '.webp)' : GD_SIL; }
 function gdNum(v) { return parseFloat(String(v).replace('−', '-').replace('+', '')) || 0; }
 function gdSgn(n) { return (n > 0 ? '+' : n < 0 ? '−' : '') + Math.abs(n).toFixed(1); }
 function gdEnhance(host, v) {
-(v.nfl || []).forEach(function (n) { n.mN = (n.md || []).length; n.oN = (n.od || []).length; n.hasXp = n.mN + n.oN > 0; });
+  (v.nfl || []).forEach(function (n) { n.mN = (n.md || []).length; n.oN = (n.od || []).length; n.hasXp = n.mN + n.oN > 0; });
   var g = v.g; if (!g) return v;
   var exp = g.exp || [], hues = {};
   (g.net || []).forEach(function (n) { hues[n.init] = { hue: n.hue, name: n.name }; });
-  function who(txt) { for (var i = 0; i < exp.length; i++) { var nm = exp[i].name, last = nm.split(' ').slice(-1)[0]; if (txt.indexOf(nm) >= 0 || txt.indexOf(last + ' ') === 0) return exp[i]; } return null; }
-  var tot = 0, net = (g.net || []).map(function (n) { var x = gdNum(n.v); tot += x; return { init: n.init, hue: n.hue, name: n.name, v: n.v, c: n.c, badge: 'lsq gd-b gd-b-' + n.init, cls: 'gd-nr' + (x > 0 ? ' up' : x < 0 ? ' dn' : '') }; });
-  var stake = [];
-  exp.forEach(function (x) {
-    var roles = (x.roles || []).filter(function (r) { return /\b(ys|os)\b/.test(r.dot); });
-    if (!roles.length) return;
-    var yours = roles.some(function (r) { return /ys/.test(r.dot); }), theirs = roles.some(function (r) { return /os/.test(r.dot); });
-    stake.push({ name: x.name, pos: x.pos, team: x.team, pts: x.pts, cls: 'gd-p' + (yours && !theirs ? ' up' : !yours ? ' dn' : ' mx'),
-      roles: roles.map(function (r) { return { init: r.init, cls: 'gd-rl ' + (/ys/.test(r.dot) ? 'up' : 'dn') }; }) });
+  exp.forEach(function (x) { x.img = gdImg(x.name); });
+  // the player a line of text is about: whoever is named earliest (full name, or last name)
+  function who(txt) {
+    var best = null, at = 1e9;
+    exp.forEach(function (x) {
+      var last = x.name.replace(/ (III|II|Jr\.)$/, '').split(' ').slice(-1)[0], k = txt.indexOf(x.name);
+      if (k < 0) { k = txt.indexOf(last + ' '); if (k > 0 && exp.some(function (y) { return y !== x && txt.indexOf(y.name) === k - y.name.length + last.length; })) k = -1; }
+      if (k >= 0 && k < at) { at = k; best = x; }
+    });
+    return best;
+  }
+  // per league: your starters vs your opponent's starters in this game (bench shown, not counted)
+  var lgs = (g.net || []).map(function (n) {
+    var you = [], opp = [], ys = 0, os = 0;
+    exp.forEach(function (x) {
+      (x.roles || []).forEach(function (r) {
+        if (r.init !== n.init) return;
+        var role = r.dot.replace('dt ', ''), pts = gdNum(x.pts), bench = role === 'yb' || role === 'ob';
+        var row = { name: x.name, pos: bench ? 'BN' : x.pos, pc: 'gd-pos gd-pos-' + (bench ? 'BN' : x.pos), pts: x.pts, cls: 'gd-r' + (bench ? ' bn' : ''), n: bench ? -1 : pts };
+        if (role === 'ys') ys += pts; if (role === 'os') os += pts;
+        (role[0] === 'y' ? you : opp).push(row);
+      });
+    });
+    you.sort(function (a, b) { return b.n - a.n; }); opp.sort(function (a, b) { return b.n - a.n; });
+    var net = ys - os;
+    return { init: n.init, hue: n.hue, name: n.name, badge: 'lsq gd-b gd-b-' + n.init, v: gdSgn(net), c: net > 0 ? 'var(--up)' : net < 0 ? 'var(--dn)' : 'var(--mut)',
+      cls: 'gd-lg1' + (net > 0 ? ' up' : net < 0 ? ' dn' : ''), you: you, opp: opp, ySum: ys.toFixed(1), oSum: os.toFixed(1), yNone: !you.length, oNone: !opp.length, k: net };
   });
-  stake.sort(function (a, b) { return gdNum(b.pts) - gdNum(a.pts); });
+  lgs.sort(function (a, b) { return b.k - a.k; });
   (g.scores || []).forEach(function (s) {
-    var yd = parseInt((s.txt.match(/(\d+)-yd/) || [])[1] || '0', 10), fx = {}, any = false;
+    var yd = parseInt((s.txt.match(/(\d+)-yd/) || [])[1] || '0', 10), fx = {}, any = false, w = who(s.txt);
+    s.img = w ? w.img : GD_SIL;
     exp.forEach(function (x) {
       var i = s.txt.indexOf(x.name); if (i < 0) return;
       var after = s.txt.slice(i + x.name.length, i + x.name.length + 14), passer = / pass/.test(after);
@@ -558,14 +585,14 @@ function gdEnhance(host, v) {
     s.fx = Object.keys(fx).map(function (k) { any = true; var h = hues[k] || {}; return { init: k, hue: h.hue || '#555', tip: h.name || k, v: gdSgn(fx[k]), c: fx[k] >= 0 ? 'var(--up)' : 'var(--dn)', cls: fx[k] >= 0 ? 'fxc mine' : 'fxc' }; });
     s.hasFx = any;
   });
-  (g.plays || []).forEach(function (p) { p.hasHs = !!who(p.txt); });
-  var st = host.state || {}, simN = st.sim || 0, rsx = { net: net, stake: stake, netLabel: 'Net ' + gdSgn(tot) + ' across ' + net.length + ' leagues' };
+  (g.plays || []).forEach(function (p) { var w = who(p.txt); p.hasHs = !!w; p.img = w ? w.img : GD_SIL; });
+  var st = host.state || {}, simN = st.sim || 0, rsx = { lgs: lgs };
   if (simN && simN !== host._gdSim) {
     host._gdSim = simN;
     var bp = (v.bigPlays || [])[0];
-    if (bp && bp.mine) { host._gdToast = { who: bp.who, txt: bp.txt, game: bp.game, when: bp.when, v: bp.k === 'TD' ? '+6.0' : '+' + ((parseInt(bp.k, 10) || 10) / 10).toFixed(1) }; clearTimeout(host._gdT); host._gdT = setTimeout(function () { host._gdToast = null; host.setState({}); }, 4200); }
+    if (bp && bp.mine) { host._gdToast = { who: bp.who, txt: bp.txt, game: bp.game, when: bp.when, img: gdImg(bp.who), v: bp.k === 'TD' ? '+6.0' : '+' + ((parseInt(bp.k, 10) || 10) / 10).toFixed(1) }; clearTimeout(host._gdT); host._gdT = setTimeout(function () { host._gdToast = null; host.setState({}); }, 4200); }
   }
-  if (host._gdToast) { var t = host._gdToast; rsx.toast = true; rsx.toastWho = t.who; rsx.toastTxt = t.txt; rsx.toastGame = t.game; rsx.toastWhen = t.when; rsx.toastV = t.v; }
+  if (host._gdToast) { var t = host._gdToast; rsx.toast = true; rsx.toastWho = t.who; rsx.toastTxt = t.txt; rsx.toastGame = t.game; rsx.toastWhen = t.when; rsx.toastV = t.v; rsx.toastImg = t.img; }
   v.rsx = rsx;
   return v;
 }
@@ -610,7 +637,7 @@ plays: [
 ['Q2 6:12', 'Gibbs 6-yard catch out of the backfield.', false, [['EL', 1.6], ['LM', 1.6], ['DD', -1.6]]],
 ['Q2 8:40', 'CHI punts, fair catch at the DET 27.', false, []],
 ['Q2 9:31', 'Caleb Williams scrambles for 14 yards.', false, [['SS', 1.4]]],
-['Q2 10:02', 'Williams pass to DJ Moore for 10 yards.', false, [['DD', 2.0], ['EL', -2.0], ['SS', 0.4]]],
+['Q2 10:02', 'Williams pass to Luther Burden III for 10 yards.', false, [['DD', 2.0], ['EL', -2.0], ['SS', 0.4]]],
 ['Q2 11:02', 'Goff 41-yard touchdown pass to Jameson Williams. Extra point good.', true, [['OP', -5.6]]],
 ['Q2 13:48', 'Williams 25-yard touchdown pass to Rome Odunze. Extra point good.', true, [['SS', 5.0]]]
 ],
@@ -618,11 +645,12 @@ exp: [
 ['Jahmyr Gibbs', 'RB', 'DET', '9.6', [['EL', 'ys'], ['LM', 'ys'], ['DD', 'os']]],
 ['Caleb Williams', 'QB', 'CHI', '9.8', [['SS', 'ys']]],
 ['Amon-Ra St. Brown', 'WR', 'DET', '7.8', [['OP', 'ys'], ['LM', 'os']]],
-['DJ Moore', 'WR', 'CHI', '6.2', [['DD', 'ys'], ['EL', 'os']]],
+['Luther Burden III', 'WR', 'CHI', '6.2', [['DD', 'ys'], ['EL', 'os']]],
 ['Jared Goff', 'QB', 'DET', '11.2', [['OP', 'os']]],
-['Khalil Herbert', 'RB', 'CHI', '4.1', [['EL', 'os']]],
+['D’Andre Swift', 'RB', 'CHI', '4.1', [['EL', 'os'], ['OP', 'os']]],
 ['Jameson Williams', 'WR', 'DET', '10.1', [['DD', 'ob']], 'Left on your Dynasty opponent’s bench'],
-['Sam LaPorta', 'TE', 'DET', '3.4', [['SS', 'ys'], ['EL', 'yb']]]
+['Sam LaPorta', 'TE', 'DET', '3.4', [['SS', 'ys'], ['EL', 'yb']]],
+['Colston Loveland', 'TE', 'CHI', '2.8', [['LM', 'ys'], ['SS', 'os']]]
 ],
 net: [['SS', 13.2], ['LM', 1.8], ['EL', -0.7], ['DD', -3.4], ['OP', -3.4]]
 },
@@ -842,7 +870,7 @@ var bp = [
 ];
 // plays the prototype can "receive" live, newest arrives at the front (left)
 var incoming = [
-['CHI', 'big', '31 YDS', 'DJ Moore', '31-yd catch down the sideline', 'DET–CHI', 'Q2 2:44', true],
+['CHI', 'big', '31 YDS', 'Luther Burden III', '31-yd catch down the sideline', 'DET–CHI', 'Q2 2:44', true],
 ['DEN', 'td', 'TD', 'Courtland Sutton', '9-yd TD catch from Bo Nix', 'KC–DEN', 'Q4 0:38', true],
 ['SEA', 'big', '36 YDS', 'Kenneth Walker III', '36-yd run', 'SEA–ARI', 'Q4 1:55', false],
 ['DET', 'td', 'TD', 'Jahmyr Gibbs', '12-yd TD run', 'DET–CHI', 'Q2 1:10', true]

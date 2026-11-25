@@ -476,3 +476,27 @@ body.rs.pg-gameday .gd-xp .m { color: #2F5BFF; background: rgba(47,91,255,.1); }
 body.rs.pg-gameday .gd-xp .o { color: #C2185B; background: rgba(214,40,120,.1); }
 body.rs.pg-gameday .gband button { border-radius: 12px !important; }
 body.rs .gd-net { grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); }
+/* Game Day: per-league stake cards + real headshots */
+body.rs .gd-hs[style*="/hs-"], body.rs.pg-gameday .ex .hs[style*="/hs-"] { background-size: cover !important; background-position: center top !important; }
+body.rs .gd-sh .h3 { margin: 0; }
+body.rs .gd-lgs { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; }
+body.rs .gd-lg1 { border-radius: 14px; box-shadow: inset 0 0 0 1px var(--ln); padding: 12px 14px 12px; display: flex; flex-direction: column; gap: 10px; background: var(--sub, #F6F7F9); }
+body.rs .gd-lg1.up { background: radial-gradient(60% 90% at 100% 0%, color-mix(in srgb, var(--up) 13%, transparent), transparent 70%), var(--sub, #F6F7F9); }
+body.rs .gd-lg1.dn { background: radial-gradient(60% 90% at 100% 0%, color-mix(in srgb, var(--dn) 10%, transparent), transparent 70%), var(--sub, #F6F7F9); }
+body.rs .gd-lh { display: flex; align-items: center; gap: 10px; }
+body.rs .gd-lh .gd-b { width: 30px; height: 30px; font-size: 11px; border-radius: 8px; flex: 0 0 auto; }
+body.rs .gd-lh .gd-b-EL { background: url(/a/el-badge-sm.webp) center / contain no-repeat !important; color: transparent; }
+body.rs .gd-lh .gd-nn { font-size: 14.5px; font-weight: 700; }
+body.rs .gd-lh b { font: 800 30px/1 'Saira Condensed', sans-serif; }
+body.rs .gd-sides { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+body.rs .gd-sd { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+body.rs .gd-sdh { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 4px; margin-bottom: 2px; border-bottom: 1px solid var(--ln); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--mut); }
+body.rs .gd-sdh b { font: 800 16px 'Saira Condensed', sans-serif; color: var(--tx); letter-spacing: 0; }
+body.rs .gd-r { display: flex; align-items: center; gap: 7px; font-size: 13px; min-height: 22px; }
+body.rs .gd-r.bn { opacity: .55; }
+body.rs .gd-rn { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
+body.rs .gd-rp { font: 700 15px 'Saira Condensed', sans-serif; }
+body.rs .gd-pos { flex: 0 0 26px; font-size: 10px; font-weight: 800; text-align: center; border-radius: 4px; padding: 1px 0; color: #12151B; background: #A3ADC2; }
+body.rs .gd-pos-QB { background: #FF7A93; } body.rs .gd-pos-RB { background: #3EE0B4; } body.rs .gd-pos-WR { background: #62B0FF; } body.rs .gd-pos-TE { background: #FFAE5C; } body.rs .gd-pos-K { background: #E8D867; }
+body.rs .gd-pos-BN { background: transparent; box-shadow: inset 0 0 0 1px var(--ln); color: var(--mut); }
+body.rs .gd-none { font-size: 12px; color: var(--mut); font-style: italic; padding-top: 2px; }
