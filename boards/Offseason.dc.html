@@ -1485,17 +1485,17 @@ var self = this, st = this.state || {};
 var theme = st.theme || 'light', isLt = theme === 'light';
 var T = {
 syndicate: ['The Gridiron Syndicate', 'SYN', 'shieldA', '#c9a24a', '@coolerheads'],
-kelce: ["Kelce's Anatomy", 'KEL', 'circle', '#ffffff', '@kapp_attack'],
-airplane: ["Jefferson's Airplane", 'JEF', 'hex', '#ffd84d', '@jetpackjeff'],
-jj: ['Johnson & Johnson LLP', 'J&J', 'shieldB', '#efe3bd', '@jj_esq'],
-mustards: ['The Bijan Mustards', 'BIJ', 'square', '#c4161c', '@relishmore'],
+kelce: ["By the Beard of Zeus", 'ZEU', 'circle', '#ffffff', '@kapp_attack'],
+airplane: ["Threat Level Midnight", 'TLM', 'hex', '#ffd84d', '@jetpackjeff'],
+jj: ['Kind of a Big Deal', 'KBD', 'shieldB', '#efe3bd', '@jj_esq'],
+mustards: ['To Infinity & Bijan', 'BIJ', 'square', '#c4161c', '@relishmore'],
 hurts: ['Hurts Locker', 'HRT', 'shieldC', '#f2c230', '@mscott44'],
-lamb: ['Certified Lamb Daddy', 'CLD', 'hex', '#d4af37', '@baaadboy'],
-henrys: ["Henry's Holes", 'HEN', 'circle', '#f28c28', '@hhenry'],
-chubb: ['Chubb Club', 'CHB', 'shieldA', '#f6d7a7', '@cigarnick'],
-purdy: ['Purdy Good Team', 'PGT', 'circle', '#ffffff', '@ninerfaithful'],
-puka: ['The Puka Principle', 'PKA', 'square', '#ffe89a', '@aloha_ppr'],
-goff: ['Goff Ball', 'GOF', 'shieldB', '#ffffff', '@fore_and_out']
+lamb: ['CMC Hammer', 'CMC', 'hex', '#d4af37', '@baaadboy'],
+henrys: ["Stroud 9", 'STR', 'circle', '#f28c28', '@hhenry'],
+chubb: ['Feats of Strength', 'FOS', 'shieldA', '#f6d7a7', '@cigarnick'],
+purdy: ['Los Pollos Hermanos', 'LPH', 'circle', '#ffffff', '@ninerfaithful'],
+puka: ['Sex Panthers', 'SXP', 'square', '#ffe89a', '@aloha_ppr'],
+goff: ['You Underestimate My Bowers', 'YUB', 'shieldB', '#ffffff', '@fore_and_out']
 };
 function tm(k) { var r = T[k]; return { key: k, name: r[0], abbr: r[1], shape: r[2], ring: r[3], user: r[4] }; }
 // ===================== OFFSEASON =====================
@@ -1522,7 +1522,7 @@ var CAL = isDyn ? [['NFL Draft', 'Apr 22–24', ''], ['Rookie draft', 'Sat, May 
 : [['Owners confirm', 'Sun, Feb 15', ''], ['Dues deadline', 'Sun, Aug 1', ''], ['Draft', 'Sat, Aug 28 · 7:00 PM ET', 'Snake with 3RR, 16 rounds'], ['Week 1', 'Thu, Sep 9', '']];
 var wiz = { steps: WSTEPS.map(function (s, i) { return { n: i < ws - 1 ? '✓' : String(i + 1), t: s[0], d: s[1], cls: 'osws' + (i + 1 === ws ? ' on' : i + 1 < ws ? ' done' : ''), pick: function () { set({ ws: i + 1 }); } }; }),
 s1: ws === 1, s2: ws === 2, s3: ws === 3, s4: ws === 4, s5: ws === 5,
-wrap: [['Champion crowned', 'The Gridiron Syndicate beat Certified Lamb Daddy 141.8–127.3'], ['Payouts sent', '$2,400 to winners’ LeagueSafe balances on Dec 30'], ['Saved to the record book', '2026 standings, records and head-to-head'], [isDyn ? '$600 moved to the Empire Vault' : 'Final standings locked', isDyn ? 'For future seasons' : 'Used for next year’s draft order']].map(function (x) { return { t: x[0], d: x[1] }; }),
+wrap: [['Champion crowned', 'The Gridiron Syndicate beat CMC Hammer 141.8–127.3'], ['Payouts sent', '$2,400 to winners’ LeagueSafe balances on Dec 30'], ['Saved to the record book', '2026 standings, records and head-to-head'], [isDyn ? '$600 moved to the Empire Vault' : 'Final standings locked', isDyn ? 'For future seasons' : 'Used for next year’s draft order']].map(function (x) { return { t: x[0], d: x[1] }; }),
 carry: CARRY.map(function (x) { return { t: x[0], d: x[1] }; }),
 owners: KS.map(function (k) { var t = tm(k); return { t: crest(k), n: t.name, u: t.user }; }),
 askCls: 'ntsw' + (askBack ? ' on' : ''), togAsk: function () { set({ askBack: !askBack }); },
@@ -1585,7 +1585,7 @@ var TL = isDyn ? [['Season ends', 'Dec 28', 'd'], ['Payouts sent', 'Dec 30', 'd'
 : isKeep ? [['Season ends', 'Dec 28', 'd'], ['Payouts sent', 'Dec 30', 'd'], ['2027 season created', 'Jan 4', 'd'], ['Owners confirm', 'Feb 15', 'd'], ['Rule votes close', 'Apr 1', 'n'], ['Dues deadline', 'Aug 1', ''], ['Keeper deadline', 'Aug 25', ''], ['Draft', 'Aug 28', ''], ['Week 1', 'Sep 9', '']]
 : [['Season ends', 'Dec 28', 'd'], ['Payouts sent', 'Dec 30', 'd'], ['2027 season created', 'Jan 4', 'd'], ['Owners confirm', 'Feb 15', 'd'], ['Rule votes close', 'Apr 1', 'n'], ['Dues deadline', 'Aug 1', ''], ['Draft', 'Aug 28', ''], ['Week 1', 'Sep 9', '']];
 var tline = TL.map(function (x) { return { t: x[0], d: x[1], cls: 'ostl' + (x[2] === 'd' ? ' done' : x[2] === 'n' ? ' now' : ''), mark: x[2] === 'd' ? '✓' : '' }; });
-var feed = (isDyn ? [['trade', 'Kelce’s Anatomy traded the 2027 1.09 to The Bijan Mustards', 'For Rashee Rice · Mar 12']] : []).concat([['back', '@hhenry is back for 2027 and paid dues', 'Mar 1'], ['vote', 'TE premium passed 9–2', 'Feb 20 · now in 2027 settings'], ['leave', '@fore_and_out is leaving after this season', 'Feb 14 · Goff Ball needs a new owner'], ['back', '@relishmore paid 2027 dues', 'Feb 9']]).map(function (f) { return { t: f[1], d: f[2], cls: 'osfd ' + f[0] }; });
+var feed = (isDyn ? [['trade', 'By the Beard of Zeus traded the 2027 1.09 to To Infinity & Bijan', 'For Rashee Rice · Mar 12']] : []).concat([['back', '@hhenry is back for 2027 and paid dues', 'Mar 1'], ['vote', 'TE premium passed 9–2', 'Feb 20 · now in 2027 settings'], ['leave', '@fore_and_out is leaving after this season', 'Feb 14 · You Underestimate My Bowers needs a new owner'], ['back', '@relishmore paid 2027 dues', 'Feb 9']]).map(function (f) { return { t: f[1], d: f[2], cls: 'osfd ' + f[0] }; });
 var otab = st.otab || 'over';
 var draftLbl = isDyn ? 'Rookie draft' : isKeep ? 'Keepers' : 'Draft';
 var OS = {
@@ -1606,7 +1606,7 @@ stat: [['Coming back', conf + ' of 12', conf === 12 ? 'ok' : ''], ['Dues paid', 
 ownerRows: ownerRows, duesLine: money(dues) + ' per team · ' + money(collected) + ' of ' + money(dues * 12) + ' collected · deadline Sun, Aug 1',
 duesW: Math.round(paidN / 12 * 100) + '%', remindAll: function () { set({ toast: 'Reminders sent', toastSub: 'To everyone who hasn’t confirmed or paid' }); },
 repOpen: !!repOpen, repName: repOpen ? tm(st.rep).name : '', closeRep: function () { set({ rep: null }); },
-repOpts: [['Invite someone you know', 'Send a link by email or text. They take over the team and its picks.', 'Invite'], ['List it in Find a league', 'Shows as an open team in public search until someone joins.', 'List it'], isDyn ? ['Sell it in the Orphan marketplace', 'Set a price or take bids. LeagueSafe holds the money.', 'List for sale'] : ['Leave it for the draft', 'A new owner can join any time before the draft.', 'Leave open']].map(function (x) { return { t: x[0], d: x[1], btn: x[2], go: function () { set({ replaced: true, rep: null, toast: x[2] + ': Goff Ball', toastSub: x[0] }); } }; }),
+repOpts: [['Invite someone you know', 'Send a link by email or text. They take over the team and its picks.', 'Invite'], ['List it in Find a league', 'Shows as an open team in public search until someone joins.', 'List it'], isDyn ? ['Sell it in the Orphan marketplace', 'Set a price or take bids. LeagueSafe holds the money.', 'List for sale'] : ['Leave it for the draft', 'A new owner can join any time before the draft.', 'Leave open']].map(function (x) { return { t: x[0], d: x[1], btn: x[2], go: function () { set({ replaced: true, rep: null, toast: x[2] + ': You Underestimate My Bowers', toastSub: x[0] }); } }; }),
 rounds: rounds, order: order.map(function (k, i) { return { n: String(i + 1), t: crest(k), nm: tm(k).name, why: whyOrder[i], cls: 'osro' + (k === me ? ' me' : '') }; }), myPicks: myPicks.length ? 'Your picks: ' + myPicks.join(', ') : 'You have no picks in this draft',
 tradePick: function () { set({ toast: 'Trade a pick', toastSub: 'Opens the trade builder with your 2027 picks' }); },
 keepRows: keepRows, kCount: kN + ' of 3 chosen', kCost: kN ? 'Costs: ' + kCostTxt : 'No keepers chosen yet', kSave: function () { set({ toast: 'Keepers saved', toastSub: 'Hidden from the league until the deadline' }); },

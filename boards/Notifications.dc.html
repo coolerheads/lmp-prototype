@@ -1470,17 +1470,17 @@ var self = this, st = this.state || {};
 var theme = st.theme || 'light', isLt = theme === 'light';
 var T = {
 syndicate: ['The Gridiron Syndicate', 'SYN', 'shieldA', '#c9a24a', '@coolerheads'],
-kelce: ["Kelce's Anatomy", 'KEL', 'circle', '#ffffff', '@kapp_attack'],
-airplane: ["Jefferson's Airplane", 'JEF', 'hex', '#ffd84d', '@jetpackjeff'],
-jj: ['Johnson & Johnson LLP', 'J&J', 'shieldB', '#efe3bd', '@jj_esq'],
-mustards: ['The Bijan Mustards', 'BIJ', 'square', '#c4161c', '@relishmore'],
+kelce: ["By the Beard of Zeus", 'ZEU', 'circle', '#ffffff', '@kapp_attack'],
+airplane: ["Threat Level Midnight", 'TLM', 'hex', '#ffd84d', '@jetpackjeff'],
+jj: ['Kind of a Big Deal', 'KBD', 'shieldB', '#efe3bd', '@jj_esq'],
+mustards: ['To Infinity & Bijan', 'BIJ', 'square', '#c4161c', '@relishmore'],
 hurts: ['Hurts Locker', 'HRT', 'shieldC', '#f2c230', '@mscott44'],
-lamb: ['Certified Lamb Daddy', 'CLD', 'hex', '#d4af37', '@baaadboy'],
-henrys: ["Henry's Holes", 'HEN', 'circle', '#f28c28', '@hhenry'],
-chubb: ['Chubb Club', 'CHB', 'shieldA', '#f6d7a7', '@cigarnick'],
-purdy: ['Purdy Good Team', 'PGT', 'circle', '#ffffff', '@ninerfaithful'],
-puka: ['The Puka Principle', 'PKA', 'square', '#ffe89a', '@aloha_ppr'],
-goff: ['Goff Ball', 'GOF', 'shieldB', '#ffffff', '@fore_and_out']
+lamb: ['CMC Hammer', 'CMC', 'hex', '#d4af37', '@baaadboy'],
+henrys: ["Stroud 9", 'STR', 'circle', '#f28c28', '@hhenry'],
+chubb: ['Feats of Strength', 'FOS', 'shieldA', '#f6d7a7', '@cigarnick'],
+purdy: ['Los Pollos Hermanos', 'LPH', 'circle', '#ffffff', '@ninerfaithful'],
+puka: ['Sex Panthers', 'SXP', 'square', '#ffe89a', '@aloha_ppr'],
+goff: ['You Underestimate My Bowers', 'YUB', 'shieldB', '#ffffff', '@fore_and_out']
 };
 function tm(k) { var r = T[k]; return { key: k, name: r[0], abbr: r[1], shape: r[2], ring: r[3], user: r[4] }; }
 // ===================== NOTIFICATIONS =====================
@@ -1499,9 +1499,9 @@ draft: ['Draft', '#0EA5E9', 'M4 4h16v16H4zM4 10h16M10 4v16'], money: ['LeagueSaf
 var ITEMS = [
 ['n1', 'trade', 'empire', 'act', '4:12 PM', '@kapp_attack sent you a trade offer', 'Rashee Rice and a 2027 2nd-round pick for Puka Nacua. Expires in 22 hours.', [['Review offer', 1, null], ['Decline', 0, 'Declined. @kapp_attack was notified.']], 1, 'all', 'kelce', 'tradeIn'],
 ['n2', 'lineup', 'empire', 'act', '4:05 PM', 'Justin Tucker is questionable tonight', 'He’s your kicker and plays at 8:20 PM. Free agent Ka’imi Fairbairn projects 8.1.', [['Swap in Fairbairn', 1, 'Done. Fairbairn is your kicker; Tucker was dropped.'], ['Open lineup', 0, null]], 1, 'all', '', 'lineup'],
-['n5', 'comm', 'empire', 'act', '3:30 PM', 'A trade is waiting for your review', 'Chubb Club and Henry’s Holes: Nick Chubb and a 2027 1st for Jaylen Warren. Review window ends Mon 8:00 PM.', [['Approve', 1, 'Approved. Posted to the league.'], ['Veto', 0, null]], 1, 'comm', 'chubb', 'cTrade'],
+['n5', 'comm', 'empire', 'act', '3:30 PM', 'A trade is waiting for your review', 'Feats of Strength and Stroud 9: Nick Chubb and a 2027 1st for Jaylen Warren. Review window ends Mon 8:00 PM.', [['Approve', 1, 'Approved. Posted to the league.'], ['Veto', 0, null]], 1, 'comm', 'chubb', 'cTrade'],
 ['n3', 'lineup', 'lmk', 'act', '2:48 PM', 'Your FLEX is empty for Sunday night', 'Best option on your bench: Jaylen Warren (proj 8.8).', [['Start Jaylen Warren', 1, 'Done. Jaylen Warren is in your FLEX.']], 1, 'all', '', 'lineup'],
-['n6', 'comm', 'empire', 'act', '9:00 AM', '2 teams still owe dues', 'The Puka Principle and Goff Ball. Late payments close tonight at midnight, then they’re frozen.', [['Send reminders', 1, 'Reminders sent by push and email.']], 1, 'comm', '', 'cDues'],
+['n6', 'comm', 'empire', 'act', '9:00 AM', '2 teams still owe dues', 'Sex Panthers and You Underestimate My Bowers. Late payments close tonight at midnight, then they’re frozen.', [['Send reminders', 1, 'Reminders sent by push and email.']], 1, 'comm', '', 'cDues'],
 ['n4', 'money', 'ss', 'act', 'Yesterday', 'Dues due Friday: $150', 'Superflex Syndicate. Pay before Fri, Oct 23 or your team is frozen until you do.', [['Pay $150', 1, 'Paid from your LeagueSafe balance. Receipt emailed.']], 1, 'all', '', 'dues'],
 ['n7', 'score', 'empire', 'today', '4:38 PM', 'You’re up 46.1 in the 4th quarter', 'The Gridiron Syndicate 139.6, Hurts Locker 93.5. 88% to win.', [], 0, 'all', 'syndicate', 'score'],
 ['n8', 'score', 'lmk', 'today', '4:31 PM', 'Lead change: you’re down 6.1', 'Lake Minnetonka Keeper. You have 2 players left, they have 4.', [], 0, 'all', '', 'score'],
@@ -1513,8 +1513,8 @@ var ITEMS = [
 ['n13c', 'league', 'empire', 'yday', 'Sat 6:15 PM', 'Your announcement was posted', '“Trade deadline is Nov 8 at noon ET. No extensions.” Read by 11 of 12 owners.', [], 0, 'comm', 'syndicate', 'ann'],
 ['n14', 'trade', 'lmk', 'yday', 'Sat 2:02 PM', '@lakelife accepted your trade', 'You get Garrett Wilson. They get Breece Hall.', [], 0, 'all', '', 'tradeRes'],
 ['n15', 'draft', 'dd', 'yday', 'Sat 10:00 AM', 'Rookie draft order is set', 'You pick 1.09 and 2.02. The draft opens Feb 1.', [], 0, 'all', '', 'draftRem'],
-['n16', 'score', 'empire', 'week', 'Thu', 'Stat correction changed your Week 6 result', 'Kyren Williams −1.4. You now lose 116.8–117.5 to Certified Lamb Daddy.', [['See the correction', 0, null]], 0, 'all', 'lamb', 'score'],
-['n17', 'waiver', 'empire', 'week', 'Wed 3:02 AM', 'Waivers: you got Tyler Allgeier', '$14 FAAB, beat 2 other bids. Lost Demario Douglas to Goff Ball ($9 to your $6). $233 FAAB left.', [], 0, 'all', '', 'waiver'],
+['n16', 'score', 'empire', 'week', 'Thu', 'Stat correction changed your Week 6 result', 'Kyren Williams −1.4. You now lose 116.8–117.5 to CMC Hammer.', [['See the correction', 0, null]], 0, 'all', 'lamb', 'score'],
+['n17', 'waiver', 'empire', 'week', 'Wed 3:02 AM', 'Waivers: you got Tyler Allgeier', '$14 FAAB, beat 2 other bids. Lost Demario Douglas to You Underestimate My Bowers ($9 to your $6). $233 FAAB left.', [], 0, 'all', '', 'waiver'],
 ['n18', 'money', 'empire', 'week', 'Tue', 'Weekly high score: $40 paid', 'Week 6, 161.1 points. Added to your LeagueSafe balance ($312.40).', [], 0, 'all', '', 'receipts'],
 ['n19', 'news', 'empire', 'week', 'Mon', 'Puka Nacua: limited practice (hamstring)', 'He’s on your roster. Questionable for Sunday.', [], 0, 'all', '', 'news']
 ].filter(function (x) { return x[9] === 'all' || (x[9] === 'comm') === isComm; });

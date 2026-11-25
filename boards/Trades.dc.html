@@ -617,7 +617,7 @@ button.wv:hover{background:rgba(255,181,71,.32)}
 <span style="flex: 1 1 240px; font-size: 13px; color: var(--mut)">Fanball Pro reads every roster and the standings to find the teams most likely to deal with you.</span>
 <button class="btnp sm">Try Pro free</button>
 </div>
-<div class="frow blur" aria-hidden="true"><span class="bx s28 shp-circle"><span class="ring" style="background: #ffffff"></span><span class="in sk-purdy"></span><span class="ic ic-purdy"></span></span><span><b style="display: block; font-size: 14px">Purdy Good Team is 1-5 and thin at RB</b><span style="font-size: 13px; color: var(--mut2)">They have WR depth you could use. James Cook for a WR could work for both of you.</span></span><span class="fit hi">Great fit</span><span></span></div>
+<div class="frow blur" aria-hidden="true"><span class="bx s28 shp-circle"><span class="ring" style="background: #ffffff"></span><span class="in sk-purdy"></span><span class="ic ic-purdy"></span></span><span><b style="display: block; font-size: 14px">Los Pollos Hermanos is 1-5 and thin at RB</b><span style="font-size: 13px; color: var(--mut2)">They have WR depth you could use. James Cook for a WR could work for both of you.</span></span><span class="fit hi">Great fit</span><span></span></div>
 </section>
 </sc-if>
 </sc-if>
@@ -796,17 +796,17 @@ var self = this, st = this.state || {};
 var theme = st.theme || 'light', isLt = theme === 'light';
 var T = {
 syndicate: ['The Gridiron Syndicate', 'SYN', 'shieldA', '#c9a24a', '@coolerheads'],
-kelce: ["Kelce's Anatomy", 'KEL', 'circle', '#ffffff', '@kapp_attack'],
-airplane: ["Jefferson's Airplane", 'JEF', 'hex', '#ffd84d', '@jetpackjeff'],
-jj: ['Johnson & Johnson LLP', 'J&J', 'shieldB', '#efe3bd', '@jj_esq'],
-mustards: ['The Bijan Mustards', 'BIJ', 'square', '#c4161c', '@relishmore'],
+kelce: ["By the Beard of Zeus", 'ZEU', 'circle', '#ffffff', '@kapp_attack'],
+airplane: ["Threat Level Midnight", 'TLM', 'hex', '#ffd84d', '@jetpackjeff'],
+jj: ['Kind of a Big Deal', 'KBD', 'shieldB', '#efe3bd', '@jj_esq'],
+mustards: ['To Infinity & Bijan', 'BIJ', 'square', '#c4161c', '@relishmore'],
 hurts: ['Hurts Locker', 'HRT', 'shieldC', '#f2c230', '@mscott44'],
-lamb: ['Certified Lamb Daddy', 'CLD', 'hex', '#d4af37', '@baaadboy'],
-henrys: ["Henry's Holes", 'HEN', 'circle', '#f28c28', '@hhenry'],
-chubb: ['Chubb Club', 'CHB', 'shieldA', '#f6d7a7', '@cigarnick'],
-purdy: ['Purdy Good Team', 'PGT', 'circle', '#ffffff', '@ninerfaithful'],
-puka: ['The Puka Principle', 'PKA', 'square', '#ffe89a', '@aloha_ppr'],
-goff: ['Goff Ball', 'GOF', 'shieldB', '#ffffff', '@fore_and_out']
+lamb: ['CMC Hammer', 'CMC', 'hex', '#d4af37', '@baaadboy'],
+henrys: ["Stroud 9", 'STR', 'circle', '#f28c28', '@hhenry'],
+chubb: ['Feats of Strength', 'FOS', 'shieldA', '#f6d7a7', '@cigarnick'],
+purdy: ['Los Pollos Hermanos', 'LPH', 'circle', '#ffffff', '@ninerfaithful'],
+puka: ['Sex Panthers', 'SXP', 'square', '#ffe89a', '@aloha_ppr'],
+goff: ['You Underestimate My Bowers', 'YUB', 'shieldB', '#ffffff', '@fore_and_out']
 };
 function tm(k) { var r = T[k]; return { key: k, name: r[0], abbr: r[1], shape: r[2], ring: r[3], user: r[4] }; }
 var GREEN = '#2FD27A', RED = '#FF5A5A', YELLOW = '#F5C542';
@@ -1002,12 +1002,12 @@ function tokP(k, n) { var pi = pInfo(k, n); return pi ? { pos: pi.pos, pc: pcP[p
 function tokK(id) { return { pos: 'PICK', pc: '#7B5CFF', name: pickLbl(id) + (pickVia(id) ? '' : '') }; }
 function tokF(v) { return { pos: 'FAAB', pc: '#1E9E57', name: '$' + v }; }
 var done = st.done || {}, objected = !!st.objected;
-var received = done.jef ? [] : [{ o: tm('airplane'), head: "Jefferson's Airplane sent you an offer", sub: '@jetpackjeff · today 9:12 AM · expires Wed 11:59 PM', st: 'Waiting on you', stCls: 'stp wait',
+var received = done.jef ? [] : [{ o: tm('airplane'), head: "Threat Level Midnight sent you an offer", sub: '@jetpackjeff · today 9:12 AM · expires Wed 11:59 PM', st: 'Waiting on you', stCls: 'stp wait',
 lA: 'YOU GET', a: [tokP('airplane', 'Justin Jefferson')].concat(dyn ? [tokK('2028 R2 lamb')] : []), lB: 'YOU GIVE', b: [tokP('syndicate', 'CeeDee Lamb'), tokP('syndicate', 'Bijan Robinson')],
 hasNote: true, note: "Lamb and Bijan for JJ. You're deep at RB, I need one.", isIn: true,
 accept: function () { self.setState({ done: Object.assign({}, done, { jef: 'acc' }), toast: rev === 'none' ? 'Trade complete' : 'Trade accepted', toastSub: rev === 'none' ? 'Jefferson is on your roster' : 'The league has 24 hours to object' }); },
 counter: function () { var c = { give: { p: { 'CeeDee Lamb': 1 }, f: 0, k: {} }, get: { p: { 'Justin Jefferson': 1 }, f: 0, k: {} } }; self.setState({ with: 'airplane', sel: c, drops: [], tt: 'block' }); },
-decline: function () { self.setState({ done: Object.assign({}, done, { jef: 'dec' }), toast: 'Offer declined', toastSub: "Jefferson's Airplane will be notified" }); } }];
+decline: function () { self.setState({ done: Object.assign({}, done, { jef: 'dec' }), toast: 'Offer declined', toastSub: "Threat Level Midnight will be notified" }); } }];
 var sentItems = [{ o: tm('hurts'), head: 'You offered Hurts Locker', sub: '@mscott44 · Mon 8:05 PM · expires Thu 8:05 PM', st: 'Pending', stCls: 'stp wait',
 lA: 'YOU GIVE', a: [tokP('syndicate', 'Dak Prescott'), tokF(5)], lB: 'YOU GET', b: [tokP('hurts', "De'Von Achane")], isOut: true, withdraw: function () {} }]
 .concat(sent.map(function (x, i) { return { o: tm(x.k), head: 'You offered ' + T[x.k][0], sub: T[x.k][4] + ' · just now · expires in 72 hours', st: 'Pending', stCls: 'stp wait',
@@ -1015,13 +1015,13 @@ lA: 'YOU GIVE', a: x.gp.map(function (n) { return tokP('syndicate', n); }).conca
 lB: 'YOU GET', b: x.tp.map(function (n) { return tokP(x.k, n); }).concat(x.tk.map(tokK)).concat(x.tf ? [tokF(x.tf)] : []), isOut: true,
 withdraw: function () { var s3 = sent.slice(); s3.splice(i, 1); self.setState({ sent: s3, toast: 'Offer withdrawn', toastSub: T[x.k][0] + ' will be notified' }); } }; }).reverse());
 if (done.jef === 'acc') sentItems = sentItems;
-var reviewItems = rev === '24h' ? [{ o: tm('kelce'), head: "Kelce's Anatomy and Henry's Holes", sub: 'Accepted today 7:40 AM', st: 'In league review', stCls: 'stp rev',
+var reviewItems = rev === '24h' ? [{ o: tm('kelce'), head: "By the Beard of Zeus and Stroud 9", sub: 'Accepted today 7:40 AM', st: 'In league review', stCls: 'stp rev',
 lA: "KELCE'S ANATOMY GETS", a: [tokP('henrys', 'Xavier Worthy')].concat(dyn ? [tokK('2027 R3 kelce')] : []), lB: "HENRY'S HOLES GETS", b: [tokP('kelce', 'Rachaad White')], isRev: true,
 revTxt: (objected ? '2' : '1') + ' of 4 objections needed to stop it · review ends in 18 hours', objTxt: objected ? 'Objected · undo' : 'Object', object: function () { self.setState({ objected: !objected }); } }]
-.concat(done.jef === 'acc' ? [{ o: tm('airplane'), head: "You and Jefferson's Airplane", sub: 'Accepted just now', st: 'In league review', stCls: 'stp rev', lA: 'YOU GET', a: [tokP('airplane', 'Justin Jefferson')], lB: 'YOU GIVE', b: [tokP('syndicate', 'CeeDee Lamb'), tokP('syndicate', 'Bijan Robinson')], isRev: true, revTxt: '0 of 4 objections · review ends in 24 hours', objTxt: 'Your trade', object: function () {} }] : []) : [];
-var recentItems = [{ o: tm('lamb'), head: 'Certified Lamb Daddy and Chubb Club', sub: 'Week 6 · Thu 6:02 PM', st: 'Completed', stCls: 'stp ok',
+.concat(done.jef === 'acc' ? [{ o: tm('airplane'), head: "You and Threat Level Midnight", sub: 'Accepted just now', st: 'In league review', stCls: 'stp rev', lA: 'YOU GET', a: [tokP('airplane', 'Justin Jefferson')], lB: 'YOU GIVE', b: [tokP('syndicate', 'CeeDee Lamb'), tokP('syndicate', 'Bijan Robinson')], isRev: true, revTxt: '0 of 4 objections · review ends in 24 hours', objTxt: 'Your trade', object: function () {} }] : []) : [];
+var recentItems = [{ o: tm('lamb'), head: 'CMC Hammer and Feats of Strength', sub: 'Week 6 · Thu 6:02 PM', st: 'Completed', stCls: 'stp ok',
 lA: 'CERTIFIED LAMB DADDY GOT', a: [tokP('chubb', 'Calvin Ridley')], lB: 'CHUBB CLUB GOT', b: [tokP('lamb', 'Rhamondre Stevenson')].concat([tokF(8)]) }]
-.concat(done.jef === 'acc' && rev === 'none' ? [{ o: tm('airplane'), head: "You and Jefferson's Airplane", sub: 'Just now', st: 'Completed', stCls: 'stp ok', lA: 'YOU GOT', a: [tokP('airplane', 'Justin Jefferson')], lB: 'YOU GAVE', b: [tokP('syndicate', 'CeeDee Lamb'), tokP('syndicate', 'Bijan Robinson')] }] : []);
+.concat(done.jef === 'acc' && rev === 'none' ? [{ o: tm('airplane'), head: "You and Threat Level Midnight", sub: 'Just now', st: 'Completed', stCls: 'stp ok', lA: 'YOU GOT', a: [tokP('airplane', 'Justin Jefferson')], lB: 'YOU GAVE', b: [tokP('syndicate', 'CeeDee Lamb'), tokP('syndicate', 'Bijan Robinson')] }] : []);
 var offerGroups = [
 { title: 'Received', items: received, empty: !received.length, emptyTxt: 'No offers waiting on you.' },
 { title: 'Sent', items: sentItems, empty: !sentItems.length, emptyTxt: 'No open offers.' }

@@ -1567,17 +1567,17 @@ var self = this, st = this.state || {};
 var theme = st.theme || 'light', isLt = theme === 'light';
 var T = {
 syndicate: ['The Gridiron Syndicate', 'SYN', 'shieldA', '#c9a24a', '@coolerheads'],
-kelce: ["Kelce's Anatomy", 'KEL', 'circle', '#ffffff', '@kapp_attack'],
-airplane: ["Jefferson's Airplane", 'JEF', 'hex', '#ffd84d', '@jetpackjeff'],
-jj: ['Johnson & Johnson LLP', 'J&J', 'shieldB', '#efe3bd', '@jj_esq'],
-mustards: ['The Bijan Mustards', 'BIJ', 'square', '#c4161c', '@relishmore'],
+kelce: ["By the Beard of Zeus", 'ZEU', 'circle', '#ffffff', '@kapp_attack'],
+airplane: ["Threat Level Midnight", 'TLM', 'hex', '#ffd84d', '@jetpackjeff'],
+jj: ['Kind of a Big Deal', 'KBD', 'shieldB', '#efe3bd', '@jj_esq'],
+mustards: ['To Infinity & Bijan', 'BIJ', 'square', '#c4161c', '@relishmore'],
 hurts: ['Hurts Locker', 'HRT', 'shieldC', '#f2c230', '@mscott44'],
-lamb: ['Certified Lamb Daddy', 'CLD', 'hex', '#d4af37', '@baaadboy'],
-henrys: ["Henry's Holes", 'HEN', 'circle', '#f28c28', '@hhenry'],
-chubb: ['Chubb Club', 'CHB', 'shieldA', '#f6d7a7', '@cigarnick'],
-purdy: ['Purdy Good Team', 'PGT', 'circle', '#ffffff', '@ninerfaithful'],
-puka: ['The Puka Principle', 'PKA', 'square', '#ffe89a', '@aloha_ppr'],
-goff: ['Goff Ball', 'GOF', 'shieldB', '#ffffff', '@fore_and_out']
+lamb: ['CMC Hammer', 'CMC', 'hex', '#d4af37', '@baaadboy'],
+henrys: ["Stroud 9", 'STR', 'circle', '#f28c28', '@hhenry'],
+chubb: ['Feats of Strength', 'FOS', 'shieldA', '#f6d7a7', '@cigarnick'],
+purdy: ['Los Pollos Hermanos', 'LPH', 'circle', '#ffffff', '@ninerfaithful'],
+puka: ['Sex Panthers', 'SXP', 'square', '#ffe89a', '@aloha_ppr'],
+goff: ['You Underestimate My Bowers', 'YUB', 'shieldB', '#ffffff', '@fore_and_out']
 };
 function tm(k) { var r = T[k]; return { key: k, name: r[0], abbr: r[1], shape: r[2], ring: r[3], user: r[4] }; }
 // ===================== PLAYER CARD =====================
@@ -1605,7 +1605,7 @@ var playT = ROS.filter(function (r) { return r[0] >= 15; }).reduce(function (m, 
 var CTX = {
 mine: { own: 'On your roster · The Gridiron Syndicate', ownCls: 'pcown me', btns: [[started ? 'Starting at RB · Bench him' : 'On your bench · Start him', 'btnp', 'start'], ['Trade', 'pcb', 'trade'], ['Drop', 'pcb', 'drop']] },
 fa: { own: 'Free agent · Waivers clear Wed 3:00 AM', ownCls: 'pcown fa', btns: [['Claim · Bid FAAB', 'btnp', 'claim'], ['Add to watchlist', 'pcb', 'watch']] },
-other: { own: 'Owned by @kapp_attack · Kelce’s Anatomy', ownCls: 'pcown', btns: [['Propose a trade', 'btnp', 'trade'], ['Add to watchlist', 'pcb', 'watch']] }
+other: { own: 'Owned by @kapp_attack · By the Beard of Zeus', ownCls: 'pcown', btns: [['Propose a trade', 'btnp', 'trade'], ['Add to watchlist', 'pcb', 'watch']] }
 }[ctx];
 var acts = CTX.btns.map(function (b) { return { label: b[0], cls: b[1], go: function () {
 if (b[2] === 'start') set({ started: !started, toast: started ? 'Bijan Robinson moved to your bench' : 'Bijan Robinson is starting at RB', toastSub: 'Week 7 lineup saved' });
@@ -1663,10 +1663,10 @@ var tctx = [['Plays per game', '65.1', '8th most'], ['Run rate', '46%', 'Neutral
 // ---- league history (this league) ----
 var hen = 231.4 + tot(2024) + games(2025).filter(function (r) { return r[0] <= 6; }).reduce(function (m, r) { return m + pts(r); }, 0);
 var syn = games(2025).filter(function (r) { return r[0] >= 7; }).reduce(function (m, r) { return m + pts(r); }, 0) + T26;
-var txs = [['TRADED', 'tr', 'Oct 9, 2025', 'to The Gridiron Syndicate (@coolerheads)', 'Henry’s Holes got Ja’Marr Chase and a 2026 1st-round pick (1.11).', 'See the trade'],
-['DRAFTED', 'dr', 'May 2, 2023', 'by Henry’s Holes (@hhenry)', '2023 rookie draft, pick 1.01. The first rookie taken in league history.', ''],
+var txs = [['TRADED', 'tr', 'Oct 9, 2025', 'to The Gridiron Syndicate (@coolerheads)', 'Stroud 9 got Ja’Marr Chase and a 2026 1st-round pick (1.11).', 'See the trade'],
+['DRAFTED', 'dr', 'May 2, 2023', 'by Stroud 9 (@hhenry)', '2023 rookie draft, pick 1.01. The first rookie taken in league history.', ''],
 ['ENTERED LEAGUE', 'nw', 'Apr 27, 2023', 'Added to the rookie draft pool', 'Drafted 8th overall by Atlanta in the NFL Draft.', '']].map(function (x) { return { kind: x[0], cls: 'pctx ' + x[1], when: x[2], who: x[3], d: x[4], hasLink: !!x[5], link: x[5], linkTxt: x[5] + ' →' }; });
-var lgFacts = [['Points for The Gridiron Syndicate', f1(syn) + ' · since Oct 2025'], ['Points for Henry’s Holes', f1(hen) + ' · 2023–2025'], ['Times traded', '1'], ['Started for his teams', '48 of 50 games'], ['Trade offers involving him', '7 this season · 0 accepted']].map(function (x) { return { k: x[0], v: x[1] }; });
+var lgFacts = [['Points for The Gridiron Syndicate', f1(syn) + ' · since Oct 2025'], ['Points for Stroud 9', f1(hen) + ' · 2023–2025'], ['Times traded', '1'], ['Started for his teams', '48 of 50 games'], ['Trade offers involving him', '7 this season · 0 accepted']].map(function (x) { return { k: x[0], v: x[1] }; });
 var notes = [['@hhenry', 'Oct 9, 2025', '“Worst trade I’ve ever made. Don’t @ me.”'], ['@coolerheads', 'Aug 30, 2026', '“Untouchable. Stop sending offers.”']].map(function (n) { return { who: n[0], when: n[1], t: n[2] }; });
 var PC = {
 pcCtxs: [['mine', 'On my team'], ['fa', 'Free agent'], ['other', 'Another team']].map(function (k) { return { label: k[1], cls: k[0] === ctx ? 'pbtn on' : 'pbtn', pick: function () { set({ ctx: k[0] }); } }; }),
@@ -1679,7 +1679,7 @@ close: function () { set({ toast: 'Closes the card', toastSub: 'Back to the list
 tiles: [['RB RANK', '2', 'gold'], ['OVERALL', '4', ''], ['PPR PTS', f1(T26), ''], ['WK 7 · LIVE', f1(nowP), 'live']].map(function (x) { return { k: x[0], v: x[1], cls: 'pctl ' + x[2] }; }),
 pcTabs: [['sum', 'Summary'], ['log', 'Game log'], ['proj', 'Projections'], ['news', 'News'], ['depth', 'Depth chart'], ['lg', 'League history']].map(function (k) { return { label: k[1], cls: k[0] === ptb ? 'on' : '', pick: function () { set({ ptb: k[0] }); } }; }),
 tSum: ptb === 'sum', tLog: ptb === 'log', tProj: ptb === 'proj', tNews: ptb === 'news', tDepth: ptb === 'depth', tLg: ptb === 'lg',
-now: { opp: 'Week 7 at San Francisco · 4:25 PM', live: 'Live · 4th quarter · 24–20', pts: f1(nowP), proj: '18.9', projTxt: 'PPR · proj 18.9', line: nowRow[3] + ' car, ' + nowRow[4] + ' yds, ' + nowRow[5] + ' TD · ' + nowRow[7] + ' rec, ' + nowRow[8] + ' yds', mx: 'Matchup: tough', mxCls: 'pcmx t', slot: ctx === 'mine' ? (started ? 'In your lineup at RB' : 'On your bench') : ctx === 'fa' ? 'Not on a roster' : 'Starting for Kelce’s Anatomy' },
+now: { opp: 'Week 7 at San Francisco · 4:25 PM', live: 'Live · 4th quarter · 24–20', pts: f1(nowP), proj: '18.9', projTxt: 'PPR · proj 18.9', line: nowRow[3] + ' car, ' + nowRow[4] + ' yds, ' + nowRow[5] + ' TD · ' + nowRow[7] + ' rec, ' + nowRow[8] + ' yds', mx: 'Matchup: tough', mxCls: 'pcmx t', slot: ctx === 'mine' ? (started ? 'In your lineup at RB' : 'On your bench') : ctx === 'fa' ? 'Not on a roster' : 'Starting for By the Beard of Zeus' },
 last: last, sStats: sStats, myLeagues: MYL, latest: news[0], news4: news.slice(0, 4), goNews: function () { set({ ptb: 'news' }); },
 gyOpts: [2026, 2025, 2024].map(function (y) { return { label: String(y), cls: y === gy ? 'on' : '', pick: function () { set({ gy: y }); } }; }), glTiles: glTiles, glRows: glRows, glTot: glTot, career: career, glNote: 'Scored with your league’s rules: PPR, −2 per fumble lost.',
 proj: proj, news: news, moves: moves, depth: DEPTH, tctx: tctx,

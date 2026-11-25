@@ -1564,17 +1564,17 @@ var self = this, st = this.state || {};
 var theme = st.theme || 'light', isLt = theme === 'light';
 var T = {
 syndicate: ['The Gridiron Syndicate', 'SYN', 'shieldA', '#c9a24a', '@coolerheads'],
-kelce: ["Kelce's Anatomy", 'KEL', 'circle', '#ffffff', '@kapp_attack'],
-airplane: ["Jefferson's Airplane", 'JEF', 'hex', '#ffd84d', '@jetpackjeff'],
-jj: ['Johnson & Johnson LLP', 'J&J', 'shieldB', '#efe3bd', '@jj_esq'],
-mustards: ['The Bijan Mustards', 'BIJ', 'square', '#c4161c', '@relishmore'],
+kelce: ["By the Beard of Zeus", 'ZEU', 'circle', '#ffffff', '@kapp_attack'],
+airplane: ["Threat Level Midnight", 'TLM', 'hex', '#ffd84d', '@jetpackjeff'],
+jj: ['Kind of a Big Deal', 'KBD', 'shieldB', '#efe3bd', '@jj_esq'],
+mustards: ['To Infinity & Bijan', 'BIJ', 'square', '#c4161c', '@relishmore'],
 hurts: ['Hurts Locker', 'HRT', 'shieldC', '#f2c230', '@mscott44'],
-lamb: ['Certified Lamb Daddy', 'CLD', 'hex', '#d4af37', '@baaadboy'],
-henrys: ["Henry's Holes", 'HEN', 'circle', '#f28c28', '@hhenry'],
-chubb: ['Chubb Club', 'CHB', 'shieldA', '#f6d7a7', '@cigarnick'],
-purdy: ['Purdy Good Team', 'PGT', 'circle', '#ffffff', '@ninerfaithful'],
-puka: ['The Puka Principle', 'PKA', 'square', '#ffe89a', '@aloha_ppr'],
-goff: ['Goff Ball', 'GOF', 'shieldB', '#ffffff', '@fore_and_out']
+lamb: ['CMC Hammer', 'CMC', 'hex', '#d4af37', '@baaadboy'],
+henrys: ["Stroud 9", 'STR', 'circle', '#f28c28', '@hhenry'],
+chubb: ['Feats of Strength', 'FOS', 'shieldA', '#f6d7a7', '@cigarnick'],
+purdy: ['Los Pollos Hermanos', 'LPH', 'circle', '#ffffff', '@ninerfaithful'],
+puka: ['Sex Panthers', 'SXP', 'square', '#ffe89a', '@aloha_ppr'],
+goff: ['You Underestimate My Bowers', 'YUB', 'shieldB', '#ffffff', '@fore_and_out']
 };
 function tm(k) { var r = T[k]; return { key: k, name: r[0], abbr: r[1], shape: r[2], ring: r[3], user: r[4] }; }
 // ===================== HISTORY & RECORD BOOK =====================
@@ -1597,9 +1597,9 @@ tommy: ['@tdtommy', 'Tom D.', 'puka'], gary: ['@gridlock_gary', 'Gary W.', 'goff
 var OKS = ['cp', 'kapp', 'jeff', 'jj', 'relish', 'mscott', 'baaad', 'hhenry', 'cigar', 'niner', 'aloha', 'fore', 'tommy', 'gary'];
 var FORMER = { tommy: [2019, 2022], gary: [2019, 2023] }, JOINED = { aloha: 2023, fore: 2024 };
 function ownerOf(slot, yr) { if (slot === 'puka') return yr <= 2022 ? 'tommy' : 'aloha'; if (slot === 'goff') return yr <= 2023 ? 'gary' : 'fore'; for (var o in OWN) if (OWN[o][2] === slot && !FORMER[o]) return o; }
-var NAMES = { syndicate: [[2019, 'Coolerheads FC'], [2022, 'The Gridiron Syndicate']], kelce: [[2019, 'Kapp Attack'], [2021, 'Kelce’s Anatomy']], airplane: [[2019, 'Jefferson’s Airplane']], jj: [[2019, 'Johnson & Johnson LLP']],
-mustards: [[2019, 'Relish the Moment'], [2023, 'The Bijan Mustards']], hurts: [[2019, 'Scott Free'], [2021, 'Hurts Locker']], lamb: [[2019, 'Baaad Company'], [2020, 'Certified Lamb Daddy']], henrys: [[2019, 'Henry’s Holes']],
-chubb: [[2019, 'Chubb Club']], purdy: [[2019, 'Niner Faithful'], [2022, 'Purdy Good Team']], puka: [[2019, 'Touchdown Tommies'], [2023, 'The Puka Principle']], goff: [[2019, 'Gary’s Gridlock'], [2024, 'Goff Ball']] };
+var NAMES = { syndicate: [[2019, 'Coolerheads FC'], [2022, 'The Gridiron Syndicate']], kelce: [[2019, 'Kapp Attack'], [2021, 'By the Beard of Zeus']], airplane: [[2019, 'Threat Level Midnight']], jj: [[2019, 'Kind of a Big Deal']],
+mustards: [[2019, 'Relish the Moment'], [2023, 'To Infinity & Bijan']], hurts: [[2019, 'Scott Free'], [2021, 'Hurts Locker']], lamb: [[2019, 'Baaad Company'], [2020, 'CMC Hammer']], henrys: [[2019, 'Stroud 9']],
+chubb: [[2019, 'Feats of Strength']], purdy: [[2019, 'Niner Faithful'], [2022, 'Los Pollos Hermanos']], puka: [[2019, 'Touchdown Tommies'], [2023, 'Sex Panthers']], goff: [[2019, 'Gary’s Gridlock'], [2024, 'You Underestimate My Bowers']] };
 function tname(slot, yr) { var n = NAMES[slot][0][1]; NAMES[slot].forEach(function (x) { if (yr >= x[0]) n = x[1]; }); return n; }
 var YRS = [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
 var SRC = { 2019: 'man', 2020: 'espn', 2021: 'slp', 2022: 'slp', 2023: 'slp', 2024: 'slp', 2025: 'fb', 2026: 'fb' };
@@ -1735,11 +1735,11 @@ var REC_C = [
 ['Most prize money won', 'Paid through LeagueSafe', top3(CL, function (c) { return c.won; }, true), function (c) { var h = carH(c); h.val = money(c.won); h.ctx = c.titles.length + ' title' + (c.titles.length === 1 ? '' : 's') + ' · ' + c.n + ' seasons'; return h; }]
 ];
 var PLAYER = [
-['Ja’Marr Chase', 'WR', 'Henry’s Holes', '@hhenry', 'henrys', 52.4, '2024 · Week 9 · 11 catches, 211 yds, 3 TD', false],
-['Josh Allen', 'QB', 'Certified Lamb Daddy', '@baaadboy', 'lamb', 49.6, '2025 · Week 4 · 4 pass TD, 2 rush TD', false],
+['Ja’Marr Chase', 'WR', 'Stroud 9', '@hhenry', 'henrys', 52.4, '2024 · Week 9 · 11 catches, 211 yds, 3 TD', false],
+['Josh Allen', 'QB', 'CMC Hammer', '@baaadboy', 'lamb', 49.6, '2025 · Week 4 · 4 pass TD, 2 rush TD', false],
 ['Bijan Robinson', 'RB', 'The Gridiron Syndicate', '@coolerheads', 'syndicate', 47.1, '2026 · Week 11 · 238 total yds, 3 TD', true],
 ['Trey McBride', 'TE', 'Hurts Locker', '@mscott44', 'hurts', 38.2, '2025 · Week 13 · 14 catches, 162 yds, 1 TD', false],
-['Brandon Aubrey', 'K', 'Henry’s Holes', '@hhenry', 'henrys', 27.0, '2024 · Week 6 · 6 FG, two from 60+', false],
+['Brandon Aubrey', 'K', 'Stroud 9', '@hhenry', 'henrys', 27.0, '2024 · Week 6 · 6 FG, two from 60+', false],
 ['Steelers D/ST', 'DST', 'The Gridiron Syndicate', '@coolerheads', 'syndicate', 31.0, '2023 · Week 15 · 3 INT, 2 TD', false]
 ].map(function (p) { var t = tag(p[1]); return { n: p[0], pos: p[1], pCls: t.cls, team: p[2], own: p[3], t: crest(p[4]), val: f1(p[5]), ctx: p[6], isNew: p[7], cls: 'hspl' + (p[3] === '@coolerheads' ? ' me' : '') }; });
 var cat = st.cat || 'game';

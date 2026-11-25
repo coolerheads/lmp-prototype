@@ -208,3 +208,95 @@ body.th-dark .wz-card { background: #161A21; color: #EEF1F6; }
 @media (max-width: 720px) { .wz-cats, .wz-kit, .wz-opts.b { grid-template-columns: 1fr; } }
 .wz-opts.h2 { grid-template-columns: 1fr 1fr; }
 .wz-opts.b1 { grid-template-columns: minmax(0, 260px); }
+
+/* ---------- Premium kits for all 12 franchises (Gridiron Syndicate + 11 league teams) ---------- */
+body.rs .sk-kelce:not(.in) { background: linear-gradient(115deg, #0E1B3A 0%, #4A3508 100%) !important; }
+body.rs .sk-kelce:not(.in)::before, body.rs .sk-kelce:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-kelce) { background: url(/a/t-kelce-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-kelce) > span { display: none !important; }
+body.rs .mcard .half.sk-kelce:not(.r) { background: #060606 url(/a/t-kelce-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-kelce { background: #060606 url(/a/t-kelce-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-kelce > .bx, body.rs .mcard .half.sk-kelce > .nm { visibility: hidden; }
+body.rs .sk-puka:not(.in) { background: linear-gradient(115deg, #14081F 0%, #4B1A6E 100%) !important; }
+body.rs .sk-puka:not(.in)::before, body.rs .sk-puka:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-puka) { background: url(/a/t-puka-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-puka) > span { display: none !important; }
+body.rs .mcard .half.sk-puka:not(.r) { background: #060606 url(/a/t-puka-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-puka { background: #060606 url(/a/t-puka-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-puka > .bx, body.rs .mcard .half.sk-puka > .nm { visibility: hidden; }
+body.rs .sk-airplane:not(.in) { background: linear-gradient(115deg, #0B1426 0%, #5A0D0D 100%) !important; }
+body.rs .sk-airplane:not(.in)::before, body.rs .sk-airplane:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-airplane) { background: url(/a/t-airplane-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-airplane) > span { display: none !important; }
+body.rs .mcard .half.sk-airplane:not(.r) { background: #060606 url(/a/t-airplane-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-airplane { background: #060606 url(/a/t-airplane-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-airplane > .bx, body.rs .mcard .half.sk-airplane > .nm { visibility: hidden; }
+body.rs .sk-jj:not(.in) { background: linear-gradient(115deg, #1F150C 0%, #4A2A12 100%) !important; }
+body.rs .sk-jj:not(.in)::before, body.rs .sk-jj:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-jj) { background: url(/a/t-jj-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-jj) > span { display: none !important; }
+body.rs .mcard .half.sk-jj:not(.r) { background: #060606 url(/a/t-jj-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-jj { background: #060606 url(/a/t-jj-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-jj > .bx, body.rs .mcard .half.sk-jj > .nm { visibility: hidden; }
+body.rs .sk-lamb:not(.in) { background: linear-gradient(115deg, #1A0B2A 0%, #0F3B40 100%) !important; }
+body.rs .sk-lamb:not(.in)::before, body.rs .sk-lamb:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-lamb) { background: url(/a/t-lamb-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-lamb) > span { display: none !important; }
+body.rs .mcard .half.sk-lamb:not(.r) { background: #060606 url(/a/t-lamb-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-lamb { background: #060606 url(/a/t-lamb-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-lamb > .bx, body.rs .mcard .half.sk-lamb > .nm { visibility: hidden; }
+body.rs .sk-henrys:not(.in) { background: linear-gradient(115deg, #0B1A3A 0%, #22437A 100%) !important; }
+body.rs .sk-henrys:not(.in)::before, body.rs .sk-henrys:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-henrys) { background: url(/a/t-henrys-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-henrys) > span { display: none !important; }
+body.rs .mcard .half.sk-henrys:not(.r) { background: #060606 url(/a/t-henrys-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-henrys { background: #060606 url(/a/t-henrys-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-henrys > .bx, body.rs .mcard .half.sk-henrys > .nm { visibility: hidden; }
+body.rs .sk-mustards:not(.in) { background: linear-gradient(115deg, #120B3A 0%, #2B1466 100%) !important; }
+body.rs .sk-mustards:not(.in)::before, body.rs .sk-mustards:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-mustards) { background: url(/a/t-mustards-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-mustards) > span { display: none !important; }
+body.rs .mcard .half.sk-mustards:not(.r) { background: #060606 url(/a/t-mustards-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-mustards { background: #060606 url(/a/t-mustards-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-mustards > .bx, body.rs .mcard .half.sk-mustards > .nm { visibility: hidden; }
+body.rs .sk-chubb:not(.in) { background: linear-gradient(115deg, #1A0A08 0%, #5A1010 100%) !important; }
+body.rs .sk-chubb:not(.in)::before, body.rs .sk-chubb:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-chubb) { background: url(/a/t-chubb-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-chubb) > span { display: none !important; }
+body.rs .mcard .half.sk-chubb:not(.r) { background: #060606 url(/a/t-chubb-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-chubb { background: #060606 url(/a/t-chubb-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-chubb > .bx, body.rs .mcard .half.sk-chubb > .nm { visibility: hidden; }
+body.rs .sk-purdy:not(.in) { background: linear-gradient(115deg, #6E0E0E 0%, #B8860B 100%) !important; }
+body.rs .sk-purdy:not(.in)::before, body.rs .sk-purdy:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-purdy) { background: url(/a/t-purdy-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-purdy) > span { display: none !important; }
+body.rs .mcard .half.sk-purdy:not(.r) { background: #060606 url(/a/t-purdy-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-purdy { background: #060606 url(/a/t-purdy-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-purdy > .bx, body.rs .mcard .half.sk-purdy > .nm { visibility: hidden; }
+body.rs .sk-goff:not(.in) { background: linear-gradient(115deg, #0A0A12 0%, #4A0A12 100%) !important; }
+body.rs .sk-goff:not(.in)::before, body.rs .sk-goff:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-goff) { background: url(/a/t-goff-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-goff) > span { display: none !important; }
+body.rs .mcard .half.sk-goff:not(.r) { background: #060606 url(/a/t-goff-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-goff { background: #060606 url(/a/t-goff-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-goff > .bx, body.rs .mcard .half.sk-goff > .nm { visibility: hidden; }
+body.rs .sk-hurts:not(.in) { background: linear-gradient(115deg, #0E1A0A 0%, #2E4A12 100%) !important; }
+body.rs .sk-hurts:not(.in)::before, body.rs .sk-hurts:not(.in)::after { display: none !important; }
+body.rs .bx:has(> .ic-hurts) { background: url(/a/t-hurts-badge.webp) center / contain no-repeat !important; }
+body.rs .bx:has(> .ic-hurts) > span { display: none !important; }
+body.rs .mcard .half.sk-hurts:not(.r) { background: #060606 url(/a/t-hurts-L.webp) left center / auto 100% no-repeat !important; }
+body.rs .mcard .half.r.sk-hurts { background: #060606 url(/a/t-hurts-R.webp) right center / auto 100% no-repeat !important; }
+body.rs .mcard .half.sk-hurts > .bx, body.rs .mcard .half.sk-hurts > .nm { visibility: hidden; }
+body.rs .mcard .half.sk-syndicate::before, body.rs .mcard .half.sk-syndicate::after { display: none !important; }
+body.rs .mcard .mtile { text-shadow: 0 2px 10px rgba(0,0,0,.7); }
+body.rs .mcard .half[class*="sk-"] { justify-content: flex-end; padding-left: 14px; padding-right: 14px; }
+body.rs .mcard .half[class*="sk-"] > .bx, body.rs .mcard .half[class*="sk-"] > .nm { display: none !important; }
+body.rs .mcard .half[class*="sk-"]:not(.r) { padding-right: 34px; } body.rs .mcard .half.r[class*="sk-"] { padding-left: 34px; }
+body.rs .mcard .mtile .half[class*="sk-"][class] { background-size: auto 70% !important; }
+body.rs .mcard .mtile .half[class*="sk-"][class]:not(.r) { background-position: 4px center !important; } body.rs .mcard .mtile .half.r[class*="sk-"][class] { background-position: calc(100% - 4px) center !important; }
+body.rs .mcard .half[class*="sk-"] > span:last-child { font-size: 40px !important; }
+.wz-gen { margin-top: 14px; padding: 14px; border-radius: 12px; border: 1px solid rgba(127,127,127,.25); }
+.wz-ideas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.wz-idea { text-align: left; padding: 9px 12px; border-radius: 10px; border: 1px solid rgba(127,127,127,.3); background: transparent; color: inherit; cursor: pointer; display: flex; flex-direction: column; gap: 2px; font: inherit; }
+.wz-idea b { font-size: 14.5px; } .wz-idea span { font-size: 12px; opacity: .6; }
+.wz-idea:hover { border-color: #2F5BFF; }

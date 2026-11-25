@@ -1314,17 +1314,17 @@ var self = this, st = this.state || {};
 var theme = st.theme || 'light', isLt = theme === 'light';
 var T = {
 syndicate: ['The Gridiron Syndicate', 'SYN', 'shieldA', '#c9a24a', '@coolerheads'],
-kelce: ["Kelce's Anatomy", 'KEL', 'circle', '#ffffff', '@kapp_attack'],
-airplane: ["Jefferson's Airplane", 'JEF', 'hex', '#ffd84d', '@jetpackjeff'],
-jj: ['Johnson & Johnson LLP', 'J&J', 'shieldB', '#efe3bd', '@jj_esq'],
-mustards: ['The Bijan Mustards', 'BIJ', 'square', '#c4161c', '@relishmore'],
+kelce: ["By the Beard of Zeus", 'ZEU', 'circle', '#ffffff', '@kapp_attack'],
+airplane: ["Threat Level Midnight", 'TLM', 'hex', '#ffd84d', '@jetpackjeff'],
+jj: ['Kind of a Big Deal', 'KBD', 'shieldB', '#efe3bd', '@jj_esq'],
+mustards: ['To Infinity & Bijan', 'BIJ', 'square', '#c4161c', '@relishmore'],
 hurts: ['Hurts Locker', 'HRT', 'shieldC', '#f2c230', '@mscott44'],
-lamb: ['Certified Lamb Daddy', 'CLD', 'hex', '#d4af37', '@baaadboy'],
-henrys: ["Henry's Holes", 'HEN', 'circle', '#f28c28', '@hhenry'],
-chubb: ['Chubb Club', 'CHB', 'shieldA', '#f6d7a7', '@cigarnick'],
-purdy: ['Purdy Good Team', 'PGT', 'circle', '#ffffff', '@ninerfaithful'],
-puka: ['The Puka Principle', 'PKA', 'square', '#ffe89a', '@aloha_ppr'],
-goff: ['Goff Ball', 'GOF', 'shieldB', '#ffffff', '@fore_and_out']
+lamb: ['CMC Hammer', 'CMC', 'hex', '#d4af37', '@baaadboy'],
+henrys: ["Stroud 9", 'STR', 'circle', '#f28c28', '@hhenry'],
+chubb: ['Feats of Strength', 'FOS', 'shieldA', '#f6d7a7', '@cigarnick'],
+purdy: ['Los Pollos Hermanos', 'LPH', 'circle', '#ffffff', '@ninerfaithful'],
+puka: ['Sex Panthers', 'SXP', 'square', '#ffe89a', '@aloha_ppr'],
+goff: ['You Underestimate My Bowers', 'YUB', 'shieldB', '#ffffff', '@fore_and_out']
 };
 function tm(k) { var r = T[k]; return { key: k, name: r[0], abbr: r[1], shape: r[2], ring: r[3], user: r[4] }; }
 var GREEN = '#2FD27A', RED = '#FF5A5A', YELLOW = '#F5C542';
@@ -1360,8 +1360,8 @@ var PC = { QB: '#FF7A93', RB: '#3EE0B4', WR: '#62B0FF', TE: '#FFAE5C', K: '#E8D8
 function q(t2, d) { return { t: t2, d: d }; }
 var LOG0 = [
 { cat: 'Scores', what: 'Applied stat correction: Week 5, Justin Jefferson +6 receiving yds', by: 'CP (commissioner)', when: 'Oct 9', why: 'Official NFL correction. Didn’t change any results.' },
-{ cat: 'FAAB', what: 'Gave Goff Ball $10 FAAB', by: 'CP (commissioner)', when: 'Oct 2', why: 'Bid typo: entered $40 instead of $4. Refunded the difference.' },
-{ cat: 'Rosters', what: 'Set lineup for Purdy Good Team (Week 4)', by: 'Kelce’s Anatomy (co-commish)', when: 'Sep 28', why: 'Owner traveling, asked in the league chat.' }
+{ cat: 'FAAB', what: 'Gave You Underestimate My Bowers $10 FAAB', by: 'CP (commissioner)', when: 'Oct 2', why: 'Bid typo: entered $40 instead of $4. Refunded the difference.' },
+{ cat: 'Rosters', what: 'Set lineup for Los Pollos Hermanos (Week 4)', by: 'By the Beard of Zeus (co-commish)', when: 'Sep 28', why: 'Owner traveling, asked in the league chat.' }
 ];
 var log = (st.log || []).concat(LOG0);
 function addLog(cat, what, why) { return [{ cat: cat, what: what, by: 'CP (commissioner)', when: 'Just now', why: why || 'No reason given' }].concat(st.log || []); }
@@ -1381,9 +1381,9 @@ if (rteam === 'purdy' && !RO.purdy && !(st.fixed || {}).purdy) { var e1 = roster
 var unpaid = { puka: 1, goff: 1 }, inactive = { purdy: 2 };
 var corrState = st.corr || {}, txState = st.tx || {};
 var CORR = [
-{ id: 'c1', n: 'Kyren Williams', pos: 'RB', what: 'Week 6: rushing yds 88 → 94, +1 fumble lost', d: -1.4, team: 'syndicate', impact: 'The Gridiron Syndicate 118.2 → 116.8 vs Certified Lamb Daddy 117.5', flips: true },
-{ id: 'c2', n: 'Trey McBride', pos: 'TE', what: 'Week 6: 1 reception added (7 → 8), +9 yds', d: 1.9, team: 'hurts', impact: 'Hurts Locker 101.0 → 102.9 vs Chubb Club 96.4', flips: false },
-{ id: 'c3', n: 'Ravens D/ST', pos: 'DST', what: 'Week 6: sack removed (4 → 3)', d: -1, team: 'hurts', impact: 'Hurts Locker 102.9 → 101.9 vs Chubb Club 96.4', flips: false }
+{ id: 'c1', n: 'Kyren Williams', pos: 'RB', what: 'Week 6: rushing yds 88 → 94, +1 fumble lost', d: -1.4, team: 'syndicate', impact: 'The Gridiron Syndicate 118.2 → 116.8 vs CMC Hammer 117.5', flips: true },
+{ id: 'c2', n: 'Trey McBride', pos: 'TE', what: 'Week 6: 1 reception added (7 → 8), +9 yds', d: 1.9, team: 'hurts', impact: 'Hurts Locker 101.0 → 102.9 vs Feats of Strength 96.4', flips: false },
+{ id: 'c3', n: 'Ravens D/ST', pos: 'DST', what: 'Week 6: sack removed (4 → 3)', d: -1, team: 'hurts', impact: 'Hurts Locker 102.9 → 101.9 vs Feats of Strength 96.4', flips: false }
 ];
 var openCorr = 0;
 var pendTrade = !txState.t2;
@@ -1424,10 +1424,10 @@ self.setState(ns);
 var vals = {};
 // ---- home ----
 var alerts = [];
-alerts.push({ ic: 'i', icCls: 'ctai blu', t: 'Week 6 stat corrections applied', d: '3 corrections. One changed a result: Certified Lamb Daddy now beats The Gridiron Syndicate 117.5 to 116.8.', btn: 'View', go: go('corr') });
-if (!(st.fixed || {}).purdy) alerts.push({ ic: '⏰', icCls: 'ctai amb', t: 'Purdy Good Team has 2 empty lineup spots', d: 'Week 7 · owner hasn’t logged in for 9 days. Sunday games kick off in 3 hours.', btn: 'Fix lineup', go: go('locks') });
-if (pendTrade) alerts.push({ ic: '⇄', icCls: 'ctai blu', t: 'Trade in league review', d: 'The Puka Principle ↔ Goff Ball · 3 objections so far, review ends Fri 6 PM.', btn: 'Open', go: go('tx') });
-alerts.push({ ic: '$', icCls: 'ctai amb', t: '2 teams frozen for unpaid dues', d: 'The Puka Principle and Goff Ball owe $250. Their lineups are frozen until they pay.', btn: 'See teams', go: go('locks') });
+alerts.push({ ic: 'i', icCls: 'ctai blu', t: 'Week 6 stat corrections applied', d: '3 corrections. One changed a result: CMC Hammer now beats The Gridiron Syndicate 117.5 to 116.8.', btn: 'View', go: go('corr') });
+if (!(st.fixed || {}).purdy) alerts.push({ ic: '⏰', icCls: 'ctai amb', t: 'Los Pollos Hermanos has 2 empty lineup spots', d: 'Week 7 · owner hasn’t logged in for 9 days. Sunday games kick off in 3 hours.', btn: 'Fix lineup', go: go('locks') });
+if (pendTrade) alerts.push({ ic: '⇄', icCls: 'ctai blu', t: 'Trade in league review', d: 'Sex Panthers ↔ You Underestimate My Bowers · 3 objections so far, review ends Fri 6 PM.', btn: 'Open', go: go('tx') });
+alerts.push({ ic: '$', icCls: 'ctai amb', t: '2 teams frozen for unpaid dues', d: 'Sex Panthers and You Underestimate My Bowers owe $250. Their lineups are frozen until they pay.', btn: 'See teams', go: go('locks') });
 // ---- roster ----
 var rsel = st.rsel;
 var rRows = [{ isHead: true, head: 'STARTERS', isP: false }];
@@ -1470,17 +1470,17 @@ logWhat: 'Changed Week ' + sw + ' score: ' + T[g[0]][0] + ' ' + a.toFixed(1) + '
 // ---- corrections ----
 var corrs = CORR.map(function (c) { var s3 = corrState[c.id];
 return { n: c.n, pos: c.pos, pc: PC[c.pos], what: c.what, delta: (c.d > 0 ? '+' : '−') + Math.abs(c.d).toFixed(1), dCls: 'ctd ' + (c.d > 0 ? 'up' : 'dn'), impact: c.impact, flips: c.flips && !s3, cls: 'ctc' + (s3 ? ' done' : '') + (c.flips && !s3 ? ' flip' : ''), open: !s3, done: !!s3, doneTxt: s3 === 'applied' ? 'Applied' : 'Kept original result',
-apply: function () { ask({ kind: 'corr', id: c.id, res: 'applied', cat: 'Scores', title: 'Apply the ' + c.n + ' correction?', sub: c.impact + '.', warn: c.flips ? 'This flips the result: Certified Lamb Daddy wins 117.5 to 116.8. Standings and the playoff picture update.' : '', btn: 'Apply correction', danger: c.flips, logWhat: 'Applied stat correction: ' + c.n + ', ' + c.what, toast: 'Correction applied' }); },
+apply: function () { ask({ kind: 'corr', id: c.id, res: 'applied', cat: 'Scores', title: 'Apply the ' + c.n + ' correction?', sub: c.impact + '.', warn: c.flips ? 'This flips the result: CMC Hammer wins 117.5 to 116.8. Standings and the playoff picture update.' : '', btn: 'Apply correction', danger: c.flips, logWhat: 'Applied stat correction: ' + c.n + ', ' + c.what, toast: 'Correction applied' }); },
 keep: function () { ask({ kind: 'corr', id: c.id, res: 'kept', cat: 'Scores', title: 'Keep the original result?', sub: 'The corrected stats show on ' + c.n + '’s player page, but the Week 6 score stays as it was.', btn: 'Keep original', logWhat: 'Kept original Week 6 result despite correction: ' + c.n, toast: 'Original result kept' }); } }; });
 var corrWeeks = [{ title: 'WEEK 6 \u00b7 APPLIED THURSDAY', items: CORR.map(function (c) { return { n: c.n, pos: c.pos, pc: PC[c.pos], what: c.what, delta: (c.d > 0 ? '+' : '\u2212') + Math.abs(c.d).toFixed(1), dCls: 'ctd ' + (c.d > 0 ? 'up' : 'dn'), impact: c.impact, flips: c.flips, cls: 'ctc' + (c.flips ? ' flip' : '') }; }), none: false },
 { title: 'WEEK 5 \u00b7 APPLIED LAST THURSDAY', items: [{ n: 'Justin Jefferson', pos: 'WR', pc: PC.WR, what: 'Week 5: receiving yds 112 \u2192 118', delta: '+0.6', dCls: 'ctd up', impact: 'The Gridiron Syndicate 140.7 \u2192 141.3 vs Hurts Locker 102.2', flips: false, cls: 'ctc' }], none: false },
 { title: 'WEEK 4', items: [], none: true }];
 // ---- transactions ----
 var TXS = [
-{ id: 't2', kind: 'Trade', t: 'The Puka Principle ↔ Goff Ball', d: 'In league review: Puka Nacua for Breece Hall + 2027 R2 · 3 objections · review ends Fri 6 PM', acts: [['Veto', 'vetoed', true], ['Push through', 'forced', false]] },
-{ id: 't1', kind: 'Trade', t: 'Kelce’s Anatomy ↔ Henry’s Holes', d: 'Accepted Oct 8: Josh Jacobs for Drake London + 2027 R2', acts: [['Reverse trade', 'reversed', true]] },
-{ id: 't3', kind: 'Claim', t: 'Goff Ball won Tyjae Spears ($14)', d: 'Week 7 waivers · dropped Ray Davis · 3 bids', acts: [['Undo claim', 'undone', true]] },
-{ id: 't4', kind: 'Add', t: 'Chubb Club added Ka’imi Fairbairn', d: 'Free agent, Thu 9:12 AM · dropped Jason Sanders', acts: [['Undo add', 'undone', true]] },
+{ id: 't2', kind: 'Trade', t: 'Sex Panthers ↔ You Underestimate My Bowers', d: 'In league review: Puka Nacua for Breece Hall + 2027 R2 · 3 objections · review ends Fri 6 PM', acts: [['Veto', 'vetoed', true], ['Push through', 'forced', false]] },
+{ id: 't1', kind: 'Trade', t: 'By the Beard of Zeus ↔ Stroud 9', d: 'Accepted Oct 8: Josh Jacobs for Drake London + 2027 R2', acts: [['Reverse trade', 'reversed', true]] },
+{ id: 't3', kind: 'Claim', t: 'You Underestimate My Bowers won Tyjae Spears ($14)', d: 'Week 7 waivers · dropped Ray Davis · 3 bids', acts: [['Undo claim', 'undone', true]] },
+{ id: 't4', kind: 'Add', t: 'Feats of Strength added Ka’imi Fairbairn', d: 'Free agent, Thu 9:12 AM · dropped Jason Sanders', acts: [['Undo add', 'undone', true]] },
 { id: 't5', kind: 'Drop', t: 'Hurts Locker dropped Gus Edwards', d: 'Wed 11:40 PM · on waivers until Fri', acts: [['Undo drop', 'undone', false]] }
 ];
 var DONE = { vetoed: 'Vetoed', forced: 'Pushed through', reversed: 'Reversed', undone: 'Undone' };
@@ -1515,7 +1515,7 @@ acts.push({ label: lk ? 'Unlock roster' : 'Lock roster', cls: 'lnk', go: functio
 if (lk) tags.push({ t: 'Roster locked', cls: 'ctfz' });
 watch.push({ t: tm(kk), d: d, tags: tags, acts: acts });
 });
-var PL0 = [{ n: 'Calvin Ridley', pos: 'WR', d: 'Locked Oct 10 · disputed trade between Kelce’s Anatomy and Henry’s Holes' }];
+var PL0 = [{ n: 'Calvin Ridley', pos: 'WR', d: 'Locked Oct 10 · disputed trade between By the Beard of Zeus and Stroud 9' }];
 var plocks = st.plocks || PL0, lkP = st.lkP != null ? st.lkP : 0;
 var LKC = [['Breece Hall', 'RB', 'NYJ'], ['Drake London', 'WR', 'ATL'], ['Josh Jacobs', 'RB', 'GB'], ['Puka Nacua', 'WR', 'LAR']];
 // ---- picks ----

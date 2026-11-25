@@ -1497,7 +1497,7 @@ customTags.forEach(function (t) { TN[t[0]] = t[1]; });
 // id, name, tags, filled, paid, status, alerts{inactive,unpaid,open,trade}, dues, champ data, flag
 var LG = [
 ['DC-0412', 'Circuit Dynasty #412', ['classic', 'sf'], 12, 12, 'Week 7 · leader 6-0', { inactive: 1 }, 250, ['Gridlock', 'Mahomes Alone', 'Kupp Runneth Over', 'Gridlock'], ''],
-['DC-0413', 'Circuit Dynasty #413', ['classic', 'sf'], 12, 11, 'Week 7 · leader 5-1', { unpaid: 1 }, 250, ['Tua Legit', 'CeeDee Hype', 'Bijan Mustards', 'Tua Legit'], 'unpaid'],
+['DC-0413', 'Circuit Dynasty #413', ['classic', 'sf'], 12, 11, 'Week 7 · leader 5-1', { unpaid: 1 }, 250, ['Tua Legit', 'CeeDee Hype', 'To Infinity & Bijan', 'Tua Legit'], 'unpaid'],
 ['DC-0414', 'Circuit Dynasty #414', ['classic', 'tep'], 12, 12, 'Week 7 · leader 5-1', {}, 250, ['Saquon Siesta', 'Lamb Chops', 'Dak to the Future', 'Lamb Chops'], ''],
 ['DC-0415', 'Circuit Dynasty #415', ['classic'], 11, 11, 'Week 7 · leader 6-0', { open: 1 }, 250, ['Purdy Woman', 'Jacobs Ladder', 'Hurts So Good', 'Purdy Woman'], ''],
 ['DC-0899', 'Circuit High Stakes #22', ['hs', 'sf', 'tep'], 12, 12, 'Week 7 · leader 5-1', { trade: 1 }, 1000, ['Brock Lobster', 'Nacua Matata', 'Etienne Bulls', 'Nacua Matata'], 'tie'],
@@ -1577,7 +1577,7 @@ var selNames = LG.filter(function (l) { return sel[l[0]]; });
 var atab = st.atab || 'inactive', aDone = st.aDone || {};
 var AROWS = {
 inactive: [['Gridlock', 'Circuit Dynasty #412', 'RB and FLEX empty · last login 12 days'], ['London Calling', 'Circuit High Stakes #23', 'WR empty · last login 6 days'], ['Run CMC', 'Circuit High Stakes #23', 'K and DST empty · last login 21 days'], ['Achane Reaction', 'Circuit Startup #102', 'QB empty (on bye) · last login 3 days']],
-unpaid: [['Bijan Mustards', 'Circuit Dynasty #413', 'Owes $250 · frozen since Sep 4 · 3 reminders sent'], ['Josh Allen Keys', 'Circuit Startup #102', 'Owes $250 · frozen since Sep 4 · 2 reminders sent'], ['Higbee Jeebies', 'Circuit Startup #102', 'Owes $250 · frozen since Sep 4 · 4 reminders sent']],
+unpaid: [['To Infinity & Bijan', 'Circuit Dynasty #413', 'Owes $250 · frozen since Sep 4 · 3 reminders sent'], ['Josh Allen Keys', 'Circuit Startup #102', 'Owes $250 · frozen since Sep 4 · 2 reminders sent'], ['Higbee Jeebies', 'Circuit Startup #102', 'Owes $250 · frozen since Sep 4 · 4 reminders sent']],
 open: [['Open team (was Hurts So Good)', 'Circuit Dynasty #415', 'Owner removed Oct 1 · roster intact · dues refunded']],
 trade: [['Nacua Matata ↔ Etienne Bulls', 'Circuit High Stakes #22', 'Puka Nacua for Breece Hall + 2027 R1 · 5 of 6 objections needed'], ['Love Actually ↔ Pitts Stop', 'Circuit Startup #88', 'Kyle Pitts for 2027 R2 · 1 objection']]
 };

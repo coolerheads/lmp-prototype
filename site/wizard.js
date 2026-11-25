@@ -22,9 +22,16 @@
     step: 0, name: 'The Gridiron Syndicate', initials: 'SYN', cat: 'screen', catWhat: 'The Godfather and 1930s gangster films',
     meaning: 'We run this league like a crime family: quiet, organized and ruthless at the trade deadline. The boss sits in the back of a smoky speakeasy pulling the strings. Include a fedora, pinstripes, cash and a chalk football play.',
     refs: [], styles: ['Metallic lettering', 'Cinematic scene'], colors: ['#B3121C', '#111111', '#C0C4CC'], bg: 'dark',
-    brief: null, briefEdited: false, hero: null, badge: null, busy: false, paid: false, heroRedo: 2, badgeRedo: 1, heroRound: 0, badgeRound: 0, badgeShown: false
+    brief: null, briefEdited: false, gen: false, genSrc: 'roster', hero: null, badge: null, busy: false, paid: false, heroRedo: 2, badgeRedo: 1, heroRound: 0, badgeRound: 0, badgeShown: false
   };
   var STEPS = ['Identity', 'Inspiration', 'Meaning', 'References', 'Style', 'Brief', 'Hero', 'Badge', 'Your kit'];
+  var IDEAS = {
+    roster: [['Hurts So Good', 'Jalen Hurts, your QB'], ['Taylor Made', 'Jonathan Taylor'], ['Lamb Chop Squad', 'CeeDee Lamb'], ['Stroud Awakening', 'C.J. Stroud'],
+      ['Gibbs Me a Break', 'Jahmyr Gibbs'], ['Over the Hill', 'Tyreek Hill'], ['Bijan Mustards', 'Bijan Robinson'], ['Metcalf on a Hot Tin Roof', 'DK Metcalf']],
+    screen: [['Threat Level Midnight', 'The Office'], ['The Gridiron Syndicate', 'The Godfather'], ['Feats of Strength', 'Seinfeld'], ['Kind of a Big Deal', 'Anchorman'],
+      ['Los Pollos Hermanos', 'Breaking Bad'], ['You Underestimate My Bowers', 'Star Wars']],
+    name: [['Cooler Heads Prevail', 'your handle, @coolerheads'], ['The Coolerheads Collective', 'your handle'], ['Heads Will Roll', 'a play on Coolerheads']]
+  };
   var el = null;
 
   function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -61,7 +68,12 @@
     if (st === 0) return '<h3>What’s your team called?</h3><p class="wz-sub">This is the name everyone in the league sees.</p>' +
       '<label class="wz-f"><span>Team name</span><input data-k="name" value="' + esc(S.name) + '" maxlength="40"></label>' +
       '<label class="wz-f"><span>Initials or short name <em>2–4 characters, shown on small badges and the scoreboard</em></span><input data-k="initials" value="' + esc(S.initials) + '" maxlength="4" style="width:140px;text-transform:uppercase"></label>' +
-      '<div class="wz-ok">✓ ' + esc(S.initials) + ' isn’t used by anyone else in The Empire League.</div>';
+      '<div class="wz-ok">✓ ' + esc(S.initials) + ' isn’t used by anyone else in The Empire League.</div>' +
+      (S.gen ? '<div class="wz-gen"><div class="wz-kh"><b>Name ideas</b><button type="button" class="wz-link" data-a="gen">Hide</button></div>' +
+        '<div class="wz-chips">' + chip('From my roster', S.genSrc === 'roster', 'data-src="roster"') + chip('Movies & TV', S.genSrc === 'screen', 'data-src="screen"') + chip('My name', S.genSrc === 'name', 'data-src="name"') + '</div>' +
+        '<div class="wz-ideas">' + IDEAS[S.genSrc].map(function (x) { return '<button type="button" class="wz-idea" data-idea="' + esc(x[0]) + '"><b>' + esc(x[0]) + '</b><span>' + esc(x[1]) + '</span></button>'; }).join('') + '</div>' +
+        '<div class="wz-sub" style="margin:8px 0 0">Pick one to use it, then tweak it however you like.</div></div>'
+      : '<button type="button" class="wz-btn ghost" data-a="gen" style="margin-top:14px">Need a name? Get ideas</button>');
     if (st === 1) return '<h3>Where does the name come from?</h3><p class="wz-sub">Pick the closest one. It helps us find the right look.</p>' +
       '<div class="wz-cats">' + CATS.map(function (c) { return '<button type="button" class="wz-cat' + (S.cat === c[0] ? ' on' : '') + '" data-cat="' + c[0] + '"><b>' + esc(c[1]) + '</b><span>' + esc(c[2]) + '</span></button>'; }).join('') + '</div>' +
       '<label class="wz-f"><span>Which one, specifically?</span><input data-k="catWhat" value="' + esc(S.catWhat) + '" placeholder="e.g. The Godfather"></label>' +
@@ -153,6 +165,9 @@
       if (d.a === 'redo-hero') { if (S.heroRedo < 1) return; S.heroRedo--; S.heroRound++; S.hero = null; return gen(1500); }
       if (d.a === 'redo-badge') { if (S.badgeRedo < 1) return; S.badgeRedo--; S.badgeRound = 1; return gen(1300); }
       if (d.a === 'paid') { S.paid = true; return render(); }
+      if (d.a === 'gen') { S.gen = !S.gen; return render(); }
+      if (d.src) { S.genSrc = d.src; return render(); }
+      if (d.idea) { S.name = d.idea; S.initials = d.idea.replace(/^The\s+/i, '').split(/\s+/).filter(function (w) { return /^[A-Za-z0-9]/.test(w); }).map(function (w) { return w[0].toUpperCase(); }).join('').slice(0, 3); S.briefEdited = false; return render(); }
       if (d.copy) { try { navigator.clipboard.writeText(d.copy); t.textContent = 'Copied'; } catch (x) {} return; }
       if (d.cat) { S.cat = d.cat; S.briefEdited = false; return render(); }
       if (d.style) { var i = S.styles.indexOf(d.style); if (i >= 0) S.styles.splice(i, 1); else if (S.styles.length < 2) S.styles.push(d.style); else { S.styles.shift(); S.styles.push(d.style); } S.briefEdited = false; return render(); }
