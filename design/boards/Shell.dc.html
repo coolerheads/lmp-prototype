@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>App shell</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800&family=Saira:wght@400;500;600;700;800&display=swap">
+<style>
+body{margin:0}a{color:inherit;text-decoration:none}button{font:inherit}
+.root{font-family:var(--fb);min-height:1300px;position:relative}
+.dk{--bg:#0E1015;--rail:#0A0C10;--bar:#12151B;--card:#161A21;--card2:#1D212A;--ln:#262B36;--tx:#EEF1F6;--mut:#8B93A5;--mut2:#A6AEBF;--up:#3DD68C;--dn:#F06A6A;--ac:#5B82FF;--amb:#FFB870;background:#0E1015;color:#EEF1F6}
+.lt{--bg:#F3F4F6;--rail:#FFFFFF;--bar:#FFFFFF;--card:#FFFFFF;--card2:#EEF0F3;--ln:#E3E6EB;--tx:#12151B;--mut:#5C6370;--mut2:#4A515E;--up:#13834A;--dn:#C8312F;--ac:#2F5BFF;--amb:#A35A06;background:#F3F4F6;color:#12151B}
+.ty{--fd:'Saira Condensed',sans-serif;--fb:'Saira',sans-serif}
+.d{font-family:var(--fd);font-weight:800}
+.app{display:grid;grid-template-columns:76px minmax(0,1fr);min-height:1300px}
+.rail{background:var(--rail);border-right:1px solid var(--ln);display:flex;flex-direction:column;align-items:center;padding:0 0 16px;gap:4px;position:relative;z-index:3}
+.logo{height:48px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:800;font-size:18px;letter-spacing:-.01em;color:var(--tx);margin-bottom:10px;width:100%;border-bottom:1px solid var(--ln)}
+.logo i{font-style:normal;color:var(--ac)}
+.ri{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;width:64px;padding:10px 0 8px;border-radius:12px;color:var(--mut2);font-size:11.5px;font-weight:600}
+.ri:hover{background:var(--card2)}
+.ri.on{background:var(--card2);color:var(--tx)}
+.ri .dot{position:absolute;top:8px;right:16px;width:8px;height:8px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 2px var(--rail)}
+.ri .ct{position:absolute;top:5px;right:11px;min-width:17px;height:17px;padding:0 4px;box-sizing:border-box;border-radius:9px;background:var(--amb);color:#14110c;font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--rail)}
+.ri .ld{position:absolute;top:9px;right:17px;width:8px;height:8px;border-radius:50%;background:var(--dn);box-shadow:0 0 0 2px var(--rail)}
+.rsep{width:36px;height:1px;background:var(--ln);margin:8px 0}
+.rlab{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:#B8892F;color:#fff;font-family:var(--fd);font-weight:800;font-size:14px;margin:2px 0 4px}
+.rsp{flex:1}
+.main{min-width:0;display:flex;flex-direction:column}
+.tick{height:48px;display:flex;align-items:center;gap:8px;padding:0 16px;background:var(--rail);border-bottom:1px solid var(--ln);overflow:hidden;white-space:nowrap}
+.tick .wk{font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.06em;text-transform:uppercase;margin-right:4px}
+.tp{display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:8px;border:1px solid var(--ln);font-size:13.5px;color:var(--mut)}
+.tp b{font-family:var(--fd);font-weight:800;font-size:16px;color:var(--mut)}
+.tp .w,.tp .w b{color:var(--tx)}
+.tp small{font-size:12px;color:var(--mut);margin-left:3px}
+.tp small.lv{color:var(--ac);font-weight:600}
+.tp.me{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 9%,transparent)}
+.tp.me::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--ac)}
+.lbar{height:64px;display:flex;align-items:center;gap:22px;padding:0 24px;background:var(--bar);border-bottom:1px solid var(--ln)}
+.lg{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;padding:6px 10px 6px 6px;border-radius:10px;cursor:pointer}
+.lg:hover{background:var(--card2)}
+.lg .b{width:32px;height:32px;border-radius:8px;background:#B8892F;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:800;font-size:14px}
+.lg svg{color:var(--mut)}
+.tabs{display:flex;align-items:stretch;gap:2px;height:64px}
+.tab{position:relative;display:flex;align-items:center;gap:7px;padding:0 13px;font-size:15px;font-weight:600;color:var(--mut2)}
+.tab.on{color:var(--tx)}
+.tab.on::after{content:'';position:absolute;left:12px;right:12px;bottom:0;height:3px;border-radius:3px 3px 0 0;background:var(--ac)}
+.tab .hc{min-width:18px;height:18px;padding:0 5px;box-sizing:border-box;border-radius:9px;background:color-mix(in srgb,var(--amb) 22%,transparent);color:var(--amb);font-size:11px;font-weight:800;display:inline-flex;align-items:center;justify-content:center}
+.tab .hl{width:7px;height:7px;border-radius:50%;background:var(--dn)}
+.tab .hm{font-size:12.5px;font-weight:600;color:var(--mut)}
+.sp{flex:1}
+.lhero{position:relative;height:330px;border-radius:16px;overflow:hidden;background:#120c06 url(/_blob/d94e1fab1d0f899e309c6dd0d9f391f0) center 32%/cover no-repeat}
+.lho{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:16px;padding:18px 22px;background:linear-gradient(180deg,rgba(10,6,2,0),rgba(10,6,2,.78) 55%);color:rgba(255,255,255,.85);font-size:14.5px}
+.lho b{color:#fff}
+.wkc{height:24px;padding:0 10px;border-radius:6px;background:rgba(236,185,88,.22);color:#F3CD7E;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center}
+.lvp{display:inline-flex;align-items:center;gap:7px;color:#7FE3AE;font-weight:600}.lvp i{width:7px;height:7px;border-radius:50%;background:#3DD68C}
+.hb{display:inline-flex;align-items:center;height:38px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.28);color:#fff;font-weight:600;font-size:14px;background:rgba(0,0,0,.25)}
+.hb.pri{background:#ECB958;border-color:#ECB958;color:#1a1206}
+.lbar{color:var(--tx)}
+.lbar.bw{--bar:#FFFFFF;--tx:#12151B;--mut:#5C6370;--mut2:#4A515E;--card2:#EEF0F3;--ln:#E3E6EB;--bg:#fff;background:#fff}
+.lbar.bi{--bar:#151B34;--tx:#FFFFFF;--mut:#9AA3BD;--mut2:#C9CFE0;--card2:#232B4D;--ln:#151B34;--bg:#151B34;--ac:#7D9BFF;background:#151B34}
+.lbar.bl{background:linear-gradient(90deg,color-mix(in srgb,#B8892F 30%,var(--bar)) 0%,color-mix(in srgb,#B8892F 10%,var(--bar)) 45%,var(--bar) 80%);border-bottom:2px solid #B8892F}
+.lt .lbar.bl{background:linear-gradient(90deg,#F6E7C8 0%,#FBF4E6 45%,#FFFFFF 80%)}
+.hero.prem{background:#060606;border-color:#060606}
+.hero.prem .hh{min-height:140px;padding:14px 26px;background-color:#060606;background-repeat:no-repeat;background-size:auto 100%;box-shadow:none;color:#fff;position:relative}
+.hero.prem .hh.a{background-image:url(/_blob/8e8513da401ed6760afe2f450149f773);background-position:left center}
+.hero.prem .hh.b{background-image:url(/_blob/6d2de6a03e0075a68b2360327ce62a48);background-position:right center;border-left-color:rgba(255,255,255,.08)}
+.hero.prem .mono,.hero.prem .who b{display:none}
+.hero.prem .who{position:absolute;top:14px}.hero.prem .hh.a .who{right:26px}.hero.prem .hh.b .who{left:26px;text-align:left}
+.hero.prem .who small{color:rgba(255,255,255,.7)}.hero.prem .sc{padding-top:14px}.hero.prem .hh.b .sc{color:rgba(255,255,255,.55)}
+.ib{position:relative;width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--mut2)}
+.ib:hover{background:var(--card2)}
+.ib .ct{position:absolute;top:4px;right:3px;min-width:17px;height:17px;padding:0 4px;box-sizing:border-box;border-radius:9px;background:var(--dn);color:#fff;font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 2px var(--bar)}
+.av{width:38px;height:38px;border-radius:50%;background:var(--tx);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px}
+.page{padding:28px 40px 40px;display:flex;flex-direction:column;gap:22px}
+.eb{font-size:13.5px;color:var(--mut)}
+.phd{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.h1{font-size:52px;line-height:1;margin:4px 0 0}
+.acts{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px;border-radius:10px;border:1px solid var(--ln);background:transparent;color:var(--tx);font:600 14px var(--fb);cursor:pointer}
+.hero{display:grid;grid-template-columns:1fr 1fr;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--ln)}
+.lt .hero,.lt .sk{box-shadow:0 1px 2px rgba(16,24,40,.05),0 6px 16px -8px rgba(16,24,40,.12)}
+.hh{display:flex;align-items:center;gap:16px;padding:22px 26px;min-height:96px}
+.hh.a{box-shadow:inset 0 3px 0 #8A2432}.hh.b{box-shadow:inset 0 3px 0 #2E6B3A;flex-direction:row-reverse;text-align:right;border-left:1px solid var(--ln)}
+.mono{width:56px;height:56px;border-radius:14px;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:800;font-size:20px;flex:0 0 auto}
+.who b{display:block;font-family:var(--fd);font-weight:800;font-size:28px;line-height:1}.who small{font-size:12.5px;color:var(--mut)}
+.sc{margin-left:auto;font-family:var(--fd);font-weight:800;font-size:64px;line-height:1}.hh.b .sc{margin:0 auto 0 0;color:var(--mut)}
+.sk{height:84px;border-radius:14px;background:var(--card);border:1px solid var(--ln)}
+.skrow{display:grid;grid-template-columns:1fr 64px 1fr;gap:12px;opacity:.55}
+.note{border:1px dashed var(--ln);border-radius:14px;padding:16px 18px;font-size:14px;line-height:1.5;color:var(--mut2)}
+.note b{color:var(--tx)}
+.fly{position:absolute;left:76px;top:0;bottom:0;width:340px;background:var(--bar);border-right:1px solid var(--ln);box-shadow:16px 0 40px -20px rgba(0,0,0,.5);z-index:2;padding:18px 16px;box-sizing:border-box;display:flex;flex-direction:column;gap:4px}
+.fly h4{margin:0 0 10px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);display:flex;justify-content:space-between}
+.fly h4 a{color:var(--ac);text-transform:none;letter-spacing:0}
+.fl{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:10px}
+.fl:hover,.fl.on{background:var(--card2)}
+.fl .b{width:36px;height:36px;border-radius:9px;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:800;font-size:14px;flex:0 0 auto}
+.fl div b{display:block;font-size:14.5px;font-weight:600}.fl div small{font-size:12.5px;color:var(--mut)}
+.fl small.u{color:var(--up)}.fl small.dn{color:var(--dn)}.fl small.am{color:var(--amb)}
+</style>
+</helmet>
+<div class="root ty {{rootCls}}"><div class="app"><nav class="rail" aria-label="Fanball"><div class="logo">fan<i>ball</i></div><a class="{{lgCls}}" href="#"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg><span>Leagues</span></a><a class="ri" href="#"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6l3 3M8 6l-3 3"/><circle cx="17" cy="17" r="2.5"/><path d="M7 14c0 4 4 4 7 3M14 7h4v4"/><path d="M18 7l-6 6"/></svg><span>Game Plan</span><i class="dot"></i></a><a class="ri" href="#"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 5 12 2.5-6h4"/></svg><span>The Wire</span></a><a class="ri" href="#"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-11.6 7.1L4 20l1-4.2A8 8 0 1 1 20 12z"/></svg><span>Chat</span></a><sc-if value="{{railLeague}}" hint-placeholder-val="{{ false }}"><span class="rsep"></span><span class="rlab" title="The Empire League">EL</span><a class="ri" href="#"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h11M4 12h9M4 17h7M16 14l3 3-3 3"/></svg><span>Lineup</span><i class="ct">2</i></a><a class="{{railScoresCls}}" href="#"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="2"/><path d="M8.5 8.5a5 5 0 0 0 0 7M15.5 8.5a5 5 0 0 1 0 7M5.6 5.6a9 9 0 0 0 0 12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></svg><span>Scores</span><i class="ld"></i></a><a class="ri" href="#"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 19V11M12 19V5M18 19v-6"/></svg><span>Standings</span></a><a class="ri" href="#"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="8" r="3.5"/><path d="M3.5 19.5c.8-3.3 3.4-5 6.5-5s5.7 1.7 6.5 5M19 8v6M16 11h6"/></svg><span>Add</span></a></sc-if><span class="rsp"></span><a class="ri" href="#"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg><span>More</span></a></nav><div class="main"><div class="tick"><span class="wk">Week 7</span><span class="tp me"><span class="w">SYN <b>139.6</b></span>–<span><b>93.5</b> HRT</span><small class="lv">Q4</small></span><span class="tp "><span class="w">KEL <b>112.8</b></span>–<span><b>108.6</b> JEF</span><small class="lv">Q4</small></span><span class="tp "><span class="w">CLD <b>124.9</b></span>–<span><b>67.3</b> GOF</span><small class="">Final</small></span><span class="tp "><span class="w">HEN <b>98.7</b></span>–<span><b>76.4</b> PKA</span><small class="">Final</small></span><span class="tp "><span class="w">CHB <b>104.5</b></span>–<span><b>91.2</b> J&J</span><small class="">Final</small></span><span class="tp "><span class="w">PGT <b>86.1</b></span>–<span><b>83.0</b> BIJ</span><small class="">Final</small></span></div><header class="{{barCls}}"><div class="lg"><span class="b">EL</span>The Empire League<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10l5 5 5-5"/></svg></div><nav class="tabs" aria-label="League"><a class="{{tabHome}}" href="#">Home</a><a class="tab" href="#">My Franchise<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><span class="hc" title="2 starters yet to lock">2</span></sc-if></a><a class="{{tabScores}}" href="#">Scores<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><span class="hl" title="Live"></span></sc-if></a><a class="tab" href="#">Standings<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><span class="hm">1st</span></sc-if></a><a class="tab" href="#">Players<sc-if value="{{hints}}" hint-placeholder-val="{{ true }}"><span class="hm">$247</span></sc-if></a><a class="tab" href="#">Trades</a><a class="tab" href="#">Clubhouse</a></nav><span class="sp"></span><a class="ib" href="#" aria-label="Search"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg></a><a class="ib" href="#" aria-label="Notifications, 3 new"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/></svg><i class="ct">3</i></a><span class="av">CP</span></header><main class="page"><sc-if value="{{isHome}}" hint-placeholder-val="{{ true }}"><div class="lhero" role="img" aria-label="The Empire League"><div class="lho"><span class="wkc">Week 7</span><span>You: <b>6-1</b> · <b>1st</b> of 12</span><span class="lvp"><i></i>Live · up 46.1 vs Hurts Locker</span><span class="sp"></span><a class="hb pri" href="#">Set lineup</a><a class="hb" href="#">Live scoring</a></div></div><div class="eb" style="margin-bottom: -10px">Your matchup</div></sc-if><sc-if value="{{isScores}}" hint-placeholder-val="{{ false }}"><div class="phd"><div><div class="eb">Week 7 · Your matchup</div><h1 class="h1 d">Scores</h1></div><div class="acts"><button class="btn" type="button" aria-label="Previous week">‹</button><span class="d" style="font-size: 20px">Week 7</span><button class="btn" type="button" aria-label="Next week">›</button><button class="btn" type="button">Other matchups</button><button class="btn" type="button">Game Day view</button></div></div></sc-if><div class="{{heroCls}}"><div class="hh a"><span class="mono" style="background: #8A2432">SYN</span><div class="who"><b>The Gridiron Syndicate</b><small>@coolerheads · 6-1 (1st)</small></div><span class="sc">139.6</span></div><div class="hh b"><span class="mono" style="background: #2E6B3A">HRT</span><div class="who"><b>Hurts Locker</b><small>2-5 (6th) · @mscott44</small></div><span class="sc">93.5</span></div></div><div class="skrow"><div class="sk"></div><div></div><div class="sk"></div></div><div class="skrow"><div class="sk"></div><div></div><div class="sk"></div></div><div class="skrow"><div class="sk"></div><div></div><div class="sk"></div></div><div class="note">{{noteText}}</div></main></div></div><sc-if value="{{flyout}}" hint-placeholder-val="{{ false }}"><aside class="fly" aria-label="Your leagues"><h4>Your leagues · 9<a href="#">+ Join</a></h4><a class="fl on" href="#"><span class="b" style="background: #B8892F">EL</span><div><b>The Empire League</b><small class="u">Live · up 46.1</small></div></a><a class="fl" href="#"><span class="b" style="background: #2F5DA8">LM</span><div><b>Lake Minnetonka Keeper</b><small class="dn">Live · down 6.1</small></div></a><a class="fl" href="#"><span class="b" style="background: #3C8A4E">DD</span><div><b>Dynasty Degenerates</b><small>Final · won 131.2–98.0</small></div></a><a class="fl" href="#"><span class="b" style="background: #A8344F">OP</span><div><b>Office Pool 2026</b><small>Kicks off Sun 8:20 PM</small></div></a><a class="fl" href="#"><span class="b" style="background: #8A4A1F">SS</span><div><b>Superflex Syndicate</b><small class="am">Dues due Friday</small></div></a><a class="fl" href="#"><span class="b" style="background: #6A3FB0">BB</span><div><b>Best Ball Pod #14</b><small>3rd of 12</small></div></a><a class="fl" href="#" style="color: var(--ac); font-size: 14px; font-weight: 600; padding-left: 14px">Show 3 more leagues</a></aside></sc-if></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"dark": {"editor": "boolean", "default": true}, "easyButtons": {"editor": "enum", "options": ["Rail league section", "Top tabs only"], "default": "Rail league section"}, "leagueBar": {"editor": "enum", "options": ["Follow theme", "White", "Brand ink", "League color"], "default": "League color"}, "hero": {"editor": "enum", "options": ["Standard", "Premium"], "default": "Standard"}, "page": {"editor": "enum", "options": ["Home", "Scores"], "default": "Home"}, "leaguesFlyout": {"editor": "boolean", "default": false}, "$preview": {"width": 1440, "height": 1300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var dark = this.props.dark ?? true, mode = this.props.easyButtons ?? 'Top tabs with status', fly = this.props.leaguesFlyout ?? false;
+    var rail = mode === 'Rail league section', bar = this.props.leagueBar ?? 'League color', hero = this.props.hero ?? 'Premium', pg = this.props.page ?? 'Home', home = pg === 'Home';
+    var BAR = { 'Follow theme': 'lbar', 'White': 'lbar bw', 'Brand ink': 'lbar bi', 'League color': 'lbar bl' };
+    var notes = {
+      tabs: 'Top tabs only. The rail holds only things that span all your leagues; the league tabs (with their status hints) are the easy buttons.',
+      rail: 'Rail league section (default). Lineup, Scores, Standings and Add stay in the rail under the league badge; the league tabs keep their status hints too. Try Tweaks > leagueBar for the bar color: League color tints it with each league badge color, so switching leagues visibly changes the frame.'
+    };
+    return { rootCls: dark ? 'dk' : 'lt', railLeague: rail, hints: true, isHome: home, isScores: !home, tabHome: home ? 'tab on' : 'tab', tabScores: home ? 'tab' : 'tab on', railScoresCls: home ? 'ri' : 'ri on', barCls: BAR[bar] || 'lbar', heroCls: hero === 'Premium' ? 'hero prem' : 'hero', flyout: fly, lgCls: fly ? 'ri on' : 'ri', noteText: rail ? notes.rail : notes.tabs };
+  }
+}
+</script>
+</body>
+</html>

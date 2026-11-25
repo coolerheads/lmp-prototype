@@ -1,16 +1,15 @@
-# React + Vite
+# Fanball LMP prototype (fanball branch)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite rebuild of the Fanball league manager prototype, using the "Restrained" design system.
 
-Currently, two official plugins are available:
+- `npm install`, `npm run dev`, `npm run build`
+- Passcode gate: `empire2027`. Demo settings: the Demo button, bottom right.
+- Routes (hash): `#/home`, `#/scores`, `#/franchise`; other tabs are placeholders until they are rebuilt.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## How the UI is produced
 
-## React Compiler
+The designs live as Claude Design board files in `design/boards/`. `tools/gen.py` converts them into React
+components in `src/boards/` (JSX + scoped CSS). Re-run `python3 tools/gen.py` after updating a board.
+App wiring (routing, demo settings, gate) is hand-written in `src/`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Design spec: `design/handoff/HANDOFF.md`.
