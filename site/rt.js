@@ -207,8 +207,8 @@
     hdr: [['Standard', 'Standard'], ['Premium', 'Premium'], ['Mixed', 'Mixed']], sides: [['left', 'Syndicate left'], ['right', 'Syndicate right']],
     wk: [['pre', 'Before lineup lock'], ['live', 'Games live'], ['post', 'Week complete']] };
   function frameClasses() {
-    var c = document.body.classList, cls = ['rs', 'th-' + (G.theme === 'dark' ? 'dark' : 'light'), 'eb-' + (G.easy || 'rail'), 'lb-' + (G.lbar || 'league')];
-    [].slice.call(c).forEach(function (x) { if (/^(th|eb|lb)-/.test(x)) c.remove(x); });
+    var c = document.body.classList, cls = ['rs', 'pg-' + PAGE.id, 'th-' + (G.theme === 'dark' ? 'dark' : 'light'), 'eb-' + (G.easy || 'rail'), 'lb-' + (G.lbar || 'league')];
+    [].slice.call(c).forEach(function (x) { if (/^(th|eb|lb|pg)-/.test(x)) c.remove(x); });
     cls.forEach(function (x) { c.add(x); });
   }
   function frameSwitches(extra) {

@@ -90,3 +90,18 @@ body.rs .ctslot, body.rs .mkpos { background: color-mix(in srgb, var(--pc) 18%, 
 body.rs .lu .n { font: 800 20px 'Saira Condensed', sans-serif !important; }
 body.rs .lu .pn1 { font-size: 16px !important; font-weight: 600; }
 body.rs .pos.flx, body.rs .pos.sflx { letter-spacing: .08em; font-weight: 800 !important; }
+
+/* ---------- Game Day: its own top bar (all my leagues) and big-plays ticker, in the same restrained voice ---------- */
+body.rs .cell .tics, body.rs .cell .bx { display: none !important; }
+body.rs .cell .ab { font-style: normal !important; font-family: 'Saira', sans-serif !important; font-weight: 600 !important; font-size: 15px !important; }
+body.rs .cell .s { font-family: 'Saira Condensed', sans-serif !important; }
+body.rs.pg-gameday .cell .lsq { width: 18px !important; height: 18px !important; font-size: 9px !important; border-radius: 5px !important; }
+body.rs.pg-gameday .cell .ft { font-weight: 500 !important; color: #8B93A5 !important; }
+body.rs.pg-gameday .num { font-style: normal !important; }
+
+/* ---------- quieter accents on list pages ---------- */
+/* add buttons: outline instead of a solid blue disc */
+body.rs .addb { background: transparent !important; color: var(--rs-ac) !important; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--rs-ac) 55%, transparent) !important; font-weight: 500 !important; }
+body.rs .addb:hover { background: color-mix(in srgb, var(--rs-ac) 10%, transparent) !important; }
+/* "most added" trend: text, not a green bubble */
+body.rs .adds.hot { background: transparent !important; padding: 0 !important; font-weight: 800; }
