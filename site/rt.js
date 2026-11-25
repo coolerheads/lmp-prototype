@@ -205,16 +205,19 @@
   // Restrained frame: theme, easy buttons and league bar classes on <body> (styles in restrained.css)
   var FRAME = { easy: [['rail', 'Rail'], ['tabs', 'Tabs only']], lbar: [['league', 'League color'], ['ink', 'Brand ink'], ['theme', 'Theme'], ['white', 'White']],
     hdr: [['Standard', 'Standard'], ['Premium', 'Premium'], ['Mixed', 'Mixed']], sides: [['left', 'Syndicate left'], ['right', 'Syndicate right']],
-    wk: [['pre', 'Before lineup lock'], ['live', 'Games live'], ['post', 'Week complete']] };
+    wk: [['pre', 'Before lineup lock'], ['live', 'Games live'], ['post', 'Week complete']],
+    bd: [['custom', 'Custom'], ['hero', 'From hero'], ['off', 'Off']] };
   function frameClasses() {
-    var c = document.body.classList, cls = ['rs', 'pg-' + PAGE.id, 'th-' + (G.theme === 'dark' ? 'dark' : 'light'), 'eb-' + (G.easy || 'rail'), 'lb-' + (G.lbar || 'league')];
-    [].slice.call(c).forEach(function (x) { if (/^(th|eb|lb|pg)-/.test(x)) c.remove(x); });
+    var bd = PAGE.id === 'franchise' && G.tier !== 'free' ? (G.bd || 'custom') : 'off';
+    var c = document.body.classList, cls = ['rs', 'pg-' + PAGE.id, 'bd-' + bd, 'th-' + (G.theme === 'dark' ? 'dark' : 'light'), 'eb-' + (G.easy || 'rail'), 'lb-' + (G.lbar || 'league')];
+    [].slice.call(c).forEach(function (x) { if (/^(th|eb|lb|pg|bd)-/.test(x)) c.remove(x); });
     cls.forEach(function (x) { c.add(x); });
   }
   function frameSwitches(extra) {
     var rows = [['easy', 'Easy buttons'], ['lbar', 'League bar']];
     if (PAGE.id === 'live') rows.push(['hdr', 'Matchup header'], ['sides', 'Sides']);
     if (PAGE.id === 'home') rows.push(['wk', 'Week state']);
+    if (PAGE.id === 'franchise') rows.push(['bd', 'Page backdrop']);
     rows.forEach(function (d) {
       var el = document.createElement('div'); el.className = 'dc-navsw';
       el.innerHTML = '<span class="dc-dl">' + d[1] + '</span><span class="dc-seg">' + FRAME[d[0]].map(function (o) { return '<button type="button" data-v="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</span>';
