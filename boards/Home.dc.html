@@ -353,6 +353,16 @@ button{font-family:inherit;cursor:pointer}
 .ostd.done .ostdc{background:#1E9E57;color:#fff;box-shadow:none}.ostd.done b{color:var(--mut)}
 .ostd .ctpn small,.hmoff small.s{display:block;font-size:12px;color:var(--mut)}
 .hmst{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.hmst>div{padding:10px 12px;border-radius:12px;background:var(--sub)}.hmst small{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}.hmst b{font-size:22px;font-weight:900}
+
+.rsh{position:relative;height:330px;border-radius:16px;overflow:hidden;background:#120c06 url(/a/d94e1fab1d0f899e309c6dd0d9f391f0.webp) center 32%/cover no-repeat;font-family:'Saira',sans-serif}
+.rsh-o{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:16px;padding:18px 22px;background:linear-gradient(180deg,rgba(10,6,2,0),rgba(10,6,2,.78) 55%);color:rgba(255,255,255,.85);font-size:14.5px;flex-wrap:wrap}
+.rsh-o b{color:#fff}
+.rsh-wk{height:24px;padding:0 10px;border-radius:6px;background:rgba(236,185,88,.22);color:#F3CD7E;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;display:inline-flex;align-items:center}
+.rsh-st{display:inline-flex;align-items:center;gap:7px;color:rgba(255,255,255,.85);font-weight:600}.rsh-st i{display:none}
+.rsh-st.live{color:#7FE3AE}.rsh-st.live i{display:block;width:7px;height:7px;border-radius:50%;background:#3DD68C}
+.rsh-sp{flex:1}
+.rsh-b{display:inline-flex;align-items:center;height:38px;padding:0 14px;border-radius:10px;border:1px solid rgba(255,255,255,.28);color:#fff!important;font-weight:600;font-size:14px;background:rgba(0,0,0,.25);text-decoration:none}
+.rsh-b.pri{background:#ECB958;border-color:#ECB958;color:#1a1206!important}
 </style>
 </helmet>
 <div class="ng" style="min-height: 100vh; background: #0F1218">
@@ -519,24 +529,11 @@ button{font-family:inherit;cursor:pointer}
 </div>
 </div>
 </header>
-<!-- HERO -->
-<sc-if value="{{heroB}}">
-<section class="empire">
-<div class="beams"></div>
-<div class="glow"></div>
-<div class="cols"></div>
-<div class="cinz" style="position: relative; font-size: 16px; margin-bottom: 6px">THE</div>
-<div class="ttl"><span class="back">EMPIRE</span><span class="front">EMPIRE</span></div>
-<div class="cinz" style="position: relative; font-size: 20px; margin-top: 12px">LEAGUE</div>
-</section>
-</sc-if>
-<sc-if value="{{heroNB}}">
-<section style="position: relative; height: 220px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: radial-gradient(70% 120% at 50% 0%, #18202A 0%, #0A0C10 70%)">
-<h1 class="num" style="position: relative; margin: 0; font-size: 80px; font-weight: 900; line-height: .9">The Empire League</h1>
-<span style="position: relative; font-size: 13px; color: #A6AEBF">Commissioner: <a href="#" style="font-weight: 600">design a league banner</a></span>
-</section>
-</sc-if>
 <main class="{{mainCls}}" style="max-width: 1240px; margin: 0 auto; padding: 28px 32px 72px; display: flex; flex-direction: column; gap: 28px">
+<!-- League hero: the league's own art, with a live status row and week-state buttons -->
+<div class="rsh" role="img" aria-label="The Empire League">
+<div class="rsh-o"><span class="rsh-wk">Week 7</span><span>You: <b>6-1</b> · <b>1st</b> of 12</span><span class="{{rsHero.stCls}}"><i></i>{{rsHero.status}}</span><span class="rsh-sp"></span><a class="rsh-b pri" href="{{rsHero.href}}">{{rsHero.btn}}</a><a class="rsh-b" href="{{rsHero.href2}}">{{rsHero.btn2}}</a></div>
+</div>
 <!-- Needs your attention -->
 <sc-if value="{{hasAtt}}">
 <section class="{{attCls}}">
@@ -763,8 +760,20 @@ button{font-family:inherit;cursor:pointer}
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"mode":{"editor":"enum","options":["Free","Mixed","Premium"],"default":"Premium"},"tab":{"editor":"enum","options":["match","lineup"],"default":"match"},"$preview":{"width":1440,"height":2900}}'>
+
+// ---- League hero buttons follow the week: before lock / games live / week complete ----
+function rsHeroVals() {
+var G = {}; try { G = JSON.parse(localStorage.getItem('lmp_global')) || {}; } catch (e) {}
+var W = {
+pre: { status: 'Sun 1:00 PM kickoff · projected 172.0–118.0', stCls: 'rsh-st', btn: 'Set lineup · 2 yet to lock', href: '/franchise', btn2: 'Matchup preview', href2: '/live' },
+live: { status: 'Live · up 46.1 vs Hurts Locker', stCls: 'rsh-st live', btn: 'Live scoring', href: '/live', btn2: 'Set lineup', href2: '/franchise' },
+post: { status: 'Final · won 139.6–93.5 vs Hurts Locker', stCls: 'rsh-st', btn: 'Week 7 recap', href: '/clubhouse', btn2: 'Waiver claims', href2: '/claims' }
+};
+return W[G.wk] || W.live;
+}
 class Component extends DCLogic {
-renderVals() {
+renderVals() { var v = this._rv(); v.rsHero = rsHeroVals(); return v; }
+_rv() {
 var self = this;
 var st = this.state || {};
 var mode = st.mode || this.props.mode || 'Premium';

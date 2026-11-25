@@ -193,7 +193,8 @@
   }
   // Restrained frame: theme, easy buttons and league bar classes on <body> (styles in restrained.css)
   var FRAME = { easy: [['rail', 'Rail'], ['tabs', 'Tabs only']], lbar: [['league', 'League color'], ['ink', 'Brand ink'], ['theme', 'Theme'], ['white', 'White']],
-    hdr: [['Standard', 'Standard'], ['Premium', 'Premium'], ['Mixed', 'Mixed']], sides: [['left', 'Syndicate left'], ['right', 'Syndicate right']] };
+    hdr: [['Standard', 'Standard'], ['Premium', 'Premium'], ['Mixed', 'Mixed']], sides: [['left', 'Syndicate left'], ['right', 'Syndicate right']],
+    wk: [['pre', 'Before lineup lock'], ['live', 'Games live'], ['post', 'Week complete']] };
   function frameClasses() {
     var c = document.body.classList, cls = ['rs', 'th-' + (G.theme === 'dark' ? 'dark' : 'light'), 'eb-' + (G.easy || 'rail'), 'lb-' + (G.lbar || 'league')];
     [].slice.call(c).forEach(function (x) { if (/^(th|eb|lb)-/.test(x)) c.remove(x); });
@@ -202,15 +203,16 @@
   function frameSwitches(extra) {
     var rows = [['easy', 'Easy buttons'], ['lbar', 'League bar']];
     if (PAGE.id === 'live') rows.push(['hdr', 'Matchup header'], ['sides', 'Sides']);
+    if (PAGE.id === 'home') rows.push(['wk', 'Week state']);
     rows.forEach(function (d) {
       var el = document.createElement('div'); el.className = 'dc-navsw';
       el.innerHTML = '<span class="dc-dl">' + d[1] + '</span><span class="dc-seg">' + FRAME[d[0]].map(function (o) { return '<button type="button" data-v="' + o[0] + '">' + o[1] + '</button>'; }).join('') + '</span>';
       el.querySelectorAll('button').forEach(function (b) {
-        var cur = d[0] === 'hdr' ? (G.tier === 'free' ? 'Standard' : (G.mixed ? 'Mixed' : 'Premium')) : (G[d[0]] || FRAME[d[0]][0][0]);
+        var cur = d[0] === 'wk' ? (G.wk || 'live') : d[0] === 'hdr' ? (G.tier === 'free' ? 'Standard' : (G.mixed ? 'Mixed' : 'Premium')) : (G[d[0]] || FRAME[d[0]][0][0]);
         if (cur === b.dataset.v) b.classList.add('on');
         b.onclick = function () {
           if (d[0] === 'hdr') { G.tier = b.dataset.v === 'Standard' ? 'free' : 'premium'; G.mixed = b.dataset.v === 'Mixed'; jset(GKEY, G); comp.setState({ tier: G.tier }); return; }
-          if (d[0] === 'sides') { G.sides = b.dataset.v; jset(GKEY, G); comp.setState({}); return; }
+          if (d[0] === 'sides' || d[0] === 'wk') { G[d[0]] = b.dataset.v; jset(GKEY, G); el.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); }); comp.setState({}); return; }
           G[d[0]] = b.dataset.v; jset(GKEY, G); el.querySelectorAll('button').forEach(function (x) { x.classList.toggle('on', x === b); }); frameClasses(); if (NAV && NAV.refresh) NAV.refresh(); };
       });
       extra.insertBefore(el, extra.children[1] || null);
