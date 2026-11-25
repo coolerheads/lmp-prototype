@@ -105,3 +105,6 @@ body.rs .addb { background: transparent !important; color: var(--rs-ac) !importa
 body.rs .addb:hover { background: color-mix(in srgb, var(--rs-ac) 10%, transparent) !important; }
 /* "most added" trend: text, not a green bubble */
 body.rs .adds.hot { background: transparent !important; padding: 0 !important; font-weight: 800; }
+
+/* headshots in Set Lineup rows (My Franchise, Home): the larger rounded-rectangle tile from Live Scoring */
+body.rs .lu .hs, body.rs.pg-home .hs { width: 60px !important; height: 52px !important; border-radius: 12px !important; background-size: 118% auto !important; background-position: 50% 8% !important; flex: 0 0 auto; }
