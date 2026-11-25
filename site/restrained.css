@@ -319,29 +319,29 @@ body.rs .tplate.sk-goff[class] { background: linear-gradient(90deg, rgba(6,6,8,.
 body.rs .tplate.sk-hurts[class] { background: linear-gradient(90deg, rgba(6,6,8,.9) 0%, rgba(6,6,8,.72) 42%, rgba(6,6,8,.25) 72%, rgba(6,6,8,.5) 100%), #111 url(/a/t-hurts-hero.webp) right 38% / 150% auto no-repeat !important; }
 
 /* ---------- Standings: division banners from the league kit; column headers repeat under each division ---------- */
-body.rs .dban.dv-barb, body.rs .dban.dv-glad { height: 120px !important; margin: 26px 0 4px !important; padding: 0 26px !important; box-shadow: none !important; }
-body.rs .dban.dv-barb { background: linear-gradient(90deg, #0b0a09 0%, #0b0a09 calc(100% - 600px), rgba(11,10,9,0) calc(100% - 380px)), #0b0a09 url(/a/div-barb.webp) right 55% / auto 165% no-repeat !important; }
-body.rs .dban.dv-glad { background: linear-gradient(90deg, #150605 0%, #150605 calc(100% - 600px), rgba(21,6,5,0) calc(100% - 380px)), #150605 url(/a/div-glad.webp) right 45% / auto 165% no-repeat !important; }
-body.rs .dban.dv-barb > svg, body.rs .dban.dv-glad > svg { display: none; }
-body.rs .dban .dn { font-size: 40px !important; }
-body.rs .dban .ds { margin-left: 24px !important; margin-right: auto; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
-body.rs .dban + .sth, body.rs .divh + .sth { margin-top: 6px; }
+body.rs.tr-premium .dban.dv-barb, body.rs.tr-premium .dban.dv-glad { height: 120px !important; margin: 26px 0 4px !important; padding: 0 26px !important; box-shadow: none !important; }
+body.rs.tr-premium .dban.dv-barb { background: linear-gradient(90deg, #0b0a09 0%, #0b0a09 calc(100% - 600px), rgba(11,10,9,0) calc(100% - 380px)), #0b0a09 url(/a/div-barb.webp) right 55% / auto 165% no-repeat !important; }
+body.rs.tr-premium .dban.dv-glad { background: linear-gradient(90deg, #150605 0%, #150605 calc(100% - 600px), rgba(21,6,5,0) calc(100% - 380px)), #150605 url(/a/div-glad.webp) right 45% / auto 165% no-repeat !important; }
+body.rs.tr-premium .dban.dv-barb > svg, body.rs.tr-premium .dban.dv-glad > svg { display: none; }
+body.rs.tr-premium .dban .dn { font-size: 40px !important; }
+body.rs.tr-premium .dban .ds { margin-left: 24px !important; margin-right: auto; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+body.rs.tr-premium .dban + .sth, body.rs .divh + .sth { margin-top: 6px; }
 
 /* ---------- League kit: Empire League badge and championship trophy art ---------- */
-body.rs .fbd[style*="#b07a1e"] { background: url(/a/el-badge.webp) center / contain no-repeat !important; color: transparent !important; box-shadow: none !important; border-radius: 0 !important; }
+body.rs.tr-premium .fbd[style*="#b07a1e"] { background: url(/a/el-badge.webp) center / contain no-repeat !important; color: transparent !important; box-shadow: none !important; border-radius: 0 !important; }
 /* Playoffs champion card: the trophy hall behind it, champion name on the calm left */
-body.rs .pfch { min-height: 280px; background: linear-gradient(90deg, #0b0806 0%, #0b0806 30%, rgba(11,8,6,.55) 55%, rgba(11,8,6,.15) 80%), #0b0806 url(/a/el-trophy.webp) right center / auto 100% no-repeat !important; }
-body.rs .pfch .pfcf, body.rs .pfch .pfcg, body.rs .pfch .pftro { display: none !important; }
-body.rs .pfch { grid-template-columns: minmax(0, 560px) !important; padding: 30px 32px !important; }
-body.rs .pfch .pfchr { background: rgba(8,6,4,.55); padding: 14px 16px; border-radius: 14px; }
+body.rs.tr-premium .pfch { min-height: 280px; background: linear-gradient(90deg, #0b0806 0%, #0b0806 30%, rgba(11,8,6,.55) 55%, rgba(11,8,6,.15) 80%), #0b0806 url(/a/el-trophy.webp) right center / auto 100% no-repeat !important; }
+body.rs.tr-premium .pfch .pfcf, body.rs.tr-premium .pfch .pfcg, body.rs.tr-premium .pfch .pftro { display: none !important; }
+body.rs.tr-premium .pfch { grid-template-columns: minmax(0, 560px) !important; padding: 30px 32px !important; }
+body.rs.tr-premium .pfch .pfchr { background: rgba(8,6,4,.55); padding: 14px 16px; border-radius: 14px; }
 /* History: Wall of Champions opens on the trophy */
-body.rs .hshd:has(+ .hswall) { position: relative; display: flex; flex-direction: column; justify-content: center; gap: 4px; height: 170px; padding: 0 28px; margin-bottom: 16px; border-radius: 16px; color: #fff;
+body.rs.tr-premium .hshd:has(+ .hswall) { position: relative; display: flex; flex-direction: column; justify-content: center; gap: 4px; height: 170px; padding: 0 28px; margin-bottom: 16px; border-radius: 16px; color: #fff;
   background: linear-gradient(90deg, #0b0806 0%, #0b0806 35%, rgba(11,8,6,.2) 70%), #0b0806 url(/a/el-trophy.webp) right center / auto 100% no-repeat; }
-body.rs .hshd:has(+ .hswall) b { font: 800 40px 'Saira Condensed', sans-serif; color: #F4D58A; }
-body.rs .hshd:has(+ .hswall) span { color: rgba(255,255,255,.75); }
+body.rs.tr-premium .hshd:has(+ .hswall) b { font: 800 40px 'Saira Condensed', sans-serif; color: #F4D58A; }
+body.rs.tr-premium .hshd:has(+ .hswall) span { color: rgba(255,255,255,.75); }
 
 /* ---------- League badge: full crest at normal sizes, simplified shield at 32px and below ---------- */
-body.rs .fbd[style*="#b07a1e"][style*="28px"], body.rs .fbd.s28[style*="#b07a1e"], body.rs .fbd.s20[style*="#b07a1e"], body.rs .fbd.s24[style*="#b07a1e"] { background-image: url(/a/el-badge-sm.webp) !important; }
+body.rs.tr-premium .fbd[style*="#b07a1e"][style*="28px"], body.rs.tr-premium .fbd.s28[style*="#b07a1e"], body.rs.tr-premium .fbd.s20[style*="#b07a1e"], body.rs.tr-premium .fbd.s24[style*="#b07a1e"] { background-image: url(/a/el-badge-sm.webp) !important; }
 
 /* ---------- Home playoffs moment: restrained card, league gold instead of the blue gradient ---------- */
 body.rs .hmpo { background: var(--card) !important; color: var(--tx) !important; box-shadow: 0 1px 2px rgba(16,24,40,.05), 0 6px 16px -8px rgba(16,24,40,.12) !important; border: 1px solid var(--ln); border-top: 3px solid #C9A24A; }
@@ -367,9 +367,9 @@ body.rs .hmpob > span[style] { color: var(--mut) !important; }
 body.rs .seg button.on, body.rs .seg2 button.on { box-shadow: 0 1px 3px rgba(0,0,0,.15) !important; }
 
 /* ---------- League banners: Empire League uses its league hero (The Wire, Game Plan) ---------- */
-body.rs .lbn.lb-EL { background: #120c06 url(/a/d94e1fab1d0f899e309c6dd0d9f391f0.webp) center 34% / cover no-repeat !important; }
-body.rs .lbn.lb-EL::before, body.rs .lbn.lb-EL::after { display: none !important; }
-body.rs .lbn.lb-EL .bt { visibility: hidden; }
+body.rs.tr-premium .lbn.lb-EL { background: #120c06 url(/a/d94e1fab1d0f899e309c6dd0d9f391f0.webp) center 34% / cover no-repeat !important; }
+body.rs.tr-premium .lbn.lb-EL::before, body.rs.tr-premium .lbn.lb-EL::after { display: none !important; }
+body.rs.tr-premium .lbn.lb-EL .bt { visibility: hidden; }
 
 /* ---------- Game Plan: tiles match The Wire's league cards; no colored top/left bars ---------- */
 body.rs .ltile { padding: 0 !important; gap: 0 !important; overflow: hidden; box-shadow: 0 1px 2px rgba(16,24,40,.05), 0 6px 16px -8px rgba(16,24,40,.12) !important; }
@@ -431,7 +431,7 @@ body.rs .gd-sub { font-size: 12px; color: var(--mut); }
 body.rs .gd-net { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; }
 body.rs .gd-nr { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: var(--sub, #F6F7F9); box-shadow: inset 0 0 0 1px var(--ln); }
 body.rs .gd-nr .gd-b { width: 30px; height: 30px; font-size: 11px; border-radius: 8px; }
-body.rs .gd-nr .gd-b-EL { background: url(/a/el-badge-sm.webp) center / contain no-repeat !important; color: transparent; }
+body.rs.tr-premium .gd-nr .gd-b-EL { background: url(/a/el-badge-sm.webp) center / contain no-repeat !important; color: transparent; }
 body.rs .gd-nn { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 body.rs .gd-nr b { font: 800 26px 'Saira Condensed', sans-serif; }
 body.rs .gd-nr.up { background: radial-gradient(70% 140% at 100% 0%, color-mix(in srgb, var(--up) 14%, transparent), transparent 70%), var(--sub, #F6F7F9); }
@@ -485,7 +485,7 @@ body.rs .gd-lg1.up { background: radial-gradient(60% 90% at 100% 0%, color-mix(i
 body.rs .gd-lg1.dn { background: radial-gradient(60% 90% at 100% 0%, color-mix(in srgb, var(--dn) 10%, transparent), transparent 70%), var(--sub, #F6F7F9); }
 body.rs .gd-lh { display: flex; align-items: center; gap: 10px; }
 body.rs .gd-lh .gd-b { width: 30px; height: 30px; font-size: 11px; border-radius: 8px; flex: 0 0 auto; }
-body.rs .gd-lh .gd-b-EL { background: url(/a/el-badge-sm.webp) center / contain no-repeat !important; color: transparent; }
+body.rs.tr-premium .gd-lh .gd-b-EL { background: url(/a/el-badge-sm.webp) center / contain no-repeat !important; color: transparent; }
 body.rs .gd-lh .gd-nn { font-size: 14.5px; font-weight: 700; }
 body.rs .gd-lh b { font: 800 30px/1 'Saira Condensed', sans-serif; }
 body.rs .gd-sides { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -528,3 +528,17 @@ body.rs .gd-sth .gd-dash { margin: 0 2px 0 6px; }
 body.rs .gd-sth .gd-dash + .nl { margin-left: 6px; }
 body.rs.pg-gameday .srow { grid-template-columns: 70px 74px 30px 1fr auto !important; }
 body.rs.pg-gameday .srow .gd-tab { font-size: 15px; }
+
+/* ---------- Prototype tier: Free / Mixed (rt.js applyTier strips kit classes; badges fall back to the team's free badge) ---------- */
+body.rs .bx.bx-free { background: var(--h) !important; border-radius: 26% !important; display: inline-flex !important; align-items: center; justify-content: center; container-type: size; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.18) !important; }
+body.rs .bx.bx-free > * { display: none !important; }
+body.rs .bx.bx-free::after { content: attr(data-i); color: #fff; font: 800 34cqw/1 'Saira', sans-serif; letter-spacing: .02em; }
+body.rs:not(.tr-premium) .rsh { background: linear-gradient(120deg, #1c2330 0%, #121722 60%, #0d1118 100%) !important; height: 200px !important; }
+body.rs:not(.tr-premium) .rsh::before { content: 'The Empire League'; position: absolute; left: 28px; top: 34px; font: 800 52px/1 'Saira Condensed', sans-serif; color: #fff; }
+body.rs:not(.tr-premium) .rsh::after { content: '12 teams · Dynasty · SF PPR'; position: absolute; left: 30px; top: 92px; font: 600 15px 'Saira', sans-serif; color: rgba(255,255,255,.6); }
+/* team cards without a kit: plain header, no dark hero band */
+body.rs .tbc .tbh:has(.bx-free), body.rs .rc .tbh:has(.bx-free) { height: auto !important; background: transparent !important; color: var(--tx) !important; padding: 2px 0 10px !important; margin: 0 0 10px !important; align-items: center !important; border-radius: 0 !important; border-bottom: 1px solid var(--ln); }
+body.rs .tbc .tbh:has(.bx-free)::before, body.rs .rc .tbh:has(.bx-free)::before { display: none !important; }
+body.rs .tbc .tbh:has(.bx-free) b, body.rs .rc .tbh:has(.bx-free) b { color: var(--tx) !important; text-shadow: none !important; }
+body.rs .tbc .tbh:has(.bx-free) span[style*="var(--mut)"], body.rs .rc .tbh:has(.bx-free) span[style*="var(--mut)"] { color: var(--mut) !important; }
+body.rs .tbc .tbh:has(.bx-free) .btns { background: transparent; color: var(--tx); border-color: var(--ln2); }

@@ -63,7 +63,7 @@
   function fromGlobal() {
     var o = {};
     if (G.theme) o.theme = G.theme;
-    if (G.tier) { o.tier = G.tier; if (PAGE.modeKey) o.mode = G.tier === 'premium' ? 'Premium' : 'Free'; }
+    if (G.tier) { o.tier = G.tier; if (PAGE.modeKey) o.mode = G.tier === 'free' ? 'Free' : (G.mixed ? 'Mixed' : 'Premium'); }
     if (G.who && PAGE.whoKey) o[PAGE.whoKey] = G.who;
     if (G.moment && PAGE.momentKey && MOMENT_IN[G.moment]) o[PAGE.momentKey] = MOMENT_IN[G.moment];
     return o;
@@ -73,7 +73,7 @@
     function put(k, v) { if (v != null && G[k] !== v) { G[k] = v; ch = true; } }
     if ('theme' in st) put('theme', st.theme);
     if ('tier' in st) put('tier', st.tier);
-    if (PAGE.modeKey && 'mode' in st && st.mode !== 'Mixed') put('tier', st.mode === 'Premium' ? 'premium' : 'free');
+    if (PAGE.modeKey && 'mode' in st) { put('tier', st.mode === 'Free' ? 'free' : 'premium'); put('mixed', st.mode === 'Mixed'); }
     if (PAGE.whoKey && PAGE.whoKey in st) put('who', st[PAGE.whoKey]);
     if (PAGE.momentKey && PAGE.momentKey in st && MOMENT_OUT[st[PAGE.momentKey]]) put('moment', MOMENT_OUT[st[PAGE.momentKey]]);
     if (ch) jset(GKEY, G);
@@ -229,10 +229,32 @@
     hdr: [['Standard', 'Standard'], ['Premium', 'Premium'], ['Mixed', 'Mixed']], sides: [['left', 'Syndicate left'], ['right', 'Syndicate right']],
     wk: [['pre', 'Before lineup lock'], ['live', 'Games live'], ['post', 'Week complete']],
     bd: [['custom', 'Custom'], ['hero', 'From hero'], ['off', 'Off']] };
+  // ---------- Prototype tier: Free = no custom league or team art; Mixed = a few teams bought kits; Premium = everything ----------
+  var KITS = { syndicate: ['SYN', '#7a2323'], kelce: ['ZEU', '#b3202f'], airplane: ['TLM', '#5b2aa6'], jj: ['KBD', '#1d3768'], mustards: ['BIJ', '#9a6f08'], hurts: ['HRT', '#35534b'],
+    lamb: ['CMC', '#3d3d3d'], henrys: ['STR', '#3b2590'], chubb: ['FOS', '#7a3b12'], purdy: ['LPH', '#a6335a'], puka: ['SXP', '#1e4f8a'], goff: ['YUB', '#2f7a46'] };
+  var MIXED_KITS = ['syndicate', 'airplane', 'hurts', 'henrys', 'puka'];
+  function tierNow() {
+    var md = PAGE.modeKey && comp.state ? comp.state.mode : null;
+    if (md === 'Mixed') return 'mixed'; if (md === 'Free') return 'free'; if (md === 'Premium') return 'premium';
+    return G.tier === 'free' ? 'free' : (G.mixed ? 'mixed' : 'premium');
+  }
+  function applyTier(t) {
+    if (t === 'premium') return;
+    document.querySelectorAll('[class*="ic-"], [class*="sk-"]').forEach(function (el) {
+      [].slice.call(el.classList).forEach(function (c) {
+        var m = /^(ic|sk)-([a-z]+)$/.exec(c); if (!m || !KITS[m[2]]) return;
+        if (t === 'mixed' && MIXED_KITS.indexOf(m[2]) > -1) return;
+        el.classList.remove(c); el.classList.add(m[1] + '-off');
+        var bx = m[1] === 'ic' && el.parentElement && el.parentElement.classList.contains('bx') ? el.parentElement : null;
+        if (bx) { bx.classList.add('bx-free'); bx.setAttribute('data-i', KITS[m[2]][0]); bx.style.setProperty('--h', KITS[m[2]][1]); }
+      });
+    });
+  }
   function frameClasses() {
+    var tier = tierNow(); applyTier(tier);
     var bd = PAGE.id === 'franchise' && G.tier !== 'free' ? (G.bd || 'custom') : 'off';
-    var c = document.body.classList, cls = ['rs', 'pg-' + PAGE.id, 'bd-' + bd, 'th-' + (G.theme === 'dark' ? 'dark' : 'light'), 'eb-' + (G.easy || 'rail'), 'lb-' + (G.lbar || 'league')];
-    [].slice.call(c).forEach(function (x) { if (/^(th|eb|lb|pg|bd)-/.test(x)) c.remove(x); });
+    var c = document.body.classList, cls = ['rs', 'tr-' + tier, 'pg-' + PAGE.id, 'bd-' + bd, 'th-' + (G.theme === 'dark' ? 'dark' : 'light'), 'eb-' + (G.easy || 'rail'), 'lb-' + (G.lbar || 'league')];
+    [].slice.call(c).forEach(function (x) { if (/^(th|eb|lb|pg|bd|tr)-/.test(x)) c.remove(x); });
     cls.forEach(function (x) { c.add(x); });
   }
   function frameSwitches(extra) {
