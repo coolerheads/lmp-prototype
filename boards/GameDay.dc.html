@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fanball — Game Day</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&amp;family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#0F1218}
+a{color:#6A8CFF;text-decoration:none}a:hover{color:#9DB3FF}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+.ng{font-family:'Onest',sans-serif;color:#EEF1F6}
+.num{font-family:'Big Shoulders Display',sans-serif;font-variant-numeric:tabular-nums}
+.pbtn{border:0;background:transparent;color:#A6AEBF;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.pbtn.on{background:#EEF1F6;color:#0A0C10}
+.ldot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#6A8CFF;box-shadow:0 0 8px #6A8CFF}
+.lsq{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:20px;height:20px;border-radius:5px;color:#fff;font-size:9px;font-weight:800;letter-spacing:.02em}
+.fb{display:inline-block;vertical-align:-1px}
+/* top band: your matchups in every league */
+.strip{position:relative;flex:1 1 auto;min-width:0;overflow:hidden;display:flex}
+.striprow{display:flex;transition:transform .35s ease}
+.sarr{position:absolute;top:0;bottom:0;z-index:2;width:44px;border:0;display:flex;align-items:center;justify-content:center;color:#EEF1F6}
+.sarr.l{left:0;background:linear-gradient(90deg,#07080B 55%,rgba(7,8,11,0))}
+.sarr.r{right:0;background:linear-gradient(270deg,#07080B 55%,rgba(7,8,11,0))}
+.sarr:hover{color:#6A8CFF}
+.tics{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.tic{width:4px;height:11px;transform:skewX(-20deg);border-radius:1px}
+.tp{margin-left:4px;font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
+.cell{flex:0 0 auto;width:206px;display:flex;flex-direction:column;border-left:1px solid #1C202A;color:#EEF1F6}
+.cell .ln{display:flex;align-items:center;gap:8px;padding:5px 12px}
+.cell .ab{font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;font-size:17px}
+.cell .s{margin-left:auto;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+.cell .s.lose{color:#6B7386}
+.cell .ft{margin-top:auto;padding:5px 12px;border-top:1px solid #1C202A;font-size:11px;font-weight:600;color:#8B93A5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell.hit{background:#12151C;box-shadow:inset 0 2px 0 #6A8CFF}
+/* big plays ticker (frame, always dark) */
+.bp{display:flex;align-items:stretch;height:44px;background:#0B0D12;border-bottom:1px solid #1C202A}
+.bplab{flex:0 0 220px;display:flex;align-items:center;gap:9px;padding:0 18px;background:#07080B;border-right:1px solid #1C202A;font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:17px;letter-spacing:.04em;color:#EEF1F6}
+.bplab small{font-family:'Onest',sans-serif;font-size:11px;font-weight:500;letter-spacing:0;color:#8B93A5}
+.bpview{position:relative;flex:1 1 auto;min-width:0;overflow:hidden}
+.bptrack{display:flex;height:100%;transition:transform .35s ease}
+.bpi{flex:0 0 400px;width:400px;display:flex;align-items:center;gap:9px;padding:0 18px;border-right:1px solid #1C202A;white-space:nowrap;font-size:13px;color:#D3D8E2;overflow:hidden}
+.bpi .d{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.bpi .w{margin-left:auto;flex:0 0 auto}
+.bpi.latest{background:linear-gradient(90deg,rgba(245,197,66,.10),rgba(245,197,66,0) 70%)}
+.bpi.fresh{animation:bpin .6s ease-out, bpglow 2.4s ease-out}
+@keyframes bpin{from{transform:translateX(-40px);opacity:0}to{transform:none;opacity:1}}
+@keyframes bpglow{0%{background:rgba(245,197,66,.35)}100%{background:rgba(245,197,66,.10)}}
+.bpnew{display:inline-flex;align-items:center;height:16px;padding:0 5px;border-radius:4px;background:#F5C542;color:#0A0C10;font-size:9px;font-weight:800;letter-spacing:.05em}
+.bparr{position:absolute;top:0;bottom:0;z-index:2;width:44px;border:0;display:flex;align-items:center;justify-content:center;color:#EEF1F6}
+.bparr.l{left:0;background:linear-gradient(90deg,#0B0D12 55%,rgba(11,13,18,0))}
+.bparr.r{right:0;background:linear-gradient(270deg,#0B0D12 55%,rgba(11,13,18,0))}
+.bparr:hover{color:#F5C542}
+.bplatest{position:absolute;left:52px;top:50%;z-index:3;transform:translateY(-50%);display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 10px;border:0;border-radius:999px;background:#F5C542;color:#0A0C10;font-size:11px;font-weight:800}
+.bpi .tt{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:20px;padding:0 5px;border-radius:4px;color:#fff;font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;font-size:13px}
+.bpi .k{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:4px;font-size:10px;font-weight:800;letter-spacing:.04em}
+.bpi .k.td{background:#EEF1F6;color:#0A0C10}
+.bpi .k.fg{background:#2A303D;color:#EEF1F6}
+.bpi .k.big{background:transparent;color:#F5C542;box-shadow:inset 0 0 0 1px rgba(245,197,66,.6)}
+.bpi b{color:#fff;font-weight:700}
+.bpi .w{font-size:12px;color:#8B93A5}
+.bpi .mine{width:8px;height:8px;border-radius:50%;background:#6A8CFF;box-shadow:0 0 6px #6A8CFF}
+/* collapsed rail */
+.crail{flex:0 0 72px;background:#08090C;border-right:1px solid #1C202A;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 0}
+.ci{position:relative;display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:12px;color:#A6AEBF}
+.ci:hover{background:#151922;color:#EEF1F6}
+.ci.on{background:#151A2A;color:#fff;box-shadow:inset 0 0 0 1px rgba(106,140,255,.55)}
+.ci .lq{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;color:#fff;font-size:12px;font-weight:700}
+.ci .st{position:absolute;right:5px;bottom:5px;width:9px;height:9px;border-radius:50%;box-shadow:0 0 0 2px #08090C}
+.ci .bdg{position:absolute;right:4px;top:4px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#2F5BFF;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.csep{width:32px;height:1px;background:#1C202A;margin:6px 0}
+/* white header bar */
+.tnav{display:inline-flex;align-items:center;gap:7px;padding:10px 14px;border-radius:9px;color:#3B4150;font-size:15px;font-weight:600;border:0;background:transparent}
+.tnav:hover{color:#0E1116;background:#F1F2F4}
+.tnav.on{color:#0E1116;background:#EDEFF2;box-shadow:inset 0 -2px 0 #2F5BFF}
+/* content themes */
+.th-dk{--tx:#EEF1F6;--mut:#8B93A5;--mut2:#A6AEBF;--dim:#6B7386;--card:#161A22;--row:#1C212B;--sub:#12151C;--ln:#262B37;--ln2:#2C3240;--vt:#6A8CFF;--up:#4BE08F;--dn:#FF7B7B;--soft:#1B202A;--tint:rgba(106,140,255,.10);--tintbd:rgba(106,140,255,.45);--sh:none;--hs:#1E232D;
+--qb:#FF7A93;--rb:#3EE0B4;--wr:#62B0FF;--te:#FFAE5C;color:#EEF1F6}
+.th-lt{--tx:#12151B;--mut:#5C6370;--mut2:#4A515E;--dim:#8A909C;--card:#FFFFFF;--row:#FFFFFF;--sub:#F6F7F9;--ln:#E3E6EB;--ln2:#CDD2DA;--vt:#2449D8;--up:#14894A;--dn:#D63B3B;--soft:#EEF0F3;--tint:rgba(47,91,255,.08);--tintbd:#AFC0FF;--sh:0 1px 2px rgba(16,20,28,.05);--hs:#E9EBEF;
+--qb:#E0446A;--rb:#0FA37E;--wr:#2B80D9;--te:#E07A16;color:#12151B}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:16px;box-shadow:var(--sh)}
+.h3{margin:0;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:24px;line-height:1}
+/* NFL band */
+.gband{display:flex;align-items:stretch;border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--ln);box-shadow:var(--sh)}
+.glab{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;gap:3px;padding:10px 18px;background:#07080B;color:#EEF1F6;line-height:1}
+.gwrap{position:relative;overflow:hidden;flex:1 1 auto;min-width:0;padding:8px 0 8px 8px}
+.grow{display:flex;gap:10px;transition:transform .35s ease}
+.garr{position:absolute;top:0;bottom:0;z-index:2;width:48px;border:0;display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.garr.l{left:0;background:linear-gradient(90deg,var(--card) 50%,rgba(0,0,0,0))}
+.garr.r{right:0;background:linear-gradient(270deg,var(--card) 50%,rgba(0,0,0,0))}
+.gchip{position:relative;flex:0 0 166px;display:flex;flex-direction:column;gap:4px;padding:9px 11px;border-radius:12px;background:var(--sub);border:1px solid var(--ln);color:var(--tx);text-align:left}
+.gchip.live{border-color:var(--tintbd)}
+.gchip.sel{background:var(--tint);box-shadow:inset 0 0 0 2px #2F5BFF;border-color:transparent}
+.gchip.idle{cursor:default}
+.gl{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700}
+.gl .t{width:36px}
+.gl .v{margin-left:auto;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:17px}
+.gl .v.lose{color:var(--dim)}
+.pd{display:inline-flex;align-items:center;gap:3px}
+.pd i{display:block;width:6px;height:6px;border-radius:50%}
+.pd i.me{background:#2F5BFF}
+.th-dk .pd i.me{background:#6A8CFF}
+.pd i.op{background:#E5484D}
+.pd .sep{width:1px;height:9px;margin:0 2px;background:var(--ln2)}
+.glab .pd i.me{background:#6A8CFF}
+/* featured scoreboard */
+.sb{display:grid;grid-template-columns:minmax(0,1fr) 260px minmax(0,1fr);align-items:stretch;border-radius:14px;overflow:hidden;height:118px}
+.tm{position:relative;display:flex;align-items:center;gap:18px;padding:0 28px;color:#fff}
+.tm.r{flex-direction:row-reverse}
+.tm .ab{font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;font-size:52px;line-height:1}
+.tm .nm{font-size:13px;font-weight:600;color:rgba(255,255,255,.8)}
+.tm .sc{margin-left:auto;font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:64px;line-height:1;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+.tm.r .sc{margin-left:0;margin-right:auto}
+.tm .to{display:flex;gap:4px;margin-top:6px}
+.tm .to i{display:block;width:16px;height:4px;border-radius:2px;background:rgba(255,255,255,.85)}
+.tm .to i.used{background:rgba(255,255,255,.25)}
+.tm.r .nmw{display:flex;flex-direction:column;align-items:flex-end}
+.mid{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:#07080B;color:#EEF1F6}
+.dd{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:7px;background:#F5C542;color:#0A0C10;font-size:13px;font-weight:800}
+.rz{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:4px;background:#FF5A5A;color:#fff;font-size:10px;font-weight:800;letter-spacing:.03em}
+/* field */
+.field{position:relative;height:132px;border-radius:12px;overflow:hidden;background:#2B7A36}
+.field.sm{height:56px;border-radius:9px}
+.ez{position:absolute;top:0;bottom:0;width:8.333%;display:flex;align-items:center;justify-content:center}
+.ez.l{left:0}.ez.r{right:0}
+.ez span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;font-size:22px;letter-spacing:.12em;color:rgba(255,255,255,.92)}
+.ez.r span{transform:none}
+.field.sm .ez span{font-size:12px;letter-spacing:.06em}
+.turf{position:absolute;top:0;bottom:0;left:8.333%;right:8.333%;background:repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 2px,transparent 2px 10%),repeating-linear-gradient(90deg,#2E8540 0 10%,#2A7A3A 10% 20%)}
+.yn{position:absolute;bottom:6px;transform:translateX(-50%);font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:15px;color:rgba(255,255,255,.55)}
+.rzone{position:absolute;top:0;bottom:0;width:20%;background:repeating-linear-gradient(-45deg,rgba(255,90,90,.18) 0 6px,rgba(255,90,90,.06) 6px 12px)}
+.drv{position:absolute;top:50%;height:16px;transform:translateY(-50%);border-radius:8px;background:rgba(47,91,255,.55);box-shadow:0 0 0 1px rgba(255,255,255,.35)}
+.field.sm .drv{height:8px;border-radius:4px}
+.los{position:absolute;top:0;bottom:0;width:3px;margin-left:-1.5px;background:#6A8CFF;box-shadow:0 0 0 1px rgba(10,12,16,.25)}
+.fdl{position:absolute;top:0;bottom:0;width:3px;margin-left:-1.5px;background:#F5C542}
+.ballm{position:absolute;top:50%;transform:translate(-50%,-50%);filter:drop-shadow(0 2px 3px rgba(0,0,0,.5))}
+.ftag{position:absolute;top:8px;transform:translateX(-50%);padding:2px 7px;border-radius:5px;background:rgba(7,8,11,.82);color:#fff;font-size:11px;font-weight:700;white-space:nowrap}
+/* plays + exposure */
+.play{display:grid;grid-template-columns:70px minmax(0,1fr);gap:14px;padding:13px 0;border-top:1px solid var(--ln)}
+.play:first-of-type{border-top:0}
+.play .tt{font-size:12px;font-weight:600;color:var(--mut)}
+.play .tx{font-size:14px;line-height:1.4}
+.play.quiet .tx{color:var(--mut)}
+.td{display:inline-flex;align-items:center;height:18px;padding:0 6px;margin-right:6px;border-radius:4px;background:var(--tx);color:var(--card);font-size:10px;font-weight:800;letter-spacing:.04em;vertical-align:1px}
+.fx{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.fxc{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 8px 0 3px;border-radius:7px;background:var(--soft);font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:15px}
+.ex{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:10px;align-items:center;padding:11px 0;border-top:1px solid var(--ln)}
+.ex:first-of-type{border-top:0}
+.hs{width:36px;height:36px;border-radius:50%;background:var(--hs) url(/a/4170e5c447395148b28bf4ffbdf45275.svg) center bottom/100% 100% no-repeat}
+.roles{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.role{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 7px 0 2px;border-radius:6px;font-size:11px;font-weight:700}
+.role .lsq{width:18px;height:18px;font-size:8px;border-radius:4px}
+.role.own{background:var(--tint);color:var(--vt);box-shadow:inset 0 0 0 1px var(--tintbd)}
+.role.face{background:var(--soft);color:var(--mut2)}
+.role.bn{background:transparent;color:var(--dim);box-shadow:inset 0 0 0 1px var(--ln2)}
+.netr{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--ln)}
+.netr:first-of-type{border-top:0}
+.netr .lsq{width:28px;height:28px;font-size:11px;border-radius:7px}
+/* status dots: your starter / your bench / opponent starter / opponent bench */
+.dt{display:inline-block;flex:0 0 auto;width:10px;height:10px;border-radius:50%;vertical-align:-1px}
+.dt.ys{background:#2F5BFF}
+.dt.yb{background:#A8B8F2}
+.dt.os{background:#E5484D}
+.dt.ob{background:#F2B3B5}
+.th-dk .dt.ys{background:#6A8CFF}
+.th-dk .dt.yb{background:#3E4C7E}
+.th-dk .dt.os{background:#FF5A5A}
+.th-dk .dt.ob{background:#7A3A3E}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:8px 0 6px;padding:8px 10px;border-radius:9px;background:var(--sub);font-size:12px;color:var(--mut2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.role{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 4px 0 7px;border-radius:7px;background:var(--soft)}
+.role .lsq{width:18px;height:18px;font-size:8px;border-radius:4px}
+.role.ys{background:var(--tint);box-shadow:inset 0 0 0 2px #2F5BFF}
+.th-dk .role.ys{box-shadow:inset 0 0 0 2px #6A8CFF}
+.role.yb,.role.ob{background:transparent;box-shadow:inset 0 0 0 1px var(--ln2)}
+.ex{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:10px;align-items:center;padding:11px 10px;margin:0 -10px;border-top:1px solid var(--ln);border-radius:10px}
+.ex.mine{box-shadow:inset 3px 0 0 #2F5BFF;background:linear-gradient(90deg,var(--tint),rgba(0,0,0,0) 60%)}
+.th-dk .ex.mine{box-shadow:inset 3px 0 0 #6A8CFF}
+.ptsx{display:flex;flex-direction:column;align-items:flex-end;gap:3px;text-align:right}
+.boom{max-width:130px;font-size:11px;font-weight:600;line-height:1.25;color:var(--dn)}
+.netr.mine{box-shadow:inset 3px 0 0 #2F5BFF;padding-left:10px;margin-left:-10px;background:linear-gradient(90deg,var(--tint),rgba(0,0,0,0) 60%);border-radius:0 8px 8px 0}
+.th-dk .netr.mine{box-shadow:inset 3px 0 0 #6A8CFF}
+.mixd{display:flex;gap:4px;margin-top:4px}
+.mixd .dt{width:8px;height:8px}
+.fxc.mine{box-shadow:inset 0 0 0 2px #2F5BFF;background:var(--tint)}
+.th-dk .fxc.mine{box-shadow:inset 0 0 0 2px #6A8CFF}
+.play.mine .tx{font-weight:600}
+.srow{display:grid;grid-template-columns:70px 44px 30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--ln)}
+.srow:first-of-type{border-top:0}
+.srow .tt{font-size:12px;font-weight:600;color:var(--mut)}
+.srow .tab{display:inline-flex;align-items:center;justify-content:center;height:22px;border-radius:5px;color:#fff;font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;font-size:14px}
+.srow .kind{font-size:11px;font-weight:800;color:var(--mut2)}
+.srow .tx{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:14px}
+.srow .run{font-size:17px;font-weight:800;white-space:nowrap}
+.srow.mine{box-shadow:inset 3px 0 0 #2F5BFF;padding-left:10px;background:linear-gradient(90deg,var(--tint),rgba(0,0,0,0) 60%)}
+.th-dk .srow.mine{box-shadow:inset 3px 0 0 #6A8CFF}
+.ib{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:0;border-radius:8px;background:var(--soft);color:var(--mut2)}
+.ib:hover{color:var(--tx)}
+.addslot{display:flex;align-items:center;justify-content:center;min-height:330px;padding:20px;border-radius:16px;border:2px dashed var(--ln2);background:transparent}
+.addbtn{display:flex;flex-direction:column;align-items:center;gap:8px;border:0;background:transparent;color:var(--tx);font-size:15px}
+.plus{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:#2F5BFF;color:#fff;font-size:30px;font-weight:400;line-height:1}
+.pickr{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;border:1px solid var(--ln);background:var(--card);color:var(--tx);text-align:left}
+.pickr:hover{border-color:#2F5BFF}
+.pickr.later{opacity:.55;cursor:default}
+.pickr.later:hover{border-color:var(--ln)}
+/* magenta option for the opponent */
+.opp-mg .dt.os{background:#D21F96}
+.opp-mg .dt.ob{background:#F2B5DE}
+.th-dk.opp-mg .dt.os{background:#F052C0}
+.th-dk.opp-mg .dt.ob{background:#6B2C59}
+.opp-mg .pd i.op{background:#D21F96}
+.th-dk.opp-mg .pd i.op{background:#F052C0}
+.opp-mg .boom{color:#C0188A}
+.th-dk.opp-mg .boom{color:#F27ACF}
+.sstog{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border:0;border-radius:9px;background:var(--sub);color:var(--tx);font-size:13px;font-weight:700;text-align:left}
+.sstog:hover{background:var(--soft)}
+.sstog .chev{margin-left:auto;transition:transform .2s ease}
+.sstog.open .chev{transform:rotate(180deg)}
+.mini{display:flex;flex-direction:column}
+.mini .srow{grid-template-columns:62px 38px 26px minmax(0,1fr) auto;gap:8px;padding:7px 0}
+.mini .srow .tx{font-size:13px}
+.mini .srow .run{font-size:15px}
+.mini .srow .tab{height:20px;font-size:13px}
+.mini .srow.mine{padding-left:8px}
+/* multi-view grid */
+.rzc{display:flex;flex-direction:column;gap:12px;padding:14px;text-align:left;color:var(--tx)}
+.rzc.hotc{box-shadow:inset 0 0 0 2px #FF5A5A,var(--sh);border-color:transparent}
+.msb{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;border-radius:10px;overflow:hidden;height:56px}
+.msb .tmm{display:flex;align-items:center;gap:10px;padding:0 14px;color:#fff}
+.msb .tmm.r{flex-direction:row-reverse}
+.msb .ab{font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;font-size:26px}
+.msb .sc{margin-left:auto;font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:32px}
+.msb .tmm.r .sc{margin-left:0;margin-right:auto}
+.msb .mm{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:0 14px;background:#07080B;color:#EEF1F6;font-size:12px;font-weight:700;min-width:118px}
+/* rail: cross-league tools */
+.xl{margin-top:12px;padding:12px 8px 8px;border-radius:14px;background:#14171E;border:1px solid #242936}
+.xlh{display:block;padding:0 6px 8px;font-size:11px;font-weight:800;letter-spacing:.06em;color:#8B93A5}
+.xt{position:relative;display:flex;align-items:center;gap:11px;padding:10px;border-radius:11px;color:#EEF1F6;text-decoration:none}
+.xt:hover{background:#1B1F28}
+.xt .ico{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:#1E2430;color:#9DB3FF}
+.xt b{display:block;font-size:14px}
+.xt small{display:block;font-size:12px;color:#8B93A5}
+.xb{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#FFB547;color:#0A0C10;font-size:12px;font-weight:800}
+.xpro{display:inline-flex;align-items:center;height:16px;padding:0 5px;margin-left:5px;border-radius:4px;background:linear-gradient(90deg,#2F5BFF,#7B5CFF);color:#fff;font-size:9px;font-weight:800;letter-spacing:.04em;vertical-align:2px}
+.ci .xbd{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#FFB547;color:#0A0C10;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+</style>
+</helmet>
+<div class="ng" style="min-height: 100vh; background: #0F1218">
+<!-- Prototype controls -->
+<div style="display: flex; justify-content: center; align-items: center; gap: 10px; padding: 8px 16px; background: #000; border-bottom: 1px solid #1C202A">
+<span style="font-size: 12px; color: #8B93A5">Prototype · Content</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{themes}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<button class="pbtn" style="margin-left: 10px; background: #151922; color: #F5C542" onClick="{{simPlay}}">+ Simulate a new big play</button>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">Opponent color</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{oppCols}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+</div>
+<!-- TOP BAND: your matchup in every league -->
+<div style="display: flex; align-items: stretch; background: #07080B; border-bottom: 1px solid #1C202A">
+<a href="#" aria-label="Fanball home" style="flex: 0 0 220px; display: flex; align-items: center; padding: 0 18px; border-right: 1px solid #1C202A">
+<img src="/a/6d0fd2687e0f4e908cbe7777ef1d6bd1.webp" alt="Fanball" style="height: 46px; width: auto; display: block">
+</a>
+<div style="flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; gap: 3px; padding: 10px 18px; border-right: 1px solid #1C202A; line-height: 1">
+<span class="num" style="font-size: 20px; font-weight: 900">WEEK 7</span>
+<span class="num" style="font-size: 14px; font-weight: 800; letter-spacing: .06em; color: #8B93A5">MY LEAGUES</span>
+</div>
+<div class="strip">
+<div class="striprow" style="transform: translateX({{stripX}})">
+<sc-for list="{{mine}}" as="c" hint-placeholder-count="6">
+<a href="#" class="{{c.cls}}" title="{{c.tip}}">
+<span class="ln"><span class="lsq" style="background: {{c.hue}}">{{c.init}}</span><span class="ab">{{c.me}}</span><span class="tics"><sc-for list="{{c.at}}" as="k" hint-placeholder-count="2"><span class="tic" style="background: {{k}}"></span></sc-for><span class="tp" style="color: {{c.atc}}">{{c.ap}}</span></span><span class="{{c.aS}}">{{c.ms}}</span></span>
+<span class="ln" style="padding-top: 0"><span style="width: 20px"></span><span class="ab">{{c.opp}}</span><span class="tics"><sc-for list="{{c.bt}}" as="k" hint-placeholder-count="1"><span class="tic" style="background: {{k}}"></span></sc-for><span class="tp" style="color: {{c.btc}}">{{c.bp}}</span></span><span class="{{c.bS}}">{{c.os}}</span></span>
+<span class="ft">{{c.name}}</span>
+</a>
+</sc-for>
+</div>
+<sc-if value="{{canPrev}}"><button class="sarr l" onClick="{{stripPrev}}" aria-label="Earlier leagues"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button></sc-if>
+<sc-if value="{{canNext}}"><button class="sarr r" onClick="{{stripNext}}" aria-label="More leagues"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button></sc-if>
+</div>
+</div>
+<!-- BIG PLAYS: every game, 20+ yard plays and all scores -->
+<div class="bp" aria-label="Big plays around the league">
+<span class="bplab"><svg width="18" height="18" viewBox="0 0 24 24" fill="#F5C542" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"></path></svg><span style="display: flex; flex-direction: column; line-height: 1">BIG PLAYS<small>newest first · 20+ yds and every score</small></span></span>
+<div class="bpview">
+<div class="bptrack" style="transform: translateX({{bpX}})">
+<sc-for list="{{bigPlays}}" as="b" hint-placeholder-count="6">
+<span class="{{b.cls}}" title="{{b.who}} {{b.txt}} · {{b.game}} {{b.when}}"><sc-if value="{{b.isNew}}"><span class="bpnew">NEW</span></sc-if><span class="tt" style="background: {{b.c}}">{{b.team}}</span><span class="{{b.kCls}}">{{b.k}}</span><span class="d"><b>{{b.who}}</b> {{b.txt}}</span><sc-if value="{{b.mine}}"><span class="mine" title="Involves one of your starters"></span></sc-if><span class="w">{{b.game}} · {{b.when}}</span></span>
+</sc-for>
+</div>
+<sc-if value="{{bpPrev}}"><button class="bparr l" onClick="{{bpLeft}}" aria-label="Newer plays"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button></sc-if>
+<sc-if value="{{bpPrev}}"><button class="bplatest" onClick="{{bpHome}}">Back to latest</button></sc-if>
+<sc-if value="{{bpNext}}"><button class="bparr r" onClick="{{bpRight}}" aria-label="Older plays"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button></sc-if>
+</div>
+</div>
+<div style="display: flex; align-items: stretch">
+<!-- COLLAPSED RAIL -->
+<nav class="crail" aria-label="Your leagues">
+<a href="#" class="ci on" title="Game Day"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"></rect><path d="M8 21h8M12 17v4"></path><path d="m10.5 8.5 4 2.5-4 2.5z" fill="currentColor"></path></svg></a>
+<span class="csep"></span>
+<sc-for list="{{railL}}" as="l" hint-placeholder-count="6">
+<a href="#" class="ci" title="{{l.name}}"><span class="lq" style="background: {{l.hue}}">{{l.init}}</span><span class="st" style="background: {{l.sc}}"></span></a>
+</sc-for>
+<span class="csep"></span>
+<a href="#" class="ci" title="Game Plan · set every lineup at once" style="position: relative"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="17" r="2.6"></circle><path d="M4 4l4 4M8 4 4 8"></path><path d="M16 15l4 4M20 15l-4 4"></path><path d="M9 15c3-6 6-8 9-9"></path><path d="m15 5 3 1-1 3"></path></svg><span class="xbd">4</span></a>
+<a href="#" class="ci" title="The Wire · adds, drops and claims"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"></path></svg></a>
+<span class="csep"></span>
+<a href="#" class="ci" title="League chat"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path></svg><span class="bdg">3</span></a>
+<a href="#" class="ci" title="Transactions"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7h13l-4-4"></path><path d="M17 17H4l4 4"></path></svg></a>
+<a href="#" class="ci" title="Expand rail" style="margin-top: auto"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="m6 6 6 6-6 6M13 6l6 6-6 6"></path></svg></a>
+</nav>
+<!-- CONTENT -->
+<div style="flex: 1 1 auto; min-width: 0; background: {{pageBg}}">
+<header style="background: #fff; color: #0E1116; border-bottom: 1px solid #E3E6EB">
+<div style="padding: 10px 28px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap">
+<span style="display: flex; align-items: center; gap: 10px">
+<span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; background: #2F5BFF; color: #fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"></rect><path d="M8 21h8M12 17v4"></path><path d="m10.5 8.5 4 2.5-4 2.5z" fill="currentColor"></path></svg></span>
+<span style="display: flex; flex-direction: column; line-height: 1.15"><b style="font-size: 15px">Game Day</b><span style="font-size: 12px; color: #5C6370">Sunday, Week 7 · all 6 of your leagues</span></span>
+</span>
+<nav style="display: flex; gap: 2px; flex: 1 1 auto">
+<button class="{{tabF}}" onClick="{{goF}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect></svg>Featured game</button>
+<button class="{{tabM}}" onClick="{{goM}}"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="7" cy="7" r="3"></circle><circle cx="17" cy="7" r="3"></circle><circle cx="7" cy="17" r="3"></circle><circle cx="17" cy="17" r="3"></circle></svg>Multi-view <span style="font-size: 12px; font-weight: 600; color: #8A909C">{{mvCount}}</span></button>
+</nav>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #5C6370"><span class="ldot" style="background: #2F5BFF; box-shadow: none"></span>4 games live · 22 of your starters playing</span>
+<span style="display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: #0E1116; color: #fff; font-weight: 700; font-size: 13px">CP</span>
+</div>
+</header>
+<main class="{{mainCls}}" style="max-width: 1320px; margin: 0 auto; padding: 22px 28px 72px; display: flex; flex-direction: column; gap: 20px">
+<!-- NFL games band -->
+<section class="gband" aria-label="NFL games">
+<div class="glab">
+<span class="num" style="font-size: 20px; font-weight: 900">NFL</span>
+<span class="num" style="font-size: 14px; font-weight: 800; letter-spacing: .06em; color: #8B93A5">SCOREBOARD</span>
+<span class="pd" style="margin-top: 5px; font-size: 10px; font-weight: 600; color: #8B93A5; gap: 4px"><i class="me"></i>Yours<i class="op" style="margin-left: 4px"></i>Facing</span>
+</div>
+<div class="gwrap">
+<div class="grow" style="transform: translateX({{gX}})">
+<sc-for list="{{nfl}}" as="n" hint-placeholder-count="10">
+<button class="{{n.cls}}" onClick="{{n.pick}}" title="{{n.tip}}">
+<span class="gl"><span class="t">{{n.a}}</span><sc-if value="{{n.aBall}}"><svg class="fb" width="14" height="9" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if><span class="{{n.aCls}}">{{n.as}}</span></span>
+<span class="gl"><span class="t">{{n.b}}</span><sc-if value="{{n.bBall}}"><svg class="fb" width="14" height="9" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if><span class="{{n.bCls}}">{{n.bs}}</span></span>
+<span style="display: flex; align-items: center; gap: 6px; margin-top: 2px; font-size: 11px; font-weight: 600; min-height: 16px"><sc-if value="{{n.rz}}"><span class="rz" style="height: 16px; font-size: 9px; padding: 0 5px">RED ZONE</span></sc-if><span style="color: {{n.sc}}">{{n.st}}</span></span>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 11px"><span class="pd"><sc-for list="{{n.md}}" as="d" hint-placeholder-count="3"><i class="me"></i></sc-for><span class="sep"></span><sc-for list="{{n.od}}" as="d" hint-placeholder-count="2"><i class="op"></i></sc-for></span></span>
+</button>
+</sc-for>
+</div>
+<sc-if value="{{gPrev}}"><button class="garr l" onClick="{{gLeft}}" aria-label="Earlier games"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button></sc-if>
+<sc-if value="{{gNext}}"><button class="garr r" onClick="{{gRight}}" aria-label="More games"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button></sc-if>
+</div>
+</section>
+<!-- ===== FEATURED GAME ===== -->
+<sc-if value="{{isFeat}}">
+<section class="card" style="padding: 16px; display: flex; flex-direction: column; gap: 14px">
+<div class="sb">
+<div class="tm" style="background: {{g.a.bg}}">
+<span class="nmw"><span class="ab">{{g.a.ab}}</span><span class="nm">{{g.a.nm}} · {{g.a.rec}}</span><span class="to"><sc-for list="{{g.a.to}}" as="t" hint-placeholder-count="3"><i class="{{t}}"></i></sc-for></span></span>
+<sc-if value="{{g.aBall}}"><svg class="fb" width="26" height="17" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if>
+<span class="sc">{{g.a.sc}}</span>
+</div>
+<div class="mid">
+<span class="num" style="font-size: 30px; font-weight: 900; line-height: 1">{{g.clock}}</span>
+<span class="dd">{{g.dd}}</span>
+<sc-if value="{{g.rz}}"><span class="rz">RED ZONE</span></sc-if>
+</div>
+<div class="tm r" style="background: {{g.b.bg}}">
+<span class="nmw"><span class="ab">{{g.b.ab}}</span><span class="nm">{{g.b.rec}} · {{g.b.nm}}</span><span class="to"><sc-for list="{{g.b.to}}" as="t" hint-placeholder-count="3"><i class="{{t}}"></i></sc-for></span></span>
+<sc-if value="{{g.bBall}}"><svg class="fb" width="26" height="17" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if>
+<span class="sc">{{g.b.sc}}</span>
+</div>
+</div>
+<div class="field">
+<div class="ez l" style="background: {{g.a.ez}}"><span>{{g.a.ab}}</span></div>
+<div class="ez r" style="background: {{g.b.ez}}"><span>{{g.b.ab}}</span></div>
+<div class="turf">
+<sc-if value="{{g.rz}}"><div class="rzone" style="left: {{g.rzL}}"></div></sc-if>
+<sc-for list="{{yards}}" as="y" hint-placeholder-count="9"><span class="yn" style="left: {{y.x}}">{{y.n}}</span></sc-for>
+<div class="drv" style="left: {{g.dL}}; width: {{g.dW}}"></div>
+<span class="ftag" style="left: {{g.ballX}}">{{g.ddShort}}</span>
+<span class="ballm" style="left: {{g.ballX}}"><svg width="30" height="19" viewBox="0 0 28 18" aria-hidden="true"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></span>
+</div>
+</div>
+<div style="font-size: 13px; color: var(--mut)"><b style="color: var(--tx)">{{g.possName}} drive:</b> {{g.drive}}</div>
+</section>
+<div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<section class="card" style="padding: 18px 20px 10px">
+<h2 class="h3" style="margin-bottom: 8px">Scoring summary</h2>
+<sc-for list="{{g.scores}}" as="s" hint-placeholder-count="4">
+<div class="{{s.cls}}">
+<span class="tt">{{s.t}}</span>
+<span class="tab" style="background: {{s.c}}">{{s.team}}</span>
+<span class="kind">{{s.kind}}</span>
+<span class="tx">{{s.txt}}<sc-for list="{{s.dots}}" as="d" hint-placeholder-count="0"><i class="{{d.cls}}" title="{{d.tip}}"></i></sc-for></span>
+<span class="num run">{{s.run}}</span>
+</div>
+</sc-for>
+</section>
+<section class="card" style="padding: 18px 20px 8px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px">
+<h2 class="h3">Play by play</h2>
+<span style="font-size: 12px; color: var(--mut)">Point swing in every league it touches · newest first</span>
+</div>
+<sc-for list="{{g.plays}}" as="p" hint-placeholder-count="6">
+<div class="{{p.cls}}">
+<span class="tt">{{p.t}}</span>
+<div>
+<div class="tx"><sc-if value="{{p.td}}"><span class="td">TD</span></sc-if>{{p.txt}}</div>
+<sc-if value="{{p.hasFx}}">
+<div class="fx"><sc-for list="{{p.fx}}" as="f" hint-placeholder-count="3"><span class="{{f.cls}}" title="{{f.tip}}"><span class="lsq" style="background: {{f.hue}}">{{f.init}}</span><span style="color: {{f.c}}">{{f.v}}</span></span></sc-for></div>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</section>
+</div>
+<div style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<section class="card" style="padding: 18px 20px 10px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px">
+<h2 class="h3">Net Impact</h2>
+<span style="font-size: 12px; color: var(--mut)">your starters minus theirs, this game</span>
+</div>
+<sc-for list="{{g.net}}" as="n" hint-placeholder-count="5">
+<div class="{{n.cls}}">
+<span class="lsq" style="background: {{n.hue}}">{{n.init}}</span>
+<span style="min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{n.name}}</span><span class="mixd"><sc-for list="{{n.dots}}" as="d" hint-placeholder-count="2"><i class="{{d}}"></i></sc-for></span></span>
+<span class="num" style="font-size: 24px; font-weight: 900; color: {{n.c}}">{{n.v}}</span>
+</div>
+</sc-for>
+</section>
+<section class="card" style="padding: 18px 20px 8px">
+<h2 class="h3">Exposure</h2>
+<div class="legend">
+<span><i class="dt ys"></i>Your starter</span>
+<span><i class="dt yb"></i>Your bench</span>
+<span><i class="dt os"></i>Opponent starter</span>
+<span><i class="dt ob"></i>Opponent bench</span>
+</div>
+<sc-for list="{{g.exp}}" as="x" hint-placeholder-count="7">
+<div class="{{x.cls}}">
+<span class="hs"></span>
+<div style="min-width: 0">
+<div style="font-weight: 700; font-size: 14px">{{x.name}} <span style="font-size: 12px; font-weight: 700; color: {{x.pc}}">{{x.pos}}</span> <span style="font-size: 12px; font-weight: 500; color: var(--mut)">{{x.team}}</span></div>
+<div class="roles"><sc-for list="{{x.roles}}" as="r" hint-placeholder-count="2"><span class="{{r.cls}}" title="{{r.tip}}"><i class="{{r.dot}}"></i><span class="lsq" style="background: {{r.hue}}">{{r.init}}</span></span></sc-for></div>
+</div>
+<span class="ptsx"><span class="num" style="font-size: 26px; font-weight: 900">{{x.pts}}</span><sc-if value="{{x.boom}}"><span class="boom">{{x.boomTxt}}</span></sc-if></span>
+</div>
+</sc-for>
+</section>
+</div>
+</div>
+</sc-if>
+<!-- ===== MULTI-VIEW ===== -->
+<sc-if value="{{isGrid}}">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap">
+<h2 class="h3" style="font-size: 28px">Multi-view</h2>
+<span style="font-size: 13px; color: var(--mut)">Pick up to 4 games · click a game in the scoreboard above to add or remove it</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px">
+<sc-for list="{{mv}}" as="c" hint-placeholder-count="2">
+<div class="{{c.cls}}">
+<div style="display: flex; align-items: center; gap: 8px">
+<b style="font-size: 14px">{{c.a.nm}} at {{c.b.nm}}</b>
+<sc-if value="{{c.rz}}"><span class="rz">RED ZONE</span></sc-if>
+<button class="ib" style="margin-left: auto" onClick="{{c.pick}}" title="Make this the featured game" aria-label="Feature this game"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg></button>
+<button class="ib" onClick="{{c.remove}}" title="Remove from multi-view" aria-label="Remove from multi-view"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+</div>
+<div class="msb">
+<div class="tmm" style="background: {{c.a.bg}}"><span class="ab">{{c.a.ab}}</span><sc-if value="{{c.aBall}}"><svg class="fb" width="18" height="12" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if><span class="sc">{{c.a.sc}}</span></div>
+<div class="mm"><span class="num" style="font-size: 18px; font-weight: 900">{{c.clock}}</span><span style="color: #F5C542">{{c.ddShort}}</span></div>
+<div class="tmm r" style="background: {{c.b.bg}}"><span class="ab">{{c.b.ab}}</span><sc-if value="{{c.bBall}}"><svg class="fb" width="18" height="12" viewBox="0 0 28 18" aria-label="Has the ball"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></sc-if><span class="sc">{{c.b.sc}}</span></div>
+</div>
+<div class="field sm">
+<div class="ez l" style="background: {{c.a.ez}}"><span>{{c.a.ab}}</span></div>
+<div class="ez r" style="background: {{c.b.ez}}"><span>{{c.b.ab}}</span></div>
+<div class="turf">
+<sc-if value="{{c.rz}}"><div class="rzone" style="left: {{c.rzL}}"></div></sc-if>
+<div class="drv" style="left: {{c.dL}}; width: {{c.dW}}"></div>
+<span class="ballm" style="left: {{c.ballX}}"><svg width="20" height="13" viewBox="0 0 28 18" aria-hidden="true"><ellipse cx="14" cy="9" rx="13" ry="8" fill="#C8763A"></ellipse><path d="M9 9h10M12 7v4M14 7v4M16 7v4" stroke="#fff" stroke-width="1.4"></path></svg></span>
+</div>
+</div>
+<span style="font-size: 13px; line-height: 1.4"><b>Last play:</b> {{c.last}}</span>
+<button class="{{c.scCls}}" onClick="{{c.scToggle}}" aria-expanded="{{c.scOpen}}"><span>{{c.scLabel}}</span><span style="font-size: 12px; font-weight: 500; color: var(--mut)">{{c.scCount}}</span><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+<sc-if value="{{c.scOpen}}">
+<div class="mini">
+<sc-for list="{{c.scores}}" as="s" hint-placeholder-count="4">
+<div class="{{s.cls}}">
+<span class="tt">{{s.t}}</span>
+<span class="tab" style="background: {{s.c}}">{{s.team}}</span>
+<span class="kind">{{s.kind}}</span>
+<span class="tx">{{s.txt}}<sc-for list="{{s.dots}}" as="d" hint-placeholder-count="0"><i class="{{d.cls}}" title="{{d.tip}}"></i></sc-for></span>
+<span class="num run">{{s.run}}</span>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 6px; padding-top: 10px; border-top: 1px solid var(--ln)">
+<sc-for list="{{c.net}}" as="n" hint-placeholder-count="4"><span class="{{n.chip}}" title="{{n.name}}"><span class="lsq" style="background: {{n.hue}}">{{n.init}}</span><span style="color: {{n.c}}">{{n.v}}</span></span></sc-for>
+<span style="margin-left: auto; align-self: center; font-size: 12px; color: var(--mut)">Net Impact by league</span>
+</div>
+</div>
+</sc-for>
+<sc-for list="{{slots}}" as="s" hint-placeholder-count="2">
+<div class="addslot">
+<sc-if value="{{s.closed}}">
+<button class="addbtn" onClick="{{s.open}}"><span class="plus">+</span><b>Add game to multi-view</b><span style="font-size: 12px; color: var(--mut)">{{s.hint}}</span></button>
+</sc-if>
+<sc-if value="{{s.isOpen}}">
+<div style="display: flex; flex-direction: column; gap: 6px; width: 100%; max-width: 420px">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px"><b style="font-size: 14px">Choose a game</b><button class="ib" onClick="{{s.close}}" aria-label="Close"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></div>
+<sc-for list="{{pick}}" as="p" hint-placeholder-count="3">
+<button class="{{p.cls}}" onClick="{{p.add}}">
+<span class="num" style="font-size: 17px; font-weight: 800; min-width: 92px; text-align: left">{{p.label}}</span>
+<span style="font-size: 12px; color: {{p.sc}}; font-weight: 600">{{p.st}}</span>
+<span class="pd" style="margin-left: auto"><sc-for list="{{p.md}}" as="d" hint-placeholder-count="2"><i class="me"></i></sc-for><span class="sep"></span><sc-for list="{{p.od}}" as="d" hint-placeholder-count="1"><i class="op"></i></sc-for></span>
+</button>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-for>
+</div>
+</sc-if>
+</main>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"view":{"editor":"enum","options":["featured","multi"],"default":"featured"},"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this, st = this.state || {};
+var theme = st.theme || 'light', isLt = theme === 'light';
+var view = st.view || this.props.view || 'featured';
+var sel = st.game || 'DETCHI';
+var mvKeys = st.mv || ['DETCHI', 'KCDEN'];
+var openSlot = st.openSlot === true;
+var opp = st.opp || 'magenta';
+var scOpenMap = st.scOpen || {};
+var UP = 'var(--up)', DN = 'var(--dn)', MUT = 'var(--mut)', VT = 'var(--vt)';
+var GREEN = '#2FD27A', RED = '#FF5A5A', YELLOW = '#F5C542';
+// ---- your leagues
+var L = {
+EL: { name: 'The Empire League', init: 'EL', hue: '#b07a1e', me: 'SYN', opp: 'HRT', ms: '139.6', os: '93.5', p: 88 },
+LM: { name: 'Lake Minnetonka Keeper', init: 'LM', hue: '#1e4f8a', me: 'LUN', opp: 'WLY', ms: '101.4', os: '107.5', p: 41 },
+DD: { name: 'Dynasty Degenerates', init: 'DD', hue: '#2f7a46', me: 'DGN', opp: 'BRK', ms: '118.2', os: '112.0', p: 58 },
+SS: { name: 'Superflex Syndicate', init: 'SS', hue: '#7a3b12', me: 'SFX', opp: 'TWO', ms: '87.3', os: '64.9', p: 79 },
+OP: { name: 'Office Pool 2026', init: 'OP', hue: '#a6335a', me: 'CPA', opp: 'HRB', ms: '92.6', os: '95.1', p: 47 },
+BB: { name: 'Best Ball Pod #14', init: 'BB', hue: '#5b2aa6', me: 'BB14', opp: '3RD', ms: '126.8', os: 'of 12', p: null }
+};
+var order = ['EL', 'LM', 'DD', 'SS', 'OP', 'BB'];
+// ---- live games. roles: ys = your starter, yb = your bench, os = opponent starter, ob = opponent bench
+var G = {
+DETCHI: {
+a: { ab: 'DET', nm: 'Detroit', rec: '5-1', sc: '14', bg: 'linear-gradient(120deg,#0076B6,#00548A)', ez: '#0076B6', to: 3 },
+b: { ab: 'CHI', nm: 'Chicago', rec: '3-3', sc: '7', bg: 'linear-gradient(240deg,#0B162A,#1d2c4a)', ez: '#C83803', to: 2 },
+clock: 'Q2 4:51', poss: 'a', dir: 1, ball: 88, start: 27, dd: '2nd & 6 at CHI 12', ddShort: '2nd & 6', drive: '8 plays · 61 yards · 4:12',
+last: 'Gibbs 22-yd run to the CHI 12',
+scores: [
+['Q1 2:15', 'a', 'TD', 'Jahmyr Gibbs 3-yd run (Bates kick)', 'DET 7 – 0', ['Jahmyr Gibbs']],
+['Q2 13:48', 'b', 'TD', 'Caleb Williams 25-yd pass to Rome Odunze (Santos kick)', 'CHI 7 – 7', ['Caleb Williams']],
+['Q2 11:02', 'a', 'TD', 'Jared Goff 41-yd pass to Jameson Williams (Bates kick)', 'DET 14 – 7', ['Jared Goff', 'Jameson Williams']]
+],
+plays: [
+['Q2 4:51', 'Jahmyr Gibbs runs up the middle for 22 yards to the CHI 12.', false, [['EL', 2.2], ['LM', 2.2], ['DD', -2.2]]],
+['Q2 5:30', 'Jared Goff pass short right to Amon-Ra St. Brown for 9 yards.', false, [['OP', 1.5], ['LM', -1.9]]],
+['Q2 6:12', 'Gibbs 6-yard catch out of the backfield.', false, [['EL', 1.6], ['LM', 1.6], ['DD', -1.6]]],
+['Q2 8:40', 'CHI punts, fair catch at the DET 27.', false, []],
+['Q2 9:31', 'Caleb Williams scrambles for 14 yards.', false, [['SS', 1.4]]],
+['Q2 10:02', 'Williams pass to DJ Moore for 10 yards.', false, [['DD', 2.0], ['EL', -2.0], ['SS', 0.4]]],
+['Q2 11:02', 'Goff 41-yard touchdown pass to Jameson Williams. Extra point good.', true, [['OP', -5.6]]],
+['Q2 13:48', 'Williams 25-yard touchdown pass to Rome Odunze. Extra point good.', true, [['SS', 5.0]]]
+],
+exp: [
+['Jahmyr Gibbs', 'RB', 'DET', '9.6', [['EL', 'ys'], ['LM', 'ys'], ['DD', 'os']]],
+['Caleb Williams', 'QB', 'CHI', '9.8', [['SS', 'ys']]],
+['Amon-Ra St. Brown', 'WR', 'DET', '7.8', [['OP', 'ys'], ['LM', 'os']]],
+['DJ Moore', 'WR', 'CHI', '6.2', [['DD', 'ys'], ['EL', 'os']]],
+['Jared Goff', 'QB', 'DET', '11.2', [['OP', 'os']]],
+['Khalil Herbert', 'RB', 'CHI', '4.1', [['EL', 'os']]],
+['Jameson Williams', 'WR', 'DET', '10.1', [['DD', 'ob']], 'Left on your Dynasty opponent’s bench'],
+['Sam LaPorta', 'TE', 'DET', '3.4', [['SS', 'ys'], ['EL', 'yb']]]
+],
+net: [['SS', 13.2], ['LM', 1.8], ['EL', -0.7], ['DD', -3.4], ['OP', -3.4]]
+},
+KCDEN: {
+a: { ab: 'KC', nm: 'Kansas City', rec: '5-1', sc: '21', bg: 'linear-gradient(120deg,#E31837,#a50f26)', ez: '#E31837', to: 1 },
+b: { ab: 'DEN', nm: 'Denver', rec: '4-2', sc: '16', bg: 'linear-gradient(240deg,#FB4F14,#c23a08)', ez: '#002244', to: 2 },
+clock: 'Q4 1:40', poss: 'b', dir: -1, ball: 38, start: 75, dd: '3rd & 4 at KC 38', ddShort: '3rd & 4', drive: '6 plays · 37 yards · 2:58',
+last: 'Bo Nix to Courtland Sutton, 12 yards',
+scores: [
+['Q1 8:12', 'b', 'FG', 'Wil Lutz 44-yd field goal', 'DEN 3 – 0', []],
+['Q1 1:05', 'a', 'TD', 'Kareem Hunt 2-yd run (Butker kick)', 'KC 7 – 3', []],
+['Q2 4:40', 'b', 'TD', 'Bo Nix 12-yd pass to Courtland Sutton (Lutz kick)', 'DEN 10 – 7', ['Bo Nix', 'Courtland Sutton']],
+['Q3 9:15', 'a', 'TD', 'Patrick Mahomes 35-yd pass to Xavier Worthy (Butker kick)', 'KC 14 – 10', []],
+['Q3 1:22', 'b', 'FG', 'Wil Lutz 51-yd field goal', 'KC 14 – 13', []],
+['Q4 9:50', 'b', 'FG', 'Wil Lutz 33-yd field goal', 'DEN 16 – 14', []],
+['Q4 6:02', 'a', 'TD', 'Mahomes 4-yd pass to Travis Kelce (Butker kick)', 'KC 21 – 16', ['Travis Kelce']]
+],
+plays: [
+['Q4 1:40', 'Bo Nix pass deep left to Courtland Sutton for 12 yards.', false, [['DD', 2.2], ['LM', -0.5]]],
+['Q4 2:21', 'Nix scrambles for 8 yards.', false, [['LM', -0.8]]],
+['Q4 4:38', 'Patrick Mahomes to Travis Kelce for 14 yards.', false, [['EL', 2.4], ['SS', -2.4]]],
+['Q4 6:02', 'Kelce 4-yard touchdown catch. Extra point good.', true, [['EL', 7.4], ['SS', -7.4]]]
+],
+exp: [
+['Travis Kelce', 'TE', 'KC', '14.2', [['EL', 'ys'], ['SS', 'os']]],
+['Bo Nix', 'QB', 'DEN', '15.0', [['LM', 'os']]],
+['Courtland Sutton', 'WR', 'DEN', '8.9', [['DD', 'ys']]],
+['Xavier Worthy', 'WR', 'KC', '12.3', [['OP', 'yb']], 'Left on your Office Pool bench']
+],
+net: [['EL', 14.2], ['DD', 8.9], ['SS', -14.2], ['LM', -15.0]]
+},
+SEAARI: {
+a: { ab: 'SEA', nm: 'Seattle', rec: '4-2', sc: '20', bg: 'linear-gradient(120deg,#002244,#0b3a6b)', ez: '#69BE28', to: 2 },
+b: { ab: 'ARI', nm: 'Arizona', rec: '2-4', sc: '17', bg: 'linear-gradient(240deg,#97233F,#6d1529)', ez: '#97233F', to: 1 },
+clock: 'Q4 3:12', poss: 'a', dir: 1, ball: 59, start: 30, dd: '1st & 10 at ARI 41', ddShort: '1st & 10', drive: '5 plays · 29 yards · 2:20',
+last: 'DK Metcalf 9-yard catch on 3rd down',
+scores: [
+['Q1 6:40', 'b', 'FG', 'Chad Ryland 47-yd field goal', 'ARI 3 – 0', []],
+['Q2 10:18', 'a', 'TD', 'Kenneth Walker III 6-yd run (Myers kick)', 'SEA 7 – 3', []],
+['Q2 0:04', 'a', 'FG', 'Jason Myers 52-yd field goal', 'SEA 10 – 3', []],
+['Q3 7:55', 'b', 'TD', 'James Conner 1-yd run (Ryland kick)', 'SEA 10 – 10', []],
+['Q3 2:10', 'a', 'TD', 'Geno Smith 15-yd pass to Jaxon Smith-Njigba (Myers kick)', 'SEA 17 – 10', []],
+['Q4 11:31', 'a', 'FG', 'Jason Myers 38-yd field goal', 'SEA 20 – 10', []],
+['Q4 5:32', 'b', 'TD', 'Kyler Murray 22-yd pass to Trey McBride (Ryland kick)', 'SEA 20 – 17', ['Kyler Murray', 'Trey McBride']]
+],
+plays: [
+['Q4 3:12', 'Geno Smith to DK Metcalf for 9 yards on 3rd & 7.', false, [['EL', 1.9]]],
+['Q4 5:32', 'Kyler Murray 22-yard TD pass to Trey McBride.', true, [['LM', 4.9], ['DD', -8.2]]]
+],
+exp: [
+['Kyler Murray', 'QB', 'ARI', '18.2', [['LM', 'ys']]],
+['Trey McBride', 'TE', 'ARI', '11.4', [['DD', 'os']]],
+['DK Metcalf', 'WR', 'SEA', '8.6', [['EL', 'ys']]]
+],
+net: [['LM', 18.2], ['EL', 8.6], ['DD', -11.4]]
+},
+HOUNE: {
+a: { ab: 'HOU', nm: 'Houston', rec: '4-2', sc: '10', bg: 'linear-gradient(120deg,#03202F,#0d3a52)', ez: '#A71930', to: 3 },
+b: { ab: 'NE', nm: 'New England', rec: '1-5', sc: '10', bg: 'linear-gradient(240deg,#002244,#123a66)', ez: '#C60C30', to: 3 },
+clock: 'Q2 8:02', poss: 'b', dir: -1, ball: 67, start: 80, dd: '2nd & 7 at NE 33', ddShort: '2nd & 7', drive: '3 plays · 13 yards · 1:30',
+last: 'Stefon Diggs 18-yard catch',
+scores: [
+['Q1 9:02', 'b', 'FG', 'Joey Slye 41-yd field goal', 'NE 3 – 0', []],
+['Q1 0:48', 'a', 'FG', "Ka'imi Fairbairn 36-yd field goal", 'HOU 3 – 3', []],
+['Q2 13:20', 'b', 'TD', 'Rhamondre Stevenson 4-yd run (Slye kick)', 'NE 10 – 3', []],
+['Q2 9:44', 'a', 'TD', 'C.J. Stroud 31-yd pass to Nico Collins (Fairbairn kick)', 'HOU 10 – 10', ['C.J. Stroud', 'Nico Collins']]
+],
+plays: [
+['Q2 8:02', 'Drake Maye to Stefon Diggs for 18 yards.', false, [['EL', -3.8]]],
+['Q2 9:44', 'C.J. Stroud 31-yard TD pass to Nico Collins.', true, [['EL', 5.2], ['DD', 9.1], ['OP', -9.1]]]
+],
+exp: [
+['C.J. Stroud', 'QB', 'HOU', '14.3', [['EL', 'ys']]],
+['Nico Collins', 'WR', 'HOU', '12.6', [['DD', 'ys'], ['OP', 'os']]],
+['Stefon Diggs', 'WR', 'NE', '6.8', [['EL', 'os']]]
+],
+net: [['DD', 12.6], ['EL', 7.5], ['OP', -12.6]]
+}
+};
+var liveKeys = ['DETCHI', 'KCDEN', 'SEAARI', 'HOUNE'];
+function sgn(v) { return (v > 0 ? '+' : (v < 0 ? '−' : '')) + Math.abs(v).toFixed(1); }
+function lsq(k) { return { init: L[k].init, hue: L[k].hue, name: L[k].name }; }
+var RTIP = { ys: 'Your starter', yb: 'Your bench', os: 'Opponent starter', ob: 'Opponent bench' };
+var pcd = isLt ? { QB: '#E0446A', RB: '#0FA37E', WR: '#2B80D9', TE: '#E07A16' } : { QB: '#FF7A93', RB: '#3EE0B4', WR: '#62B0FF', TE: '#FFAE5C' };
+function pct(y) { return y + '%'; }
+function build(key) {
+var d = G[key], o = {};
+o.key = key; o.a = Object.assign({}, d.a); o.b = Object.assign({}, d.b);
+o.a.to = [0, 1, 2].map(function (i) { return i < d.a.to ? '' : 'used'; });
+o.b.to = [0, 1, 2].map(function (i) { return i < d.b.to ? '' : 'used'; });
+o.clock = d.clock; o.dd = d.dd; o.ddShort = d.ddShort; o.drive = d.drive; o.last = d.last;
+o.aBall = d.poss === 'a'; o.bBall = d.poss === 'b';
+o.possName = d.poss === 'a' ? d.a.nm : d.b.nm;
+o.ballX = pct(d.ball);
+o.dL = pct(Math.min(d.start, d.ball)); o.dW = pct(Math.abs(d.ball - d.start));
+var toGo = d.dir > 0 ? 100 - d.ball : d.ball;
+o.rz = toGo <= 20; o.rzL = d.dir > 0 ? '80%' : '0%';
+// who's who in this game, for dots on the scoring summary
+var roleOf = {};
+d.exp.forEach(function (x) { roleOf[x[0]] = x[4]; });
+o.scores = d.scores.map(function (s) {
+var dots = [], mine = false;
+s[5].forEach(function (nm) { (roleOf[nm] || []).forEach(function (r) { dots.push({ cls: 'dt ' + r[1], tip: nm + ' · ' + RTIP[r[1]] + ' in ' + L[r[0]].name }); if (r[1] === 'ys') mine = true; }); });
+var t = s[1] === 'a' ? d.a : d.b;
+return { t: s[0], team: t.ab, c: t.ez, kind: s[2], txt: s[3], run: s[4], dots: dots, cls: 'srow' + (mine ? ' mine' : '') };
+});
+o.plays = d.plays.map(function (p) {
+var fx = p[3].map(function (f) { var s = lsq(f[0]); return { init: s.init, hue: s.hue, v: sgn(f[1]), c: f[1] >= 0 ? UP : DN, tip: s.name, cls: f[1] >= 0 ? 'fxc mine' : 'fxc' }; });
+var mine = p[3].some(function (f) { return f[1] > 0; });
+return { t: p[0], txt: p[1], td: p[2], fx: fx, hasFx: fx.length > 0, cls: fx.length ? 'play' + (mine ? ' mine' : '') : 'play quiet' };
+});
+o.exp = d.exp.map(function (x) {
+var hasYs = x[4].some(function (r) { return r[1] === 'ys'; });
+return { name: x[0], pos: x[1], pc: pcd[x[1]], team: x[2], pts: x[3], boom: !!x[5], boomTxt: x[5] || '',
+cls: 'ex' + (hasYs ? ' mine' : ''),
+roles: x[4].map(function (r) { var s = lsq(r[0]); return { init: s.init, hue: s.hue, dot: 'dt ' + r[1], cls: 'role ' + r[1], tip: RTIP[r[1]] + ' · ' + s.name }; }) };
+});
+o.net = d.net.map(function (n) {
+var s = lsq(n[0]), dots = [];
+d.exp.forEach(function (x) { x[4].forEach(function (r) { if (r[0] === n[0] && (r[1] === 'ys' || r[1] === 'os')) dots.push('dt ' + r[1]); }); });
+dots.sort();
+return { init: s.init, hue: s.hue, name: s.name, v: sgn(n[1]), c: n[1] >= 0 ? UP : DN, dots: dots.reverse(), cls: 'netr' + (n[1] > 0 ? ' mine' : ''), chip: n[1] > 0 ? 'fxc mine' : 'fxc' };
+});
+var mine = 0, face = 0;
+d.exp.forEach(function (x) { x[4].forEach(function (r) { if (r[1] === 'ys') mine++; if (r[1] === 'os') face++; }); });
+o.mine = mine; o.face = face;
+o.pick = function () { self.setState({ game: key, view: 'featured' }); };
+o.remove = function () { self.setState({ mv: mvKeys.filter(function (k) { return k !== key; }) }); };
+o.cls = 'card rzc' + (o.rz ? ' hotc' : '');
+o.scOpen = !!scOpenMap[key];
+o.scCls = o.scOpen ? 'sstog open' : 'sstog';
+o.scLabel = o.scOpen ? 'Hide scoring summary' : 'Show scoring summary';
+o.scCount = d.scores.length + (d.scores.length === 1 ? ' score' : ' scores');
+o.scToggle = function () { var m = Object.assign({}, scOpenMap); m[key] = !m[key]; self.setState({ scOpen: m }); };
+return o;
+}
+if (!G[sel]) sel = 'DETCHI';
+var g = build(sel);
+function toggleMv(key) {
+var has = mvKeys.indexOf(key) > -1;
+var next = has ? mvKeys.filter(function (k) { return k !== key; }) : (mvKeys.length < 4 ? mvKeys.concat([key]) : mvKeys);
+self.setState({ mv: next, openSlot: false });
+}
+// ---- NFL chips
+function chip(a, as, b, bs, st2, live, ball, key, md, od) {
+var aw = parseFloat(as) > parseFloat(bs), bw = parseFloat(bs) > parseFloat(as);
+var k = key && G[key] ? build(key) : null;
+var nm = k ? k.mine : md, nf = k ? k.face : od;
+var on = view === 'featured' ? key === sel : mvKeys.indexOf(key) > -1;
+return { a: a, as: as, b: b, bs: bs, st: st2, sc: live ? VT : MUT, aBall: ball === 'a', bBall: ball === 'b',
+rz: !!(k && k.rz), notRz: !(k && k.rz),
+aCls: bw ? 'v lose' : 'v', bCls: aw ? 'v lose' : 'v', inMv: view === 'multi' && on,
+md: Array(nm).fill(1), od: Array(nf).fill(1), tip: nm + ' of your starters · ' + nf + ' opponent starters',
+cls: 'gchip' + (live ? ' live' : ' idle') + (on ? ' sel' : ''),
+pick: function () { if (!key || !G[key]) return; if (view === 'multi') toggleMv(key); else self.setState({ game: key }); } };
+}
+var nfl = [
+chip('DET', '14', 'CHI', '7', 'Q2 4:51', true, 'a', 'DETCHI'),
+chip('KC', '21', 'DEN', '16', 'Q4 1:40', true, 'b', 'KCDEN'),
+chip('SEA', '20', 'ARI', '17', 'Q4 3:12', true, 'a', 'SEAARI'),
+chip('HOU', '10', 'NE', '10', 'Q2 8:02', true, 'b', 'HOUNE'),
+chip('BAL', '–', 'CLE', '–', 'Sun 8:20 PM', false, '', null, 4, 3),
+chip('PHI', '31', 'NYG', '17', 'Final', false, '', null, 3, 1),
+chip('IND', '27', 'MIA', '24', 'Final', false, '', null, 2, 3),
+chip('ATL', '24', 'TB', '20', 'Final', false, '', null, 2, 1),
+chip('LV', '20', 'LAC', '24', 'Final', false, '', null, 1, 2),
+chip('BUF', '30', 'NYJ', '10', 'Final', false, '', null, 2, 2)
+];
+var goff = st.goff || 0, gMax = nfl.length - 5;
+// ---- top band
+var mineCells = order.map(function (k) {
+var l = L[k], at = [], bt = [], atc = '', btc = '', ap = '', bp = '', i;
+if (l.p !== null) {
+var p = l.p, fav = Math.max(p, 100 - p);
+if (fav <= 60) { for (i = 0; i < 2; i++) { at.push(YELLOW); bt.push(YELLOW); } atc = btc = YELLOW; }
+else { var n = fav <= 70 ? 1 : (fav <= 80 ? 2 : 3), aF = p > 50; for (i = 0; i < n; i++) { at.push(aF ? GREEN : RED); bt.push(aF ? RED : GREEN); } atc = aF ? GREEN : RED; btc = aF ? RED : GREEN; }
+ap = p + '%'; bp = (100 - p) + '%';
+}
+var aw = l.p === null || parseFloat(l.ms) >= parseFloat(l.os);
+var touched = G[sel].net.some(function (n) { return n[0] === k; });
+return { init: l.init, hue: l.hue, name: l.p === null ? l.name + ' · best ball' : l.name, me: l.me, opp: l.opp, ms: l.ms, os: l.os,
+at: at, bt: bt, atc: atc, btc: btc, ap: ap, bp: bp, aS: aw ? 's' : 's lose', bS: aw ? 's lose' : 's',
+cls: touched && view === 'featured' ? 'cell hit' : 'cell', tip: touched ? 'Affected by the featured game' : l.name };
+});
+var off = st.off || 0, maxOff = Math.max(0, mineCells.length - 4);
+// ---- multi-view
+var mv = mvKeys.filter(function (k) { return G[k]; }).map(build);
+var free = 4 - mv.length, slots = [];
+for (var si = 0; si < free; si++) {
+var first = si === 0;
+slots.push({ closed: !(first && openSlot), isOpen: first && openSlot,
+hint: first ? 'or click any live game in the scoreboard' : 'Up to 4 games',
+open: function () { self.setState({ openSlot: true }); }, close: function () { self.setState({ openSlot: false }); } });
+}
+var pick = liveKeys.filter(function (k) { return mvKeys.indexOf(k) < 0; }).map(function (k) {
+var b = build(k);
+return { label: G[k].a.ab + ' – ' + G[k].b.ab, st: G[k].clock + (b.rz ? ' · RED ZONE' : ''), sc: b.rz ? '#E5484D' : VT,
+md: Array(b.mine).fill(1), od: Array(b.face).fill(1), cls: 'pickr', add: function () { toggleMv(k); } };
+});
+pick.push({ label: 'BAL – CLE', st: 'Sun 8:20 PM · adds at kickoff', sc: MUT, md: Array(4).fill(1), od: Array(3).fill(1), cls: 'pickr later', add: function () {} });
+// big plays across the whole slate (newest first), regardless of whose players
+var TC = { DET: '#0076B6', CHI: '#C83803', KC: '#E31837', DEN: '#FB4F14', SEA: '#002244', ARI: '#97233F', HOU: '#A71930', NE: '#002244', PHI: '#004C54', NYG: '#0B2265', BUF: '#00338D', NYJ: '#125740', IND: '#002C5F', MIA: '#008E97', LV: '#555', LAC: '#0080C6', ATL: '#A71930', TB: '#D50A0A' };
+var bp = [
+['DET', 'big', '22 YDS', 'Jahmyr Gibbs', '22-yd run to the CHI 12', 'DET–CHI', 'Q2 4:51', true],
+['KC', 'td', 'TD', 'Travis Kelce', '4-yd TD catch from Mahomes', 'KC–DEN', 'Q4 6:02', true],
+['ARI', 'td', 'TD', 'Trey McBride', '22-yd TD catch from Kyler Murray', 'SEA–ARI', 'Q4 5:32', false],
+['BUF', 'big', '47 YDS', 'Khalil Shakir', '47-yd catch-and-run', 'BUF–NYJ', 'Q4 7:10', false],
+['DEN', 'fg', 'FG', 'Wil Lutz', '33-yd field goal', 'KC–DEN', 'Q4 9:50', false],
+['HOU', 'td', 'TD', 'Nico Collins', '31-yd TD catch from C.J. Stroud', 'HOU–NE', 'Q2 9:44', true],
+['NE', 'big', '24 YDS', 'Rhamondre Stevenson', '24-yd run', 'HOU–NE', 'Q2 13:58', false],
+['DET', 'td', 'TD', 'Jameson Williams', '41-yd TD catch from Jared Goff', 'DET–CHI', 'Q2 11:02', false],
+['CHI', 'td', 'TD', 'Rome Odunze', '25-yd TD catch from Caleb Williams', 'DET–CHI', 'Q2 13:48', false],
+['SEA', 'big', '28 YDS', 'Jaxon Smith-Njigba', '28-yd catch over the middle', 'SEA–ARI', 'Q3 3:40', false],
+['PHI', 'td', 'TD', 'Jalen Hurts', '2-yd TD run · final: PHI 31, NYG 17', 'PHI–NYG', 'Final', true],
+['LAC', 'big', '52 YDS', 'Ladd McConkey', '52-yd catch', 'LV–LAC', 'Final', false],
+['MIA', 'td', 'TD', "De'Von Achane", '9-yd TD catch from Tua Tagovailoa', 'IND–MIA', 'Final', false]
+];
+// plays the prototype can "receive" live, newest arrives at the front (left)
+var incoming = [
+['CHI', 'big', '31 YDS', 'DJ Moore', '31-yd catch down the sideline', 'DET–CHI', 'Q2 2:44', true],
+['DEN', 'td', 'TD', 'Courtland Sutton', '9-yd TD catch from Bo Nix', 'KC–DEN', 'Q4 0:38', true],
+['SEA', 'big', '36 YDS', 'Kenneth Walker III', '36-yd run', 'SEA–ARI', 'Q4 1:55', false],
+['DET', 'td', 'TD', 'Jahmyr Gibbs', '12-yd TD run', 'DET–CHI', 'Q2 1:10', true]
+];
+var simN = Math.min(st.sim || 0, incoming.length);
+var feedAll = incoming.slice(0, simN).reverse().concat(bp).slice(0, 30);  // keep the 30 most recent
+bp = feedAll.map(function (b, i) { return { team: b[0], c: TC[b[0]] || '#2A303D', k: b[2], kCls: 'k ' + b[1], who: b[3], txt: b[4], game: b[5], when: b[6], mine: b[7],
+isNew: i === 0 && simN > 0, cls: 'bpi' + (i === 0 ? ' latest' : '') + (i === 0 && simN > 0 ? ' fresh' : '') }; });
+var bpOff = Math.min(st.bpoff || 0, bp.length - 1), bpMax = Math.max(0, bp.length - 2);
+var yards = [10, 20, 30, 40, 50, 40, 30, 20, 10].map(function (n, i) { return { n: n, x: ((i + 1) * 10) + '%' }; });
+return {
+themes: [['dark', 'Dark'], ['light', 'Light']].map(function (k) { return { label: k[1], cls: k[0] === theme ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ theme: k[0] }); } }; }),
+tabF: view === 'featured' ? 'tnav on' : 'tnav', tabM: view === 'multi' ? 'tnav on' : 'tnav',
+goF: function () { self.setState({ view: 'featured' }); }, goM: function () { self.setState({ view: 'multi' }); },
+mvCount: mv.length + '/4',
+mainCls: (isLt ? 'th-lt' : 'th-dk') + (opp === 'magenta' ? ' opp-mg' : ''),
+oppCols: [['red', 'Red'], ['magenta', 'Magenta']].map(function (k) { return { label: k[1], cls: k[0] === opp ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ opp: k[0] }); } }; }), pageBg: isLt ? '#F2F3F5' : '#0F1218',
+isFeat: view === 'featured', isGrid: view === 'multi',
+bandHint: view === 'multi' ? 'Click a live game to add or remove it' : 'Click a live game to feature it',
+mine: mineCells, stripX: (-off * 206) + 'px', canPrev: off > 0, canNext: off < maxOff,
+stripPrev: function () { self.setState({ off: Math.max(0, off - 2) }); },
+stripNext: function () { self.setState({ off: Math.min(maxOff, off + 2) }); },
+railL: order.map(function (k) { var l = L[k]; return { name: l.name, init: l.init, hue: l.hue, sc: l.p === null ? '#8B93A5' : (parseFloat(l.ms) >= parseFloat(l.os) ? '#4BE08F' : '#FF7B7B') }; }),
+nfl: nfl, gX: (-goff * 176) + 'px', gPrev: goff > 0, gNext: goff < gMax,
+gLeft: function () { self.setState({ goff: Math.max(0, goff - 3) }); },
+gRight: function () { self.setState({ goff: Math.min(gMax, goff + 3) }); },
+bigPlays: bp, bpX: (-bpOff * 400) + 'px', bpPrev: bpOff > 0, bpNext: bpOff < bpMax,
+bpLeft: function () { self.setState({ bpoff: Math.max(0, bpOff - 2) }); },
+bpRight: function () { self.setState({ bpoff: Math.min(bpMax, bpOff + 2) }); },
+bpHome: function () { self.setState({ bpoff: 0 }); },
+simPlay: function () { self.setState({ sim: (st.sim || 0) + 1 }); },
+g: g, mv: mv, slots: slots, pick: pick, yards: yards
+};
+}
+}
+</script>
+</body>
+</html>

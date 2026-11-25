@@ -1,0 +1,1426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fanball — Clubhouse</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&amp;family=Onest:wght@400;500;600;700&amp;family=Cinzel:wght@700&amp;family=Alfa+Slab+One&amp;display=swap">
+<style>
+body{margin:0;background:#0F1218}
+a{color:#6A8CFF;text-decoration:none}a:hover{color:#9DB3FF}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+/* team art (badge interiors) */
+.sk-syndicate{background:repeating-linear-gradient(90deg,rgba(255,214,140,.07) 0 1px,transparent 1px 9px),radial-gradient(130% 160% at 50% 0%,#7a1d1d 0%,#2a0606 72%)}
+.sk-kelce{background:repeating-linear-gradient(0deg,rgba(255,255,255,.09) 0 1px,transparent 1px 7px),repeating-linear-gradient(90deg,rgba(255,255,255,.09) 0 1px,transparent 1px 7px),linear-gradient(100deg,#ee3b4d 0%,#a8121f 58%,#4f040c 100%)}
+.sk-airplane{background:linear-gradient(90deg,#3b1670 0%,#3b1670 30%,rgba(59,22,112,0) 85%),repeating-conic-gradient(from 0deg at 88% 55%,#ffcf3f 0 9deg,#ff7a2f 9deg 18deg,#d23a8f 18deg 27deg,#5b2aa6 27deg 36deg)}
+.sk-jj{background:linear-gradient(180deg,#14284f,#0a1631)}
+.sk-mustards{background:radial-gradient(circle,rgba(150,60,0,.32) 1.1px,transparent 1.5px) 0 0/6px 6px,linear-gradient(90deg,#ffd43f,#eaa000)}
+.sk-hurts{background:radial-gradient(28% 70% at 18% 30%,#56776a 60%,transparent 62%),radial-gradient(22% 60% at 55% 80%,#1d302d 60%,transparent 62%),#35534b}
+.sk-lamb{background:radial-gradient(90% 140% at 85% 50%,rgba(212,175,55,.35),transparent 60%),linear-gradient(180deg,#1a1a1a,#050505)}
+.sk-henrys{background:repeating-linear-gradient(-55deg,#2b1a6b 0 12px,#4127a0 12px 24px)}
+.sk-chubb{background:radial-gradient(120% 120% at 20% 0%,#9a4d1a,#4a200a 70%)}
+.sk-purdy{background:linear-gradient(90deg,#ffe6ea,#f7a6ba 60%,#e2587b)}
+.sk-puka{background:linear-gradient(180deg,#ffb347 0%,#ff6a5c 52%,#1e4f8a 53%,#0e2c55 100%)}
+.sk-goff{background:linear-gradient(180deg,#8fd1ff 0 34%,transparent 34%),repeating-linear-gradient(90deg,#2f8f4e 0 16px,#3aa35c 16px 32px)}
+/* badges */
+.bx{position:relative;display:inline-block;flex:0 0 auto;width:28px;height:28px;vertical-align:middle}
+.bx>span{position:absolute}
+.bx .ring{inset:0}
+.bx .in{inset:2px}
+.bx .ic{inset:20%;background-size:contain;background-repeat:no-repeat;background-position:center}
+.s20{width:20px;height:20px}.s20 .in{inset:1.5px}
+.s24{width:24px;height:24px}
+.shp-circle .ring,.shp-circle .in{border-radius:50%}
+.shp-square .ring{border-radius:26%}.shp-square .in{border-radius:22%}
+.shp-hex .ring,.shp-hex .in{clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%)}
+.shp-shieldA .ring,.shp-shieldA .in{clip-path:polygon(50% 0,100% 9%,100% 52%,93% 71%,76% 88%,50% 100%,24% 88%,7% 71%,0 52%,0 9%)}
+.shp-shieldB .ring,.shp-shieldB .in{clip-path:polygon(0 7%,22% 0,50% 8%,78% 0,100% 7%,100% 56%,50% 100%,0 56%)}
+.shp-shieldC .ring,.shp-shieldC .in{clip-path:polygon(50% 0,100% 16%,100% 62%,50% 100%,0 62%,0 16%)}
+.shp-shieldA .ic,.shp-shieldB .ic,.shp-shieldC .ic{inset:17% 20% 29% 20%}
+.shp-hex .ic{inset:22%}
+.ic-syndicate{background-image:url(/a/6620792e05f35fa68740bc24df7c61ee.svg)}
+.ic-kelce{background-image:url(/a/a68c807ed60f60bdc676af72e43387f8.svg)}
+.ic-airplane{background-image:url(/a/51b59441fd266a7c8ea6aef6429acf70.svg)}
+.ic-jj{background-image:url(/a/7cf8e5de2b42f41f05fa6d320330dfac.svg)}
+.ic-mustards{background-image:url(/a/134f1db1b44f4066e769d265e3b3ba91.svg)}
+.ic-hurts{background-image:url(/a/78f90d423a65f4f4dc1806d54a0ed219.svg)}
+.ic-lamb{background-image:url(/a/3ce630101181ee5c485c2e8135cadbce.svg)}
+.ic-henrys{background-image:url(/a/a8d350d6607bbbbff37d324ee3099237.svg)}
+.ic-chubb{background-image:url(/a/5316d699414f0067a5ca8d3f3c13a087.svg)}
+.ic-purdy{background-image:url(/a/1997667c68e3f31393bc3ca55a9197f4.svg)}
+.ic-puka{background-image:url(/a/a1ee853acec05aece928976e9f470406.svg)}
+.ic-goff{background-image:url(/a/29f184c04e3a5bfe2a475523be98fcb1.svg)}
+.fbd{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;border-radius:50%;font-family:'Onest',sans-serif;font-weight:700;color:#fff;font-size:10px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2)}
+/* shell */
+.ng{font-family:'Onest',sans-serif;color:#EEF1F6}
+.num{font-family:'Big Shoulders Display',sans-serif;font-variant-numeric:tabular-nums}
+.ldot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#6A8CFF;box-shadow:0 0 8px #6A8CFF}
+.strip{position:relative;flex:1 1 auto;min-width:0;overflow:hidden;display:flex}
+.striprow{display:flex;transition:transform .35s ease}
+.sarr{position:absolute;top:0;bottom:0;z-index:2;width:44px;border:0;display:flex;align-items:center;justify-content:center;color:#EEF1F6}
+.sarr.l{left:0;background:linear-gradient(90deg,#07080B 55%,rgba(7,8,11,0))}
+.sarr.r{right:0;background:linear-gradient(270deg,#07080B 55%,rgba(7,8,11,0))}
+.sarr:hover{color:#6A8CFF}
+.tics{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.tic{width:4px;height:11px;transform:skewX(-20deg);border-radius:1px}
+.tp{margin-left:4px;font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
+.cell{flex:0 0 auto;width:206px;display:flex;flex-direction:column;border-left:1px solid #1C202A;color:#EEF1F6}
+.cell .ln{display:flex;align-items:center;gap:8px;padding:5px 12px}
+.cell .ab{font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;font-size:17px}
+.cell .s{margin-left:auto;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+.cell .s.lose{color:#6B7386}
+.cell .ft{margin-top:auto;padding:5px 12px;border-top:1px solid #1C202A;font-size:11px;font-weight:600}
+.cell.mine{background:#12151C;box-shadow:inset 0 2px 0 #6A8CFF}
+.rail{flex:0 0 288px;background:#08090C;border-right:1px solid #1C202A;display:flex;flex-direction:column}
+.rsec{padding:18px 16px;border-bottom:1px solid #1C202A}
+.rh{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px;padding:0 4px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:20px;color:#EEF1F6}
+.rh a{font-family:'Onest',sans-serif;font-size:12px;font-weight:600}
+.qa{display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:80px;padding:12px;border-radius:14px;border:1px solid #232835;background:#141821;color:#EEF1F6;text-align:left}
+.qa .qt{font-weight:700;font-size:14px}
+.qa .qs{font-size:12px;color:#8B93A5}
+.qa.hot{background:#2F5BFF;border-color:#2F5BFF;color:#fff}
+.qa.hot .qs{color:rgba(255,255,255,.8)}
+.al{display:grid;grid-template-columns:28px minmax(0,1fr);align-items:center;gap:10px;padding:8px 10px;border-radius:11px;background:#12151C;border:1px solid #1E232D}
+.al .ai{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px}
+.al .at{font-size:13px;font-weight:700;line-height:1.25}
+.al .as{font-size:12px;color:#8B93A5}
+.lg{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:10px;color:#EEF1F6}
+.lg.on{background:#1B1F28;box-shadow:inset 3px 0 0 #6A8CFF}
+.cm{display:grid;grid-template-columns:24px minmax(0,1fr);gap:9px;align-items:start}
+.tx{display:flex;flex-direction:column;gap:5px;padding:10px 4px;border-top:1px solid #1C202A}
+.txl{display:flex;align-items:center;gap:7px;font-size:13px;line-height:1.3}
+.tag{display:inline-flex;align-items:center;justify-content:center;width:54px;height:18px;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:.04em}
+.tag.add{background:rgba(47,210,122,.15);color:#4BE08F}
+.tag.drop{background:rgba(255,90,90,.15);color:#FF7B7B}
+.tnav{display:flex;align-items:center;gap:6px;padding:10px 13px;border-radius:9px;color:#3B4150;font-size:15px;font-weight:600}
+.tnav:hover{color:#0E1116;background:#F1F2F4}
+.tnav.on{color:#0E1116;background:#EDEFF2;box-shadow:inset 0 -2px 0 #0E1116}
+.slot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--slot);border-radius:16px;color:var(--dim);font-size:13px;text-align:center;padding:24px}
+.slot b{color:var(--mut2);font-size:14px}
+.pbtn{border:0;background:transparent;color:#A6AEBF;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.pbtn.on{background:#EEF1F6;color:#0A0C10}
+/* content themes: rail, top band and any hero stay dark */
+.th-dk{--tx:#EEF1F6;--mut:#8B93A5;--mut2:#A6AEBF;--dim:#6B7386;--ln:#1C202A;--ln2:#2C3240;--slot:#343B4A;color:#EEF1F6}
+.th-lt{--tx:#12151B;--mut:#5C6370;--mut2:#4A515E;--dim:#8A909C;--ln:#E3E6EB;--ln2:#CDD2DA;--slot:#C4C9D2;color:#12151B}
+/* ---- Players ---- */
+.th-dk{--card:#161A22;--row:#1C212B;--sub:#12151C;--soft:#1B202A;--vt:#6A8CFF;--up:#4BE08F;--dn:#FF7B7B;--tint:rgba(106,140,255,.10);--tintbd:rgba(106,140,255,.45);--sh:none;--hsbg:#1E232D}
+.th-lt{--card:#FFFFFF;--row:#FFFFFF;--sub:#F6F7F9;--soft:#EEF0F3;--vt:#2449D8;--up:#14894A;--dn:#D63B3B;--tint:rgba(47,91,255,.07);--tintbd:#AFC0FF;--sh:0 1px 2px rgba(16,20,28,.05);--hsbg:#E9EBEF}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:16px;box-shadow:var(--sh)}
+.h2{margin:0;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:24px;line-height:1}
+.btnp{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 18px;border:0;border-radius:10px;background:#2F5BFF;color:#fff;font-weight:700;font-size:14px}
+.btnp.off{background:var(--soft);color:var(--dim);cursor:default}
+.btns{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:10px;border:1.5px solid var(--ln2);background:transparent;color:var(--tx);font-weight:700;font-size:14px}
+.lnk{border:0;background:transparent;padding:0;color:var(--vt);font-weight:700;font-size:13px}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:12px;background:var(--soft)}
+.seg button{border:0;background:transparent;color:var(--mut2);height:34px;padding:0 12px;border-radius:9px;font-size:13px;font-weight:700}
+.seg button.on{background:var(--card);color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.15),inset 0 -2px 0 #2F5BFF}
+.seg.sm button{height:30px}
+.wstat{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:var(--card);border:1px solid var(--ln);font-size:13px;max-width:640px}
+.ldot2{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:#1E9E57;box-shadow:0 0 0 4px rgba(30,158,87,.18)}
+.faab{flex:0 0 auto;padding-left:12px;border-left:1px solid var(--ln);font-size:12px;color:var(--mut);white-space:nowrap}
+.faab .num{font-size:20px;font-weight:900;color:var(--tx)}
+/* trending */
+.twrap{position:relative;overflow:hidden;margin:0 -4px;padding:4px}
+.trow{display:flex;gap:12px;transition:transform .35s ease}
+.tcard{flex:0 0 230px;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:14px;background:var(--card);border:1px solid var(--ln)}
+.hs{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--hsbg) url(/a/4170e5c447395148b28bf4ffbdf45275.svg) center bottom/100% 100% no-repeat}
+.tn{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tm{display:block;font-size:12px;color:var(--mut);white-space:nowrap}
+.tadd{display:block;font-size:26px;font-weight:900;line-height:1;color:var(--up)}
+.tsub{display:block;font-size:11px;color:var(--mut)}
+.bar2{display:block;height:5px;border-radius:3px;background:var(--soft);overflow:hidden}
+.bar2 i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#1E9E57,#4BE08F)}
+.tadd2{height:32px;border:0;border-radius:8px;background:#2F5BFF;color:#fff;font-weight:700;font-size:13px}
+.tstat{display:flex;align-items:center;justify-content:center;height:32px;border-radius:8px;background:var(--soft);color:var(--mut2);font-size:12px;font-weight:600}
+.tstat.own{justify-content:flex-start;gap:8px;padding:0 4px 0 8px;color:var(--tx);font-weight:700}
+.tstat.own .otn{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.trb.sm{width:26px;height:26px;background:var(--card)}
+.tstat.mine{background:rgba(20,137,74,.12);color:var(--up)}
+.tarr{position:absolute;top:0;bottom:0;z-index:2;width:48px;border:0;display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.th-lt .tarr.l{left:0;background:linear-gradient(90deg,#F2F3F5 45%,rgba(242,243,245,0))}
+.th-lt .tarr.r{right:0;background:linear-gradient(270deg,#F2F3F5 45%,rgba(242,243,245,0))}
+.th-dk .tarr.l{left:0;background:linear-gradient(90deg,#0F1218 45%,rgba(15,18,24,0))}
+.th-dk .tarr.r{right:0;background:linear-gradient(270deg,#0F1218 45%,rgba(15,18,24,0))}
+/* filters */
+.fbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.srch{flex:1 1 220px;display:flex;align-items:center;gap:8px;height:40px;padding:0 10px 0 12px;border-radius:10px;background:var(--soft);color:var(--mut)}
+.srch input{flex:1;min-width:0;border:0;background:transparent;color:var(--tx);font:inherit;font-size:14px;outline:none}
+.srch kbd{font-family:inherit;font-size:11px;padding:2px 6px;border-radius:5px;background:var(--card);color:var(--mut)}
+.sel{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:9px;background:var(--soft);font-size:13px;font-weight:700}
+.chk{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 6px;border:0;background:transparent;color:var(--tx);font-size:13px;font-weight:600}
+.chk .box{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:5px;box-shadow:inset 0 0 0 1.5px var(--ln2)}
+.chk .box svg{visibility:hidden}
+.chk.on .box{background:#2F5BFF;box-shadow:none}
+.chk.on .box svg{visibility:visible}
+/* table */
+.ptabs{display:flex;gap:4px;border-bottom:1px solid var(--ln);margin:0 -18px;padding:0 18px}
+.ptab{display:flex;align-items:baseline;gap:8px;padding:16px 14px 13px;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;background:transparent;color:var(--mut);font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:22px}
+.ptab:hover{color:var(--tx)}
+.ptab.on{color:var(--tx);border-bottom-color:#2F5BFF}
+.ptab .tc{font-family:'Onest',sans-serif;font-size:12px;font-weight:600;color:var(--mut)}
+.wgh,.wgr{display:grid;gap:4px;align-items:center}
+.wgr{box-shadow:inset 3px 0 0 var(--pc)}
+.wgh>span:nth-child(-n+4),.wgr>span:nth-child(-n+4){position:sticky;z-index:2;background:var(--card);align-self:stretch;display:flex;align-items:center}
+.wgh>span:nth-child(1),.wgr>span:nth-child(1){left:0;justify-content:center}
+.wgh>span:nth-child(2),.wgr>span:nth-child(2){left:40px}
+.wgh>span:nth-child(3),.wgr>span:nth-child(3){left:var(--l3);justify-content:flex-end}
+.wgh>span:nth-child(4),.wgr>span:nth-child(4){left:var(--l4);justify-content:flex-end;padding-right:6px;box-shadow:6px 0 8px -6px rgba(0,0,0,.18)}
+.wgr>span:nth-child(1){box-shadow:inset 3px 0 0 var(--pc)}
+.wgr.mineR>span:nth-child(-n+4){background:linear-gradient(rgba(30,158,87,.07),rgba(30,158,87,.07)),var(--card)}
+.wgh>.c{text-align:center}
+.wgrid.many .wc{font-size:13px;height:28px;border-radius:5px}
+.wgrid.many .wgh{font-size:10px}
+.wgh{margin-top:6px;padding:6px 0;border-bottom:1px solid var(--ln);font-size:11px;font-weight:700;color:var(--dim);text-align:right}
+.wgh .l{text-align:left}
+.wgh>span:first-child{text-align:center}
+.wgr{padding:5px 0;border-bottom:1px solid var(--ln)}
+.wgr.mineR{background:rgba(30,158,87,.07)}
+.wrk{text-align:center;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:16px;color:var(--dim)}
+.wc{display:flex;align-items:center;justify-content:center;height:30px;border-radius:6px;font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
+.wc.bye{color:var(--dim);font-size:11px;font-family:'Onest',sans-serif;font-weight:700;box-shadow:inset 0 0 0 1px var(--ln)}
+.wc.top{font-weight:900;box-shadow:inset 0 0 0 2px #1E9E57}
+.scale{display:inline-block;width:80px;height:9px;border-radius:5px;background:linear-gradient(90deg,#1E9E57,#F5C542,#D63A3A)}
+.trcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.trcols h3{margin:10px 0 6px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:20px}
+.trcols h3.up{color:var(--up)}.trcols h3.dn{color:var(--dn)}
+.tri{display:grid;grid-template-columns:30px minmax(0,1fr) 120px 40px;gap:10px;align-items:center;padding:9px 0 9px 6px;border-bottom:1px solid var(--ln)}
+.trv{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.trv b{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:19px}
+.trv b.up{color:var(--up)}.trv b.dn{color:var(--dn)}
+.bar3{display:block;width:100%;height:5px;border-radius:3px;background:var(--soft);overflow:hidden}
+.bar3 i{display:block;height:100%;border-radius:3px}
+.bar3 i.up{background:linear-gradient(90deg,#1E9E57,#4BE08F)}.bar3 i.dn{margin-left:auto;background:linear-gradient(270deg,#D63A3A,#FF7B7B)}
+.tscroll{overflow-x:auto;margin:0 -18px;padding:0 18px;scrollbar-width:thin}
+.tinner{min-width:1060px}
+.pgrp,.phd,.pr{display:grid;grid-template-columns:44px minmax(250px,1fr) 56px 56px 72px repeat(11,44px);gap:6px;align-items:center}
+.phd>span:nth-child(1),.phd>span:nth-child(2),.pgrp>span:nth-child(1),.pgrp>span:nth-child(2){position:sticky;z-index:2;background:var(--card);align-self:stretch;display:flex;align-items:center}
+.phd>span:nth-child(1),.pgrp>span:nth-child(1),.pr>.act{position:sticky;left:0;z-index:2;background:var(--card);align-self:stretch;align-items:center}
+.phd>span:nth-child(2),.pgrp>span:nth-child(2),.pr>.who{position:sticky;left:50px;z-index:2;background:var(--card);align-self:stretch;box-shadow:6px 0 8px -6px rgba(0,0,0,.18)}
+.pr:hover>.act,.pr:hover>.who{background:var(--sub)}
+.pr.mineR>.act,.pr.mineR>.who{background:#EEF7F1}
+.pr.mineR>.act{box-shadow:inset 3px 0 0 #1E9E57 !important}
+.th-dk .pr.mineR>.act,.th-dk .pr.mineR>.who{background:#16231C}
+.ownl{display:flex;align-items:center;gap:6px;margin-top:3px;font-size:11px;font-weight:600;color:var(--mut2)}
+.s16{width:16px;height:16px}.s16 .in{inset:1px}
+.trb{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:0;border-radius:50%;background:var(--soft);color:var(--mut2)}
+.trb:hover{background:var(--tint);color:var(--vt)}
+.pgrp{margin-top:16px;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--mut)}
+.pgrp .g{text-align:right}
+.pgrp .g3{grid-column:span 3;text-align:center;border-bottom:1px solid var(--ln);padding-bottom:4px}
+.pgrp .g4{grid-column:span 4;text-align:center;border-bottom:1px solid var(--ln);padding-bottom:4px}
+.pgrp>span:nth-child(4){grid-column:span 2}
+.phd{padding:6px 0;border-bottom:1px solid var(--ln)}
+.phd .l{font-size:11px;font-weight:700;color:var(--dim)}
+.hc{border:0;background:transparent;padding:4px 0;color:var(--dim);font-size:11px;font-weight:700;text-align:right;white-space:nowrap}
+.hc:hover{color:var(--tx)}
+.hc.on{color:var(--vt)}
+.pr{padding:7px 0;border-bottom:1px solid var(--ln)}
+.pr:hover{background:var(--sub)}
+.pr.mineR{background:rgba(30,158,87,.07);box-shadow:inset 3px 0 0 #1E9E57 !important}
+.act{display:flex;justify-content:center}
+.addb{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:0;border-radius:50%;background:#2F5BFF;color:#fff;font-size:22px;font-weight:600;line-height:1;box-shadow:0 2px 6px -2px rgba(47,91,255,.6)}
+.addb:hover{background:#2448CC}
+.wv{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,181,71,.18);color:#9A6100;font-size:12px;font-weight:800;line-height:1}
+.th-dk .wv{color:#FFB547}
+.wv small{font-size:8px;font-weight:700}
+button.wv{border:0;padding:0}
+button.wv:hover{background:rgba(255,181,71,.32)}
+.th-dk .wv{color:#FFB547}
+.clm{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:28px;padding:0 7px;border:0;border-radius:999px;background:rgba(245,165,36,.18);color:#8A5A00;font-family:'Big Shoulders Display',sans-serif;font-size:16px;font-weight:900;box-shadow:inset 0 0 0 1.5px rgba(245,165,36,.6)}
+.th-dk .clm{color:#FFB547}
+.cnote{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:8px;background:rgba(47,91,255,.09);color:var(--vt);font-size:12px;font-weight:600}
+.bidr{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:12px;border-radius:12px;background:var(--sub)}
+.fpill{display:inline-flex;align-items:baseline;gap:5px;padding:4px 10px;border-radius:999px;background:var(--tint);color:var(--vt);font-family:'Onest',sans-serif;font-size:12px;font-weight:700;letter-spacing:0}
+.fpill .num{font-size:17px;font-weight:900}
+.bidbox{display:inline-flex;align-items:center;height:44px;padding:0 4px;border-radius:11px;background:var(--card);box-shadow:inset 0 0 0 2px #2F5BFF}
+.bidbox button{width:34px;height:36px;border:0;border-radius:8px;background:transparent;color:var(--mut2);font-size:20px;font-weight:700}
+.bidbox button:hover{background:var(--soft);color:var(--tx)}
+.bidbox .num{min-width:56px;text-align:center;font-size:26px;font-weight:900}
+.qbid{height:30px;padding:0 10px;border:0;border-radius:8px;background:var(--card);color:var(--mut2);font-size:13px;font-weight:700;box-shadow:inset 0 0 0 1px var(--ln2)}
+.qbid.on{background:#2F5BFF;color:#fff;box-shadow:none}
+.tgt{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:center;width:100%;padding:9px 12px;border:0;border-radius:10px;background:var(--sub);color:var(--tx);text-align:left}
+.tgt .rd{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--ln2)}
+.tgt.on{background:var(--tint);box-shadow:inset 0 0 0 1.5px var(--tintbd)}
+.tgt.on .rd{box-shadow:inset 0 0 0 5px #2F5BFF}
+.mlab{margin:14px 0 6px;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--dim)}
+.mine2{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(30,158,87,.14);color:var(--up);font-weight:800}
+.own2{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--soft);color:var(--mut2);font-size:10px;font-weight:800}
+.who{display:flex;align-items:center;gap:8px;min-width:0}
+.star{border:0;background:transparent;padding:0 2px;font-size:15px;color:var(--ln2);line-height:1}
+.star.on{color:#F5C542}
+.pn2{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;white-space:nowrap}
+.pm2{display:block;font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inj{display:inline-flex;align-items:center;height:16px;padding:0 4px;margin-left:4px;border-radius:4px;background:rgba(214,58,58,.12);color:var(--dn);font-size:9px;font-weight:800;letter-spacing:.04em}
+.rk2{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(123,92,255,.16);color:#7B5CFF;font-size:9px;font-weight:800}
+.n{text-align:right;font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums}
+.n.b{font-weight:900;font-size:18px}
+.n.m{color:var(--mut2);font-weight:600}
+.adds{display:inline-flex;align-items:center;gap:3px;color:var(--up);font-weight:800}
+.adds.hot{padding:1px 6px;border-radius:999px;background:rgba(30,158,87,.14)}
+.adds.dn{color:var(--dn)}
+/* modal */
+.ovl{position:absolute;inset:0;z-index:20;background:rgba(7,8,11,.55)}
+.mod{position:absolute;z-index:21;top:120px;right:max(32px,calc((100% - 1240px)/2 + 32px));width:500px;padding:20px 20px 16px;border-radius:16px;background:var(--card);color:var(--tx);border:1px solid var(--ln);box-shadow:0 30px 70px -20px rgba(0,0,0,.65)}
+.xbtn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:0;border-radius:8px;background:var(--soft);color:var(--mut2)}
+.newp{display:grid;grid-template-columns:50px minmax(0,1fr) auto;gap:12px;align-items:center;margin-top:14px;padding:10px 12px 10px 14px;border-radius:12px;background:var(--tint);border:1px solid var(--tintbd)}
+.full{display:flex;align-items:center;gap:8px;margin:12px 0 8px;padding:10px 12px;border-radius:10px;background:rgba(255,181,71,.18);color:#7A4E00;font-size:13px;font-weight:700}
+.th-dk .full{color:#FFB547}
+.rhd{display:grid;grid-template-columns:50px minmax(0,1fr) 54px 40px;gap:10px;padding:4px 10px 4px 14px;font-size:11px;font-weight:700;color:var(--dim)}
+.rlist{max-height:430px;overflow-y:auto;display:flex;flex-direction:column;gap:3px;padding-right:4px}
+.rsub{margin:8px 0 2px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:15px;color:var(--mut)}
+.rr{display:grid;grid-template-columns:50px minmax(0,1fr) 54px 40px;gap:10px;align-items:center;width:100%;padding:7px 10px 7px 14px;border:0;border-radius:10px;background:var(--sub);color:var(--tx);text-align:left}
+.rr:hover{background:var(--soft)}
+.rr.sel2{background:rgba(214,58,58,.08);outline:2px solid var(--dn);outline-offset:-2px}
+.pos2{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:22px;padding:0 6px 3px;font-size:10px;font-weight:800;color:#EEF1F6;background:#2A303D;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
+.pos2.bn{padding-bottom:0;color:#A6AEBF}
+.p-QB{background:linear-gradient(#FF7A93,#FF7A93) left bottom/100% 4px no-repeat,#2A303D}
+.p-RB{background:linear-gradient(#3EE0B4,#3EE0B4) left bottom/100% 4px no-repeat,#2A303D}
+.p-WR{background:linear-gradient(#62B0FF,#62B0FF) left bottom/100% 4px no-repeat,#2A303D}
+.p-TE{background:linear-gradient(#FFAE5C,#FFAE5C) left bottom/100% 4px no-repeat,#2A303D}
+.p-K{background:linear-gradient(#E8D867,#E8D867) left bottom/100% 4px no-repeat,#2A303D}
+.p-DST{background:linear-gradient(#A3ADC2,#A3ADC2) left bottom/100% 4px no-repeat,#2A303D}
+.pos2.flx{background:linear-gradient(90deg,#3EE0B4 0 33.3%,#62B0FF 33.3% 66.6%,#FFAE5C 66.6%) left bottom/100% 4px no-repeat,#2A303D}
+.pos2.sflx{background:linear-gradient(90deg,#FF7A93 0 25%,#3EE0B4 25% 50%,#62B0FF 50% 75%,#FFAE5C 75%) left bottom/100% 4px no-repeat,#2A303D}
+.toast{position:fixed;left:50%;bottom:28px;z-index:30;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:14px;background:#0E1116;color:#EEF1F6;font-size:14px;box-shadow:0 18px 40px -14px rgba(0,0,0,.6)}
+.okc{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#1E9E57;color:#fff;font-weight:800}
+.empire{position:relative;height:300px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(60% 90% at 50% 100%,#4a3414 0%,rgba(74,52,20,0) 70%),linear-gradient(180deg,#06060a 0%,#141019 58%,#24180b 100%)}
+.empire .beams{position:absolute;inset:0;background:conic-gradient(from 150deg at 14% -8%,transparent 0deg,rgba(255,226,150,.2) 7deg,transparent 15deg),conic-gradient(from 195deg at 86% -8%,transparent 0deg,rgba(255,226,150,.2) 7deg,transparent 15deg),conic-gradient(from 172deg at 50% -14%,transparent 0deg,rgba(255,240,200,.12) 8deg,transparent 16deg)}
+.empire .cols{position:absolute;left:0;right:0;bottom:0;height:96px;opacity:.95;background:linear-gradient(#0b0806,#0b0806) 0 0/100% 12px no-repeat,linear-gradient(#0b0806,#0b0806) 0 100%/100% 16px no-repeat,repeating-linear-gradient(90deg,#0b0806 0 20px,rgba(11,8,6,0) 20px 64px);box-shadow:inset 0 1px 0 rgba(255,210,120,.28)}
+.empire .glow{position:absolute;left:50%;top:46%;width:700px;height:240px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,196,90,.28),rgba(255,196,90,0))}
+.ttl{position:relative;font-family:'Alfa Slab One',serif;font-size:104px;line-height:.95;letter-spacing:.01em}
+.ttl .back{color:#7a5516;text-shadow:0 1px 0 #6b4a12,0 2px 0 #5e400f,0 3px 0 #52370c,0 4px 0 #462f0a,0 5px 0 #3a2708,0 6px 0 #2e1f06,0 7px 0 #221704,0 14px 22px rgba(0,0,0,.8)}
+.ttl .front{position:absolute;left:0;top:0;background:linear-gradient(180deg,#fff7d6 0%,#f2cf72 36%,#b07a1e 50%,#e9c063 63%,#fff1bd 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cinz{font-family:'Cinzel',serif;font-weight:700;color:#e9c063;letter-spacing:.42em}
+/* compact league hero: shows on every league page when the league has it */
+.empire.compact{height:112px;flex-direction:row;gap:22px}
+.empire.compact .cols{height:34px}
+.empire.compact .ttl{font-size:58px}
+.empire.compact .ttl .back{text-shadow:0 1px 0 #6b4a12,0 2px 0 #5e400f,0 3px 0 #52370c,0 4px 0 #3a2708,0 8px 14px rgba(0,0,0,.8)}
+.empire.compact .cinz{position:relative;font-size:16px;letter-spacing:.38em}
+.empire.compact .glow{width:620px;height:150px}
+/* rail: cross-league tools */
+.xl{margin-top:12px;padding:12px 8px 8px;border-radius:14px;background:#14171E;border:1px solid #242936}
+.xlh{display:block;padding:0 6px 8px;font-size:11px;font-weight:800;letter-spacing:.06em;color:#8B93A5}
+.xt{position:relative;display:flex;align-items:center;gap:11px;padding:10px;border-radius:11px;color:#EEF1F6;text-decoration:none}
+.xt:hover{background:#1B1F28}
+.xt .ico{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:#1E2430;color:#9DB3FF}
+.xt b{display:block;font-size:14px}
+.xt small{display:block;font-size:12px;color:#8B93A5}
+.xb{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#FFB547;color:#0A0C10;font-size:12px;font-weight:800}
+.xpro{display:inline-flex;align-items:center;height:16px;padding:0 5px;margin-left:5px;border-radius:4px;background:linear-gradient(90deg,#2F5BFF,#7B5CFF);color:#fff;font-size:9px;font-weight:800;letter-spacing:.04em;vertical-align:2px}
+.ci .xbd{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#FFB547;color:#0A0C10;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+/* ---- Trades ---- */
+.ptabs{margin:0;padding:0}
+.tbn{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#FFB547;color:#0A0C10;font-family:'Onest',sans-serif;font-size:11px;font-weight:800;align-self:center}
+.btns.sm,.btnp.sm{height:32px;padding:0 12px;font-size:13px}
+.tbg{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;align-items:start}
+.tbc{padding:14px 16px 10px}
+.tbc.mine{box-shadow:inset 0 0 0 1.5px var(--tintbd),var(--sh)}
+.tbh{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.look{display:flex;gap:8px;align-items:baseline;margin:0 0 8px;padding:8px 10px;border-radius:9px;background:var(--sub);font-size:13px;font-weight:600}
+.look span{flex:0 0 auto;font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--dim)}
+.tbr{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 4px 8px 12px;border-top:1px solid var(--ln);box-shadow:inset 3px 0 0 var(--pc)}
+.pkc{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:22px;padding:0 6px;border-radius:6px;background:rgba(123,92,255,.14);color:#6A4BE0;font-size:10px;font-weight:800}
+.th-dk .pkc{color:#B3A2FF}
+.fbc{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:22px;padding:0 6px;border-radius:6px;background:rgba(30,158,87,.14);color:var(--up);font-size:10px;font-weight:800}
+.tlink{display:block;width:100%;margin-top:6px;padding:10px 0 4px;border:0;border-top:1px solid var(--ln);background:transparent;color:var(--vt);font-size:13px;font-weight:700;text-align:left}
+.bed{margin-top:8px;padding:10px;border-radius:10px;background:var(--sub)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{height:30px;padding:0 10px;border:0;border-radius:999px;background:var(--card);color:var(--tx);font-size:12px;font-weight:700;box-shadow:inset 0 0 0 1px var(--ln2),inset 3px 0 0 var(--pc)}
+.chip.on{background:#2F5BFF;color:#fff;box-shadow:none}
+.chip.drop.on{background:var(--dn)}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.rc{display:flex;flex-direction:column;padding:14px 14px 12px}
+.rcl{display:flex;flex-direction:column;gap:2px;flex:1}
+.rcp{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:8px;align-items:center;padding:4px 6px 4px 8px;border-radius:6px;box-shadow:inset 3px 0 0 var(--pc);font-size:13px}
+.rcp .pp,.tok .pp{font-size:10px;font-weight:800;color:var(--pc)}
+.rcp .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.blk{display:inline-flex;align-items:center;height:16px;margin-left:6px;padding:0 5px;border-radius:4px;background:rgba(245,165,36,.18);color:#8A5A00;font-size:9px;font-weight:800;letter-spacing:.04em;vertical-align:1px}
+.th-dk .blk{color:#FFB547}
+.rcf{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--ln);font-size:12px;color:var(--mut)}
+.bld{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;align-items:start}
+.bside{padding:14px 16px 16px}
+.bsh{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--ln)}
+.dir{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--dim)}
+.bcount{font-size:12px;font-weight:700;color:var(--vt)}
+.bsec{display:flex;align-items:baseline;margin:14px 0 6px;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--dim)}
+.bpr{display:grid;grid-template-columns:22px 34px minmax(0,1fr);gap:10px;align-items:center;width:100%;padding:7px 10px;border:0;border-radius:9px;background:transparent;color:var(--tx);box-shadow:inset 3px 0 0 var(--pc)}
+.bpr:hover{background:var(--sub)}
+.bpr .ck{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:6px;box-shadow:inset 0 0 0 1.5px var(--ln2);color:transparent}
+.bpr.on{background:var(--tint);box-shadow:inset 3px 0 0 var(--pc),inset 0 0 0 1px var(--tintbd)}
+.bpr.on .ck{background:#2F5BFF;box-shadow:none;color:#fff}
+.pp2{font-size:11px;font-weight:800;color:var(--pc)}
+.fr{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bidbox{display:inline-flex;align-items:center;height:40px;padding:0 3px;border-radius:10px;background:var(--card);box-shadow:inset 0 0 0 1.5px var(--ln2)}
+.bidbox button{width:30px;height:32px;border:0;border-radius:7px;background:transparent;color:var(--mut2);font-size:18px;font-weight:700}
+.bidbox .num{min-width:48px;text-align:center;font-size:22px;font-weight:900}
+.pkg{display:flex;flex-wrap:wrap;gap:6px}
+.pk{display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:86px;height:42px;padding:0 10px;border:0;border-radius:9px;background:var(--sub);color:var(--tx);box-shadow:inset 0 0 0 1px var(--ln)}
+.pk b{font-size:13px}
+.pk small{font-size:10px;color:var(--mut)}
+.pk.on{background:rgba(123,92,255,.14);box-shadow:inset 0 0 0 1.5px #7B5CFF}
+.bsum{padding:16px 18px;position:sticky;bottom:12px;z-index:3;box-shadow:0 14px 40px -18px rgba(0,0,0,.45)}
+.bsl{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:16px;align-items:center}
+.sumt{display:block;margin-top:3px;font-size:15px;font-weight:700}
+.bfoot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--ln)}
+.ofr{padding:14px 16px;margin-bottom:10px}
+.ofh{display:flex;align-items:center;gap:10px}
+.ofb{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+.toks{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+.tok{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 8px;border-radius:7px;background:var(--sub);box-shadow:inset 0 0 0 1px var(--ln),inset 3px 0 0 var(--pc);font-size:13px;font-weight:600;white-space:nowrap}
+.stp{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap}
+.stp.ok{background:rgba(20,137,74,.12);color:var(--up)}
+.stp.bad{background:rgba(214,59,59,.10);color:var(--dn)}
+.stp.wait{background:var(--tint);color:var(--vt);box-shadow:inset 0 0 0 1px var(--tintbd)}
+.stp.rev{background:rgba(245,165,36,.16);color:#8A5A00}
+.th-dk .stp.rev{color:#FFB547}
+.rev{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px 12px;border-radius:10px;background:rgba(245,165,36,.10);font-size:13px}
+.cempty{padding:14px;border-radius:10px;border:1.5px dashed var(--ln2);color:var(--mut);font-size:13px}
+/* pro: trade finder + fit tags */
+.finder{padding:14px 16px 8px;background:linear-gradient(180deg,var(--tint),transparent 70%),var(--card);border-color:var(--tintbd)}
+.fh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.prob{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:5px;background:linear-gradient(90deg,#2F5BFF,#7B5CFF);color:#fff;font-size:10px;font-weight:800;letter-spacing:.05em}
+.frow{display:grid;grid-template-columns:28px minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:10px 2px;border-top:1px solid var(--ln)}
+.frow.blur>span:nth-child(2){filter:blur(4px);user-select:none}
+.fit{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap}
+.fit.hi{background:rgba(20,137,74,.14);color:var(--up)}
+.fit.md{background:var(--tint);color:var(--vt)}
+.fit.lo{background:var(--soft);color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin:-2px 0 10px}
+.tg{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:5px;font-size:11px;font-weight:700;white-space:nowrap}
+.tg.str{background:rgba(214,59,59,.10);color:var(--dn)}
+.tg.mat{background:var(--tint);color:var(--vt);box-shadow:inset 0 0 0 1px var(--tintbd)}
+.tg.thin{background:rgba(245,165,36,.16);color:#8A5A00}
+.th-dk .tg.thin{color:#FFB547}
+.tg.deep{background:rgba(20,137,74,.12);color:var(--up)}
+.dep{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:0 0 8px}
+.dp{display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 2px;border-radius:7px;background:var(--sub);line-height:1.05}
+.dp b{font-family:'Big Shoulders Display',sans-serif;font-size:18px;font-weight:900}
+.dp span{font-size:10px;font-weight:800;color:var(--mut)}
+.dp small{font-size:9px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.04em}
+.dp.deep{background:rgba(20,137,74,.12)}.dp.deep b,.dp.deep small{color:var(--up)}
+.dp.thin{background:rgba(245,165,36,.16)}.dp.thin b,.dp.thin small{color:#B97700}
+.th-dk .dp.thin b,.th-dk .dp.thin small{color:#FFB547}
+.look.led{align-items:center}
+.look.led input{flex:1;min-width:0;height:28px;padding:0 8px;border:0;border-radius:7px;background:var(--card);color:var(--tx);font:inherit;font-size:13px;font-weight:600;box-shadow:inset 0 0 0 1.5px #2F5BFF;outline:none}
+.chip.sm2{height:26px;font-size:11px;box-shadow:inset 0 0 0 1px var(--ln2)}
+/* ---- Clubhouse ---- */
+.ptabs{margin:0;padding:0}
+.s48{width:48px;height:48px}.s48 .in{inset:3px}
+.online{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--ln);font-size:13px;font-weight:600}
+.avs{display:flex}.avs .bx{margin-left:-6px}.avs .bx:first-child{margin-left:0}
+.cbg{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:20px;align-items:stretch}
+.cbg2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:1100px){.cbg,.cbg2{grid-template-columns:1fr}}
+.recap{padding:22px 24px 16px}
+.rkick{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rk1{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--vt)}
+.aib{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:999px;background:linear-gradient(90deg,rgba(47,91,255,.12),rgba(123,92,255,.12));color:#6A4BE0;font-size:11px;font-weight:700}
+.th-dk .aib{color:#B3A2FF}
+.rhead{margin:10px 0 0;font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:38px;line-height:1;letter-spacing:-.005em}
+.cnote2{display:flex;gap:10px;align-items:flex-start;margin-top:14px;padding:10px 12px;border-radius:10px;background:rgba(201,162,74,.12);box-shadow:inset 3px 0 0 #c9a24a;font-size:13px;line-height:1.45}
+.cnote2 b{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8A6A1C}
+.th-dk .cnote2 b{color:#E6C46A}
+.rbody{margin-top:12px;font-size:15px;line-height:1.6;color:var(--mut2)}
+.rbody p{margin:0 0 10px}
+.rbody b{color:var(--tx)}
+.rstand{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:6px}
+.sto{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:10px;background:var(--sub)}
+.sto b{font-size:14px}
+.sto>span:last-child{font-size:12px;color:var(--mut)}
+.sk{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--dim)}
+.rnext{display:flex;flex-direction:column;gap:3px;margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--tint);font-size:13px}
+.rreact{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid var(--ln)}
+.rx{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 10px;border:0;border-radius:999px;background:var(--sub);color:var(--tx);font-size:15px;box-shadow:inset 0 0 0 1px var(--ln)}
+.rx b{font-size:12px;font-weight:700;color:var(--mut2)}
+.rx.on{background:var(--tint);box-shadow:inset 0 0 0 1.5px var(--tintbd)}
+.rx.on b{color:var(--vt)}
+.rcom{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.cmt{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px}
+.cin,.cbox{display:flex;align-items:center;gap:8px;height:42px;padding:0 6px 0 12px;border-radius:10px;background:var(--sub);box-shadow:inset 0 0 0 1px var(--ln)}
+.cin input,.cbox input{flex:1;min-width:0;border:0;background:transparent;color:var(--tx);font:inherit;font-size:14px;outline:none}
+.pod{padding:18px 20px}
+.podg{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:16px;align-items:stretch}
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:end}
+.pdc{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;min-width:0}
+.pdc .pn{font-size:13px;line-height:1.2;max-width:100%}
+.pdc .ps{font-size:26px;font-weight:900;line-height:1}
+.pm3{font-size:11px;color:var(--mut)}
+.step{width:100%;margin-top:6px;display:flex;align-items:flex-start;justify-content:center;padding-top:8px;border-radius:10px 10px 0 0;color:#fff}
+.step .num{font-size:30px;font-weight:900}
+.pdc.p1 .step{height:110px;background:linear-gradient(180deg,#E6B85A,#B08328)}
+.pdc.p2 .step{height:78px;background:linear-gradient(180deg,#B9C1CE,#8A93A3)}
+.pdc.p3 .step{height:56px;background:linear-gradient(180deg,#D49A6A,#9C6438)}
+.base{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px;border-radius:12px;background:repeating-linear-gradient(-45deg,rgba(214,59,59,.05) 0 10px,transparent 10px 20px),var(--sub);box-shadow:inset 0 0 0 1px rgba(214,59,59,.25)}
+.bkick{font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--dn)}
+.plunger{color:#8B5E3C}
+.chat{display:flex;flex-direction:column;padding:16px 16px 14px;min-height:0}
+.chh{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.pin{display:flex;gap:8px;align-items:flex-start;padding:8px 10px;border-radius:9px;background:rgba(201,162,74,.12);font-size:12px;line-height:1.4;margin-bottom:8px}
+.pk2{flex:0 0 auto;font-size:9px;font-weight:800;letter-spacing:.08em;color:#8A6A1C;padding-top:2px}
+.th-dk .pk2{color:#E6C46A}
+.msgs{flex:1;min-height:560px;max-height:1080px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;padding:4px 4px 10px 0}
+.msg{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px}
+.msg.me .mb{background:var(--tint)}
+.mh{display:flex;gap:8px;align-items:baseline;font-size:12px}
+.mh span{color:var(--dim)}
+.mb{display:inline-block;margin-top:3px;padding:7px 10px;border-radius:4px 12px 12px 12px;background:var(--sub);font-size:14px;line-height:1.4}
+.mr{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.mr button{height:24px;padding:0 8px;border:0;border-radius:999px;background:var(--sub);color:var(--mut2);font-size:12px;box-shadow:inset 0 0 0 1px var(--ln)}
+.mr button.on{background:var(--tint);color:var(--vt);box-shadow:inset 0 0 0 1.5px var(--tintbd)}
+.evt{padding:10px 12px;border-radius:11px;background:var(--sub);box-shadow:inset 3px 0 0 var(--ec),inset 0 0 0 1px var(--ln)}
+.eh{display:flex;justify-content:space-between;margin-bottom:4px;font-size:11px;color:var(--dim)}
+.et{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--ec)}
+.popt{position:relative;display:flex;align-items:center;width:100%;height:34px;margin-top:5px;padding:0 10px;border:0;border-radius:8px;background:var(--card);color:var(--tx);overflow:hidden;box-shadow:inset 0 0 0 1px var(--ln)}
+.popt .pf2{position:absolute;left:0;top:0;bottom:0;background:rgba(123,92,255,.14)}
+.popt.on{box-shadow:inset 0 0 0 1.5px #7B5CFF}
+.popt.on .pf2{background:rgba(123,92,255,.24)}
+.popt .pl{position:relative;font-size:13px;font-weight:700}
+.popt .pv2{position:relative;margin-left:auto;font-size:12px;font-weight:700;color:var(--mut2)}
+.cbox{margin-top:10px}
+.sendb{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:0;border-radius:8px;background:#2F5BFF;color:#fff}
+.qr{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.chip2{height:28px;padding:0 10px;border:0;border-radius:999px;background:var(--sub);color:var(--mut2);font-size:12px;font-weight:600;box-shadow:inset 0 0 0 1px var(--ln)}
+.aw{padding:18px 20px}
+.awg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+@media (max-width:1100px){.awg{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.awc{display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:12px;background:var(--sub);box-shadow:inset 0 3px 0 var(--ac)}
+.awh{display:grid;grid-template-columns:34px minmax(0,1fr);gap:10px;align-items:center}
+.awi{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--ac) 18%,transparent);color:var(--ac)}
+.awl{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px;align-items:center;padding:7px 8px;border-radius:9px;background:var(--card)}
+.awv{font-size:17px;font-weight:900}
+.awr{display:flex;justify-content:space-between;gap:8px;font-size:11px;color:var(--mut)}
+.shelf{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid var(--ln)}
+.shi{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px 0 6px;border-radius:999px;background:var(--sub);font-size:12px}
+.shi .num{font-size:16px;font-weight:900;color:#B08328}
+.wkr{display:grid;grid-template-columns:minmax(0,1fr) 120px minmax(0,1fr) 76px;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--ln)}
+.wt{display:flex;align-items:center;gap:7px;min-width:0;font-size:13px}
+.wt .num{margin-left:auto;font-size:17px;font-weight:800}
+.wt.r{justify-content:flex-end}
+.wt.r .num{margin-left:0;margin-right:auto}
+.wpb{display:flex;height:6px;border-radius:999px;overflow:hidden;background:var(--soft);gap:2px}
+.wst{font-size:11px;font-weight:700;color:var(--mut);text-align:right}
+.str{display:grid;grid-template-columns:22px 20px minmax(0,1fr) 40px 56px;gap:8px;align-items:center;padding:6px 4px;border-top:1px solid var(--ln)}
+.str.me{background:var(--tint);border-radius:8px}
+.sr{font-size:15px;font-weight:800;color:var(--dim);text-align:center}
+.cutl{display:flex;align-items:center;gap:8px;margin:2px 0;font-size:9px;font-weight:800;letter-spacing:.1em;color:var(--dn)}
+.cutl::before,.cutl::after{content:'';flex:1;border-top:1.5px dashed var(--dn);opacity:.5}
+.scr{display:grid;grid-template-columns:minmax(0,1fr) 140px minmax(0,1fr) 90px;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--ln)}
+.scr:first-child{border-top:0}
+.scs{text-align:center;font-size:20px;font-weight:800}
+.ltr{display:grid;grid-template-columns:86px 104px minmax(0,190px) minmax(0,1fr) 170px;gap:12px;align-items:center;padding:11px 0;border-top:1px solid var(--ln)}
+.ltr:first-child{border-top:0}
+.when2{display:flex;flex-direction:column;font-size:12px;color:var(--mut)}
+.when2 b{color:var(--tx);font-size:13px}
+.ty2{display:inline-flex;align-items:center;justify-content:center;height:22px;padding:0 8px;border-radius:6px;font-size:10px;font-weight:800;letter-spacing:.04em;background:var(--soft);color:var(--mut2)}
+.ty2.faab{background:rgba(245,197,66,.16);color:#9A6B00}
+.th-dk .ty2.faab{color:#F5C542}
+.ty2.trade{background:var(--tint);color:var(--vt)}
+.toks{display:flex;flex-wrap:wrap;gap:6px}
+.tk2{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px 0 7px;border-radius:7px;background:var(--sub);box-shadow:inset 0 0 0 1px var(--ln);font-size:13px;font-weight:600;white-space:nowrap}
+.tk2 b{width:10px;text-align:center}
+.tk2.add b{color:var(--up)}.tk2.drop b{color:var(--dn)}.tk2.drop{color:var(--mut2)}
+.diff{padding:18px 20px;background:linear-gradient(180deg,rgba(245,197,66,.10),transparent 80%),var(--card)}
+.dgr{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:12px}
+.dfi{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:10px;background:var(--card);box-shadow:inset 0 0 0 1px rgba(245,197,66,.45)}
+.dfi b{font-size:14px}.dfi span{font-size:12px;color:var(--mut)}
+.rgr{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px;align-items:start}
+.kv2{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--ln);font-size:13px}
+.kv2 span{color:var(--mut)}
+.kv2 b{text-align:right}
+.kv2.hl{margin:0 -8px;padding:9px 8px;border-radius:6px;background:rgba(245,197,66,.14)}
+/* ---- LeagueSafe tab ---- */
+.owe{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-radius:12px;background:rgba(245,165,36,.14);box-shadow:inset 0 0 0 1.5px rgba(245,165,36,.55);font-size:14px}
+.owe b{font-size:15px}
+.lslogo{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:38px;height:38px;border-radius:10px;background:#0E7A5A;color:#fff;font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:17px;letter-spacing:.02em}
+.lslogo.gold{background:linear-gradient(180deg,#E6B85A,#B08328)}
+.lsh{padding:16px 18px}
+.lsb{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--ln)}
+.lss{display:flex;flex-wrap:wrap}
+.lsx{flex:1 1 170px;display:flex;flex-direction:column;gap:6px;padding:14px 18px 2px;border-left:1px solid var(--ln)}
+.lsx:first-child{padding-left:0;border-left:0}
+.cbl2{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--dim)}
+.lsn{font-size:32px;font-weight:900;line-height:.95}
+.lbar{display:block;height:8px;border-radius:999px;background:var(--soft);overflow:hidden}
+.lbar>span{display:block;height:100%;border-radius:999px;background:#0E9E6E}
+.lsg{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:20px;align-items:start}
+@media (max-width:1100px){.lsg{grid-template-columns:1fr}}
+.lsstage{padding:18px 20px}
+.spill{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:999px;font-size:11px;font-weight:800}
+.spill.season{background:var(--soft);color:var(--mut2)}
+.spill.alloc{background:var(--tint);color:var(--vt)}
+.spill.veto{background:rgba(245,165,36,.16);color:#8A5A00}
+.th-dk .spill.veto{color:#FFB547}
+.spill.paid{background:rgba(20,137,74,.12);color:var(--up)}
+.tl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:14px}
+.tls{display:flex;flex-direction:column;gap:6px;padding:10px;border-radius:10px;background:var(--sub);font-size:12px;line-height:1.3}
+.tls b{display:block;font-size:13px}
+.tls small{display:block;font-size:11px;color:var(--mut)}
+.tld{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--ln2);font-size:11px;font-weight:800;color:var(--dim)}
+.tls.done .tld{background:#0E9E6E;box-shadow:none;color:#fff}
+.tls.now{background:var(--tint);box-shadow:inset 0 0 0 1.5px var(--tintbd)}
+.tls.now .tld{background:#2F5BFF;box-shadow:none;color:#fff}
+.alloc,.veto{margin-top:16px;padding:14px;border-radius:12px;background:var(--sub);box-shadow:inset 0 0 0 1px var(--ln)}
+.alh,.vh{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+.alh span,.vh span{font-size:12px;color:var(--mut)}
+.alr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,240px) 80px;gap:12px;align-items:center;padding:9px 0;border-top:1px solid var(--ln)}
+.alw{display:grid;grid-template-columns:20px minmax(0,1fr) 12px;gap:8px;align-items:center;height:36px;padding:0 10px;border:0;border-radius:9px;background:var(--card);color:var(--tx);font-size:13px;font-weight:600;box-shadow:inset 0 0 0 1.5px var(--ln2);text-align:left}
+.alf{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px;padding-top:12px;border-top:1px solid var(--ln);font-size:13px;color:var(--mut)}
+.veto{background:rgba(245,165,36,.07);box-shadow:inset 0 0 0 1px rgba(245,165,36,.4)}
+.veto.paid{background:rgba(20,137,74,.06);box-shadow:inset 0 0 0 1px rgba(20,137,74,.3)}
+.vr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr) 80px;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--ln);font-size:13px}
+.vw{display:flex;align-items:center;gap:8px;font-weight:700;min-width:0}
+.vf{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding-top:12px;border-top:1px solid var(--ln)}
+.vbar{display:block;width:120px;height:8px;border-radius:999px;background:var(--soft);overflow:hidden}
+.vbar>span{display:block;height:100%;background:#D63B3B}
+.btns.danger{border-color:var(--dn);color:var(--dn)}
+.lsinfo{margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--sub);font-size:13px;color:var(--mut2)}
+.mrow{display:grid;grid-template-columns:28px minmax(0,1fr) 84px 120px;gap:10px;align-items:center;padding:10px 4px;border-top:1px solid var(--ln)}
+.mrow.me{background:var(--tint);border-radius:9px}
+.mrow.due{background:rgba(245,165,36,.07);border-radius:9px}
+.stp.due{background:rgba(245,165,36,.16);color:#8A5A00}
+.th-dk .stp.due{color:#FFB547}
+.mlab3{margin:14px 0 6px;font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--dim)}
+.wpr{display:grid;grid-template-columns:28px 20px minmax(0,1fr) 44px auto;gap:8px;align-items:center;padding:6px 0;border-top:1px solid var(--ln)}
+.vault{padding:18px;background:linear-gradient(180deg,rgba(230,184,90,.12),transparent 70%),var(--card)}
+.fut{display:flex;flex-direction:column;gap:5px;margin-top:10px}
+.steps{margin:12px 0 0;padding-left:20px;display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.45;color:var(--mut2)}
+.steps b{color:var(--tx)}
+.paymod{position:absolute;z-index:21;top:150px;left:50%;transform:translateX(-50%);width:440px;padding:20px;border-radius:16px;background:var(--card);color:var(--tx);border:1px solid var(--ln);box-shadow:0 30px 70px -20px rgba(0,0,0,.65)}
+.payamt{display:flex;flex-direction:column;align-items:center;gap:2px;margin:18px 0 6px}
+.payamt .num{font-size:48px;font-weight:900;line-height:1}
+.payamt>span:last-child{font-size:13px;color:var(--mut)}
+.pm4{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;margin-top:6px;padding:10px 12px;border:0;border-radius:10px;background:var(--sub);color:var(--tx)}
+.pm4 .rd{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--ln2)}
+.pm4.on{background:var(--tint);box-shadow:inset 0 0 0 1.5px var(--tintbd)}
+.pm4.on .rd{box-shadow:inset 0 0 0 5px #2F5BFF}
+.paysum{display:flex;flex-direction:column;gap:6px;margin-top:14px;padding:12px;border-radius:10px;background:var(--sub);font-size:13px}
+.paysum>div{display:flex;justify-content:space-between}
+.paysum>div>span:first-child{color:var(--mut)}
+.paysum .tot{padding-top:6px;border-top:1px solid var(--ln);font-weight:800;font-size:15px}
+.paysum .tot>span:first-child{color:var(--tx)}
+.paydone{display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:16px}
+.okbig{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:50%;background:#1E9E57;color:#fff;font-size:28px;font-weight:800}
+.tl2{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-top:18px}
+.tl2::before{content:'';position:absolute;left:calc(100% / 14);right:calc(100% / 14);top:11px;height:3px;border-radius:2px;background:var(--ln2)}
+.tls2{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:12px;line-height:1.25;padding:0 2px}
+.tls2 b{font-size:12px;margin-top:4px}
+.tls2 small{font-size:11px;color:var(--mut)}
+.dot2{position:relative;z-index:1;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--card);box-shadow:inset 0 0 0 2.5px var(--ln2);color:#fff;font-size:12px;font-weight:900}
+.tls2.done .dot2{background:#0E9E6E;box-shadow:none}
+.tls2.done::after{content:'';position:absolute;top:11px;left:50%;width:calc(100% + 6px);height:3px;background:#0E9E6E}
+.tls2.done:last-child::after{display:none}
+.tls2.now .dot2{background:#2F5BFF;box-shadow:0 0 0 5px rgba(47,91,255,.2)}
+.tls2.now b{color:var(--vt)}
+.tls2:not(.done):not(.now) b{color:var(--mut2)}
+.vtx{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--ln)}
+.vpend{margin-top:10px;padding:10px 12px;border-radius:9px;background:rgba(245,165,36,.12);font-size:12px;line-height:1.4}
+.vault.next{background:var(--card)}
+.cmbar{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:var(--card);border:1px solid var(--ln)}
+.cmb2{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:6px;background:#c9a24a;color:#1A1200;font-size:10px;font-weight:800;letter-spacing:.08em}
+/* ===== Position tags: Baseline tab, ink blue body, 4px underline (final) ===== */
+:root{--tagbg:#1A2340}
+.th-dk{--tagbg:#1F2A4D}
+.pos,.pos2{clip-path:none !important;width:max-content;min-width:46px !important;height:24px !important;padding:0 8px 4px !important;border-radius:4px 4px 2px 2px;font-size:11px !important;font-weight:800;letter-spacing:.03em;color:#fff !important}
+.p-QB{background:linear-gradient(#FF7A93,#FF7A93) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-RB{background:linear-gradient(#3EE0B4,#3EE0B4) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-WR{background:linear-gradient(#62B0FF,#62B0FF) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-TE{background:linear-gradient(#FFAE5C,#FFAE5C) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-K{background:linear-gradient(#E8D867,#E8D867) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-DST{background:linear-gradient(#B9A6FF,#B9A6FF) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.flx,.pos2.flx{background:linear-gradient(90deg,#3EE0B4 0 33.3%,#62B0FF 33.3% 66.6%,#FFAE5C 66.6%) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.sflx,.pos2.sflx{background:linear-gradient(90deg,#FF7A93 0 25%,#3EE0B4 25% 50%,#62B0FF 50% 75%,#FFAE5C 75%) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.bn,.pos2.bn{background:linear-gradient(#5A6275,#5A6275) left bottom/100% 4px no-repeat,var(--tagbg) !important;color:rgba(255,255,255,.6) !important}
+/* ===== Position tags: smaller size (final) ===== */
+.pos,.pos2{min-width:34px !important;height:18px !important;padding:0 5px 3px !important;border-radius:3px 3px 1px 1px;font-size:9.5px !important;letter-spacing:.04em;background-size:100% 3px,auto !important}
+</style>
+</helmet>
+<div class="ng" style="min-height: 100vh; background: #0F1218">
+<!-- Prototype controls -->
+<div style="display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 16px; background: #000; border-bottom: 1px solid #1C202A">
+<span style="font-size: 12px; color: #8B93A5">Content</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{themes}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">League look</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{tiers}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">Viewing as</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{whos}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">Payout stage</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{stages}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">Prizes paid</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{weeklys}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">Format</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{fmts2}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+</div>
+<!-- 1. TOP BAND (static on every page) -->
+<div style="display: flex; align-items: stretch; background: #07080B; border-bottom: 1px solid #1C202A">
+<a href="#" aria-label="Fanball home" style="flex: 0 0 288px; display: flex; align-items: center; padding: 0 20px; border-right: 1px solid #1C202A">
+<img src="/a/6d0fd2687e0f4e908cbe7777ef1d6bd1.webp" alt="Fanball" style="height: 52px; width: auto; display: block">
+</a>
+<div style="flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; gap: 3px; padding: 10px 18px; border-right: 1px solid #1C202A; line-height: 1">
+<span class="num" style="font-size: 20px; font-weight: 900; letter-spacing: .02em">WEEK 7</span>
+<span class="num" style="font-size: 14px; font-weight: 800; letter-spacing: .06em; color: #8B93A5">SCOREBOARD</span>
+</div>
+<div class="strip">
+<div class="striprow" style="transform: translateX({{stripX}})">
+<sc-for list="{{games}}" as="g" hint-placeholder-count="6">
+<a href="#" class="{{g.cellCls}}">
+<span class="ln"><span class="bx s20 shp-{{g.ta.shape}}"><span class="ring" style="background: {{g.ta.ring}}"></span><span class="in sk-{{g.ta.key}}"></span><span class="ic ic-{{g.ta.key}}"></span></span><span class="ab">{{g.ta.abbr}}</span><span class="tics"><sc-for list="{{g.at}}" as="k" hint-placeholder-count="2"><span class="tic" style="background: {{k}}"></span></sc-for><span class="tp" style="color: {{g.atc}}">{{g.ap}}</span></span><span class="{{g.aS}}">{{g.as}}</span></span>
+<span class="ln" style="padding-top: 0"><span class="bx s20 shp-{{g.tb.shape}}"><span class="ring" style="background: {{g.tb.ring}}"></span><span class="in sk-{{g.tb.key}}"></span><span class="ic ic-{{g.tb.key}}"></span></span><span class="ab">{{g.tb.abbr}}</span><span class="tics"><sc-for list="{{g.bt}}" as="k" hint-placeholder-count="2"><span class="tic" style="background: {{k}}"></span></sc-for><span class="tp" style="color: {{g.btc}}">{{g.bp}}</span></span><span class="{{g.bS}}">{{g.bs}}</span></span>
+<span class="ft" style="color: {{g.stColor}}">{{g.st}}</span>
+</a>
+</sc-for>
+</div>
+<sc-if value="{{canPrev}}"><button class="sarr l" onClick="{{stripPrev}}" aria-label="Earlier matchups"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button></sc-if>
+<sc-if value="{{canNext}}"><button class="sarr r" onClick="{{stripNext}}" aria-label="More matchups"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button></sc-if>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: stretch">
+<!-- 2. LEFT RAIL (static on every page) -->
+<aside class="rail">
+<div style="padding: 14px 12px 16px; border-bottom: 1px solid #1C202A">
+<div style="border-radius: 14px; background: #14171E; border: 1px solid #242936; padding: 12px 8px 6px">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 0 6px 8px">
+<span style="font-size: 12px; font-weight: 700; color: #A6AEBF">All your leagues · 9</span>
+<a href="#" style="font-size: 12px; font-weight: 600">+ Join</a>
+</div>
+<sc-for list="{{leagues}}" as="l" hint-placeholder-count="6">
+<a href="#" class="{{l.cls}}">
+<span class="fbd" style="width: 36px; height: 36px; font-size: 12px; background: {{l.hue}}; border-radius: 10px">{{l.init}}</span>
+<span style="min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{l.name}}</span><span style="display: block; font-size: 12px; color: {{l.sc}}">{{l.st}}</span></span>
+</a>
+</sc-for>
+<a href="#" style="display: block; padding: 8px; font-size: 13px; font-weight: 600; color: #A6AEBF">Show 3 more leagues</a>
+</div>
+<div class="xl">
+<span class="xlh">ACROSS ALL LEAGUES</span>
+<a href="#" class="xt"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="17" r="2.6"></circle><path d="M4 4l4 4M8 4 4 8"></path><path d="M16 15l4 4M20 15l-4 4"></path><path d="M9 15c3-6 6-8 9-9"></path><path d="m15 5 3 1-1 3"></path></svg></span><span><b>Game Plan <span class="xpro">PRO</span></b><small>Set every lineup at once</small></span><span class="xb">4</span></a>
+<a href="#" class="xt"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"></path></svg></span><span><b>The Wire</b><small>Adds, drops and claims · claims run Wed</small></span></a>
+</div>
+</div>
+<div class="rsec">
+<div style="display: flex; align-items: center; gap: 10px; margin: 0 0 12px; padding: 0 4px">
+<span class="fbd" style="width: 28px; height: 28px; background: #b07a1e; border-radius: 8px">EL</span>
+<span style="display: flex; flex-direction: column; line-height: 1.15"><span style="font-size: 11px; font-weight: 600; color: #8B93A5">You're viewing</span><b style="font-size: 14px">The Empire League</b></span>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
+<a href="#" class="qa hot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h11"></path><path d="M4 12h16"></path><path d="M4 17h8"></path><path d="m17 4 3 3-3 3"></path></svg><span><span class="qt" style="display: block">Set lineup</span><span class="qs">2 yet to lock</span></span></a>
+<a href="#" class="qa"><span class="ldot"></span><span><span class="qt" style="display: block">Live scoring</span><span class="qs">139.6 – 93.5</span></span></a>
+<a href="#" class="qa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 20V10"></path><path d="M12 20V4"></path><path d="M18 20v-7"></path></svg><span><span class="qt" style="display: block">Standings</span><span class="qs">1st · 6-1</span></span></a>
+<a href="#" class="qa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="8" r="4"></circle><path d="M3 20c0-3.3 3.1-6 7-6"></path><path d="M18 14v6"></path><path d="M15 17h6"></path></svg><span><span class="qt" style="display: block">Add players</span><span class="qs">$247 FAAB</span></span></a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px">
+<div class="al"><span class="ai" style="background: rgba(98,176,255,.14); color: #62B0FF"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span><span class="at" style="display: block">Waivers run Wed 3:00 AM</span><span class="as">1 claim pending</span></span></div>
+<div class="al"><span class="ai" style="background: rgba(255,181,71,.14); color: #FFB547"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 7h13l-4-4"></path><path d="M17 17H4l4 4"></path></svg></span><span><span class="at" style="display: block">Trade deadline Nov 8</span><span class="as">16 days left</span></span></div>
+</div>
+</div>
+<div class="rsec" style="border-bottom: 0">
+<div class="rh">Transactions <a href="#">All</a></div>
+<sc-for list="{{tx}}" as="x" hint-placeholder-count="3">
+<div class="tx">
+<div style="display: flex; align-items: center; gap: 8px"><span class="bx s20 shp-{{x.t.shape}}"><span class="ring" style="background: {{x.t.ring}}"></span><span class="in sk-{{x.t.key}}"></span><span class="ic ic-{{x.t.key}}"></span></span><b style="flex: 1; font-size: 13px">{{x.t.name}}</b><span style="font-size: 11px; color: #6B7386">{{x.when}}</span></div>
+<div class="txl"><span class="tag add">ADDED</span><span style="font-weight: 700; font-size: 11px; color: {{x.ac}}">{{x.ap}}</span><span>{{x.an}}</span><span style="color: #8B93A5">{{x.at}}</span></div>
+<div class="txl"><span class="tag drop">DROPPED</span><span style="font-weight: 700; font-size: 11px; color: {{x.dc}}">{{x.dp}}</span><span>{{x.dn}}</span><span style="color: #8B93A5">{{x.dt}}</span></div>
+</div>
+</sc-for>
+</div>
+</aside>
+<!-- 3. CONTENT COLUMN -->
+<div style="position: relative; flex: 999 1 640px; min-width: 0; background: {{pageBg}}">
+<!-- League bar (static; active item changes per page) -->
+<header style="background: #fff; color: #0E1116; border-bottom: 1px solid #E3E6EB">
+<div style="padding: 10px 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+<span style="display: flex; align-items: center; gap: 10px; padding-right: 8px">
+<span class="fbd" style="width: 36px; height: 36px; font-size: 12px; background: #b07a1e; border-radius: 10px">EL</span>
+<span style="display: flex; flex-direction: column; line-height: 1.15"><b style="font-size: 15px">The Empire League</b><span style="font-size: 12px; color: #5C6370">12 teams · Dynasty · SF PPR</span></span>
+</span>
+<nav style="display: flex; gap: 2px; flex-wrap: wrap; flex: 1 1 auto">
+<a href="#" class="tnav">Home</a>
+<a href="#" class="tnav">My Franchise</a>
+<a href="#" class="tnav">Scores</a>
+<a href="#" class="tnav">Players</a>
+<a href="#" class="tnav">Standings</a>
+<a href="#" class="tnav">Trades</a>
+<a href="#" class="tnav on">Clubhouse</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 6px">
+<button aria-label="Search" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: #0E1116; display: flex; align-items: center; justify-content: center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
+<button aria-label="Notifications" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: #0E1116; display: flex; align-items: center; justify-content: center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></button>
+<span style="display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: #0E1116; color: #fff; font-weight: 700; font-size: 13px">CP</span>
+</div>
+</div>
+</header>
+<sc-if value="{{prem}}">
+<section class="empire compact" aria-label="The Empire League">
+<div class="beams"></div><div class="glow"></div><div class="cols"></div>
+<span class="cinz">THE</span>
+<span class="ttl"><span class="back">EMPIRE</span><span class="front">EMPIRE</span></span>
+<span class="cinz">LEAGUE</span>
+</section>
+</sc-if>
+<!-- Page area (changes per page) -->
+<main class="{{mainCls}}" style="max-width: 1240px; margin: 0 auto; padding: 24px 32px 72px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+<div>
+<div style="font-size: 13px; color: var(--mut)">The Empire League · Week 7 · 12 teams · Dynasty SF PPR</div>
+<h1 class="num" style="margin: 4px 0 0; font-size: 44px; font-weight: 900; line-height: 1">Clubhouse</h1>
+</div>
+<div class="online"><span class="ldot2"></span><span class="avs"><sc-for list="{{onlineTeams}}" as="o" hint-placeholder-count="4"><span class="bx s24 shp-{{o.shape}}"><span class="ring" style="background: {{o.ring}}"></span><span class="in sk-{{o.key}}"></span><span class="ic ic-{{o.key}}"></span></span></sc-for></span><span>{{onlineTxt}}</span></div>
+</div>
+<sc-if value="{{oweShow}}">
+<div class="owe"><span class="lslogo" style="width: 32px; height: 32px; font-size: 14px">LS</span><span style="flex: 1 1 280px"><b>{{oweTxt}}</b> Late payments close Sat, Oct 18. LeagueSafe holds every team's dues until payouts.</span><button class="lnk" onClick="{{goMoney}}">See who's paid</button><button class="btnp sm" onClick="{{openPay}}">Pay now</button></div>
+</sc-if>
+<div class="ptabs">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="4"><button class="{{t.cls}}" onClick="{{t.pick}}">{{t.label}}</button></sc-for>
+</div>
+<!-- ===================== CLUBHOUSE ===================== -->
+<sc-if value="{{isClub}}">
+<div class="cbg">
+<!-- left column -->
+<div style="display: flex; flex-direction: column; gap: 20px; min-width: 0">
+<!-- weekly recap -->
+<article class="card recap">
+<div class="rkick"><span class="rk1">WEEK 6 RECAP</span><span class="aib">✦ Written by Fanball AI</span><span style="margin-left: auto; font-size: 12px; color: var(--mut)">Posted Tue 9:00 AM</span></div>
+<h2 class="rhead">The Syndicate drops 161 and the rest of the league is chasing</h2>
+<sc-if value="{{prem}}">
+<div class="cnote2"><span class="bx s24 shp-shieldA"><span class="ring" style="background: #c9a24a"></span><span class="in sk-syndicate"></span><span class="ic ic-syndicate"></span></span><span><b>Commissioner's note</b> Trade deadline is Sat, Nov 8. If you're 1-5, now's the time to sell. You know who you are.</span></div>
+</sc-if>
+<div class="rbody">
+<p><b>Top dog, again.</b> The Gridiron Syndicate put up the week's best score for the second time this season, 161.1, behind 31.4 from Jahmyr Gibbs and 28.6 from Jalen Hurts. The Puka Principle never had a chance, finishing at 108.5.</p>
+<p><b>Closest call.</b> Henry's Holes edged Chubb Club 118.2 to 117.6 when Kareem Hunt punched in a 1-yard touchdown with 1:12 left. Chubb Club left 24.0 points on its bench, including a 19-point day from Joe Mixon.</p>
+<p><b>Blowout of the week.</b> Certified Lamb Daddy beat Goff Ball 148.7 to 79.0. Malik Nabers had 27.2 before halftime.</p>
+<p><b>Playoff race.</b> With eight weeks left, the Syndicate and Lamb Daddy sit at 5-1. Four teams are tied at 3-3 for the last three spots, and Purdy Good Team (1-5) is two games out.</p>
+</div>
+<div class="rstand">
+<sc-for list="{{standouts}}" as="s" hint-placeholder-count="3">
+<div class="sto"><span class="sk">{{s.k}}</span><b>{{s.v}}</b><span>{{s.d}}</span></div>
+</sc-for>
+</div>
+<div class="rnext"><span class="sk">WEEK 7 TO WATCH</span><span><b>Kelce's Anatomy vs Jefferson's Airplane.</b> A 52 to 48 coin flip between two 3-3 teams fighting for the same playoff spot.</span></div>
+<div class="rreact">
+<sc-for list="{{reacts}}" as="r" hint-placeholder-count="5"><button class="{{r.cls}}" onClick="{{r.pick}}"><span>{{r.e}}</span><b>{{r.n}}</b></button></sc-for>
+<span style="margin-left: auto; font-size: 13px; color: var(--mut)">{{commentCount}}</span>
+</div>
+<div class="rcom">
+<sc-for list="{{comments}}" as="c" hint-placeholder-count="2">
+<div class="cmt"><span class="bx s24 shp-{{c.t.shape}}"><span class="ring" style="background: {{c.t.ring}}"></span><span class="in sk-{{c.t.key}}"></span><span class="ic ic-{{c.t.key}}"></span></span><div style="min-width: 0"><div style="font-size: 12px"><b>{{c.t.name}}</b> <span style="color: var(--dim)">{{c.when}}</span></div><div style="font-size: 14px; line-height: 1.4">{{c.txt}}</div></div></div>
+</sc-for>
+<div class="cin"><input placeholder="Add a comment" aria-label="Add a comment"><button class="lnk">Post</button></div>
+</div>
+</article>
+<!-- podium + basement -->
+<section class="card pod">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 14px"><h2 class="h2">Week 6 Podium</h2><span style="font-size: 12px; color: var(--mut)">Top 3 scores, regardless of matchup</span></div>
+<div class="podg">
+<div class="podium">
+<sc-for list="{{podium}}" as="p" hint-placeholder-count="3">
+<div class="{{p.cls}}">
+<span class="bx s48 shp-{{p.t.shape}}"><span class="ring" style="background: {{p.t.ring}}"></span><span class="in sk-{{p.t.key}}"></span><span class="ic ic-{{p.t.key}}"></span></span>
+<b class="pn">{{p.t.name}}</b>
+<span class="num ps">{{p.score}}</span>
+<span class="pm3">{{p.mvp}}</span>
+<div class="step"><span class="num">{{p.place}}</span></div>
+</div>
+</sc-for>
+</div>
+<div class="base">
+<div class="bkick">THE BASEMENT</div>
+<div class="plunger"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 2v10"></path><path d="M6 17c0-3 2.7-5 6-5s6 2 6 5"></path><path d="M5 17h14v2a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"></path></svg></div>
+<div style="display: flex; align-items: center; gap: 8px; justify-content: center"><span class="bx s24 shp-circle"><span class="ring" style="background: #ffffff"></span><span class="in sk-purdy"></span><span class="ic ic-purdy"></span></span><b>Purdy Good Team</b></div>
+<span class="num" style="font-size: 32px; font-weight: 900">71.4</span>
+<span style="font-size: 12px; color: var(--mut); text-align: center">Keeps the Plunger until someone scores lower. Third time this season.</span>
+<div class="rreact" style="justify-content: center; border: 0; padding: 0; margin-top: 4px"><sc-for list="{{baseReacts}}" as="r" hint-placeholder-count="2"><button class="{{r.cls}}" onClick="{{r.pick}}"><span>{{r.e}}</span><b>{{r.n}}</b></button></sc-for></div>
+</div>
+</div>
+</section>
+</div>
+<!-- right column: chat -->
+<section class="card chat">
+<div class="chh"><h2 class="h2">League Chat</h2><span style="font-size: 12px; color: var(--mut)"><span class="ldot2" style="display: inline-block; width: 7px; height: 7px; margin-right: 6px; box-shadow: none"></span>3 online</span></div>
+<div class="pin"><span class="pk2">PINNED</span><span><b>Commish:</b> Dues are paid for everyone but Goff Ball. Payouts go through LeagueSafe.</span></div>
+<div class="msgs">
+<sc-for list="{{feed}}" as="m" hint-placeholder-count="10">
+<sc-if value="{{m.isMsg}}">
+<div class="{{m.cls}}">
+<span class="bx s28 shp-{{m.t.shape}}"><span class="ring" style="background: {{m.t.ring}}"></span><span class="in sk-{{m.t.key}}"></span><span class="ic ic-{{m.t.key}}"></span></span>
+<div style="min-width: 0"><div class="mh"><b>{{m.t.name}}</b><span>{{m.when}}</span></div><div class="mb">{{m.txt}}</div>
+<sc-if value="{{m.hasR}}"><div class="mr"><sc-for list="{{m.rs}}" as="r" hint-placeholder-count="2"><button class="{{r.cls}}" onClick="{{r.pick}}">{{r.lbl}}</button></sc-for></div></sc-if>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{m.isEvt}}">
+<div class="evt" style="--ec: {{m.ec}}">
+<div class="eh"><span class="et">{{m.kind}}</span><span>{{m.when}}</span></div>
+<div style="font-size: 14px; font-weight: 600; line-height: 1.4">{{m.txt}}</div>
+<div class="mr"><sc-for list="{{m.rs}}" as="r" hint-placeholder-count="3"><button class="{{r.cls}}" onClick="{{r.pick}}">{{r.lbl}}</button></sc-for></div>
+</div>
+</sc-if>
+<sc-if value="{{m.isPoll}}">
+<div class="evt poll" style="--ec: #7B5CFF">
+<div class="eh"><span class="et">POLL</span><span>{{m.when}}</span></div>
+<div style="font-size: 14px; font-weight: 700; margin-bottom: 8px">{{m.txt}}</div>
+<sc-for list="{{m.opts}}" as="o" hint-placeholder-count="2"><button class="{{o.cls}}" onClick="{{o.pick}}"><span class="pf2" style="width: {{o.w}}"></span><span class="pl">{{o.label}}</span><span class="pv2">{{o.pct}}</span></button></sc-for>
+<div style="margin-top: 6px; font-size: 12px; color: var(--mut)">{{m.votes}}</div>
+</div>
+</sc-if>
+</sc-for>
+</div>
+<div class="cbox">
+<input value="{{draft}}" onInput="{{onDraft}}" placeholder="Message the league" aria-label="Message the league">
+<button class="sendb" onClick="{{send}}" aria-label="Send"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></button>
+</div>
+<div class="qr"><sc-for list="{{quick}}" as="q" hint-placeholder-count="4"><button class="chip2" onClick="{{q.pick}}">{{q.label}}</button></sc-for></div>
+</section>
+</div>
+<!-- awards -->
+<section class="card aw">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap"><h2 class="h2">Season Awards</h2><span style="font-size: 12px; color: var(--mut)">Updated every Tuesday · current holder and who's chasing</span></div>
+<div class="awg">
+<sc-for list="{{awards}}" as="a" hint-placeholder-count="8">
+<div class="awc" style="--ac: {{a.c}}">
+<div class="awh"><span class="awi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{a.icon}}"></path></svg></span><span style="min-width: 0"><b style="display: block; font-size: 14px">{{a.name}}</b><span style="font-size: 11px; color: var(--mut)">{{a.desc}}</span></span></div>
+<div class="awl"><span class="bx s24 shp-{{a.t.shape}}"><span class="ring" style="background: {{a.t.ring}}"></span><span class="in sk-{{a.t.key}}"></span><span class="ic ic-{{a.t.key}}"></span></span><span style="min-width: 0; font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{a.t.name}}</span><span class="num awv">{{a.v}}</span></div>
+<div class="awr"><span>{{a.ru}}</span><span>{{a.rv}}</span></div>
+</div>
+</sc-for>
+</div>
+<div class="shelf">
+<span class="sk" style="margin-right: 6px">MOST DECORATED</span>
+<sc-for list="{{shelf}}" as="s" hint-placeholder-count="5"><span class="shi"><span class="bx s20 shp-{{s.t.shape}}"><span class="ring" style="background: {{s.t.ring}}"></span><span class="in sk-{{s.t.key}}"></span><span class="ic ic-{{s.t.key}}"></span></span><b>{{s.t.abbr}}</b><span class="num">{{s.n}}</span></span></sc-for>
+</div>
+</section>
+<!-- this week + standings -->
+<div class="cbg2">
+<section class="card" style="padding: 18px 18px 10px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 class="h2">This Week</h2><a href="#" class="lnk">Scores →</a></div>
+<sc-for list="{{wk}}" as="g" hint-placeholder-count="6">
+<div class="wkr">
+<span class="wt"><span class="bx s20 shp-{{g.a.shape}}"><span class="ring" style="background: {{g.a.ring}}"></span><span class="in sk-{{g.a.key}}"></span><span class="ic ic-{{g.a.key}}"></span></span><b>{{g.a.abbr}}</b><span class="num">{{g.as}}</span></span>
+<span class="wpb"><span style="width: {{g.aw}}; background: {{g.ac}}"></span><span style="width: {{g.bw}}; background: {{g.bc}}"></span></span>
+<span class="wt r"><span class="num">{{g.bs}}</span><b>{{g.b.abbr}}</b><span class="bx s20 shp-{{g.b.shape}}"><span class="ring" style="background: {{g.b.ring}}"></span><span class="in sk-{{g.b.key}}"></span><span class="ic ic-{{g.b.key}}"></span></span></span>
+<span class="wst">{{g.st}}</span>
+</div>
+</sc-for>
+</section>
+<section class="card" style="padding: 18px 18px 10px">
+<div style="display: flex; align-items: baseline; justify-content: space-between"><h2 class="h2">Standings</h2><a href="#" class="lnk">Full standings →</a></div>
+<sc-for list="{{stand}}" as="s" hint-placeholder-count="12">
+<sc-if value="{{s.cut}}"><div class="cutl"><span>PLAYOFF LINE</span></div></sc-if>
+<div class="{{s.cls}}"><span class="num sr">{{s.n}}</span><span class="bx s20 shp-{{s.t.shape}}"><span class="ring" style="background: {{s.t.ring}}"></span><span class="in sk-{{s.t.key}}"></span><span class="ic ic-{{s.t.key}}"></span></span><span style="min-width: 0; font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{s.t.name}}</span><span class="num" style="font-weight: 800">{{s.rec}}</span><span class="num" style="color: var(--mut2); text-align: right">{{s.pf}}</span></div>
+</sc-for>
+</section>
+</div>
+</sc-if>
+<!-- ===================== SCHEDULE ===================== -->
+<sc-if value="{{isSched}}">
+<div class="seg sm" style="align-self: flex-start; flex-wrap: wrap"><sc-for list="{{weeks}}" as="w" hint-placeholder-count="14"><button class="{{w.cls}}" onClick="{{w.pick}}">{{w.label}}</button></sc-for></div>
+<section class="card" style="padding: 8px 18px">
+<sc-for list="{{sched}}" as="g" hint-placeholder-count="6">
+<div class="scr">
+<span class="wt"><span class="bx s24 shp-{{g.a.shape}}"><span class="ring" style="background: {{g.a.ring}}"></span><span class="in sk-{{g.a.key}}"></span><span class="ic ic-{{g.a.key}}"></span></span><b>{{g.a.name}}</b></span>
+<span class="num scs">{{g.score}}</span>
+<span class="wt r"><b>{{g.b.name}}</b><span class="bx s24 shp-{{g.b.shape}}"><span class="ring" style="background: {{g.b.ring}}"></span><span class="in sk-{{g.b.key}}"></span><span class="ic ic-{{g.b.key}}"></span></span></span>
+<span class="wst">{{g.st}}</span>
+</div>
+</sc-for>
+</section>
+</sc-if>
+<!-- ===================== TRANSACTIONS ===================== -->
+<sc-if value="{{isTx}}">
+<div class="seg sm" style="align-self: flex-start"><sc-for list="{{txf}}" as="f" hint-placeholder-count="4"><button class="{{f.cls}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+<section class="card" style="padding: 6px 18px">
+<sc-for list="{{ltx}}" as="x" hint-placeholder-count="10">
+<div class="ltr">
+<span class="when2"><b>{{x.wk}}</b><span>{{x.day}}</span></span>
+<span class="{{x.tyCls}}">{{x.ty}}</span>
+<span class="wt"><span class="bx s20 shp-{{x.t.shape}}"><span class="ring" style="background: {{x.t.ring}}"></span><span class="in sk-{{x.t.key}}"></span><span class="ic ic-{{x.t.key}}"></span></span><b style="font-size: 13px">{{x.t.name}}</b></span>
+<div class="toks"><sc-for list="{{x.toks}}" as="k" hint-placeholder-count="2"><span class="{{k.cls}}"><b>{{k.s}}</b>{{k.name}}<span style="color: {{k.pc}}; font-weight: 800; font-size: 11px; margin-left: 5px">{{k.pos}}</span></span></sc-for></div>
+<span style="font-size: 12px; color: var(--mut); text-align: right">{{x.note}}</span>
+</div>
+</sc-for>
+</section>
+</sc-if>
+<!-- ===================== LEAGUESAFE ===================== -->
+<sc-if value="{{isMoney}}">
+<!-- league dues summary -->
+<section class="card lsh">
+<div class="lsb"><span class="lslogo">LS</span><span><b style="display: block; font-size: 17px">League Dues</b><span style="font-size: 12px; color: var(--mut)">{{duesSub}}</span></span></div>
+<div class="lss">
+<div class="lsx" style="flex: 1.6 1 280px"><span class="cbl2">COLLECTED</span><span style="display: flex; align-items: baseline; gap: 6px"><span class="num lsn">{{collected}}</span><span style="font-size: 13px; color: var(--mut)">{{collOf}}</span></span><span class="lbar"><span style="width: {{colW}}"></span></span></div>
+<div class="lsx"><span class="cbl2">PAID</span><span style="display: flex; align-items: baseline; gap: 6px"><span class="num lsn">{{paidN}}</span><span style="font-size: 13px; color: var(--mut)">of 12 teams</span></span></div>
+<div class="lsx"><span class="cbl2">PAYMENT DEADLINE</span><span class="num lsn" style="font-size: 26px">Thu, Sep 4</span><span style="font-size: 12px; color: var(--mut)">{{dlNote}}</span></div>
+<div class="lsx"><span class="cbl2">PAID OUT SO FAR</span><span class="num lsn">{{paidOut}}</span><span style="font-size: 12px; color: var(--mut)">{{paidOutNote}}</span></div>
+</div>
+</section>
+<div class="lsg">
+<div style="display: flex; flex-direction: column; gap: 20px; min-width: 0">
+<!-- season timeline + payouts -->
+<section class="card lsstage">
+<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap"><h2 class="h2">Season Timeline</h2><span class="{{stagePillCls}}">{{stagePill}}</span></div>
+<div class="tl2">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="7"><div class="{{s.cls}}"><span class="dot2">{{s.mark}}</span><b>{{s.t}}</b><small>{{s.d}}</small></div></sc-for>
+</div>
+<!-- commissioner allocation -->
+<sc-if value="{{showAlloc}}">
+<div class="alloc">
+<div class="alh"><b>Allocate Prizes</b><span>Final results are filled in. Check each winner, then propose. The league then has a 48-hour review.</span></div>
+<sc-for list="{{alloc}}" as="a" hint-placeholder-count="5">
+<div class="alr">
+<span style="min-width: 0"><b style="display: block; font-size: 14px">{{a.prize}}</b><span style="font-size: 12px; color: var(--mut)">{{a.basis}}</span></span>
+<button class="alw" onClick="{{a.cycle}}" title="Change recipient"><span class="bx s20 shp-{{a.t.shape}}"><span class="ring" style="background: {{a.t.ring}}"></span><span class="in sk-{{a.t.key}}"></span><span class="ic ic-{{a.t.key}}"></span></span><span style="min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{a.t.name}}</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+<span class="num" style="font-size: 20px; font-weight: 900; text-align: right">{{a.amt}}</span>
+</div>
+</sc-for>
+<div class="alf"><span>{{allocTotal}}</span><button class="btnp" onClick="{{propose}}">Propose payouts</button></div>
+</div>
+</sc-if>
+<sc-if value="{{showAllocWait}}">
+<div class="lsinfo">The commissioner is allocating prizes from the final results. Everyone is notified when the 48-hour review starts.</div>
+</sc-if>
+<!-- league review -->
+<sc-if value="{{showVeto}}">
+<div class="veto">
+<div class="vh"><b>League Review · {{vetoLeft}}</b><span>The proposed allocation passes when 7 of 12 teams approve, or automatically when the 48 hours end.</span></div>
+<sc-for list="{{proposal}}" as="a" hint-placeholder-count="5">
+<div class="vr"><span>{{a.prize}}</span><span class="vw"><span class="bx s20 shp-{{a.t.shape}}"><span class="ring" style="background: {{a.t.ring}}"></span><span class="in sk-{{a.t.key}}"></span><span class="ic ic-{{a.t.key}}"></span></span>{{a.t.name}}</span><span class="num" style="font-weight: 900; font-size: 18px; text-align: right">{{a.amt}}</span></div>
+</sc-for>
+<div class="vf"><span class="vbar"><span style="width: {{apprW}}"></span></span><span style="font-size: 13px; font-weight: 700">{{apprTxt}}</span><span style="flex: 1"></span>
+<sc-if value="{{canApprove}}"><button class="{{apprBtnCls}}" onClick="{{apprAct}}">{{apprBtn}}</button></sc-if>
+<sc-if value="{{isCommish}}"><button class="btns sm danger" onClick="{{cancelProp}}">Cancel proposal</button></sc-if>
+</div>
+</div>
+</sc-if>
+<!-- paid -->
+<sc-if value="{{showPaid}}">
+<div class="veto paid">
+<div class="vh"><b>Paid Out Tue, Jan 6 · 9:00 AM</b><span>Approved by 9 of 12 teams. Each winner's share went to their LeagueSafe account.</span></div>
+<sc-for list="{{proposal}}" as="a" hint-placeholder-count="5">
+<div class="vr"><span>{{a.prize}}</span><span class="vw"><span class="bx s20 shp-{{a.t.shape}}"><span class="ring" style="background: {{a.t.ring}}"></span><span class="in sk-{{a.t.key}}"></span><span class="ic ic-{{a.t.key}}"></span></span>{{a.t.name}}</span><span class="num" style="font-weight: 900; font-size: 18px; text-align: right; color: var(--up)">{{a.amt}}</span></div>
+</sc-for>
+</div>
+</sc-if>
+</section>
+<!-- payment summary -->
+<section class="card" style="padding: 18px 18px 8px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap"><h2 class="h2">Payment Summary</h2><span style="font-size: 12px; color: var(--mut)">{{memSub}}</span></div>
+<sc-for list="{{members}}" as="m" hint-placeholder-count="12">
+<div class="{{m.cls}}">
+<span class="bx s28 shp-{{m.t.shape}}"><span class="ring" style="background: {{m.t.ring}}"></span><span class="in sk-{{m.t.key}}"></span><span class="ic ic-{{m.t.key}}"></span></span>
+<span style="min-width: 0"><b style="display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{m.t.name}}</b><span style="font-size: 12px; color: var(--mut)">{{m.sub}}</span></span>
+<span class="{{m.stCls}}">{{m.st}}</span>
+<span style="text-align: right">
+<sc-if value="{{m.canPay}}"><button class="btnp sm" onClick="{{openPay}}">{{payBtn}}</button></sc-if>
+<sc-if value="{{m.canRemind}}"><button class="btns sm" onClick="{{m.remind}}">{{m.remTxt}}</button></sc-if>
+<sc-if value="{{m.hasDate}}"><span style="font-size: 12px; color: var(--mut)">{{m.date}}</span></sc-if>
+</span>
+</div>
+</sc-for>
+</section>
+</div>
+<!-- side -->
+<div style="display: flex; flex-direction: column; gap: 20px; min-width: 0">
+<section class="card" style="padding: 18px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px"><h2 class="h2">Prize Structure</h2><span class="{{weeklyPillCls}}">{{weeklyPill}}</span></div>
+<sc-for list="{{plan}}" as="p" hint-placeholder-count="5"><div class="kv2"><span>{{p.k}}</span><b class="num" style="font-size: 17px">{{p.v}}</b></div></sc-for>
+<div class="kv2" style="border-top: 2px solid var(--ln2)"><span style="color: var(--tx); font-weight: 700">Total</span><b class="num" style="font-size: 17px">{{planTotal}}</b></div>
+<sc-if value="{{weekly}}">
+<div class="mlab3">WEEKLY HIGH SCORE · PAID SO FAR</div>
+<sc-for list="{{weeklyPaid}}" as="w" hint-placeholder-count="6"><div class="wpr"><span class="num" style="font-weight: 800; color: var(--dim)">{{w.wk}}</span><span class="bx s20 shp-{{w.t.shape}}"><span class="ring" style="background: {{w.t.ring}}"></span><span class="in sk-{{w.t.key}}"></span><span class="ic ic-{{w.t.key}}"></span></span><span style="min-width: 0; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{w.t.name}}</span><span class="num" style="font-size: 14px; color: var(--mut2)">{{w.score}}</span><span class="stp ok" style="height: 20px; font-size: 10px">$40 PAID</span></div></sc-for>
+<div style="margin-top: 8px; font-size: 12px; color: var(--mut)">Weekly prizes are proposed by the commissioner every Tuesday and go through the same 48-hour review.</div>
+</sc-if>
+</section>
+<sc-if value="{{dyn}}">
+<section class="card vault">
+<div style="display: flex; align-items: center; gap: 10px"><span class="lslogo gold">V</span><span><b style="display: block; font-size: 16px">Empire Vault</b><span style="font-size: 12px; color: var(--mut)">The league's long-term fund, held by LeagueSafe</span></span></div>
+<div style="display: flex; align-items: baseline; gap: 6px; margin: 12px 0 4px"><span class="num" style="font-size: 34px; font-weight: 900">{{vaultBal}}</span><span style="font-size: 13px; color: var(--mut)">in the vault</span></div>
+<div class="mlab3">TRANSFERS</div>
+<sc-for list="{{vaultTx}}" as="x" hint-placeholder-count="2"><div class="vtx"><span><b style="display: block; font-size: 13px">{{x.what}}</b><span style="font-size: 11px; color: var(--mut)">{{x.when}}</span></span><b class="num" style="font-size: 17px; color: var(--up)">{{x.amt}}</b></div></sc-for>
+<sc-if value="{{vaultPending}}"><div class="vpend">{{vaultPendTxt}}</div></sc-if>
+<sc-if value="{{canTransfer}}"><button class="btnp" style="width: 100%; margin-top: 10px" onClick="{{doTransfer}}">{{transferTxt}}</button></sc-if>
+<div style="margin-top: 10px; font-size: 12px; color: var(--mut); line-height: 1.45">Members pay their full 2026 dues. The commissioner moves the vault share into the Empire Vault, and every transfer is visible to the whole league.</div>
+</section>
+</sc-if>
+<section class="card vault next">
+<div style="display: flex; align-items: center; gap: 10px"><span class="lslogo">27</span><span><b style="display: block; font-size: 16px">2027 Season Vault</b><span style="font-size: 12px; color: var(--mut)">Next season's dues, paid early</span></span></div>
+<div style="display: flex; align-items: baseline; gap: 6px; margin: 12px 0 6px"><span class="num" style="font-size: 30px; font-weight: 900">{{nextTotal}}</span><span style="font-size: 13px; color: var(--mut)">{{nextOf}}</span></div>
+<span class="lbar"><span style="width: {{nextW}}"></span></span>
+<div style="margin: 8px 0 12px; font-size: 12px; color: var(--mut)">{{nextN}}</div>
+<sc-if value="{{canPayAhead}}"><button class="btns" style="width: 100%" onClick="{{openPayAhead}}">{{payAheadTxt}}</button></sc-if>
+<sc-if value="{{paidAhead}}"><div class="stp ok" style="justify-content: center; height: 36px; width: 100%; border-radius: 10px">Your 2027 dues are paid</div></sc-if>
+</section>
+<section class="card" style="padding: 18px">
+<h2 class="h2" style="font-size: 18px">How LeagueSafe Works</h2>
+<ol class="steps" style="margin-top: 10px">
+<li><b>Dues are held securely all season.</b> Nobody, including the commissioner, has access to league dues in-season.</li>
+<li><b>The commissioner proposes payouts</b> from the final results.</li>
+<li><b>48-hour review period.</b> The proposed allocation passes on majority approval.</li>
+<li><b>Winners are paid</b> straight to their LeagueSafe accounts.</li>
+</ol>
+</section>
+</div>
+</div>
+</sc-if>
+<!-- ===================== RULES ===================== -->
+<sc-if value="{{isRules}}">
+<div class="cmbar"><span class="cmb2">COMMISSIONER</span><span style="flex: 1; font-size: 13px; color: var(--mut2)">You can change these settings. Members see this read-only view.</span><a href="#" class="btnp sm" style="text-decoration: none">Edit league settings</a></div>
+<section class="card diff">
+<h2 class="h2" style="font-size: 20px">What's Different About This League</h2>
+<div class="dgr"><sc-for list="{{diffs}}" as="d" hint-placeholder-count="4"><div class="dfi"><b>{{d.k}}</b><span>{{d.v}}</span></div></sc-for></div>
+</section>
+<div class="rgr">
+<sc-for list="{{rules}}" as="g" hint-placeholder-count="4">
+<section class="card" style="padding: 16px 18px 8px">
+<h2 class="h2" style="font-size: 18px; margin-bottom: 6px">{{g.title}}</h2>
+<sc-for list="{{g.rows}}" as="r" hint-placeholder-count="5"><div class="{{r.cls}}"><span>{{r.k}}</span><b>{{r.v}}</b></div></sc-for>
+</section>
+</sc-for>
+</div>
+<div style="font-size: 12px; color: var(--mut)">Highlighted settings differ from Fanball's standard. Only the commissioner can change them.</div>
+</sc-if>
+<footer style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 20px; border-top: 1px solid var(--ln); font-size: 13px; color: var(--dim)">
+<span>Fanball · Your league, your way</span>
+<span>Payments secured by LeagueSafe</span>
+</footer>
+</main>
+<!-- LEAGUESAFE PAY MODAL -->
+<sc-if value="{{payOpen}}">
+<div class="ovl" onClick="{{closePay}}"></div>
+<section class="{{payCls}}" role="dialog" aria-label="Pay league dues">
+<div style="display: flex; align-items: center; gap: 10px">
+<span class="lslogo">LS</span>
+<div style="flex: 1"><b style="display: block; font-size: 16px">{{pay.title}}</b><span style="font-size: 12px; color: var(--mut)">The Empire League · secured by LeagueSafe</span></div>
+<button class="xbtn" onClick="{{closePay}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
+</div>
+<sc-if value="{{pay.isForm}}">
+<div class="payamt"><span class="num">{{pay.amt}}</span><span>{{pay.what}}</span></div>
+<div class="mlab3">PAY WITH</div>
+<sc-for list="{{pay.methods}}" as="m" hint-placeholder-count="3">
+<button class="{{m.cls}}" onClick="{{m.pick}}"><span class="rd"></span><span style="min-width: 0; text-align: left"><b style="display: block; font-size: 14px">{{m.label}}</b><span style="font-size: 12px; color: var(--mut)">{{m.sub}}</span></span><span style="font-size: 12px; font-weight: 700; color: var(--mut2)">{{m.fee}}</span></button>
+</sc-for>
+<div class="paysum"><div><span>Dues</span><span>$200.00</span></div><div><span>Processing fee</span><span>{{pay.fee}}</span></div><div class="tot"><span>Total</span><span>{{pay.total}}</span></div></div>
+<div style="font-size: 12px; color: var(--mut); line-height: 1.45; margin-top: 10px">Your dues are held by LeagueSafe until the league's payouts clear the 48-hour review. The commissioner can't withdraw them.</div>
+<button class="btnp" style="width: 100%; height: 46px; margin-top: 14px; font-size: 15px" onClick="{{pay.go}}">{{pay.goTxt}}</button>
+</sc-if>
+<sc-if value="{{pay.isDone}}">
+<div class="paydone">
+<span class="okbig">✓</span>
+<b style="font-size: 20px">You're paid up</b>
+<span style="font-size: 13px; color: var(--mut); text-align: center">{{pay.doneTxt}}</span>
+<div class="paysum" style="width: 100%"><div><span>Receipt</span><span>LS-48213-EMP</span></div><div><span>Paid with</span><span>{{pay.methodName}}</span></div><div class="tot"><span>Total</span><span>{{pay.total}}</span></div></div>
+<button class="btnp" style="width: 100%; height: 44px" onClick="{{closePay}}">Back to the Clubhouse</button>
+</div>
+</sc-if>
+</section>
+</sc-if>
+<sc-if value="{{toast}}">
+<div class="toast"><span class="okc">✓</span><span><b>{{toastTxt}}</b><span style="display: block; font-size: 12px; color: #A6AEBF">{{toastSub}}</span></span><button class="lnk" style="color: #9DB3FF" onClick="{{closeToast}}">Dismiss</button></div>
+</sc-if>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this, st = this.state || {};
+var theme = st.theme || 'light', isLt = theme === 'light';
+var T = {
+syndicate: ['The Gridiron Syndicate', 'SYN', 'shieldA', '#c9a24a', '@coolerheads'],
+kelce: ["Kelce's Anatomy", 'KEL', 'circle', '#ffffff', '@kapp_attack'],
+airplane: ["Jefferson's Airplane", 'JEF', 'hex', '#ffd84d', '@jetpackjeff'],
+jj: ['Johnson & Johnson LLP', 'J&J', 'shieldB', '#efe3bd', '@jj_esq'],
+mustards: ['The Bijan Mustards', 'BIJ', 'square', '#c4161c', '@relishmore'],
+hurts: ['Hurts Locker', 'HRT', 'shieldC', '#f2c230', '@mscott44'],
+lamb: ['Certified Lamb Daddy', 'CLD', 'hex', '#d4af37', '@baaadboy'],
+henrys: ["Henry's Holes", 'HEN', 'circle', '#f28c28', '@hhenry'],
+chubb: ['Chubb Club', 'CHB', 'shieldA', '#f6d7a7', '@cigarnick'],
+purdy: ['Purdy Good Team', 'PGT', 'circle', '#ffffff', '@ninerfaithful'],
+puka: ['The Puka Principle', 'PKA', 'square', '#ffe89a', '@aloha_ppr'],
+goff: ['Goff Ball', 'GOF', 'shieldB', '#ffffff', '@fore_and_out']
+};
+function tm(k) { var r = T[k]; return { key: k, name: r[0], abbr: r[1], shape: r[2], ring: r[3], user: r[4] }; }
+var GREEN = '#2FD27A', RED = '#FF5A5A', YELLOW = '#F5C542';
+var games = [
+['syndicate', '139.6', 'hurts', '93.5', 'Live · 4th quarter', true, true, 88],
+['kelce', '112.8', 'airplane', '108.6', 'Live · 4th quarter', true, false, 52],
+['lamb', '124.9', 'goff', '67.3', 'Final', false, false, 100],
+['henrys', '98.7', 'puka', '76.4', 'Final', false, false, 100],
+['chubb', '104.5', 'jj', '91.2', 'Final', false, false, 100],
+['purdy', '86.1', 'mustards', '83.0', 'Final', false, false, 100]
+].map(function (g) {
+var aw = parseFloat(g[1]) > parseFloat(g[3]);
+var at = [], bt = [], atc = '', btc = '', ap = '', bp = '';
+if (g[5]) {
+var p = g[7], fav = Math.max(p, 100 - p), i;
+if (fav <= 60) { for (i = 0; i < 2; i++) { at.push(YELLOW); bt.push(YELLOW); } atc = btc = YELLOW; }
+else {
+var n = fav <= 70 ? 1 : (fav <= 80 ? 2 : 3), aFav = p > 50;
+for (i = 0; i < n; i++) { at.push(aFav ? GREEN : RED); bt.push(aFav ? RED : GREEN); }
+atc = aFav ? GREEN : RED; btc = aFav ? RED : GREEN;
+}
+ap = p + '%'; bp = (100 - p) + '%';
+}
+return { ta: tm(g[0]), as: g[1], tb: tm(g[2]), bs: g[3], st: g[4], stColor: g[5] ? '#6A8CFF' : '#8B93A5', cellCls: g[6] ? 'cell mine' : 'cell',
+aS: aw ? 's' : 's lose', bS: aw ? 's lose' : 's', at: at, bt: bt, atc: atc, btc: btc, ap: ap, bp: bp };
+});
+var off = st.off || 0, maxOff = games.length - 2;
+var pc = { QB: '#FF7A93', RB: '#3EE0B4', WR: '#62B0FF', TE: '#FFAE5C', K: '#E8D867' };
+// ===== Clubhouse =====
+var tier = st.tier || 'premium', prem = tier === 'premium';
+var pcP = isLt ? { QB: '#E0446A', RB: '#0FA37E', WR: '#2B80D9', TE: '#E07A16', K: '#A8960F', DST: '#77819A' }
+: { QB: '#FF7A93', RB: '#3EE0B4', WR: '#62B0FF', TE: '#FFAE5C', K: '#E8D867', DST: '#A3ADC2' };
+var ct = st.ct || 'club';
+var R = st.rx || {};   // my reactions: id -> true
+function rx(id, e, n, cls) { var on = !!R[id], c = n + (on ? 1 : 0); return { e: e, n: c, lbl: e + ' ' + c, cls: (cls || 'rx') + (on ? ' on' : ''), pick: function () { var r2 = Object.assign({}, R); if (on) delete r2[id]; else r2[id] = 1; self.setState({ rx: r2 }); } }; }
+var reacts = [['r1', '🔥', 12], ['r2', '😂', 7], ['r3', '💀', 4], ['r4', '👏', 5], ['r5', '🧻', 3]].map(function (r) { return rx(r[0], r[1], r[2]); });
+var baseReacts = [['b1', '🪠', 9], ['b2', '😬', 4]].map(function (r) { return rx(r[0], r[1], r[2]); });
+var comments = [['puka', 'I want it noted that I was missing Puka AND Walker. Rigged.', '1d'], ['purdy', 'Third Plunger. Framing it. Building a shelf.', '22h']].map(function (c) { return { t: tm(c[0]), txt: c[1], when: c[2] }; });
+var standouts = [
+{ k: 'PLAYER OF THE WEEK', v: 'Jahmyr Gibbs · 31.4', d: 'The Gridiron Syndicate' },
+{ k: 'BENCH BLUNDER', v: '24.0 points left on the bench', d: 'Chubb Club, in a 0.6-point loss' },
+{ k: 'WAIVER HIT', v: 'Tank Bigsby · 17.8', d: "Henry's Holes, a $22 pickup" }
+];
+var podium = [
+[2, 'lamb', '148.7', 'Malik Nabers 27.2'], [1, 'syndicate', '161.1', 'Jahmyr Gibbs 31.4'], [3, 'kelce', '142.3', 'Josh Allen 30.1']
+].map(function (p) { return { place: p[0], t: tm(p[1]), score: p[2], mvp: 'MVP: ' + p[3], cls: 'pdc p' + p[0] }; });
+// chat feed (oldest first)
+var poll = st.poll || null, pv = { a: 14, b: 9 }; if (poll) pv[poll]++;
+var tot = pv.a + pv.b;
+var mine = (st.mine || []);
+var feed = [
+{ k: 'evt', kind: 'TRADE COMPLETED', ec: '#2F5BFF', txt: "The Gridiron Syndicate got Travis Kelce from Kelce's Anatomy for Garrett Wilson and Rachaad White.", when: 'Tue 4:40 PM', rs: [['e3', '🤝', 4], ['e4', '🫠', 5], ['e5', '🧐', 2]] },
+{ k: 'msg', t: 'lamb', txt: 'Who approved this?? Fleece of the year.', when: 'Tue 4:52 PM', rs: [['m2', '💯', 4]] },
+{ k: 'evt', kind: 'WAIVER RESULTS', ec: '#1E9E57', txt: "4 claims processed. Biggest bid: Henry's Holes paid $22 for Tank Bigsby.", when: 'Wed 3:00 AM', rs: [['e6', '💸', 3]] },
+{ k: 'msg', t: 'henrys', txt: 'Anyone want Chubb for pennies?', when: 'Thu 11:02 AM' },
+{ k: 'msg', t: 'syndicate', txt: 'Commish here. Trade deadline is Nov 8.', when: 'Fri 9:15 AM', me: true },
+{ k: 'poll', txt: "Who wins Kelce's Anatomy vs Jefferson's Airplane?", when: 'Sun 12:30 PM' },
+{ k: 'evt', kind: 'BIG GAME', ec: '#E6B85A', txt: 'Jahmyr Gibbs just passed 30 points for The Gridiron Syndicate, the most by any player this week.', when: 'Sun 4:12 PM', rs: [['e1', '🔥', 6], ['e2', '😤', 2]] },
+{ k: 'msg', t: 'hurts', txt: 'Of course Gibbs goes off the week I play him.', when: 'Sun 4:14 PM' },
+{ k: 'msg', t: 'kelce', txt: 'Airplane is gonna need a miracle on SNF lol', when: 'Sun 7:58 PM', rs: [['m1', '😂', 3]] },
+{ k: 'msg', t: 'airplane', txt: 'I have Jefferson tonight. Relax.', when: 'Sun 7:59 PM' }
+].concat(mine.map(function (m) { return { k: 'msg', t: 'syndicate', txt: m, when: 'now', me: true }; })).map(function (m, i) {
+var base = { isMsg: m.k === 'msg', isEvt: m.k === 'evt', isPoll: m.k === 'poll', when: m.when, txt: m.txt, kind: m.kind || '', ec: m.ec || '', t: tm(m.t || 'syndicate'),
+cls: 'msg' + (m.me ? ' me' : ''), rs: (m.rs || []).map(function (r) { return rx(r[0], r[1], r[2], 'mrx'); }), hasR: !!(m.rs && m.rs.length), opts: [], votes: '' };
+if (m.k === 'poll') {
+base.opts = [['a', "Kelce's Anatomy"], ['b', "Jefferson's Airplane"]].map(function (o) { var pa = Math.round(pv.a / tot * 100), pct = o[0] === 'a' ? pa : 100 - pa;
+return { label: o[1], pct: pct + '%', w: pct + '%', cls: 'popt' + (poll === o[0] ? ' on' : ''), pick: function () { self.setState({ poll: poll === o[0] ? null : o[0] }); } }; });
+base.votes = tot + ' votes · closes at kickoff' + (poll ? ' · you voted' : '');
+}
+return base;
+});
+var draft = st.draft || '';
+function say(txt) { self.setState({ mine: mine.concat([txt]), draft: '' }); }
+// awards
+var IC = {
+crown: 'M3 8l4 4 5-7 5 7 4-4-2 11H5z', wave: 'M2 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0', swap: 'M7 7h13l-4-4M17 17H4l4 4', target: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8z',
+couch: 'M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3M3 11h18v6H3zM5 17v2M19 17v2', heart: 'M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10zM12 7l-1 5h2l-1 5',
+clover: 'M12 12c-3-5-8-3-6 1s6 0 6-1zm0 0c3-5 8-3 6 1s-6 0-6-1zm0 0c-5 3-3 8 1 6s0-6-1-6zm0 0v9', plunger: 'M12 2v10M6 17c0-3 2.7-5 6-5s6 2 6 5M5 17h14v3H5z'
+};
+var awards = [
+['crown', 'High Score of the Week', 'Most weekly high scores', 'syndicate', '×2', 'Certified Lamb Daddy', '×1', '#E6B85A'],
+['wave', 'Waiver Warrior', 'Most adds this season', 'goff', '23', "Henry's Holes", '19', '#1E9E57'],
+['swap', 'Trade Baron', 'Most completed trades', 'kelce', '4', 'The Gridiron Syndicate', '3', '#2F5BFF'],
+['target', 'Lineup Savant', 'Share of the best possible lineup', 'lamb', '96.8%', 'The Gridiron Syndicate', '95.1%', '#7B5CFF'],
+['couch', 'Bench Warmer', 'Most points left on the bench', 'chubb', '142.6', 'Johnson & Johnson LLP', '131.0', '#8A93A3'],
+['heart', 'Heartbreaker', 'Closest loss this season', 'chubb', '0.6', 'The Puka Principle', '1.9', '#D63B3B'],
+['clover', 'Lucky Dog', 'Wins above expected', 'henrys', '+1.8', 'The Bijan Mustards', '+1.1', '#14894A'],
+['plunger', 'The Plunger', 'Lowest score of the week', 'purdy', '×3', 'Goff Ball', '×2', '#8B5E3C']
+].map(function (a) { return { icon: IC[a[0]], name: a[1], desc: a[2], t: tm(a[3]), v: a[4], ru: 'Next: ' + a[5], rv: a[6], c: a[7] }; });
+var shelf = [['syndicate', 2], ['chubb', 2], ['lamb', 1], ['kelce', 1], ['goff', 1], ['henrys', 1], ['purdy', 1]].map(function (s) { return { t: tm(s[0]), n: '×' + s[1] }; });
+// this week (from the scoreboard data)
+var GW = [['syndicate', '139.6', 'hurts', '93.5', 'Live', 88], ['kelce', '112.8', 'airplane', '108.6', 'Live', 52], ['lamb', '124.9', 'goff', '67.3', 'Final', 100], ['henrys', '98.7', 'puka', '76.4', 'Final', 100], ['chubb', '104.5', 'jj', '91.2', 'Final', 100], ['purdy', '86.1', 'mustards', '83.0', 'Final', 100]];
+var G2 = isLt ? '#1E9E57' : '#2FD27A', R2 = isLt ? '#D63B3B' : '#FF5A5A', Y2 = '#F5C542';
+var wk = GW.map(function (g) { var p = g[5], fin = g[4] === 'Final', aw = parseFloat(g[1]) > parseFloat(g[3]);
+if (fin) p = aw ? 100 : 0;
+var close = Math.abs(p - 50) <= 10;
+return { a: tm(g[0]), as: g[1], b: tm(g[2]), bs: g[3], aw: p + '%', bw: (100 - p) + '%', ac: close ? Y2 : (p > 50 ? G2 : R2), bc: close ? Y2 : (p > 50 ? R2 : G2), st: fin ? 'Final' : g[4] + ' · ' + Math.max(p, 100 - p) + '%' }; });
+var ST = [['syndicate', '5-1', '1,024.2'], ['lamb', '5-1', '976.5'], ['henrys', '4-2', '899.4'], ['kelce', '3-3', '885.2'], ['chubb', '3-3', '871.0'], ['mustards', '3-3', '858.7'], ['airplane', '3-3', '846.9'], ['jj', '2-4', '850.3'], ['hurts', '2-4', '837.2'], ['puka', '2-4', '824.8'], ['goff', '2-4', '760.1'], ['purdy', '1-5', '728.9']];
+var stand = ST.map(function (s, i) { return { n: i + 1, t: tm(s[0]), rec: s[1], pf: s[2], cut: i === 6, cls: 'str' + (s[0] === 'syndicate' ? ' me' : '') }; });
+// schedule tab
+var sw = st.sw2 || 7;
+var PAIRS = [['syndicate', 'hurts'], ['kelce', 'airplane'], ['lamb', 'goff'], ['henrys', 'puka'], ['chubb', 'jj'], ['purdy', 'mustards']];
+var KS = ['syndicate', 'kelce', 'airplane', 'jj', 'mustards', 'hurts', 'lamb', 'henrys', 'chubb', 'purdy', 'puka', 'goff'];
+function rot(w) { var arr = KS.slice(1), out = []; for (var r = 1; r < w; r++) arr.unshift(arr.pop()); var all = [KS[0]].concat(arr); for (var i = 0; i < 6; i++) out.push([all[i], all[11 - i]]); return out; }
+function hs(str) { var h = 7; for (var i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) % 9973; return h; }
+var sched = (sw === 7 ? PAIRS : rot(sw)).map(function (p, i) {
+var a = 95 + hs(p[0] + sw) % 60 + (hs(p[1] + sw) % 10) / 10, b = 90 + hs(p[1] + sw * 3) % 62 + (hs(p[0]) % 10) / 10;
+if (sw === 7) { var g = GW[i]; return { a: tm(p[0]), b: tm(p[1]), score: g[1] + ' – ' + g[3], st: g[4] === 'Live' ? 'Live' : 'Final' }; }
+return { a: tm(p[0]), b: tm(p[1]), score: sw < 7 ? a.toFixed(1) + ' – ' + b.toFixed(1) : 'vs', st: sw < 7 ? 'Final' : 'Week ' + sw };
+});
+var weeks = []; for (var w = 1; w <= 14; w++) (function (w) { weeks.push({ label: 'W' + w, cls: w === sw ? 'on' : '', pick: function () { self.setState({ sw2: w }); } }); })(w);
+// league transactions tab
+function tk2(s, n, p) { return { s: s === '+' ? '+' : '−', name: n, pos: p, pc: pcP[p], cls: 'tk2 ' + (s === '+' ? 'add' : 'drop') }; }
+var LTX = [
+['ad', 'Week 7', 'Today 9:40 AM', 'goff', [tk2('+', 'Will Shipley', 'RB'), tk2('-', 'Demond Claiborne', 'RB')], 'Free agent'],
+['ad', 'Week 7', 'Today 1:05 AM', 'henrys', [tk2('+', 'Jaylen Warren', 'RB'), tk2('-', 'Xavier Legette', 'WR')], 'Free agent'],
+['faab', 'Week 7', 'Wed 3:00 AM', 'henrys', [tk2('+', 'Tank Bigsby', 'RB'), tk2('-', 'Zamir White', 'RB')], '$22 · 4 bids'],
+['faab', 'Week 7', 'Wed 3:00 AM', 'goff', [tk2('+', 'Jalen McMillan', 'WR'), tk2('-', 'Jake Elliott', 'K')], '$7 · 3 bids'],
+['trade', 'Week 7', 'Tue 4:40 PM', 'syndicate', [tk2('+', 'Travis Kelce', 'TE'), tk2('-', 'Garrett Wilson', 'WR'), tk2('-', 'Rachaad White', 'RB')], "With Kelce's Anatomy"],
+['ad', 'Week 6', 'Sat 11:20 AM', 'purdy', [tk2('+', 'Joshua Palmer', 'WR'), tk2('-', 'Romeo Doubs', 'WR')], 'Free agent'],
+['trade', 'Week 6', 'Thu 6:02 PM', 'lamb', [tk2('+', 'Calvin Ridley', 'WR'), tk2('-', 'Rhamondre Stevenson', 'RB')], 'With Chubb Club · + $8 FAAB'],
+['faab', 'Week 6', 'Wed 3:00 AM', 'syndicate', [tk2('+', 'Ravens D/ST', 'DST'), tk2('-', 'Steelers D/ST', 'DST')], '$8 · 3 bids']
+];
+var txfK = st.txf2 || 'all', TYN = { ad: 'ADD / DROP', faab: 'FAAB', trade: 'TRADE' };
+var ltx = LTX.filter(function (x) { return txfK === 'all' || x[0] === txfK; }).map(function (x) { return { ty: TYN[x[0]], tyCls: 'ty2 ' + x[0], wk: x[1], day: x[2], t: tm(x[3]), toks: x[4], note: x[5] }; });
+// rules tab
+var rules = [
+['Roster', [['Starters', '1 QB, 2 RB, 3 WR, 1 TE, 1 FLEX, 1 SUPERFLEX, K, DST', 1], ['Bench', '7 spots', 0], ['Injured reserve', '2 spots (OUT, IR, PUP)', 0], ['Taxi squad', '3 rookies', 1]]],
+['Scoring', [['Format', 'PPR (1 point per catch)', 0], ['TE premium', '+0.5 per catch for TEs', 1], ['Passing TD', '6 points', 1], ['Passing yards', '1 point per 25 yards', 0], ['Rushing and receiving yards', '1 point per 10 yards', 0]]],
+['Waivers', [['Type', 'Blind FAAB, $100 a season', 0], ['Runs', 'Wednesdays at 3:00 AM, then free agency', 0], ['$0 bids', 'Allowed', 0], ['Dropped players', 'On waivers for 24 hours', 0], ['Ties', 'Rolling priority (fewest points for to start)', 0]]],
+['Trades', [['Review', 'None. Trades go through when both teams agree', 0], ['Deadline', 'Sat, Nov 8 · 11:59 PM', 0], ['Draft picks', 'Rounds 1–4, next two seasons', 1], ['FAAB', 'Tradeable, not during waiver processing', 1]]],
+['Season & Playoffs', [['Regular season', 'Weeks 1–14', 0], ['Playoffs', '6 teams, Weeks 15–17, top 2 get byes', 0], ['Tiebreaker', 'Points for', 0], ['Divisions', 'None', 0]]],
+['Money', [['Dues', '$250 per team ($50 to the Empire Vault) · held by LeagueSafe', 1], ['Payouts', '1st $1,400 · 2nd $600 · 3rd $200 · High score $200', 1], ['Dues status', '11 of 12 paid', 0]]]
+].map(function (g) { return { title: g[0], rows: g[1].map(function (r) { return { k: r[0], v: r[1], cls: 'kv2' + (r[2] ? ' hl' : '') }; }) }; });
+var diffs = [['Superflex', 'Start a second QB in the SUPERFLEX spot'], ['TE premium', 'Tight ends get +0.5 per catch'], ['6-point passing TDs', 'Standard is 4'], ['Taxi squad', 'Stash 3 rookies without using bench spots'], ['Weekly high score pays $200', 'Paid out through LeagueSafe at season end']].map(function (d) { return { k: d[0], v: d[1] }; });
+var club = {
+prem: prem, ct: ct,
+tabs: [['club', 'Clubhouse'], ['money', 'LeagueSafe'], ['sched', 'Schedule'], ['tx', 'Transactions'], ['rules', 'Rules & Settings']].map(function (t) { return { label: t[1], cls: 'ptab' + (t[0] === ct ? ' on' : ''), pick: function () { self.setState({ ct: t[0] }); } }; }),
+isClub: ct === 'club', isSched: ct === 'sched', isTx: ct === 'tx', isRules: ct === 'rules',
+onlineTeams: ['kelce', 'airplane', 'henrys'].map(tm), onlineTxt: '3 in the Clubhouse now',
+reacts: reacts, baseReacts: baseReacts, comments: comments, commentCount: '8 comments', standouts: standouts, podium: podium,
+feed: feed, draft: draft, onDraft: function (e) { self.setState({ draft: e && e.target ? e.target.value : draft }); },
+send: function () { if (draft.trim()) say(draft.trim()); },
+quick: ['GG', 'Fleeced 🧐', 'Respect 🫡', 'Any trade offers?'].map(function (q) { return { label: q, pick: function () { say(q); } }; }),
+awards: awards, shelf: shelf, wk: wk, stand: stand, sched: sched, weeks: weeks,
+txf: [['all', 'All'], ['ad', 'Adds / drops'], ['faab', 'FAAB'], ['trade', 'Trades']].map(function (f) { return { label: f[1], cls: f[0] === txfK ? 'on' : '', pick: function () { self.setState({ txf2: f[0] }); } }; }),
+ltx: ltx, rules: rules, diffs: diffs,
+toast: !!st.toast, toastTxt: st.toast || '', toastSub: st.toastSub || '', closeToast: function () { self.setState({ toast: null }); }
+};
+// ===== LeagueSafe tab =====
+var who = st.who || 'commish', stage = st.stage || 'late', fmt2 = st.fmt2 || 'dynasty', dyn = fmt2 === 'dynasty', weekly = !!st.weekly;
+var D = dyn ? 250 : 200, POT = 12 * D;
+function $(n) { return '$' + n.toLocaleString(); }
+var meK = who === 'commish' ? 'syndicate' : (who === 'member' ? 'kelce' : 'goff');
+var goffPaid = !!st.goffPaid, rem = st.rem || {};
+var DATES = { syndicate: 'Aug 2', kelce: 'Aug 2', airplane: 'Aug 3', jj: 'Aug 5', mustards: 'Aug 2', hurts: 'Aug 9', lamb: 'Aug 2', henrys: 'Aug 4', chubb: 'Aug 14', purdy: 'Aug 21', puka: 'Aug 6', goff: 'Oct 16' };
+var PRE = ['syndicate', 'kelce', 'airplane', 'jj', 'mustards', 'hurts', 'lamb', 'henrys', 'puka'];
+function isPaid(k) {
+if (k === 'goff' && goffPaid) return true;
+if (stage === 'pre') return PRE.indexOf(k) >= 0;
+if (stage === 'late') return k !== 'goff';
+return true;
+}
+var paidN = KS.filter(isPaid).length, collected = paidN * D;
+var members = KS.map(function (k) {
+var paid = isPaid(k), me = k === meK;
+return { t: tm(k), sub: (me ? 'You · ' : '') + T[k][4] + (k === 'syndicate' ? ' · commissioner' : '') + (!paid && stage === 'late' ? ' · late' : ''),
+st: (paid ? 'Paid ' : 'Owes ') + $(D), stCls: paid ? 'stp ok' : 'stp due', cls: 'mrow' + (me ? ' me' : (paid ? '' : ' due')),
+hasDate: paid, date: paid ? (k === 'goff' && goffPaid ? 'Today' : DATES[k]) : '',
+canPay: !paid && me, canRemind: !paid && who === 'commish', remTxt: rem[k] ? 'Reminded' : 'Remind',
+remind: function () { var r = Object.assign({}, rem); r[k] = 1; self.setState({ rem: r, toast: 'Reminder sent to ' + T[k][0], toastSub: 'By email and push, with a link to pay' }); } };
+});
+var PLAN = weekly ? [['1st place', 1150], ['2nd place', 500], ['3rd place', 190]] : [['1st place', 1400], ['2nd place', 600], ['3rd place', 200], ['Season high score', 200]];
+var plan = PLAN.map(function (p) { return { k: p[0], v: $(p[1]) }; }).concat(weekly ? [{ k: 'Weekly high score', v: '$40 × 14' }] : []).concat(dyn ? [{ k: 'Empire Vault share', v: '$600' }] : []);
+var WPAID = [['W1', 'kelce', '151.2'], ['W2', 'syndicate', '169.6'], ['W3', 'lamb', '158.0'], ['W4', 'henrys', '149.3'], ['W5', 'airplane', '155.8'], ['W6', 'syndicate', '161.1']];
+var weeklyPaid = WPAID.map(function (w) { return { wk: w[0], t: tm(w[1]), score: w[2] }; });
+var BASIS = ['Champion · won the Week 17 final', 'Runner-up', 'Won the 3rd-place game', 'Highest single-week score · 172.4 in Week 11'];
+var DEF = ['syndicate', 'lamb', 'henrys', 'syndicate'], AL = st.al || {};
+var alloc = PLAN.map(function (p, i) { var k = AL[i] || DEF[i];
+return { prize: p[0], basis: BASIS[i], t: tm(k), amt: $(p[1]), cycle: function () { var a2 = Object.assign({}, AL); a2[i] = KS[(KS.indexOf(k) + 1) % KS.length]; self.setState({ al: a2 }); } }; });
+// timeline
+var STEPS = [['Dues being collected', 'Opened Jul 15'], ['Payment deadline', 'Thu, Sep 4'], ['Late payments', 'If allowed · through Oct 18'], ['In-season', 'Weeks 1–17'], ['Commissioner allocates', weekly ? 'Weekly, then Week 17' : 'Opens Week 16'], ['League review', '48-hour review, passes sooner with majority approval'], ['Winners paid', 'To LeagueSafe accounts']];
+var NOW = { pre: [0], late: [2, 3], season: [3], alloc: [4], veto: [5], paid: [] }[stage], first = NOW.length ? NOW[0] : 7;
+var steps = STEPS.map(function (s, i) { var done = i < first, now = NOW.indexOf(i) >= 0; return { t: s[0], d: s[1], mark: done ? '✓' : '', cls: 'tls2' + (done ? ' done' : (now ? ' now' : '')) }; });
+// review
+var myAppr = !!st.myAppr, appr = 5 + (myAppr ? 1 : 0);
+// vault
+var moved = !!st.vmoved || stage === 'paid', share = paidN * 50;
+var vaultTx = [['Moved from 2025 season dues', 'Jan 8, 2026', '+$600'], ['Opening balance', 'Jan 10, 2025', '+$1,200']];
+if (moved) vaultTx.unshift(['Moved from 2026 dues', stage === 'paid' ? 'Sep 10' : 'Today', '+' + $(share)]);
+var aheadN = 5 + (st.paidAhead ? 1 : 0);
+// pay modal
+var payOpen = st.payOpen || null, payM = st.payM || 'wallet', payDone = !!st.payDone;
+var METH = [['wallet', 'LeagueSafe balance', '$312.40 available', 'No fee'], ['bank', 'Bank account', 'Chase ••6721 · clears in 1–2 days', 'No fee'], ['card', 'Debit card', 'Visa ••4410 · instant', '+' + '$' + (D * 0.029).toFixed(2)]];
+var fee = payM === 'card' ? Math.round(D * 2.9) / 100 : 0;
+var pay = { title: payOpen === 'ahead' ? 'Pay 2027 Dues' : 'Pay League Dues', amt: '$' + D.toFixed(2),
+what: payOpen === 'ahead' ? '2027 season dues · held in the 2027 Season Vault' : '2026 season dues · ' + T[meK][0],
+methods: METH.map(function (m) { return { label: m[1], sub: m[2], fee: m[3], cls: 'pm4' + (m[0] === payM ? ' on' : ''), pick: function () { self.setState({ payM: m[0] }); } }; }),
+fee: '$' + fee.toFixed(2), total: '$' + (D + fee).toFixed(2), goTxt: 'Pay $' + (D + fee).toFixed(2), isForm: !payDone, isDone: payDone,
+methodName: METH.filter(function (m) { return m[0] === payM; })[0][1],
+doneTxt: payOpen === 'ahead' ? 'Your 2027 dues are in the 2027 Season Vault. Your spot for next season is locked.' : 'LeagueSafe is holding your dues with the rest of the league’s until payouts.',
+go: function () { var o = { payDone: true }; if (payOpen === 'ahead') o.paidAhead = true; else o.goffPaid = true; self.setState(o); } };
+var ls = {
+isMoney: ct === 'money', dyn: dyn, weekly: weekly, isCommish: who === 'commish',
+oweShow: !isPaid(meK), oweTxt: 'You owe ' + $(D) + ' in league dues.',
+duesSub: dyn ? '$250 per team · $200 to prizes, $50 to the Empire Vault · held by LeagueSafe' : '$200 per team · held by LeagueSafe',
+collected: $(collected), collOf: 'of ' + $(POT), colW: (collected / POT * 100).toFixed(1) + '%', paidN: paidN,
+dlNote: stage === 'pre' ? '25 days left · draft is Sat, Sep 6' : (stage === 'late' ? 'Passed · late payments allowed through Oct 18' : 'All 12 teams paid'),
+paidOut: stage === 'paid' ? '$2,400' : (weekly && stage !== 'pre' ? '$240' : '$0'), paidOutNote: stage === 'paid' ? 'Season complete' : (weekly && stage !== 'pre' ? 'Weekly high scores, Weeks 1–6' : 'Prizes pay after the season'),
+stagePill: { pre: 'Collecting dues', late: 'Late payments open', season: 'Season in progress', alloc: 'Allocation open', veto: 'League review', paid: 'Paid out' }[stage], stagePillCls: 'spill ' + ({ pre: 'alloc', late: 'veto', season: 'season', alloc: 'alloc', veto: 'veto', paid: 'paid' }[stage]),
+steps: steps,
+showAlloc: stage === 'alloc' && who === 'commish', showAllocWait: stage === 'alloc' && who !== 'commish', alloc: alloc,
+allocTotal: weekly ? 'Total $1,840 · the other $560 went out as weekly prizes' : 'Total $2,400 in prizes' + (dyn ? ' · the $600 vault share is separate' : ' · matches dues held'),
+propose: function () { self.setState({ stage: 'veto', myAppr: false, toast: 'Payouts proposed', toastSub: 'The 48-hour league review has started. Everyone has been notified.' }); },
+showVeto: stage === 'veto', showPaid: stage === 'paid', proposal: alloc, vetoLeft: '31 hours left',
+apprW: (Math.min(appr, 7) / 7 * 100).toFixed(0) + '%', apprTxt: appr + ' approvals · 7 needed',
+canApprove: who !== 'commish', apprBtn: myAppr ? 'Approved · undo' : 'Approve payouts', apprBtnCls: myAppr ? 'btns sm' : 'btnp sm',
+apprAct: function () { self.setState({ myAppr: !myAppr }); },
+cancelProp: function () { self.setState({ stage: 'alloc', toast: 'Proposal cancelled', toastSub: 'Edit the allocation and propose again' }); },
+members: members, memSub: who === 'commish' ? 'Remind anyone who hasn’t paid' : paidN + ' of 12 paid', payBtn: 'Pay ' + $(D),
+plan: plan, planTotal: $(POT), weeklyPill: weekly ? 'Weekly payouts on' : 'Paid at season end', weeklyPillCls: weekly ? 'spill alloc' : 'spill season', weeklyPaid: weeklyPaid,
+vaultBal: $(1800 + (moved ? share : 0)), vaultTx: vaultTx.map(function (x) { return { what: x[0], when: x[1], amt: x[2] }; }),
+vaultPending: !moved && stage !== 'pre' && who !== 'commish', vaultPendTxt: $(share) + ' of 2026 dues is set aside for the vault. The commissioner hasn’t moved it yet.',
+canTransfer: !moved && stage !== 'pre' && who === 'commish', transferTxt: 'Move ' + $(share) + ' to the Empire Vault',
+doTransfer: function () { self.setState({ vmoved: true, toast: $(share) + ' moved to the Empire Vault', toastSub: 'The whole league can see this transfer' }); },
+nextTotal: $(aheadN * D), nextOf: 'of ' + $(POT), nextW: (aheadN / 12 * 100).toFixed(0) + '%', nextN: aheadN + ' of 12 teams have paid 2027 dues early',
+canPayAhead: !st.paidAhead, paidAhead: !!st.paidAhead, payAheadTxt: 'Pay 2027 dues · ' + $(D),
+payOpen: !!payOpen, pay: pay, payCls: (isLt ? 'th-lt' : 'th-dk') + ' paymod',
+openPay: function () { self.setState({ payOpen: 'dues', payDone: false, payM: 'wallet' }); },
+openPayAhead: function () { self.setState({ payOpen: 'ahead', payDone: false, payM: 'wallet' }); },
+closePay: function () { self.setState({ payOpen: null, payDone: false }); },
+whos: [['commish', 'Commissioner'], ['member', 'Member'], ['unpaid', 'Unpaid member']].map(function (k) { return { label: k[1], cls: k[0] === who ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ who: k[0], payOpen: null, myAppr: false }); } }; }),
+stages: [['pre', 'Preseason'], ['late', 'Late payments'], ['season', 'In season'], ['alloc', 'Allocation'], ['veto', 'Review'], ['paid', 'Paid out']].map(function (k) { return { label: k[1], cls: k[0] === stage ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ stage: k[0], ct: 'money' }); } }; }),
+fmts2: [['redraft', 'Re-draft'], ['dynasty', 'Dynasty']].map(function (k) { return { label: k[1], cls: k[0] === fmt2 ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ fmt2: k[0] }); } }; }),
+weeklys: [['off', 'Season end'], ['on', 'Weekly']].map(function (k) { var on = k[0] === 'on' ? weekly : !weekly; return { label: k[1], cls: on ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ weekly: k[0] === 'on' }); } }; }),
+goMoney: function () { self.setState({ ct: 'money' }); }
+};
+Object.assign(club, ls);
+return Object.assign(club, {
+prem: prem, tiers: [['free', 'Standard'], ['premium', 'Premium']].map(function (k) { return { label: k[1], cls: k[0] === tier ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ tier: k[0] }); } }; }),
+themes: [['dark', 'Dark'], ['light', 'Light']].map(function (k) { return { label: k[1], cls: k[0] === theme ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ theme: k[0] }); } }; }),
+mainCls: isLt ? 'th-lt' : 'th-dk', pageBg: isLt ? '#F2F3F5' : '#0F1218',
+games: games, stripX: (-off * 206) + 'px', canPrev: off > 0, canNext: off < maxOff,
+stripPrev: function () { self.setState({ off: Math.max(0, off - 2) }); },
+stripNext: function () { self.setState({ off: Math.min(maxOff, off + 2) }); },
+leagues: [
+['The Empire League', 'EL', '#b07a1e', 'Live · up 46.1', '#4BE08F', true],
+['Lake Minnetonka Keeper', 'LM', '#1e4f8a', 'Live · down 6.1', '#FF7B7B', false],
+['Dynasty Degenerates', 'DD', '#2f7a46', 'Final · won 131.2–98.0', '#8B93A5', false],
+['Office Pool 2026', 'OP', '#a6335a', 'Kicks off Sun 8:20 PM', '#8B93A5', false],
+['Superflex Syndicate', 'SS', '#7a3b12', 'Dues due Friday', '#FFB547', false],
+['Best Ball Pod #14', 'BB', '#5b2aa6', '3rd of 12', '#8B93A5', false]
+].map(function (l) { return { name: l[0], init: l[1], hue: l[2], st: l[3], sc: l[4], cls: l[5] ? 'lg on' : 'lg' }; }),
+chat: [
+['kelce', 'Airplane is gonna need a miracle on SNF lol', '2m'],
+['airplane', 'I have Jefferson tonight. Relax.', '1m'],
+['syndicate', 'Commish here. Trade deadline is Nov 8.', '2h'],
+['henrys', 'Anyone want Chubb for pennies?', '4h']
+].map(function (c) { return { t: tm(c[0]), txt: c[1], when: c[2] }; }),
+tx: [
+['goff', 'RB', 'Will Shipley', 'PHI', 'RB', 'Demond Claiborne', 'MIN', '1h'],
+['henrys', 'RB', 'Jaylen Warren', 'PIT', 'WR', 'Xavier Legette', 'CAR', '8h'],
+['purdy', 'WR', 'Joshua Palmer', 'BUF', 'WR', 'Romeo Doubs', 'GB', '1d']
+].map(function (x) { return { t: tm(x[0]), ap: x[1], ac: pc[x[1]], an: x[2], at: x[3], dp: x[4], dc: pc[x[4]], dn: x[5], dt: x[6], when: x[7] }; })
+});
+}
+}
+</script>
+</body>
+</html>

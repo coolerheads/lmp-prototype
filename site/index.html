@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Fanball · League Management Prototype</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{display:flex;align-items:center;justify-content:center;background:radial-gradient(80% 60% at 50% 0%,#1d2a66 0%,rgba(29,42,102,0) 60%),#0B0D12;color:#EEF1F6;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;padding:16px}
+.c{width:100%;max-width:400px;padding:32px 28px;border-radius:20px;background:#12151C;box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 0 0 1px #232836}
+img{height:44px;display:block;margin-bottom:22px}
+h1{margin:0;font-size:24px}p{margin:8px 0 22px;color:#A6AEBF;font-size:14px;line-height:1.5}
+label{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;color:#8B93A5;margin-bottom:6px}
+input{width:100%;height:46px;padding:0 14px;border:0;border-radius:12px;background:#0B0D12;color:#fff;font-size:16px;box-shadow:inset 0 0 0 1.5px #2a2f3b;outline:0}
+input:focus{box-shadow:inset 0 0 0 2px #2F5BFF}
+button{width:100%;height:46px;margin-top:12px;border:0;border-radius:12px;background:#2F5BFF;color:#fff;font-size:15px;font-weight:800;cursor:pointer}
+.e{min-height:20px;margin-top:10px;color:#FF7B7B;font-size:13px;font-weight:600}
+small{display:block;margin-top:18px;color:#5A6275;font-size:12px;line-height:1.5}
+</style>
+<link rel="icon" href="/a/6d0fd2687e0f4e908cbe7777ef1d6bd1.webp">
+</head>
+<body>
+<form class="c" id="f">
+<img src="/a/6d0fd2687e0f4e908cbe7777ef1d6bd1.webp" alt="Fanball">
+<h1>League Management Prototype</h1>
+<p>A clickable design prototype. Enter the passcode you were given.</p>
+<label for="pc">PASSCODE</label>
+<input id="pc" type="password" autocomplete="current-password" autofocus>
+<button type="submit">Enter</button>
+<div class="e" id="e"></div>
+<small>Sample data only. Nothing you do here is saved to a real league or moves real money.</small>
+</form>
+<script>
+var H='6f2e1db94e3a0e0b587bc63620d0cf2040414f6ce61d8d7f74292bf4d3b9b9b5';
+if(localStorage.getItem('lmp_ok')){go();}
+function go(){var n=new URLSearchParams(location.search).get('next');location.replace(n&&n.charAt(0)==='/'&&n.charAt(1)!=='/'?n:'/home');}
+document.getElementById('f').addEventListener('submit',async function(ev){ev.preventDefault();
+var v=document.getElementById('pc').value.trim().toLowerCase();
+var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));
+var h=Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');
+if(h===H){localStorage.setItem('lmp_ok','1');go();}else{document.getElementById('e').textContent='That passcode isn’t right.';}});
+</script>
+</body>
+</html>

@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fanball — Trades</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&amp;family=Onest:wght@400;500;600;700&amp;family=Cinzel:wght@700&amp;family=Alfa+Slab+One&amp;display=swap">
+<style>
+body{margin:0;background:#0F1218}
+a{color:#6A8CFF;text-decoration:none}a:hover{color:#9DB3FF}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+/* team art (badge interiors) */
+.sk-syndicate{background:repeating-linear-gradient(90deg,rgba(255,214,140,.07) 0 1px,transparent 1px 9px),radial-gradient(130% 160% at 50% 0%,#7a1d1d 0%,#2a0606 72%)}
+.sk-kelce{background:repeating-linear-gradient(0deg,rgba(255,255,255,.09) 0 1px,transparent 1px 7px),repeating-linear-gradient(90deg,rgba(255,255,255,.09) 0 1px,transparent 1px 7px),linear-gradient(100deg,#ee3b4d 0%,#a8121f 58%,#4f040c 100%)}
+.sk-airplane{background:linear-gradient(90deg,#3b1670 0%,#3b1670 30%,rgba(59,22,112,0) 85%),repeating-conic-gradient(from 0deg at 88% 55%,#ffcf3f 0 9deg,#ff7a2f 9deg 18deg,#d23a8f 18deg 27deg,#5b2aa6 27deg 36deg)}
+.sk-jj{background:linear-gradient(180deg,#14284f,#0a1631)}
+.sk-mustards{background:radial-gradient(circle,rgba(150,60,0,.32) 1.1px,transparent 1.5px) 0 0/6px 6px,linear-gradient(90deg,#ffd43f,#eaa000)}
+.sk-hurts{background:radial-gradient(28% 70% at 18% 30%,#56776a 60%,transparent 62%),radial-gradient(22% 60% at 55% 80%,#1d302d 60%,transparent 62%),#35534b}
+.sk-lamb{background:radial-gradient(90% 140% at 85% 50%,rgba(212,175,55,.35),transparent 60%),linear-gradient(180deg,#1a1a1a,#050505)}
+.sk-henrys{background:repeating-linear-gradient(-55deg,#2b1a6b 0 12px,#4127a0 12px 24px)}
+.sk-chubb{background:radial-gradient(120% 120% at 20% 0%,#9a4d1a,#4a200a 70%)}
+.sk-purdy{background:linear-gradient(90deg,#ffe6ea,#f7a6ba 60%,#e2587b)}
+.sk-puka{background:linear-gradient(180deg,#ffb347 0%,#ff6a5c 52%,#1e4f8a 53%,#0e2c55 100%)}
+.sk-goff{background:linear-gradient(180deg,#8fd1ff 0 34%,transparent 34%),repeating-linear-gradient(90deg,#2f8f4e 0 16px,#3aa35c 16px 32px)}
+/* badges */
+.bx{position:relative;display:inline-block;flex:0 0 auto;width:28px;height:28px;vertical-align:middle}
+.bx>span{position:absolute}
+.bx .ring{inset:0}
+.bx .in{inset:2px}
+.bx .ic{inset:20%;background-size:contain;background-repeat:no-repeat;background-position:center}
+.s20{width:20px;height:20px}.s20 .in{inset:1.5px}
+.s24{width:24px;height:24px}
+.shp-circle .ring,.shp-circle .in{border-radius:50%}
+.shp-square .ring{border-radius:26%}.shp-square .in{border-radius:22%}
+.shp-hex .ring,.shp-hex .in{clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%)}
+.shp-shieldA .ring,.shp-shieldA .in{clip-path:polygon(50% 0,100% 9%,100% 52%,93% 71%,76% 88%,50% 100%,24% 88%,7% 71%,0 52%,0 9%)}
+.shp-shieldB .ring,.shp-shieldB .in{clip-path:polygon(0 7%,22% 0,50% 8%,78% 0,100% 7%,100% 56%,50% 100%,0 56%)}
+.shp-shieldC .ring,.shp-shieldC .in{clip-path:polygon(50% 0,100% 16%,100% 62%,50% 100%,0 62%,0 16%)}
+.shp-shieldA .ic,.shp-shieldB .ic,.shp-shieldC .ic{inset:17% 20% 29% 20%}
+.shp-hex .ic{inset:22%}
+.ic-syndicate{background-image:url(/a/6620792e05f35fa68740bc24df7c61ee.svg)}
+.ic-kelce{background-image:url(/a/a68c807ed60f60bdc676af72e43387f8.svg)}
+.ic-airplane{background-image:url(/a/51b59441fd266a7c8ea6aef6429acf70.svg)}
+.ic-jj{background-image:url(/a/7cf8e5de2b42f41f05fa6d320330dfac.svg)}
+.ic-mustards{background-image:url(/a/134f1db1b44f4066e769d265e3b3ba91.svg)}
+.ic-hurts{background-image:url(/a/78f90d423a65f4f4dc1806d54a0ed219.svg)}
+.ic-lamb{background-image:url(/a/3ce630101181ee5c485c2e8135cadbce.svg)}
+.ic-henrys{background-image:url(/a/a8d350d6607bbbbff37d324ee3099237.svg)}
+.ic-chubb{background-image:url(/a/5316d699414f0067a5ca8d3f3c13a087.svg)}
+.ic-purdy{background-image:url(/a/1997667c68e3f31393bc3ca55a9197f4.svg)}
+.ic-puka{background-image:url(/a/a1ee853acec05aece928976e9f470406.svg)}
+.ic-goff{background-image:url(/a/29f184c04e3a5bfe2a475523be98fcb1.svg)}
+.fbd{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;border-radius:50%;font-family:'Onest',sans-serif;font-weight:700;color:#fff;font-size:10px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2)}
+/* shell */
+.ng{font-family:'Onest',sans-serif;color:#EEF1F6}
+.num{font-family:'Big Shoulders Display',sans-serif;font-variant-numeric:tabular-nums}
+.ldot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#6A8CFF;box-shadow:0 0 8px #6A8CFF}
+.strip{position:relative;flex:1 1 auto;min-width:0;overflow:hidden;display:flex}
+.striprow{display:flex;transition:transform .35s ease}
+.sarr{position:absolute;top:0;bottom:0;z-index:2;width:44px;border:0;display:flex;align-items:center;justify-content:center;color:#EEF1F6}
+.sarr.l{left:0;background:linear-gradient(90deg,#07080B 55%,rgba(7,8,11,0))}
+.sarr.r{right:0;background:linear-gradient(270deg,#07080B 55%,rgba(7,8,11,0))}
+.sarr:hover{color:#6A8CFF}
+.tics{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.tic{width:4px;height:11px;transform:skewX(-20deg);border-radius:1px}
+.tp{margin-left:4px;font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
+.cell{flex:0 0 auto;width:206px;display:flex;flex-direction:column;border-left:1px solid #1C202A;color:#EEF1F6}
+.cell .ln{display:flex;align-items:center;gap:8px;padding:5px 12px}
+.cell .ab{font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;font-size:17px}
+.cell .s{margin-left:auto;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+.cell .s.lose{color:#6B7386}
+.cell .ft{margin-top:auto;padding:5px 12px;border-top:1px solid #1C202A;font-size:11px;font-weight:600}
+.cell.mine{background:#12151C;box-shadow:inset 0 2px 0 #6A8CFF}
+.rail{flex:0 0 288px;background:#08090C;border-right:1px solid #1C202A;display:flex;flex-direction:column}
+.rsec{padding:18px 16px;border-bottom:1px solid #1C202A}
+.rh{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px;padding:0 4px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:20px;color:#EEF1F6}
+.rh a{font-family:'Onest',sans-serif;font-size:12px;font-weight:600}
+.qa{display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:80px;padding:12px;border-radius:14px;border:1px solid #232835;background:#141821;color:#EEF1F6;text-align:left}
+.qa .qt{font-weight:700;font-size:14px}
+.qa .qs{font-size:12px;color:#8B93A5}
+.qa.hot{background:#2F5BFF;border-color:#2F5BFF;color:#fff}
+.qa.hot .qs{color:rgba(255,255,255,.8)}
+.al{display:grid;grid-template-columns:28px minmax(0,1fr);align-items:center;gap:10px;padding:8px 10px;border-radius:11px;background:#12151C;border:1px solid #1E232D}
+.al .ai{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px}
+.al .at{font-size:13px;font-weight:700;line-height:1.25}
+.al .as{font-size:12px;color:#8B93A5}
+.lg{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:10px;color:#EEF1F6}
+.lg.on{background:#1B1F28;box-shadow:inset 3px 0 0 #6A8CFF}
+.cm{display:grid;grid-template-columns:24px minmax(0,1fr);gap:9px;align-items:start}
+.tx{display:flex;flex-direction:column;gap:5px;padding:10px 4px;border-top:1px solid #1C202A}
+.txl{display:flex;align-items:center;gap:7px;font-size:13px;line-height:1.3}
+.tag{display:inline-flex;align-items:center;justify-content:center;width:54px;height:18px;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:.04em}
+.tag.add{background:rgba(47,210,122,.15);color:#4BE08F}
+.tag.drop{background:rgba(255,90,90,.15);color:#FF7B7B}
+.tnav{display:flex;align-items:center;gap:6px;padding:10px 13px;border-radius:9px;color:#3B4150;font-size:15px;font-weight:600}
+.tnav:hover{color:#0E1116;background:#F1F2F4}
+.tnav.on{color:#0E1116;background:#EDEFF2;box-shadow:inset 0 -2px 0 #0E1116}
+.slot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--slot);border-radius:16px;color:var(--dim);font-size:13px;text-align:center;padding:24px}
+.slot b{color:var(--mut2);font-size:14px}
+.pbtn{border:0;background:transparent;color:#A6AEBF;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.pbtn.on{background:#EEF1F6;color:#0A0C10}
+/* content themes: rail, top band and any hero stay dark */
+.th-dk{--tx:#EEF1F6;--mut:#8B93A5;--mut2:#A6AEBF;--dim:#6B7386;--ln:#1C202A;--ln2:#2C3240;--slot:#343B4A;color:#EEF1F6}
+.th-lt{--tx:#12151B;--mut:#5C6370;--mut2:#4A515E;--dim:#8A909C;--ln:#E3E6EB;--ln2:#CDD2DA;--slot:#C4C9D2;color:#12151B}
+/* ---- Players ---- */
+.th-dk{--card:#161A22;--row:#1C212B;--sub:#12151C;--soft:#1B202A;--vt:#6A8CFF;--up:#4BE08F;--dn:#FF7B7B;--tint:rgba(106,140,255,.10);--tintbd:rgba(106,140,255,.45);--sh:none;--hsbg:#1E232D}
+.th-lt{--card:#FFFFFF;--row:#FFFFFF;--sub:#F6F7F9;--soft:#EEF0F3;--vt:#2449D8;--up:#14894A;--dn:#D63B3B;--tint:rgba(47,91,255,.07);--tintbd:#AFC0FF;--sh:0 1px 2px rgba(16,20,28,.05);--hsbg:#E9EBEF}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:16px;box-shadow:var(--sh)}
+.h2{margin:0;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:24px;line-height:1}
+.btnp{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 18px;border:0;border-radius:10px;background:#2F5BFF;color:#fff;font-weight:700;font-size:14px}
+.btnp.off{background:var(--soft);color:var(--dim);cursor:default}
+.btns{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:10px;border:1.5px solid var(--ln2);background:transparent;color:var(--tx);font-weight:700;font-size:14px}
+.lnk{border:0;background:transparent;padding:0;color:var(--vt);font-weight:700;font-size:13px}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:12px;background:var(--soft)}
+.seg button{border:0;background:transparent;color:var(--mut2);height:34px;padding:0 12px;border-radius:9px;font-size:13px;font-weight:700}
+.seg button.on{background:var(--card);color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.15),inset 0 -2px 0 #2F5BFF}
+.seg.sm button{height:30px}
+.wstat{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:var(--card);border:1px solid var(--ln);font-size:13px;max-width:640px}
+.ldot2{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:#1E9E57;box-shadow:0 0 0 4px rgba(30,158,87,.18)}
+.faab{flex:0 0 auto;padding-left:12px;border-left:1px solid var(--ln);font-size:12px;color:var(--mut);white-space:nowrap}
+.faab .num{font-size:20px;font-weight:900;color:var(--tx)}
+/* trending */
+.twrap{position:relative;overflow:hidden;margin:0 -4px;padding:4px}
+.trow{display:flex;gap:12px;transition:transform .35s ease}
+.tcard{flex:0 0 230px;display:flex;flex-direction:column;gap:10px;padding:14px;border-radius:14px;background:var(--card);border:1px solid var(--ln)}
+.hs{flex:0 0 auto;width:40px;height:40px;border-radius:50%;background:var(--hsbg) url(/a/4170e5c447395148b28bf4ffbdf45275.svg) center bottom/100% 100% no-repeat}
+.tn{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tm{display:block;font-size:12px;color:var(--mut);white-space:nowrap}
+.tadd{display:block;font-size:26px;font-weight:900;line-height:1;color:var(--up)}
+.tsub{display:block;font-size:11px;color:var(--mut)}
+.bar2{display:block;height:5px;border-radius:3px;background:var(--soft);overflow:hidden}
+.bar2 i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,#1E9E57,#4BE08F)}
+.tadd2{height:32px;border:0;border-radius:8px;background:#2F5BFF;color:#fff;font-weight:700;font-size:13px}
+.tstat{display:flex;align-items:center;justify-content:center;height:32px;border-radius:8px;background:var(--soft);color:var(--mut2);font-size:12px;font-weight:600}
+.tstat.own{justify-content:flex-start;gap:8px;padding:0 4px 0 8px;color:var(--tx);font-weight:700}
+.tstat.own .otn{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}
+.trb.sm{width:26px;height:26px;background:var(--card)}
+.tstat.mine{background:rgba(20,137,74,.12);color:var(--up)}
+.tarr{position:absolute;top:0;bottom:0;z-index:2;width:48px;border:0;display:flex;align-items:center;justify-content:center;color:var(--tx)}
+.th-lt .tarr.l{left:0;background:linear-gradient(90deg,#F2F3F5 45%,rgba(242,243,245,0))}
+.th-lt .tarr.r{right:0;background:linear-gradient(270deg,#F2F3F5 45%,rgba(242,243,245,0))}
+.th-dk .tarr.l{left:0;background:linear-gradient(90deg,#0F1218 45%,rgba(15,18,24,0))}
+.th-dk .tarr.r{right:0;background:linear-gradient(270deg,#0F1218 45%,rgba(15,18,24,0))}
+/* filters */
+.fbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.srch{flex:1 1 220px;display:flex;align-items:center;gap:8px;height:40px;padding:0 10px 0 12px;border-radius:10px;background:var(--soft);color:var(--mut)}
+.srch input{flex:1;min-width:0;border:0;background:transparent;color:var(--tx);font:inherit;font-size:14px;outline:none}
+.srch kbd{font-family:inherit;font-size:11px;padding:2px 6px;border-radius:5px;background:var(--card);color:var(--mut)}
+.sel{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:9px;background:var(--soft);font-size:13px;font-weight:700}
+.chk{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 6px;border:0;background:transparent;color:var(--tx);font-size:13px;font-weight:600}
+.chk .box{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:5px;box-shadow:inset 0 0 0 1.5px var(--ln2)}
+.chk .box svg{visibility:hidden}
+.chk.on .box{background:#2F5BFF;box-shadow:none}
+.chk.on .box svg{visibility:visible}
+/* table */
+.ptabs{display:flex;gap:4px;border-bottom:1px solid var(--ln);margin:0 -18px;padding:0 18px}
+.ptab{display:flex;align-items:baseline;gap:8px;padding:16px 14px 13px;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;background:transparent;color:var(--mut);font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:22px}
+.ptab:hover{color:var(--tx)}
+.ptab.on{color:var(--tx);border-bottom-color:#2F5BFF}
+.ptab .tc{font-family:'Onest',sans-serif;font-size:12px;font-weight:600;color:var(--mut)}
+.wgh,.wgr{display:grid;gap:4px;align-items:center}
+.wgr{box-shadow:inset 3px 0 0 var(--pc)}
+.wgh>span:nth-child(-n+4),.wgr>span:nth-child(-n+4){position:sticky;z-index:2;background:var(--card);align-self:stretch;display:flex;align-items:center}
+.wgh>span:nth-child(1),.wgr>span:nth-child(1){left:0;justify-content:center}
+.wgh>span:nth-child(2),.wgr>span:nth-child(2){left:40px}
+.wgh>span:nth-child(3),.wgr>span:nth-child(3){left:var(--l3);justify-content:flex-end}
+.wgh>span:nth-child(4),.wgr>span:nth-child(4){left:var(--l4);justify-content:flex-end;padding-right:6px;box-shadow:6px 0 8px -6px rgba(0,0,0,.18)}
+.wgr>span:nth-child(1){box-shadow:inset 3px 0 0 var(--pc)}
+.wgr.mineR>span:nth-child(-n+4){background:linear-gradient(rgba(30,158,87,.07),rgba(30,158,87,.07)),var(--card)}
+.wgh>.c{text-align:center}
+.wgrid.many .wc{font-size:13px;height:28px;border-radius:5px}
+.wgrid.many .wgh{font-size:10px}
+.wgh{margin-top:6px;padding:6px 0;border-bottom:1px solid var(--ln);font-size:11px;font-weight:700;color:var(--dim);text-align:right}
+.wgh .l{text-align:left}
+.wgh>span:first-child{text-align:center}
+.wgr{padding:5px 0;border-bottom:1px solid var(--ln)}
+.wgr.mineR{background:rgba(30,158,87,.07)}
+.wrk{text-align:center;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:16px;color:var(--dim)}
+.wc{display:flex;align-items:center;justify-content:center;height:30px;border-radius:6px;font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
+.wc.bye{color:var(--dim);font-size:11px;font-family:'Onest',sans-serif;font-weight:700;box-shadow:inset 0 0 0 1px var(--ln)}
+.wc.top{font-weight:900;box-shadow:inset 0 0 0 2px #1E9E57}
+.scale{display:inline-block;width:80px;height:9px;border-radius:5px;background:linear-gradient(90deg,#1E9E57,#F5C542,#D63A3A)}
+.trcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.trcols h3{margin:10px 0 6px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:20px}
+.trcols h3.up{color:var(--up)}.trcols h3.dn{color:var(--dn)}
+.tri{display:grid;grid-template-columns:30px minmax(0,1fr) 120px 40px;gap:10px;align-items:center;padding:9px 0 9px 6px;border-bottom:1px solid var(--ln)}
+.trv{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.trv b{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:19px}
+.trv b.up{color:var(--up)}.trv b.dn{color:var(--dn)}
+.bar3{display:block;width:100%;height:5px;border-radius:3px;background:var(--soft);overflow:hidden}
+.bar3 i{display:block;height:100%;border-radius:3px}
+.bar3 i.up{background:linear-gradient(90deg,#1E9E57,#4BE08F)}.bar3 i.dn{margin-left:auto;background:linear-gradient(270deg,#D63A3A,#FF7B7B)}
+.tscroll{overflow-x:auto;margin:0 -18px;padding:0 18px;scrollbar-width:thin}
+.tinner{min-width:1060px}
+.pgrp,.phd,.pr{display:grid;grid-template-columns:44px minmax(250px,1fr) 56px 56px 72px repeat(11,44px);gap:6px;align-items:center}
+.phd>span:nth-child(1),.phd>span:nth-child(2),.pgrp>span:nth-child(1),.pgrp>span:nth-child(2){position:sticky;z-index:2;background:var(--card);align-self:stretch;display:flex;align-items:center}
+.phd>span:nth-child(1),.pgrp>span:nth-child(1),.pr>.act{position:sticky;left:0;z-index:2;background:var(--card);align-self:stretch;align-items:center}
+.phd>span:nth-child(2),.pgrp>span:nth-child(2),.pr>.who{position:sticky;left:50px;z-index:2;background:var(--card);align-self:stretch;box-shadow:6px 0 8px -6px rgba(0,0,0,.18)}
+.pr:hover>.act,.pr:hover>.who{background:var(--sub)}
+.pr.mineR>.act,.pr.mineR>.who{background:#EEF7F1}
+.pr.mineR>.act{box-shadow:inset 3px 0 0 #1E9E57 !important}
+.th-dk .pr.mineR>.act,.th-dk .pr.mineR>.who{background:#16231C}
+.ownl{display:flex;align-items:center;gap:6px;margin-top:3px;font-size:11px;font-weight:600;color:var(--mut2)}
+.s16{width:16px;height:16px}.s16 .in{inset:1px}
+.trb{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:0;border-radius:50%;background:var(--soft);color:var(--mut2)}
+.trb:hover{background:var(--tint);color:var(--vt)}
+.pgrp{margin-top:16px;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--mut)}
+.pgrp .g{text-align:right}
+.pgrp .g3{grid-column:span 3;text-align:center;border-bottom:1px solid var(--ln);padding-bottom:4px}
+.pgrp .g4{grid-column:span 4;text-align:center;border-bottom:1px solid var(--ln);padding-bottom:4px}
+.pgrp>span:nth-child(4){grid-column:span 2}
+.phd{padding:6px 0;border-bottom:1px solid var(--ln)}
+.phd .l{font-size:11px;font-weight:700;color:var(--dim)}
+.hc{border:0;background:transparent;padding:4px 0;color:var(--dim);font-size:11px;font-weight:700;text-align:right;white-space:nowrap}
+.hc:hover{color:var(--tx)}
+.hc.on{color:var(--vt)}
+.pr{padding:7px 0;border-bottom:1px solid var(--ln)}
+.pr:hover{background:var(--sub)}
+.pr.mineR{background:rgba(30,158,87,.07);box-shadow:inset 3px 0 0 #1E9E57 !important}
+.act{display:flex;justify-content:center}
+.addb{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:0;border-radius:50%;background:#2F5BFF;color:#fff;font-size:22px;font-weight:600;line-height:1;box-shadow:0 2px 6px -2px rgba(47,91,255,.6)}
+.addb:hover{background:#2448CC}
+.wv{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,181,71,.18);color:#9A6100;font-size:12px;font-weight:800;line-height:1}
+.th-dk .wv{color:#FFB547}
+.wv small{font-size:8px;font-weight:700}
+button.wv{border:0;padding:0}
+button.wv:hover{background:rgba(255,181,71,.32)}
+.th-dk .wv{color:#FFB547}
+.clm{display:inline-flex;align-items:center;justify-content:center;min-width:40px;height:28px;padding:0 7px;border:0;border-radius:999px;background:rgba(245,165,36,.18);color:#8A5A00;font-family:'Big Shoulders Display',sans-serif;font-size:16px;font-weight:900;box-shadow:inset 0 0 0 1.5px rgba(245,165,36,.6)}
+.th-dk .clm{color:#FFB547}
+.cnote{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border-radius:8px;background:rgba(47,91,255,.09);color:var(--vt);font-size:12px;font-weight:600}
+.bidr{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px;padding:12px;border-radius:12px;background:var(--sub)}
+.fpill{display:inline-flex;align-items:baseline;gap:5px;padding:4px 10px;border-radius:999px;background:var(--tint);color:var(--vt);font-family:'Onest',sans-serif;font-size:12px;font-weight:700;letter-spacing:0}
+.fpill .num{font-size:17px;font-weight:900}
+.bidbox{display:inline-flex;align-items:center;height:44px;padding:0 4px;border-radius:11px;background:var(--card);box-shadow:inset 0 0 0 2px #2F5BFF}
+.bidbox button{width:34px;height:36px;border:0;border-radius:8px;background:transparent;color:var(--mut2);font-size:20px;font-weight:700}
+.bidbox button:hover{background:var(--soft);color:var(--tx)}
+.bidbox .num{min-width:56px;text-align:center;font-size:26px;font-weight:900}
+.qbid{height:30px;padding:0 10px;border:0;border-radius:8px;background:var(--card);color:var(--mut2);font-size:13px;font-weight:700;box-shadow:inset 0 0 0 1px var(--ln2)}
+.qbid.on{background:#2F5BFF;color:#fff;box-shadow:none}
+.tgt{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:center;width:100%;padding:9px 12px;border:0;border-radius:10px;background:var(--sub);color:var(--tx);text-align:left}
+.tgt .rd{width:18px;height:18px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--ln2)}
+.tgt.on{background:var(--tint);box-shadow:inset 0 0 0 1.5px var(--tintbd)}
+.tgt.on .rd{box-shadow:inset 0 0 0 5px #2F5BFF}
+.mlab{margin:14px 0 6px;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--dim)}
+.mine2{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(30,158,87,.14);color:var(--up);font-weight:800}
+.own2{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--soft);color:var(--mut2);font-size:10px;font-weight:800}
+.who{display:flex;align-items:center;gap:8px;min-width:0}
+.star{border:0;background:transparent;padding:0 2px;font-size:15px;color:var(--ln2);line-height:1}
+.star.on{color:#F5C542}
+.pn2{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;white-space:nowrap}
+.pm2{display:block;font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inj{display:inline-flex;align-items:center;height:16px;padding:0 4px;margin-left:4px;border-radius:4px;background:rgba(214,58,58,.12);color:var(--dn);font-size:9px;font-weight:800;letter-spacing:.04em}
+.rk2{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(123,92,255,.16);color:#7B5CFF;font-size:9px;font-weight:800}
+.n{text-align:right;font-family:'Big Shoulders Display',sans-serif;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums}
+.n.b{font-weight:900;font-size:18px}
+.n.m{color:var(--mut2);font-weight:600}
+.adds{display:inline-flex;align-items:center;gap:3px;color:var(--up);font-weight:800}
+.adds.hot{padding:1px 6px;border-radius:999px;background:rgba(30,158,87,.14)}
+.adds.dn{color:var(--dn)}
+/* modal */
+.ovl{position:absolute;inset:0;z-index:20;background:rgba(7,8,11,.55)}
+.mod{position:absolute;z-index:21;top:120px;right:max(32px,calc((100% - 1240px)/2 + 32px));width:500px;padding:20px 20px 16px;border-radius:16px;background:var(--card);color:var(--tx);border:1px solid var(--ln);box-shadow:0 30px 70px -20px rgba(0,0,0,.65)}
+.xbtn{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border:0;border-radius:8px;background:var(--soft);color:var(--mut2)}
+.newp{display:grid;grid-template-columns:50px minmax(0,1fr) auto;gap:12px;align-items:center;margin-top:14px;padding:10px 12px 10px 14px;border-radius:12px;background:var(--tint);border:1px solid var(--tintbd)}
+.full{display:flex;align-items:center;gap:8px;margin:12px 0 8px;padding:10px 12px;border-radius:10px;background:rgba(255,181,71,.18);color:#7A4E00;font-size:13px;font-weight:700}
+.th-dk .full{color:#FFB547}
+.rhd{display:grid;grid-template-columns:50px minmax(0,1fr) 54px 40px;gap:10px;padding:4px 10px 4px 14px;font-size:11px;font-weight:700;color:var(--dim)}
+.rlist{max-height:430px;overflow-y:auto;display:flex;flex-direction:column;gap:3px;padding-right:4px}
+.rsub{margin:8px 0 2px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:15px;color:var(--mut)}
+.rr{display:grid;grid-template-columns:50px minmax(0,1fr) 54px 40px;gap:10px;align-items:center;width:100%;padding:7px 10px 7px 14px;border:0;border-radius:10px;background:var(--sub);color:var(--tx);text-align:left}
+.rr:hover{background:var(--soft)}
+.rr.sel2{background:rgba(214,58,58,.08);outline:2px solid var(--dn);outline-offset:-2px}
+.pos2{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:22px;padding:0 6px 3px;font-size:10px;font-weight:800;color:#EEF1F6;background:#2A303D;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
+.pos2.bn{padding-bottom:0;color:#A6AEBF}
+.p-QB{background:linear-gradient(#FF7A93,#FF7A93) left bottom/100% 4px no-repeat,#2A303D}
+.p-RB{background:linear-gradient(#3EE0B4,#3EE0B4) left bottom/100% 4px no-repeat,#2A303D}
+.p-WR{background:linear-gradient(#62B0FF,#62B0FF) left bottom/100% 4px no-repeat,#2A303D}
+.p-TE{background:linear-gradient(#FFAE5C,#FFAE5C) left bottom/100% 4px no-repeat,#2A303D}
+.p-K{background:linear-gradient(#E8D867,#E8D867) left bottom/100% 4px no-repeat,#2A303D}
+.p-DST{background:linear-gradient(#A3ADC2,#A3ADC2) left bottom/100% 4px no-repeat,#2A303D}
+.pos2.flx{background:linear-gradient(90deg,#3EE0B4 0 33.3%,#62B0FF 33.3% 66.6%,#FFAE5C 66.6%) left bottom/100% 4px no-repeat,#2A303D}
+.pos2.sflx{background:linear-gradient(90deg,#FF7A93 0 25%,#3EE0B4 25% 50%,#62B0FF 50% 75%,#FFAE5C 75%) left bottom/100% 4px no-repeat,#2A303D}
+.toast{position:fixed;left:50%;bottom:28px;z-index:30;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:14px;background:#0E1116;color:#EEF1F6;font-size:14px;box-shadow:0 18px 40px -14px rgba(0,0,0,.6)}
+.okc{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#1E9E57;color:#fff;font-weight:800}
+.empire{position:relative;height:300px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(60% 90% at 50% 100%,#4a3414 0%,rgba(74,52,20,0) 70%),linear-gradient(180deg,#06060a 0%,#141019 58%,#24180b 100%)}
+.empire .beams{position:absolute;inset:0;background:conic-gradient(from 150deg at 14% -8%,transparent 0deg,rgba(255,226,150,.2) 7deg,transparent 15deg),conic-gradient(from 195deg at 86% -8%,transparent 0deg,rgba(255,226,150,.2) 7deg,transparent 15deg),conic-gradient(from 172deg at 50% -14%,transparent 0deg,rgba(255,240,200,.12) 8deg,transparent 16deg)}
+.empire .cols{position:absolute;left:0;right:0;bottom:0;height:96px;opacity:.95;background:linear-gradient(#0b0806,#0b0806) 0 0/100% 12px no-repeat,linear-gradient(#0b0806,#0b0806) 0 100%/100% 16px no-repeat,repeating-linear-gradient(90deg,#0b0806 0 20px,rgba(11,8,6,0) 20px 64px);box-shadow:inset 0 1px 0 rgba(255,210,120,.28)}
+.empire .glow{position:absolute;left:50%;top:46%;width:700px;height:240px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,196,90,.28),rgba(255,196,90,0))}
+.ttl{position:relative;font-family:'Alfa Slab One',serif;font-size:104px;line-height:.95;letter-spacing:.01em}
+.ttl .back{color:#7a5516;text-shadow:0 1px 0 #6b4a12,0 2px 0 #5e400f,0 3px 0 #52370c,0 4px 0 #462f0a,0 5px 0 #3a2708,0 6px 0 #2e1f06,0 7px 0 #221704,0 14px 22px rgba(0,0,0,.8)}
+.ttl .front{position:absolute;left:0;top:0;background:linear-gradient(180deg,#fff7d6 0%,#f2cf72 36%,#b07a1e 50%,#e9c063 63%,#fff1bd 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cinz{font-family:'Cinzel',serif;font-weight:700;color:#e9c063;letter-spacing:.42em}
+/* compact league hero: shows on every league page when the league has it */
+.empire.compact{height:112px;flex-direction:row;gap:22px}
+.empire.compact .cols{height:34px}
+.empire.compact .ttl{font-size:58px}
+.empire.compact .ttl .back{text-shadow:0 1px 0 #6b4a12,0 2px 0 #5e400f,0 3px 0 #52370c,0 4px 0 #3a2708,0 8px 14px rgba(0,0,0,.8)}
+.empire.compact .cinz{position:relative;font-size:16px;letter-spacing:.38em}
+.empire.compact .glow{width:620px;height:150px}
+/* rail: cross-league tools */
+.xl{margin-top:12px;padding:12px 8px 8px;border-radius:14px;background:#14171E;border:1px solid #242936}
+.xlh{display:block;padding:0 6px 8px;font-size:11px;font-weight:800;letter-spacing:.06em;color:#8B93A5}
+.xt{position:relative;display:flex;align-items:center;gap:11px;padding:10px;border-radius:11px;color:#EEF1F6;text-decoration:none}
+.xt:hover{background:#1B1F28}
+.xt .ico{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:#1E2430;color:#9DB3FF}
+.xt b{display:block;font-size:14px}
+.xt small{display:block;font-size:12px;color:#8B93A5}
+.xb{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#FFB547;color:#0A0C10;font-size:12px;font-weight:800}
+.xpro{display:inline-flex;align-items:center;height:16px;padding:0 5px;margin-left:5px;border-radius:4px;background:linear-gradient(90deg,#2F5BFF,#7B5CFF);color:#fff;font-size:9px;font-weight:800;letter-spacing:.04em;vertical-align:2px}
+.ci .xbd{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#FFB547;color:#0A0C10;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+/* ---- Trades ---- */
+.ptabs{margin:0;padding:0}
+.tbn{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#FFB547;color:#0A0C10;font-family:'Onest',sans-serif;font-size:11px;font-weight:800;align-self:center}
+.btns.sm,.btnp.sm{height:32px;padding:0 12px;font-size:13px}
+.tbg{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;align-items:start}
+.tbc{padding:14px 16px 10px}
+.tbc.mine{box-shadow:inset 0 0 0 1.5px var(--tintbd),var(--sh)}
+.tbh{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.look{display:flex;gap:8px;align-items:baseline;margin:0 0 8px;padding:8px 10px;border-radius:9px;background:var(--sub);font-size:13px;font-weight:600}
+.look span{flex:0 0 auto;font-size:10px;font-weight:800;letter-spacing:.06em;color:var(--dim)}
+.tbr{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 4px 8px 12px;border-top:1px solid var(--ln);box-shadow:inset 3px 0 0 var(--pc)}
+.pkc{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:22px;padding:0 6px;border-radius:6px;background:rgba(123,92,255,.14);color:#6A4BE0;font-size:10px;font-weight:800}
+.th-dk .pkc{color:#B3A2FF}
+.fbc{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:22px;padding:0 6px;border-radius:6px;background:rgba(30,158,87,.14);color:var(--up);font-size:10px;font-weight:800}
+.tlink{display:block;width:100%;margin-top:6px;padding:10px 0 4px;border:0;border-top:1px solid var(--ln);background:transparent;color:var(--vt);font-size:13px;font-weight:700;text-align:left}
+.bed{margin-top:8px;padding:10px;border-radius:10px;background:var(--sub)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{height:30px;padding:0 10px;border:0;border-radius:999px;background:var(--card);color:var(--tx);font-size:12px;font-weight:700;box-shadow:inset 0 0 0 1px var(--ln2),inset 3px 0 0 var(--pc)}
+.chip.on{background:#2F5BFF;color:#fff;box-shadow:none}
+.chip.drop.on{background:var(--dn)}
+.rg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.rc{display:flex;flex-direction:column;padding:14px 14px 12px}
+.rcl{display:flex;flex-direction:column;gap:2px;flex:1}
+.rcp{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:8px;align-items:center;padding:4px 6px 4px 8px;border-radius:6px;box-shadow:inset 3px 0 0 var(--pc);font-size:13px}
+.rcp .pp,.tok .pp{font-size:10px;font-weight:800;color:var(--pc)}
+.rcp .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.blk{display:inline-flex;align-items:center;height:16px;margin-left:6px;padding:0 5px;border-radius:4px;background:rgba(245,165,36,.18);color:#8A5A00;font-size:9px;font-weight:800;letter-spacing:.04em;vertical-align:1px}
+.th-dk .blk{color:#FFB547}
+.rcf{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--ln);font-size:12px;color:var(--mut)}
+.bld{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:16px;align-items:start}
+.bside{padding:14px 16px 16px}
+.bsh{display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--ln)}
+.dir{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--dim)}
+.bcount{font-size:12px;font-weight:700;color:var(--vt)}
+.bsec{display:flex;align-items:baseline;margin:14px 0 6px;font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--dim)}
+.bpr{display:grid;grid-template-columns:22px 34px minmax(0,1fr);gap:10px;align-items:center;width:100%;padding:7px 10px;border:0;border-radius:9px;background:transparent;color:var(--tx);box-shadow:inset 3px 0 0 var(--pc)}
+.bpr:hover{background:var(--sub)}
+.bpr .ck{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:6px;box-shadow:inset 0 0 0 1.5px var(--ln2);color:transparent}
+.bpr.on{background:var(--tint);box-shadow:inset 3px 0 0 var(--pc),inset 0 0 0 1px var(--tintbd)}
+.bpr.on .ck{background:#2F5BFF;box-shadow:none;color:#fff}
+.pp2{font-size:11px;font-weight:800;color:var(--pc)}
+.fr{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bidbox{display:inline-flex;align-items:center;height:40px;padding:0 3px;border-radius:10px;background:var(--card);box-shadow:inset 0 0 0 1.5px var(--ln2)}
+.bidbox button{width:30px;height:32px;border:0;border-radius:7px;background:transparent;color:var(--mut2);font-size:18px;font-weight:700}
+.bidbox .num{min-width:48px;text-align:center;font-size:22px;font-weight:900}
+.pkg{display:flex;flex-wrap:wrap;gap:6px}
+.pk{display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:center;min-width:86px;height:42px;padding:0 10px;border:0;border-radius:9px;background:var(--sub);color:var(--tx);box-shadow:inset 0 0 0 1px var(--ln)}
+.pk b{font-size:13px}
+.pk small{font-size:10px;color:var(--mut)}
+.pk.on{background:rgba(123,92,255,.14);box-shadow:inset 0 0 0 1.5px #7B5CFF}
+.bsum{padding:16px 18px;position:sticky;bottom:12px;z-index:3;box-shadow:0 14px 40px -18px rgba(0,0,0,.45)}
+.bsl{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:16px;align-items:center}
+.sumt{display:block;margin-top:3px;font-size:15px;font-weight:700}
+.bfoot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid var(--ln)}
+.ofr{padding:14px 16px;margin-bottom:10px}
+.ofh{display:flex;align-items:center;gap:10px}
+.ofb{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+.toks{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+.tok{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 8px;border-radius:7px;background:var(--sub);box-shadow:inset 0 0 0 1px var(--ln),inset 3px 0 0 var(--pc);font-size:13px;font-weight:600;white-space:nowrap}
+.stp{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap}
+.stp.ok{background:rgba(20,137,74,.12);color:var(--up)}
+.stp.bad{background:rgba(214,59,59,.10);color:var(--dn)}
+.stp.wait{background:var(--tint);color:var(--vt);box-shadow:inset 0 0 0 1px var(--tintbd)}
+.stp.rev{background:rgba(245,165,36,.16);color:#8A5A00}
+.th-dk .stp.rev{color:#FFB547}
+.rev{display:flex;align-items:center;gap:10px;margin-top:12px;padding:10px 12px;border-radius:10px;background:rgba(245,165,36,.10);font-size:13px}
+.cempty{padding:14px;border-radius:10px;border:1.5px dashed var(--ln2);color:var(--mut);font-size:13px}
+/* pro: trade finder + fit tags */
+.finder{padding:14px 16px 8px;background:linear-gradient(180deg,var(--tint),transparent 70%),var(--card);border-color:var(--tintbd)}
+.fh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.prob{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:5px;background:linear-gradient(90deg,#2F5BFF,#7B5CFF);color:#fff;font-size:10px;font-weight:800;letter-spacing:.05em}
+.frow{display:grid;grid-template-columns:28px minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:10px 2px;border-top:1px solid var(--ln)}
+.frow.blur>span:nth-child(2){filter:blur(4px);user-select:none}
+.fit{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;font-size:11px;font-weight:800;white-space:nowrap}
+.fit.hi{background:rgba(20,137,74,.14);color:var(--up)}
+.fit.md{background:var(--tint);color:var(--vt)}
+.fit.lo{background:var(--soft);color:var(--dim)}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin:-2px 0 10px}
+.tg{display:inline-flex;align-items:center;height:20px;padding:0 7px;border-radius:5px;font-size:11px;font-weight:700;white-space:nowrap}
+.tg.str{background:rgba(214,59,59,.10);color:var(--dn)}
+.tg.mat{background:var(--tint);color:var(--vt);box-shadow:inset 0 0 0 1px var(--tintbd)}
+.tg.thin{background:rgba(245,165,36,.16);color:#8A5A00}
+.th-dk .tg.thin{color:#FFB547}
+.tg.deep{background:rgba(20,137,74,.12);color:var(--up)}
+.dep{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:0 0 8px}
+.dp{display:flex;flex-direction:column;align-items:center;gap:1px;padding:5px 2px;border-radius:7px;background:var(--sub);line-height:1.05}
+.dp b{font-family:'Big Shoulders Display',sans-serif;font-size:18px;font-weight:900}
+.dp span{font-size:10px;font-weight:800;color:var(--mut)}
+.dp small{font-size:9px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.04em}
+.dp.deep{background:rgba(20,137,74,.12)}.dp.deep b,.dp.deep small{color:var(--up)}
+.dp.thin{background:rgba(245,165,36,.16)}.dp.thin b,.dp.thin small{color:#B97700}
+.th-dk .dp.thin b,.th-dk .dp.thin small{color:#FFB547}
+.look.led{align-items:center}
+.look.led input{flex:1;min-width:0;height:28px;padding:0 8px;border:0;border-radius:7px;background:var(--card);color:var(--tx);font:inherit;font-size:13px;font-weight:600;box-shadow:inset 0 0 0 1.5px #2F5BFF;outline:none}
+.chip.sm2{height:26px;font-size:11px;box-shadow:inset 0 0 0 1px var(--ln2)}
+/* ===== Position tags: Baseline tab, ink blue body, 4px underline (final) ===== */
+:root{--tagbg:#1A2340}
+.th-dk{--tagbg:#1F2A4D}
+.pos,.pos2{clip-path:none !important;width:max-content;min-width:46px !important;height:24px !important;padding:0 8px 4px !important;border-radius:4px 4px 2px 2px;font-size:11px !important;font-weight:800;letter-spacing:.03em;color:#fff !important}
+.p-QB{background:linear-gradient(#FF7A93,#FF7A93) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-RB{background:linear-gradient(#3EE0B4,#3EE0B4) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-WR{background:linear-gradient(#62B0FF,#62B0FF) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-TE{background:linear-gradient(#FFAE5C,#FFAE5C) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-K{background:linear-gradient(#E8D867,#E8D867) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-DST{background:linear-gradient(#B9A6FF,#B9A6FF) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.flx,.pos2.flx{background:linear-gradient(90deg,#3EE0B4 0 33.3%,#62B0FF 33.3% 66.6%,#FFAE5C 66.6%) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.sflx,.pos2.sflx{background:linear-gradient(90deg,#FF7A93 0 25%,#3EE0B4 25% 50%,#62B0FF 50% 75%,#FFAE5C 75%) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.bn,.pos2.bn{background:linear-gradient(#5A6275,#5A6275) left bottom/100% 4px no-repeat,var(--tagbg) !important;color:rgba(255,255,255,.6) !important}
+/* ===== Position tags: smaller size (final) ===== */
+.pos,.pos2{min-width:34px !important;height:18px !important;padding:0 5px 3px !important;border-radius:3px 3px 1px 1px;font-size:9.5px !important;letter-spacing:.04em;background-size:100% 3px,auto !important}
+</style>
+</helmet>
+<div class="ng" style="min-height: 100vh; background: #0F1218">
+<!-- Prototype controls -->
+<div style="display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; padding: 8px 16px; background: #000; border-bottom: 1px solid #1C202A">
+<span style="font-size: 12px; color: #8B93A5">Content</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{themes}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">League look</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{tiers}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">Format</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{fmts}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">Trade review</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{revs}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">Fanball Pro</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{pros}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+</div>
+<!-- 1. TOP BAND (static on every page) -->
+<div style="display: flex; align-items: stretch; background: #07080B; border-bottom: 1px solid #1C202A">
+<a href="#" aria-label="Fanball home" style="flex: 0 0 288px; display: flex; align-items: center; padding: 0 20px; border-right: 1px solid #1C202A">
+<img src="/a/6d0fd2687e0f4e908cbe7777ef1d6bd1.webp" alt="Fanball" style="height: 52px; width: auto; display: block">
+</a>
+<div style="flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; gap: 3px; padding: 10px 18px; border-right: 1px solid #1C202A; line-height: 1">
+<span class="num" style="font-size: 20px; font-weight: 900; letter-spacing: .02em">WEEK 7</span>
+<span class="num" style="font-size: 14px; font-weight: 800; letter-spacing: .06em; color: #8B93A5">SCOREBOARD</span>
+</div>
+<div class="strip">
+<div class="striprow" style="transform: translateX({{stripX}})">
+<sc-for list="{{games}}" as="g" hint-placeholder-count="6">
+<a href="#" class="{{g.cellCls}}">
+<span class="ln"><span class="bx s20 shp-{{g.ta.shape}}"><span class="ring" style="background: {{g.ta.ring}}"></span><span class="in sk-{{g.ta.key}}"></span><span class="ic ic-{{g.ta.key}}"></span></span><span class="ab">{{g.ta.abbr}}</span><span class="tics"><sc-for list="{{g.at}}" as="k" hint-placeholder-count="2"><span class="tic" style="background: {{k}}"></span></sc-for><span class="tp" style="color: {{g.atc}}">{{g.ap}}</span></span><span class="{{g.aS}}">{{g.as}}</span></span>
+<span class="ln" style="padding-top: 0"><span class="bx s20 shp-{{g.tb.shape}}"><span class="ring" style="background: {{g.tb.ring}}"></span><span class="in sk-{{g.tb.key}}"></span><span class="ic ic-{{g.tb.key}}"></span></span><span class="ab">{{g.tb.abbr}}</span><span class="tics"><sc-for list="{{g.bt}}" as="k" hint-placeholder-count="2"><span class="tic" style="background: {{k}}"></span></sc-for><span class="tp" style="color: {{g.btc}}">{{g.bp}}</span></span><span class="{{g.bS}}">{{g.bs}}</span></span>
+<span class="ft" style="color: {{g.stColor}}">{{g.st}}</span>
+</a>
+</sc-for>
+</div>
+<sc-if value="{{canPrev}}"><button class="sarr l" onClick="{{stripPrev}}" aria-label="Earlier matchups"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button></sc-if>
+<sc-if value="{{canNext}}"><button class="sarr r" onClick="{{stripNext}}" aria-label="More matchups"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button></sc-if>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: stretch">
+<!-- 2. LEFT RAIL (static on every page) -->
+<aside class="rail">
+<div style="padding: 14px 12px 16px; border-bottom: 1px solid #1C202A">
+<div style="border-radius: 14px; background: #14171E; border: 1px solid #242936; padding: 12px 8px 6px">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 0 6px 8px">
+<span style="font-size: 12px; font-weight: 700; color: #A6AEBF">All your leagues · 9</span>
+<a href="#" style="font-size: 12px; font-weight: 600">+ Join</a>
+</div>
+<sc-for list="{{leagues}}" as="l" hint-placeholder-count="6">
+<a href="#" class="{{l.cls}}">
+<span class="fbd" style="width: 36px; height: 36px; font-size: 12px; background: {{l.hue}}; border-radius: 10px">{{l.init}}</span>
+<span style="min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{l.name}}</span><span style="display: block; font-size: 12px; color: {{l.sc}}">{{l.st}}</span></span>
+</a>
+</sc-for>
+<a href="#" style="display: block; padding: 8px; font-size: 13px; font-weight: 600; color: #A6AEBF">Show 3 more leagues</a>
+</div>
+<div class="xl">
+<span class="xlh">ACROSS ALL LEAGUES</span>
+<a href="#" class="xt"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="17" r="2.6"></circle><path d="M4 4l4 4M8 4 4 8"></path><path d="M16 15l4 4M20 15l-4 4"></path><path d="M9 15c3-6 6-8 9-9"></path><path d="m15 5 3 1-1 3"></path></svg></span><span><b>Game Plan <span class="xpro">PRO</span></b><small>Set every lineup at once</small></span><span class="xb">4</span></a>
+<a href="#" class="xt"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"></path></svg></span><span><b>The Wire</b><small>Adds, drops and claims · claims run Wed</small></span></a>
+</div>
+</div>
+<div class="rsec">
+<div style="display: flex; align-items: center; gap: 10px; margin: 0 0 12px; padding: 0 4px">
+<span class="fbd" style="width: 28px; height: 28px; background: #b07a1e; border-radius: 8px">EL</span>
+<span style="display: flex; flex-direction: column; line-height: 1.15"><span style="font-size: 11px; font-weight: 600; color: #8B93A5">You're viewing</span><b style="font-size: 14px">The Empire League</b></span>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
+<a href="#" class="qa hot"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h11"></path><path d="M4 12h16"></path><path d="M4 17h8"></path><path d="m17 4 3 3-3 3"></path></svg><span><span class="qt" style="display: block">Set lineup</span><span class="qs">2 yet to lock</span></span></a>
+<a href="#" class="qa"><span class="ldot"></span><span><span class="qt" style="display: block">Live scoring</span><span class="qs">139.6 – 93.5</span></span></a>
+<a href="#" class="qa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 20V10"></path><path d="M12 20V4"></path><path d="M18 20v-7"></path></svg><span><span class="qt" style="display: block">Standings</span><span class="qs">1st · 6-1</span></span></a>
+<a href="#" class="qa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="8" r="4"></circle><path d="M3 20c0-3.3 3.1-6 7-6"></path><path d="M18 14v6"></path><path d="M15 17h6"></path></svg><span><span class="qt" style="display: block">Add players</span><span class="qs">$247 FAAB</span></span></a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px">
+<div class="al"><span class="ai" style="background: rgba(98,176,255,.14); color: #62B0FF"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span><span><span class="at" style="display: block">Waivers run Wed 3:00 AM</span><span class="as">1 claim pending</span></span></div>
+<div class="al"><span class="ai" style="background: rgba(255,181,71,.14); color: #FFB547"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 7h13l-4-4"></path><path d="M17 17H4l4 4"></path></svg></span><span><span class="at" style="display: block">Trade deadline Nov 8</span><span class="as">16 days left</span></span></div>
+</div>
+</div>
+<div class="rsec">
+<div class="rh">League chat <span style="font-family: 'Onest', sans-serif; font-size: 12px; font-weight: 500; color: #8B93A5"><span class="ldot" style="margin-right: 5px; vertical-align: 1px"></span>3 online</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{chat}}" as="c" hint-placeholder-count="4">
+<div class="cm">
+<span class="bx s24 shp-{{c.t.shape}}"><span class="ring" style="background: {{c.t.ring}}"></span><span class="in sk-{{c.t.key}}"></span><span class="ic ic-{{c.t.key}}"></span></span>
+<div style="min-width: 0"><div style="font-size: 12px"><b>{{c.t.user}}</b> <span style="color: #6B7386">{{c.when}}</span></div><div style="font-size: 13px; color: #D3D8E2; line-height: 1.4">{{c.txt}}</div></div>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; gap: 6px; margin-top: 14px">
+<label for="tp-msg" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Message the league</label>
+<input id="tp-msg" placeholder="Message the league" style="flex: 1; min-width: 0; height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid #2C3240; background: #0A0C10; color: #EEF1F6; font: inherit; font-size: 13px">
+<button aria-label="Send" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: #2F5BFF; color: #fff; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></button>
+</div>
+</div>
+<div class="rsec" style="border-bottom: 0">
+<div class="rh">Transactions <a href="#">All</a></div>
+<sc-for list="{{tx}}" as="x" hint-placeholder-count="3">
+<div class="tx">
+<div style="display: flex; align-items: center; gap: 8px"><span class="bx s20 shp-{{x.t.shape}}"><span class="ring" style="background: {{x.t.ring}}"></span><span class="in sk-{{x.t.key}}"></span><span class="ic ic-{{x.t.key}}"></span></span><b style="flex: 1; font-size: 13px">{{x.t.name}}</b><span style="font-size: 11px; color: #6B7386">{{x.when}}</span></div>
+<div class="txl"><span class="tag add">ADDED</span><span style="font-weight: 700; font-size: 11px; color: {{x.ac}}">{{x.ap}}</span><span>{{x.an}}</span><span style="color: #8B93A5">{{x.at}}</span></div>
+<div class="txl"><span class="tag drop">DROPPED</span><span style="font-weight: 700; font-size: 11px; color: {{x.dc}}">{{x.dp}}</span><span>{{x.dn}}</span><span style="color: #8B93A5">{{x.dt}}</span></div>
+</div>
+</sc-for>
+</div>
+</aside>
+<!-- 3. CONTENT COLUMN -->
+<div style="position: relative; flex: 999 1 640px; min-width: 0; background: {{pageBg}}">
+<!-- League bar (static; active item changes per page) -->
+<header style="background: #fff; color: #0E1116; border-bottom: 1px solid #E3E6EB">
+<div style="padding: 10px 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+<span style="display: flex; align-items: center; gap: 10px; padding-right: 8px">
+<span class="fbd" style="width: 36px; height: 36px; font-size: 12px; background: #b07a1e; border-radius: 10px">EL</span>
+<span style="display: flex; flex-direction: column; line-height: 1.15"><b style="font-size: 15px">The Empire League</b><span style="font-size: 12px; color: #5C6370">12 teams · Dynasty · SF PPR</span></span>
+</span>
+<nav style="display: flex; gap: 2px; flex-wrap: wrap; flex: 1 1 auto">
+<a href="#" class="tnav">Home</a>
+<a href="#" class="tnav">My Franchise</a>
+<a href="#" class="tnav">Scores</a>
+<a href="#" class="tnav">Players</a>
+<a href="#" class="tnav">Standings</a>
+<a href="#" class="tnav on">Trades</a>
+<a href="#" class="tnav">Clubhouse</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 6px">
+<button aria-label="Search" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: #0E1116; display: flex; align-items: center; justify-content: center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
+<button aria-label="Notifications" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: #0E1116; display: flex; align-items: center; justify-content: center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></button>
+<span style="display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: #0E1116; color: #fff; font-weight: 700; font-size: 13px">CP</span>
+</div>
+</div>
+</header>
+<sc-if value="{{prem}}">
+<section class="empire compact" aria-label="The Empire League">
+<div class="beams"></div><div class="glow"></div><div class="cols"></div>
+<span class="cinz">THE</span>
+<span class="ttl"><span class="back">EMPIRE</span><span class="front">EMPIRE</span></span>
+<span class="cinz">LEAGUE</span>
+</section>
+</sc-if>
+<!-- Page area (changes per page) -->
+<main class="{{mainCls}}" style="max-width: 1240px; margin: 0 auto; padding: 24px 32px 72px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap">
+<div>
+<div style="font-size: 13px; color: var(--mut)">The Empire League · Week 7 · {{fmtLabel}}</div>
+<h1 class="num" style="margin: 4px 0 0; font-size: 44px; font-weight: 900; line-height: 1">Trades</h1>
+</div>
+<div class="wstat">
+<span class="ldot2" style="background: #F5A524; box-shadow: 0 0 0 4px rgba(245,165,36,.2)"></span>
+<span><b>Trade deadline Sat, Nov 8 · 11:59 PM</b><span style="display: block; color: var(--mut)">{{reviewTxt}}</span></span>
+<span class="faab"><span class="num">16</span> days left</span>
+</div>
+</div>
+<!-- tabs -->
+<div class="ptabs">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="3"><button class="{{t.cls}}" onClick="{{t.pick}}">{{t.label}}<sc-if value="{{t.hasN}}"><span class="tbn">{{t.n}}</span></sc-if></button></sc-for>
+</div>
+<!-- ================= PRO: TRADE FINDER ================= -->
+<sc-if value="{{showFinder}}">
+<sc-if value="{{pro}}">
+<section class="card finder">
+<div class="fh">
+<span class="prob">PRO</span>
+<b style="font-size: 17px">Trade finder</b>
+<span style="flex: 1 1 240px; font-size: 13px; color: var(--mut)">{{finderSub}}</span>
+</div>
+<sc-for list="{{finds}}" as="f" hint-placeholder-count="3">
+<div class="frow">
+<span class="bx s28 shp-{{f.o.shape}}"><span class="ring" style="background: {{f.o.ring}}"></span><span class="in sk-{{f.o.key}}"></span><span class="ic ic-{{f.o.key}}"></span></span>
+<span style="min-width: 0"><b style="display: block; font-size: 14px">{{f.title}}</b><span style="display: block; font-size: 13px; color: var(--mut2); line-height: 1.4">{{f.why}}</span></span>
+<span class="{{f.fitCls}}">{{f.fit}}</span>
+<button class="btns sm" onClick="{{f.go}}">{{f.goTxt}}</button>
+</div>
+</sc-for>
+</section>
+</sc-if>
+<sc-if value="{{noPro}}">
+<section class="card finder lockd">
+<div class="fh">
+<span class="prob">PRO</span>
+<b style="font-size: 17px">Trade finder</b>
+<span style="flex: 1 1 240px; font-size: 13px; color: var(--mut)">Fanball Pro reads every roster and the standings to find the teams most likely to deal with you.</span>
+<button class="btnp sm">Try Pro free</button>
+</div>
+<div class="frow blur" aria-hidden="true"><span class="bx s28 shp-circle"><span class="ring" style="background: #ffffff"></span><span class="in sk-purdy"></span><span class="ic ic-purdy"></span></span><span><b style="display: block; font-size: 14px">Purdy Good Team is 1-5 and thin at RB</b><span style="font-size: 13px; color: var(--mut2)">They have WR depth you could use. James Cook for a WR could work for both of you.</span></span><span class="fit hi">Great fit</span><span></span></div>
+</section>
+</sc-if>
+</sc-if>
+<!-- ================= TRADE BLOCK ================= -->
+<sc-if value="{{isBlock}}">
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: -6px">
+<span style="flex: 1 1 300px; font-size: 13px; color: var(--mut)">Players and picks each team is open to moving. Tap <b style="color: var(--tx)">Propose</b> to start a trade with that player already in it.</span>
+<div class="seg sm"><sc-for list="{{blkPos}}" as="f" hint-placeholder-count="6"><button class="{{f.cls}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+</div>
+<div class="tbg">
+<sc-for list="{{blocks}}" as="b" hint-placeholder-count="6">
+<section class="{{b.cls}}">
+<div class="tbh">
+<span class="bx s28 shp-{{b.o.shape}}"><span class="ring" style="background: {{b.o.ring}}"></span><span class="in sk-{{b.o.key}}"></span><span class="ic ic-{{b.o.key}}"></span></span>
+<span style="flex: 1; min-width: 0"><b style="display: block; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{b.o.name}}</b><span style="font-size: 12px; color: var(--mut)">{{b.sub}}</span></span>
+<sc-if value="{{b.mine}}"><button class="btns sm" onClick="{{editBlock}}">{{editTxt}}</button></sc-if>
+</div>
+<sc-if value="{{b.hasTags}}"><div class="tags"><sc-for list="{{b.tags}}" as="g" hint-placeholder-count="3"><span class="{{g.cls}}">{{g.label}}</span></sc-for></div></sc-if>
+<sc-if value="{{b.hasLook}}"><div class="look"><span>LOOKING FOR</span>{{b.look}}</div></sc-if>
+<sc-if value="{{b.editing}}">
+<label class="look led"><span>LOOKING FOR</span><input value="{{myLook}}" onInput="{{onLook}}" placeholder="What would you take back?" aria-label="Looking for"></label>
+<div class="chips" style="margin: -2px 0 10px"><sc-for list="{{lookOpts}}" as="c" hint-placeholder-count="7"><button class="{{c.cls}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for></div>
+</sc-if>
+<sc-for list="{{b.items}}" as="p" hint-placeholder-count="2">
+<div class="tbr" style="--pc: {{p.pc}}">
+<span class="{{p.chipCls}}">{{p.chip}}</span>
+<span style="min-width: 0"><b style="font-size: 14px">{{p.name}}</b> <span style="font-size: 12px; color: var(--mut)">{{p.meta}}</span></span>
+<sc-if value="{{p.canProp}}"><button class="lnk" onClick="{{p.prop}}">Propose</button></sc-if>
+<sc-if value="{{p.canRm}}"><button class="lnk" style="color: var(--dn)" onClick="{{p.rm}}">Remove</button></sc-if>
+</div>
+</sc-for>
+<sc-if value="{{b.empty}}"><div style="padding: 10px 2px; font-size: 13px; color: var(--mut)">{{b.emptyTxt}}</div></sc-if>
+<sc-if value="{{b.editing}}">
+<div class="bed">
+<div style="font-size: 12px; font-weight: 700; color: var(--mut); margin-bottom: 6px">Tap to put on or take off the block</div>
+<div class="chips"><sc-for list="{{myOpts}}" as="c" hint-placeholder-count="18"><button class="{{c.cls}}" onClick="{{c.pick}}" style="--pc: {{c.pc}}">{{c.label}}</button></sc-for></div>
+</div>
+</sc-if>
+<sc-if value="{{b.canTrade}}"><button class="tlink" onClick="{{b.open}}">See full roster and trade →</button></sc-if>
+</section>
+</sc-for>
+</div>
+</sc-if>
+<!-- ================= LEAGUE ROSTERS ================= -->
+<sc-if value="{{isRost}}">
+<div style="margin-top: -6px; font-size: 13px; color: var(--mut)">Every team at a glance. Pick one to build a trade.</div>
+<div class="rg">
+<sc-for list="{{rosters}}" as="r" hint-placeholder-count="11">
+<section class="card rc">
+<div class="tbh">
+<span class="bx s28 shp-{{r.o.shape}}"><span class="ring" style="background: {{r.o.ring}}"></span><span class="in sk-{{r.o.key}}"></span><span class="ic ic-{{r.o.key}}"></span></span>
+<span style="flex: 1; min-width: 0"><b style="display: block; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{r.o.name}}</b><span style="font-size: 12px; color: var(--mut)">{{r.sub}}</span></span>
+<sc-if value="{{r.hasFit}}"><span class="{{r.fitCls}}">{{r.fit}}</span></sc-if>
+</div>
+<sc-if value="{{pro}}">
+<div class="dep"><sc-for list="{{r.depth}}" as="d" hint-placeholder-count="4"><span class="{{d.cls}}" title="{{d.tip}}"><b>{{d.n}}</b><span>{{d.pos}}</span><small>{{d.lbl}}</small></span></sc-for></div>
+<sc-if value="{{r.hasTags}}"><div class="tags" style="margin-bottom: 8px"><sc-for list="{{r.tags}}" as="g" hint-placeholder-count="2"><span class="{{g.cls}}">{{g.label}}</span></sc-for></div></sc-if>
+</sc-if>
+<div class="rcl">
+<sc-for list="{{r.players}}" as="p" hint-placeholder-count="9">
+<span class="rcp" style="--pc: {{p.pc}}"><span class="pp">{{p.pos}}</span><span class="nm">{{p.name}}</span><sc-if value="{{p.blk}}"><span class="blk" title="On the trade block">BLOCK</span></sc-if></span>
+</sc-for>
+</div>
+<div class="rcf"><span>{{r.more}}</span><button class="btnp sm" onClick="{{r.open}}">Trade</button></div>
+</section>
+</sc-for>
+</div>
+</sc-if>
+<!-- ================= BUILDER ================= -->
+<sc-if value="{{isBuild}}">
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: -6px">
+<button class="lnk" onClick="{{backFromBuild}}">{{backTxt}}</button>
+<span style="flex: 1"></span>
+<span style="font-size: 12px; color: var(--mut)">Tick what moves in each direction. Nothing is sent until you propose.</span>
+</div>
+<div class="bld">
+<sc-for list="{{sides}}" as="sd" hint-placeholder-count="2">
+<section class="card bside">
+<div class="bsh">
+<span class="bx s28 shp-{{sd.o.shape}}"><span class="ring" style="background: {{sd.o.ring}}"></span><span class="in sk-{{sd.o.key}}"></span><span class="ic ic-{{sd.o.key}}"></span></span>
+<span style="flex: 1; min-width: 0"><span class="dir">{{sd.dir}}</span><b style="display: block; font-size: 15px">{{sd.o.name}}</b></span>
+<span class="bcount">{{sd.count}}</span>
+</div>
+<div class="bsec">PLAYERS</div>
+<sc-for list="{{sd.players}}" as="p" hint-placeholder-count="14">
+<button class="{{p.cls}}" onClick="{{p.pick}}" style="--pc: {{p.pc}}">
+<span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg></span>
+<span class="pp2">{{p.pos}}</span>
+<span style="min-width: 0; text-align: left"><b style="font-size: 14px">{{p.name}}</b> <span style="font-size: 12px; color: var(--mut)">{{p.team}}</span><sc-if value="{{p.blk}}"><span class="blk">BLOCK</span></sc-if></span>
+</button>
+</sc-for>
+<div class="bsec"><span>FAAB</span><span style="font-weight: 600; letter-spacing: 0; color: var(--mut); margin-left: 6px">{{sd.faabBal}}</span></div>
+<div class="fr">
+<span class="bidbox"><button onClick="{{sd.fMinus}}" aria-label="Less FAAB">−</button><span class="num">{{sd.faabTxt}}</span><button onClick="{{sd.fPlus}}" aria-label="More FAAB">+</button></span>
+<span style="font-size: 12px; color: var(--mut)">Can't be traded while waivers are processing</span>
+</div>
+<sc-if value="{{dyn}}">
+<div class="bsec">DRAFT PICKS</div>
+<div class="pkg">
+<sc-for list="{{sd.picks}}" as="k" hint-placeholder-count="8"><button class="{{k.cls}}" onClick="{{k.pick}}"><b>{{k.label}}</b><sc-if value="{{k.hasVia}}"><small>{{k.via}}</small></sc-if></button></sc-for>
+</div>
+</sc-if>
+</section>
+</sc-for>
+</div>
+<!-- summary -->
+<section class="card bsum">
+<div class="bsl">
+<div><span class="dir">YOU GIVE</span><span class="sumt">{{sumGive}}</span></div>
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color: var(--dim); flex: 0 0 auto" aria-hidden="true"><path d="M7 7h13l-4-4"></path><path d="M17 17H4l4 4"></path></svg>
+<div><span class="dir">YOU GET</span><span class="sumt">{{sumGet}}</span></div>
+</div>
+<sc-if value="{{needDrop}}">
+<div class="full" style="margin: 14px 0 8px">{{dropTxt}}</div>
+<div class="chips"><sc-for list="{{dropOpts}}" as="c" hint-placeholder-count="10"><button class="{{c.cls}}" onClick="{{c.pick}}" style="--pc: {{c.pc}}">{{c.label}}</button></sc-for></div>
+</sc-if>
+<div class="bfoot">
+<span style="flex: 1 1 260px; font-size: 13px; color: var(--mut)">{{afterTxt}}</span>
+<button class="btns" onClick="{{clearTrade}}">Clear</button>
+<button class="{{propCls}}" onClick="{{propose}}">{{propTxt}}</button>
+</div>
+</section>
+</sc-if>
+<!-- ================= OFFERS ================= -->
+<sc-if value="{{isOffers}}">
+<sc-for list="{{offerGroups}}" as="og" hint-placeholder-count="3">
+<div>
+<h2 class="h2" style="font-size: 20px; margin: 4px 0 10px">{{og.title}}</h2>
+<sc-for list="{{og.items}}" as="o" hint-placeholder-count="2">
+<section class="card ofr">
+<div class="ofh">
+<span class="bx s24 shp-{{o.o.shape}}"><span class="ring" style="background: {{o.o.ring}}"></span><span class="in sk-{{o.o.key}}"></span><span class="ic ic-{{o.o.key}}"></span></span>
+<span style="flex: 1; min-width: 0"><b style="font-size: 14px">{{o.head}}</b><span style="display: block; font-size: 12px; color: var(--mut)">{{o.sub}}</span></span>
+<span class="{{o.stCls}}">{{o.st}}</span>
+</div>
+<div class="ofb">
+<div><span class="dir">{{o.lA}}</span><div class="toks"><sc-for list="{{o.a}}" as="k" hint-placeholder-count="2"><span class="tok" style="--pc: {{k.pc}}"><span class="pp">{{k.pos}}</span>{{k.name}}</span></sc-for></div></div>
+<div><span class="dir">{{o.lB}}</span><div class="toks"><sc-for list="{{o.b}}" as="k" hint-placeholder-count="2"><span class="tok" style="--pc: {{k.pc}}"><span class="pp">{{k.pos}}</span>{{k.name}}</span></sc-for></div></div>
+</div>
+<sc-if value="{{o.hasNote}}"><div style="margin-top: 10px; font-size: 13px; color: var(--mut2)">“{{o.note}}”</div></sc-if>
+<sc-if value="{{o.isIn}}">
+<div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px">
+<button class="btnp" style="height: 34px; padding: 0 14px; font-size: 13px" onClick="{{o.accept}}">Accept</button>
+<button class="btns" style="height: 34px; padding: 0 12px; font-size: 13px" onClick="{{o.counter}}">Counter</button>
+<button class="btns" style="height: 34px; padding: 0 12px; font-size: 13px" onClick="{{o.decline}}">Decline</button>
+</div>
+</sc-if>
+<sc-if value="{{o.isOut}}">
+<div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px"><button class="btns" style="height: 34px; padding: 0 12px; font-size: 13px" onClick="{{o.withdraw}}">Withdraw</button></div>
+</sc-if>
+<sc-if value="{{o.isRev}}">
+<div class="rev"><span style="flex: 1">{{o.revTxt}}</span><button class="btns" style="height: 32px; padding: 0 12px; font-size: 13px" onClick="{{o.object}}">{{o.objTxt}}</button></div>
+</sc-if>
+</section>
+</sc-for>
+<sc-if value="{{og.empty}}"><div class="cempty">{{og.emptyTxt}}</div></sc-if>
+</div>
+</sc-for>
+</sc-if>
+<footer style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 20px; border-top: 1px solid var(--ln); font-size: 13px; color: var(--dim)">
+<span>Fanball · Your league, your way</span>
+<span>Trade settings are set by your commissioner</span>
+</footer>
+</main>
+<sc-if value="{{toast}}">
+<div class="toast"><span class="okc">✓</span><span><b>{{toastTxt}}</b><span style="display: block; font-size: 12px; color: #A6AEBF">{{toastSub}}</span></span><button class="lnk" style="color: #9DB3FF" onClick="{{closeToast}}">Dismiss</button></div>
+</sc-if>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this, st = this.state || {};
+var theme = st.theme || 'light', isLt = theme === 'light';
+var T = {
+syndicate: ['The Gridiron Syndicate', 'SYN', 'shieldA', '#c9a24a', '@coolerheads'],
+kelce: ["Kelce's Anatomy", 'KEL', 'circle', '#ffffff', '@kapp_attack'],
+airplane: ["Jefferson's Airplane", 'JEF', 'hex', '#ffd84d', '@jetpackjeff'],
+jj: ['Johnson & Johnson LLP', 'J&J', 'shieldB', '#efe3bd', '@jj_esq'],
+mustards: ['The Bijan Mustards', 'BIJ', 'square', '#c4161c', '@relishmore'],
+hurts: ['Hurts Locker', 'HRT', 'shieldC', '#f2c230', '@mscott44'],
+lamb: ['Certified Lamb Daddy', 'CLD', 'hex', '#d4af37', '@baaadboy'],
+henrys: ["Henry's Holes", 'HEN', 'circle', '#f28c28', '@hhenry'],
+chubb: ['Chubb Club', 'CHB', 'shieldA', '#f6d7a7', '@cigarnick'],
+purdy: ['Purdy Good Team', 'PGT', 'circle', '#ffffff', '@ninerfaithful'],
+puka: ['The Puka Principle', 'PKA', 'square', '#ffe89a', '@aloha_ppr'],
+goff: ['Goff Ball', 'GOF', 'shieldB', '#ffffff', '@fore_and_out']
+};
+function tm(k) { var r = T[k]; return { key: k, name: r[0], abbr: r[1], shape: r[2], ring: r[3], user: r[4] }; }
+var GREEN = '#2FD27A', RED = '#FF5A5A', YELLOW = '#F5C542';
+var games = [
+['syndicate', '139.6', 'hurts', '93.5', 'Live · 4th quarter', true, true, 88],
+['kelce', '112.8', 'airplane', '108.6', 'Live · 4th quarter', true, false, 52],
+['lamb', '124.9', 'goff', '67.3', 'Final', false, false, 100],
+['henrys', '98.7', 'puka', '76.4', 'Final', false, false, 100],
+['chubb', '104.5', 'jj', '91.2', 'Final', false, false, 100],
+['purdy', '86.1', 'mustards', '83.0', 'Final', false, false, 100]
+].map(function (g) {
+var aw = parseFloat(g[1]) > parseFloat(g[3]);
+var at = [], bt = [], atc = '', btc = '', ap = '', bp = '';
+if (g[5]) {
+var p = g[7], fav = Math.max(p, 100 - p), i;
+if (fav <= 60) { for (i = 0; i < 2; i++) { at.push(YELLOW); bt.push(YELLOW); } atc = btc = YELLOW; }
+else {
+var n = fav <= 70 ? 1 : (fav <= 80 ? 2 : 3), aFav = p > 50;
+for (i = 0; i < n; i++) { at.push(aFav ? GREEN : RED); bt.push(aFav ? RED : GREEN); }
+atc = aFav ? GREEN : RED; btc = aFav ? RED : GREEN;
+}
+ap = p + '%'; bp = (100 - p) + '%';
+}
+return { ta: tm(g[0]), as: g[1], tb: tm(g[2]), bs: g[3], st: g[4], stColor: g[5] ? '#6A8CFF' : '#8B93A5', cellCls: g[6] ? 'cell mine' : 'cell',
+aS: aw ? 's' : 's lose', bS: aw ? 's lose' : 's', at: at, bt: bt, atc: atc, btc: btc, ap: ap, bp: bp };
+});
+var off = st.off || 0, maxOff = games.length - 2;
+var pc = { QB: '#FF7A93', RB: '#3EE0B4', WR: '#62B0FF', TE: '#FFAE5C', K: '#E8D867' };
+// ===== Trades =====
+var tier = st.tier || 'premium', prem = tier === 'premium';
+var pcP = isLt ? { QB: '#E0446A', RB: '#0FA37E', WR: '#2B80D9', TE: '#E07A16', K: '#A8960F', DST: '#77819A' }
+: { QB: '#FF7A93', RB: '#3EE0B4', WR: '#62B0FF', TE: '#FFAE5C', K: '#E8D867', DST: '#A3ADC2' };
+var fmt = st.fmt || 'dynasty', dyn = fmt === 'dynasty', rev = st.rev || 'none';
+var tt = st.tt || 'block', withK = st.with || null;
+var ROST = {
+syndicate: [['QB', 'Jalen Hurts', 'PHI'], ['RB', 'Bijan Robinson', 'ATL'], ['RB', 'Jonathan Taylor', 'IND'], ['WR', 'CeeDee Lamb', 'DAL'], ['WR', 'Tyreek Hill', 'MIA'], ['WR', 'DK Metcalf', 'SEA'], ['TE', 'Travis Kelce', 'KC'], ['RB', 'Jahmyr Gibbs', 'DET'], ['QB', 'C.J. Stroud', 'HOU'], ['K', 'Justin Tucker', 'BAL'], ['DST', 'Ravens D/ST', 'BAL'], ['RB', 'Saquon Barkley', 'PHI'], ['QB', 'Dak Prescott', 'DAL'], ['RB', 'James Cook', 'BUF'], ['TE', 'Sam LaPorta', 'DET'], ['WR', 'Rashod Bateman', 'BAL'], ['WR', "Ja'Marr Chase", 'CIN'], ['RB', 'Chase Brown', 'CIN']],
+kelce: [['QB', 'Josh Allen', 'BUF'], ['RB', 'Christian McCaffrey', 'SF'], ['RB', 'Josh Jacobs', 'GB'], ['WR', 'Garrett Wilson', 'NYJ'], ['WR', 'Nico Collins', 'HOU'], ['WR', 'DeVonta Smith', 'PHI'], ['TE', 'George Kittle', 'SF'], ['RB', 'Rachaad White', 'TB'], ['QB', 'Jordan Love', 'GB'], ['K', 'Harrison Butker', 'KC'], ['DST', '49ers D/ST', 'SF']],
+airplane: [['QB', 'Patrick Mahomes', 'KC'], ['RB', 'Breece Hall', 'NYJ'], ['RB', "D'Andre Swift", 'CHI'], ['WR', 'Justin Jefferson', 'MIN'], ['WR', 'Jaylen Waddle', 'MIA'], ['WR', 'Zay Flowers', 'BAL'], ['TE', 'Trey McBride', 'ARI'], ['WR', 'Jordan Addison', 'MIN'], ['QB', 'Kyler Murray', 'ARI'], ['K', 'Jake Bates', 'DET']],
+jj: [['QB', 'Lamar Jackson', 'BAL'], ['RB', 'Alvin Kamara', 'NO'], ['RB', 'James Conner', 'ARI'], ['WR', 'Mike Evans', 'TB'], ['WR', 'Chris Olave', 'NO'], ['WR', 'DJ Moore', 'CHI'], ['TE', 'Mark Andrews', 'BAL'], ['RB', 'Tony Pollard', 'TEN'], ['QB', 'Baker Mayfield', 'TB'], ['K', 'Brandon Aubrey', 'DAL']],
+mustards: [['QB', 'Joe Burrow', 'CIN'], ['RB', 'Chuba Hubbard', 'CAR'], ['RB', 'Aaron Jones', 'MIN'], ['WR', 'Amon-Ra St. Brown', 'DET'], ['WR', 'Tee Higgins', 'CIN'], ['WR', 'Courtland Sutton', 'DEN'], ['TE', 'Jonnu Smith', 'PIT'], ['RB', 'Javonte Williams', 'DAL'], ['QB', 'Bo Nix', 'DEN'], ['K', "Ka'imi Fairbairn", 'HOU']],
+hurts: [['QB', 'Jared Goff', 'DET'], ['RB', 'Derrick Henry', 'BAL'], ['RB', "De'Von Achane", 'MIA'], ['WR', 'A.J. Brown', 'PHI'], ['WR', 'Davante Adams', 'LAR'], ['WR', 'Terry McLaurin', 'WAS'], ['TE', 'Dalton Kincaid', 'BUF'], ['RB', 'Isiah Pacheco', 'KC'], ['QB', 'Matthew Stafford', 'LAR'], ['K', 'Cameron Dicker', 'LAC']],
+lamb: [['QB', 'Jayden Daniels', 'WAS'], ['RB', 'Bucky Irving', 'TB'], ['RB', 'Omarion Hampton', 'LAC'], ['WR', 'Malik Nabers', 'NYG'], ['WR', 'Brian Thomas Jr.', 'JAX'], ['WR', 'Ladd McConkey', 'LAC'], ['TE', 'Tucker Kraft', 'GB'], ['RB', 'Rhamondre Stevenson', 'NE'], ['QB', 'Caleb Williams', 'CHI'], ['K', 'Tyler Bass', 'BUF'], ['WR', 'Jauan Jennings', 'SF']],
+henrys: [['QB', 'Justin Herbert', 'LAC'], ['RB', 'Ashton Jeanty', 'LV'], ['RB', 'Kareem Hunt', 'KC'], ['WR', 'Rome Odunze', 'CHI'], ['WR', 'Xavier Worthy', 'KC'], ['WR', 'Jameson Williams', 'DET'], ['TE', 'Evan Engram', 'DEN'], ['RB', 'Jaylen Warren', 'PIT'], ['QB', 'Geno Smith', 'LV'], ['K', 'Chris Boswell', 'PIT'], ['RB', 'Bhayshul Tuten', 'JAX']],
+chubb: [['QB', 'Trevor Lawrence', 'JAX'], ['RB', 'Kyren Williams', 'LAR'], ['RB', 'Joe Mixon', 'HOU'], ['WR', 'Jaxon Smith-Njigba', 'SEA'], ['WR', 'Jerry Jeudy', 'CLE'], ['WR', 'Calvin Ridley', 'TEN'], ['TE', 'David Njoku', 'CLE'], ['RB', 'Nick Chubb', 'HOU'], ['QB', 'Tua Tagovailoa', 'MIA'], ['K', 'Wil Lutz', 'DEN'], ['QB', 'Joe Flacco', 'CIN']],
+purdy: [['QB', 'Brock Purdy', 'SF'], ['RB', 'David Montgomery', 'DET'], ['RB', 'Travis Etienne', 'JAX'], ['WR', 'Drake London', 'ATL'], ['WR', 'Marvin Harrison Jr.', 'ARI'], ['WR', 'Joshua Palmer', 'BUF'], ['TE', 'Brock Bowers', 'LV'], ['WR', 'Romeo Doubs', 'GB'], ['QB', 'Justin Fields', 'NYJ'], ['K', 'Jason Myers', 'SEA'], ['WR', 'Jayden Reed', 'GB']],
+puka: [['QB', 'Sam Darnold', 'SEA'], ['RB', 'Kenneth Walker III', 'SEA'], ['RB', 'Najee Harris', 'LAC'], ['WR', 'Puka Nacua', 'LAR'], ['WR', 'Keenan Allen', 'LAC'], ['WR', 'Jakobi Meyers', 'LV'], ['TE', 'T.J. Hockenson', 'MIN'], ['RB', 'Tyrone Tracy Jr.', 'NYG'], ['QB', 'Aaron Rodgers', 'PIT'], ['K', 'Younghoe Koo', 'ATL']],
+goff: [['QB', 'Michael Penix Jr.', 'ATL'], ['RB', 'TreVeyon Henderson', 'NE'], ['RB', 'Will Shipley', 'PHI'], ['WR', 'Tetairoa McMillan', 'CAR'], ['WR', 'Emeka Egbuka', 'TB'], ['WR', 'Travis Hunter', 'JAX'], ['TE', 'Colston Loveland', 'CHI'], ['RB', 'RJ Harvey', 'DEN'], ['QB', 'J.J. McCarthy', 'MIN'], ['K', 'Brandon McManus', 'GB']]
+};
+var KEYS = ['syndicate', 'kelce', 'airplane', 'jj', 'mustards', 'hurts', 'lamb', 'henrys', 'chubb', 'purdy', 'puka', 'goff'];
+var REC = { syndicate: '5-1', kelce: '4-2', airplane: '3-3', jj: '2-4', mustards: '3-3', hurts: '2-4', lamb: '5-1', henrys: '4-2', chubb: '3-3', purdy: '1-5', puka: '2-4', goff: '2-4' };
+var FAAB = { syndicate: 62, kelce: 40, airplane: 71, jj: 55, mustards: 88, hurts: 23, lamb: 47, henrys: 30, chubb: 66, purdy: 51, puka: 79, goff: 12 };
+// picks: id = 'YYYY Rn origKey'; MOVED maps id -> current owner
+var MOVED = { '2027 R2 hurts': 'syndicate', '2028 R3 syndicate': 'kelce', '2027 R1 goff': 'lamb', '2028 R2 lamb': 'airplane', '2027 R3 kelce': 'henrys' };
+function picksOf(k) {
+var out = [];
+KEYS.forEach(function (o) { [2027, 2028].forEach(function (y) { for (var r = 1; r <= 4; r++) { var id = y + ' R' + r + ' ' + o, own = MOVED[id] || o; if (own === k) out.push(id); } }); });
+return out.sort();
+}
+function pickLbl(id) { var p = id.split(' '); return p[0] + ' ' + p[1]; }
+function pickVia(id) { return id.split(' ')[2]; }
+function pInfo(k, n) { var r = ROST[k].filter(function (x) { return x[1] === n; })[0]; return r ? { pos: r[0], name: r[1], team: r[2] } : null; }
+// trade block
+var myBlock = st.myBlock || ['Dak Prescott', 'James Cook'];
+var BLOCK = {
+syndicate: [myBlock, 'WR depth or a 2027 1st'],
+kelce: [['Jordan Love', 'Rachaad White'], 'An RB1'],
+airplane: [['Kyler Murray', '2028 R2 lamb'], 'Running back help'],
+jj: [['Tony Pollard', 'Mark Andrews'], 'TE upgrade'],
+mustards: [['Javonte Williams', 'Bo Nix'], ''],
+hurts: [['Isiah Pacheco', 'Davante Adams', '2027 R1 hurts'], 'Young WR, 2027 1st'],
+lamb: [['Caleb Williams', '2027 R1 goff'], 'Proven WR2'],
+henrys: [['Geno Smith', 'Xavier Worthy'], ''],
+chubb: [['Joe Mixon'], 'Anything at TE'],
+purdy: [['Justin Fields', 'Travis Etienne', '2027 R2 purdy'], 'Win-now pieces'],
+puka: [['Aaron Rodgers'], ''],
+goff: [[], '']
+};
+var blkP = st.blkpos || 'ALL', editing = !!st.editBlk;
+var pro = st.pro !== 'off', myLook = st.myLook == null ? 'WR depth or a 2027 1st' : st.myLook;
+BLOCK.syndicate[1] = myLook;
+// ---- Pro: depth, standing and fit
+var POS4 = ['QB', 'RB', 'WR', 'TE'], TH = { QB: [1, 3], RB: [2, 4], WR: [2, 5], TE: [0, 2] };
+function depthOf(k) { var d = {}; POS4.forEach(function (p) { d[p] = ROST[k].filter(function (r) { return r[0] === p; }).length; }); return d; }
+function lvl(p, n) { return n <= TH[p][0] ? 'thin' : (n >= TH[p][1] ? 'deep' : 'ok'); }
+function wins(k) { return parseInt(REC[k], 10); }
+function needsOf(txt) { var t = (txt || '').toUpperCase(), out = []; POS4.forEach(function (p) { if (t.indexOf(p) >= 0) out.push(p); }); if (/RB1|RUNNING/.test(t) && out.indexOf('RB') < 0) out.push('RB'); return out; }
+var myBlockPos = {}; myBlock.forEach(function (n) { var pi = pInfo('syndicate', n); if (pi) myBlockPos[pi.pos] = n; });
+var myNeeds = needsOf(myLook), myDepth = depthOf('syndicate');
+function fitOf(k) {
+var d = depthOf(k), score = 0, why = [], tags = [], theirNeeds = needsOf(BLOCK[k][1]), give = null, get = null;
+if (wins(k) <= 2) { score += 2; tags.push({ cls: 'tg str', label: REC[k] + ' · struggling' }); }
+POS4.forEach(function (p) { var l = lvl(p, d[p]); if (l === 'thin') tags.push({ cls: 'tg thin', label: 'Thin at ' + p }); if (l === 'deep') tags.push({ cls: 'tg deep', label: 'Deep at ' + p }); });
+POS4.forEach(function (p) {
+if (myBlockPos[p] && (lvl(p, d[p]) === 'thin' || theirNeeds.indexOf(p) >= 0)) { score += 3; if (!give) give = myBlockPos[p];
+why.push((theirNeeds.indexOf(p) >= 0 ? 'they want ' + (p === 'RB' && /RB1/i.test(BLOCK[k][1]) ? 'an RB1' : (p === 'RB' ? 'an ' : 'a ') + p) : 'they are thin at ' + p) + ' and you have ' + myBlockPos[p] + ' on the block');
+tags.push({ cls: 'tg mat', label: 'Wants your ' + p }); }
+if (myNeeds.indexOf(p) >= 0 && lvl(p, d[p]) === 'deep') { score += 2; why.push('they are deep at ' + p + ', which you need');
+if (!get) { var cand = ROST[k].filter(function (r) { return r[0] === p; }); get = cand[cand.length - 1][1]; } }
+});
+return { score: score, why: why, tags: tags, give: give, get: get, d: d };
+}
+var FIT = {}; KEYS.forEach(function (k) { if (k !== 'syndicate') FIT[k] = fitOf(k); });
+function fitLbl(sc) { return sc >= 5 ? ['Great fit', 'fit hi'] : (sc >= 3 ? ['Good fit', 'fit md'] : ['Long shot', 'fit lo']); }
+function openWith(k, getItems) {
+return function () { var sel = { give: { p: {}, f: 0, k: {} }, get: { p: {}, f: 0, k: {} } }; (getItems || []).forEach(function (it) { if (it.indexOf(' R') === 4) sel.get.k[it] = 1; else sel.get.p[it] = 1; }); self.setState({ with: k, sel: sel, drops: [] }); };
+}
+var blocks = KEYS.map(function (k) {
+var b = BLOCK[k], mine = k === 'syndicate', o = tm(k);
+var items = b[0].filter(function (it) { var isPick = it.indexOf(' R') === 4; if (isPick && !dyn) return false;
+if (blkP === 'ALL') return true; if (blkP === 'PICKS') return isPick; if (isPick) return false; var pi = pInfo(k, it); return pi && pi.pos === blkP; })
+.map(function (it) {
+var isPick = it.indexOf(' R') === 4;
+if (isPick) { var via = pickVia(it); return { chip: 'PICK', chipCls: 'pkc', name: pickLbl(it), meta: via === k ? 'own pick' : 'via ' + T[via][0], pc: '#7B5CFF', canProp: !mine, canRm: mine, prop: openWith(k, [it]), rm: function () { self.setState({ myBlock: myBlock.filter(function (x) { return x !== it; }) }); } }; }
+var pi = pInfo(k, it); return { chip: pi.pos, chipCls: 'pos2 p-' + pi.pos, name: pi.name, meta: pi.team, pc: pcP[pi.pos], canProp: !mine, canRm: mine, prop: openWith(k, [it]), rm: function () { self.setState({ myBlock: myBlock.filter(function (x) { return x !== it; }) }); } };
+});
+var ft = FIT[k], tg = pro && ft ? ft.tags.filter(function (t) { return t.cls !== 'tg deep' && t.cls !== 'tg thin' || true; }) : [];
+return { o: o, mine: mine, cls: 'card tbc' + (mine ? ' mine' : ''), sub: mine ? 'Your block · ' + REC[k] : REC[k] + ' · ' + T[k][4], hasLook: !!b[1] && !(mine && editing), look: b[1], items: items,
+hasTags: tg.length > 0, tags: tg, score: ft ? ft.score : 99,
+empty: !items.length, emptyTxt: mine ? 'Nothing on your block. Tap Edit to add players' + (dyn ? ' or picks.' : '.') : (b[0].length ? 'Nothing at this position.' : 'Nothing on the block yet.'),
+editing: mine && editing, canTrade: !mine, open: openWith(k, []) };
+});
+if (pro) { var mineB = blocks.shift(); blocks.sort(function (a, b) { return b.score - a.score; }); blocks.unshift(mineB); }
+var LOOKS = ['WR depth', 'RB help', 'TE upgrade', 'A QB', 'A 2027 1st', 'Young players', 'Win-now pieces'];
+var lookOpts = LOOKS.map(function (l) { var on = myLook.indexOf(l) >= 0;
+return { label: l, cls: 'chip sm2' + (on ? ' on' : ''), pick: function () { var parts = myLook ? myLook.split(/\s*(?:,| or )\s*/).filter(function (x) { return x; }) : [];
+parts = on ? parts.filter(function (x) { return x !== l; }) : parts.concat([l]); var txt = parts.length > 1 ? parts.slice(0, -1).join(', ') + ' or ' + parts[parts.length - 1] : (parts[0] || ''); self.setState({ myLook: txt }); } }; });
+var myOpts = ROST.syndicate.map(function (r) { return { label: r[1], pc: pcP[r[0]], on: myBlock.indexOf(r[1]) >= 0, id: r[1] }; })
+.concat(dyn ? picksOf('syndicate').map(function (id) { return { label: pickLbl(id) + (pickVia(id) !== 'syndicate' ? ' (' + T[pickVia(id)][1] + ')' : ''), pc: '#7B5CFF', on: myBlock.indexOf(id) >= 0, id: id }; }) : [])
+.map(function (c) { return { label: c.label, pc: c.pc, cls: 'chip' + (c.on ? ' on' : ''), pick: function () { self.setState({ myBlock: c.on ? myBlock.filter(function (x) { return x !== c.id; }) : myBlock.concat([c.id]) }); } }; });
+// league rosters
+var onBlock = {}; KEYS.forEach(function (k) { (k === 'syndicate' ? myBlock : BLOCK[k][0]).forEach(function (n) { onBlock[n] = 1; }); });
+var rosters = KEYS.filter(function (k) { return k !== 'syndicate'; }).map(function (k) {
+var r = ROST[k];
+var ft = FIT[k], fl = fitLbl(ft.score);
+return { o: tm(k), sub: REC[k] + ' · $' + FAAB[k] + ' FAAB' + (dyn ? ' · ' + picksOf(k).length + ' picks' : ''), score: ft.score,
+hasFit: pro && ft.score >= 3, fit: fl[0], fitCls: fl[1],
+depth: POS4.map(function (p) { var n = ft.d[p], l = lvl(p, n); return { pos: p, n: n, lbl: l === 'ok' ? '' : l, cls: 'dp' + (l === 'ok' ? '' : ' ' + l), tip: n + ' ' + p + (n === 1 ? '' : 's') + ' on the roster' }; }),
+hasTags: ft.tags.filter(function (t) { return t.cls === 'tg str' || t.cls === 'tg mat'; }).length > 0, tags: ft.tags.filter(function (t) { return t.cls === 'tg str' || t.cls === 'tg mat'; }),
+players: r.slice(0, 9).map(function (p) { return { pos: p[0], pc: pcP[p[0]], name: p[1], blk: !!onBlock[p[1]] }; }),
+more: '+' + (r.length - 9) + ' more' + (dyn ? ' · picks' : ''), open: openWith(k, []) };
+});
+if (pro) rosters.sort(function (a, b) { return b.score - a.score; });
+// trade finder: top 3 partners
+function openSel(k, give, get) { return function () { var sel2 = { give: { p: {}, f: 0, k: {} }, get: { p: {}, f: 0, k: {} } }; if (give) sel2.give.p[give] = 1; if (get) sel2.get.p[get] = 1; self.setState({ with: k, sel: sel2, drops: [] }); }; }
+var finds = Object.keys(FIT).sort(function (a, b) { return FIT[b].score - FIT[a].score; }).slice(0, 3).map(function (k) {
+var ft = FIT[k], d = ft.d, fl = fitLbl(ft.score), thin = POS4.filter(function (p) { return lvl(p, d[p]) === 'thin'; }), deep = POS4.filter(function (p) { return lvl(p, d[p]) === 'deep'; });
+var title = T[k][0] + ' is ' + REC[k] + (thin.length ? ' and thin at ' + thin.join(' and ') : (deep.length ? ' and deep at ' + deep.join(' and ') : ''));
+var why = ft.why.length ? ft.why.join('; ') : 'No obvious match yet.';
+why = why.charAt(0).toUpperCase() + why.slice(1) + '.';
+if (ft.give && ft.get) why += ' ' + ft.give + ' for ' + ft.get + ' could work for both of you.';
+else if (ft.give) why += ' Start with ' + ft.give + '.';
+return { o: tm(k), title: title, why: why, fit: fl[0], fitCls: fl[1], goTxt: ft.give || ft.get ? 'Build this trade' : 'Open roster', go: openSel(k, ft.give, ft.get) };
+});
+// builder
+var sel = st.sel || { give: { p: {}, f: 0, k: {} }, get: { p: {}, f: 0, k: {} } }, drops = st.drops || [];
+function cpSel() { return JSON.parse(JSON.stringify(sel)); }
+function side(sideKey, teamKey) {
+var s2 = sel[sideKey], bal = FAAB[teamKey];
+var players = ROST[teamKey].map(function (r) { var on = !!s2.p[r[1]];
+return { pos: r[0], pc: pcP[r[0]], name: r[1], team: r[2], blk: !!onBlock[r[1]], cls: 'bpr' + (on ? ' on' : ''), pick: function () { var c = cpSel(); if (on) delete c[sideKey].p[r[1]]; else c[sideKey].p[r[1]] = 1; self.setState({ sel: c, drops: [] }); } }; });
+var picks = picksOf(teamKey).map(function (id) { var on = !!s2.k[id], via = pickVia(id);
+return { label: pickLbl(id), hasVia: via !== teamKey, via: via !== teamKey ? 'via ' + T[via][0] : '', cls: 'pk' + (on ? ' on' : ''), pick: function () { var c = cpSel(); if (on) delete c[sideKey].k[id]; else c[sideKey].k[id] = 1; self.setState({ sel: c }); } }; });
+var n = Object.keys(s2.p).length + Object.keys(s2.k).length + (s2.f ? 1 : 0);
+return { o: tm(teamKey), dir: sideKey === 'give' ? 'YOU GIVE' : 'YOU GET', count: n ? n + ' selected' : '', players: players, picks: picks,
+faabBal: '$' + bal + ' available', faabTxt: '$' + s2.f,
+fMinus: function () { var c = cpSel(); c[sideKey].f = Math.max(0, s2.f - 1); self.setState({ sel: c }); },
+fPlus: function () { var c = cpSel(); c[sideKey].f = Math.min(bal, s2.f + 1); self.setState({ sel: c }); } };
+}
+function sumOf(s2) {
+var parts = Object.keys(s2.p).concat(Object.keys(s2.k).map(function (id) { return pickLbl(id) + ' pick'; }));
+if (s2.f) parts.push('$' + s2.f + ' FAAB');
+return parts.length ? parts.join(', ') : 'Nothing yet';
+}
+var nIn = Object.keys(sel.get.p).length, nOut = Object.keys(sel.give.p).length, needN = Math.max(0, nIn - nOut);
+var dropOpts = ROST.syndicate.filter(function (r) { return !sel.give.p[r[1]]; }).map(function (r) { var on = drops.indexOf(r[1]) >= 0;
+return { label: r[1], pc: pcP[r[0]], cls: 'chip drop' + (on ? ' on' : ''), pick: function () { var d = on ? drops.filter(function (x) { return x !== r[1]; }) : drops.concat([r[1]]).slice(-needN); self.setState({ drops: d }); } }; });
+var hasGive = sumOf(sel.give) !== 'Nothing yet', hasGet = sumOf(sel.get) !== 'Nothing yet';
+var ready = withK && hasGive && hasGet && drops.length >= needN;
+var sent = st.sent || [];
+var builder = withK ? {
+sides: [side('give', 'syndicate'), side('get', withK)], sumGive: sumOf(sel.give), sumGet: sumOf(sel.get),
+needDrop: needN > 0, dropTxt: 'You get ' + nIn + ' player' + (nIn === 1 ? '' : 's') + ' and give ' + nOut + '. Your roster is full, so pick ' + needN + ' to drop if the trade goes through.',
+dropOpts: dropOpts,
+afterTxt: rev === 'none' ? 'Goes through as soon as ' + T[withK][0] + ' accepts.' : 'After ' + T[withK][0] + ' accepts, the league has 24 hours to object.',
+propCls: ready ? 'btnp' : 'btnp off', propTxt: 'Propose trade',
+propose: function () { if (!ready) return; self.setState({ sent: sent.concat([{ k: withK, give: sumOf(sel.give), get: sumOf(sel.get), gp: Object.keys(sel.give.p), tp: Object.keys(sel.get.p), gf: sel.give.f, tf: sel.get.f, gk: Object.keys(sel.give.k), tk: Object.keys(sel.get.k) }]),
+with: null, sel: null, drops: [], tt: 'offers', toast: 'Trade sent to ' + T[withK][0], toastSub: 'They have 72 hours to respond · see Offers' }); },
+clearTrade: function () { self.setState({ sel: null, drops: [] }); },
+backTxt: '← ' + (tt === 'rost' ? 'League rosters' : 'Trade block'), backFromBuild: function () { self.setState({ with: null, sel: null, drops: [] }); }
+} : { sides: [], dropOpts: [], sumGive: '', sumGet: '', needDrop: false, dropTxt: '', afterTxt: '', propCls: 'btnp off', propTxt: '', propose: function () {}, clearTrade: function () {}, backTxt: '', backFromBuild: function () {} };
+// offers
+function tokP(k, n) { var pi = pInfo(k, n); return pi ? { pos: pi.pos, pc: pcP[pi.pos], name: n } : { pos: '', pc: 'var(--ln2)', name: n }; }
+function tokK(id) { return { pos: 'PICK', pc: '#7B5CFF', name: pickLbl(id) + (pickVia(id) ? '' : '') }; }
+function tokF(v) { return { pos: 'FAAB', pc: '#1E9E57', name: '$' + v }; }
+var done = st.done || {}, objected = !!st.objected;
+var received = done.jef ? [] : [{ o: tm('airplane'), head: "Jefferson's Airplane sent you an offer", sub: '@jetpackjeff · today 9:12 AM · expires Wed 11:59 PM', st: 'Waiting on you', stCls: 'stp wait',
+lA: 'YOU GET', a: [tokP('airplane', 'Justin Jefferson')].concat(dyn ? [tokK('2028 R2 lamb')] : []), lB: 'YOU GIVE', b: [tokP('syndicate', 'CeeDee Lamb'), tokP('syndicate', 'Bijan Robinson')],
+hasNote: true, note: "Lamb and Bijan for JJ. You're deep at RB, I need one.", isIn: true,
+accept: function () { self.setState({ done: Object.assign({}, done, { jef: 'acc' }), toast: rev === 'none' ? 'Trade complete' : 'Trade accepted', toastSub: rev === 'none' ? 'Jefferson is on your roster' : 'The league has 24 hours to object' }); },
+counter: function () { var c = { give: { p: { 'CeeDee Lamb': 1 }, f: 0, k: {} }, get: { p: { 'Justin Jefferson': 1 }, f: 0, k: {} } }; self.setState({ with: 'airplane', sel: c, drops: [], tt: 'block' }); },
+decline: function () { self.setState({ done: Object.assign({}, done, { jef: 'dec' }), toast: 'Offer declined', toastSub: "Jefferson's Airplane will be notified" }); } }];
+var sentItems = [{ o: tm('hurts'), head: 'You offered Hurts Locker', sub: '@mscott44 · Mon 8:05 PM · expires Thu 8:05 PM', st: 'Pending', stCls: 'stp wait',
+lA: 'YOU GIVE', a: [tokP('syndicate', 'Dak Prescott'), tokF(5)], lB: 'YOU GET', b: [tokP('hurts', "De'Von Achane")], isOut: true, withdraw: function () {} }]
+.concat(sent.map(function (x, i) { return { o: tm(x.k), head: 'You offered ' + T[x.k][0], sub: T[x.k][4] + ' · just now · expires in 72 hours', st: 'Pending', stCls: 'stp wait',
+lA: 'YOU GIVE', a: x.gp.map(function (n) { return tokP('syndicate', n); }).concat(x.gk.map(tokK)).concat(x.gf ? [tokF(x.gf)] : []),
+lB: 'YOU GET', b: x.tp.map(function (n) { return tokP(x.k, n); }).concat(x.tk.map(tokK)).concat(x.tf ? [tokF(x.tf)] : []), isOut: true,
+withdraw: function () { var s3 = sent.slice(); s3.splice(i, 1); self.setState({ sent: s3, toast: 'Offer withdrawn', toastSub: T[x.k][0] + ' will be notified' }); } }; }).reverse());
+if (done.jef === 'acc') sentItems = sentItems;
+var reviewItems = rev === '24h' ? [{ o: tm('kelce'), head: "Kelce's Anatomy and Henry's Holes", sub: 'Accepted today 7:40 AM', st: 'In league review', stCls: 'stp rev',
+lA: "KELCE'S ANATOMY GETS", a: [tokP('henrys', 'Xavier Worthy')].concat(dyn ? [tokK('2027 R3 kelce')] : []), lB: "HENRY'S HOLES GETS", b: [tokP('kelce', 'Rachaad White')], isRev: true,
+revTxt: (objected ? '2' : '1') + ' of 4 objections needed to stop it · review ends in 18 hours', objTxt: objected ? 'Objected · undo' : 'Object', object: function () { self.setState({ objected: !objected }); } }]
+.concat(done.jef === 'acc' ? [{ o: tm('airplane'), head: "You and Jefferson's Airplane", sub: 'Accepted just now', st: 'In league review', stCls: 'stp rev', lA: 'YOU GET', a: [tokP('airplane', 'Justin Jefferson')], lB: 'YOU GIVE', b: [tokP('syndicate', 'CeeDee Lamb'), tokP('syndicate', 'Bijan Robinson')], isRev: true, revTxt: '0 of 4 objections · review ends in 24 hours', objTxt: 'Your trade', object: function () {} }] : []) : [];
+var recentItems = [{ o: tm('lamb'), head: 'Certified Lamb Daddy and Chubb Club', sub: 'Week 6 · Thu 6:02 PM', st: 'Completed', stCls: 'stp ok',
+lA: 'CERTIFIED LAMB DADDY GOT', a: [tokP('chubb', 'Calvin Ridley')], lB: 'CHUBB CLUB GOT', b: [tokP('lamb', 'Rhamondre Stevenson')].concat([tokF(8)]) }]
+.concat(done.jef === 'acc' && rev === 'none' ? [{ o: tm('airplane'), head: "You and Jefferson's Airplane", sub: 'Just now', st: 'Completed', stCls: 'stp ok', lA: 'YOU GOT', a: [tokP('airplane', 'Justin Jefferson')], lB: 'YOU GAVE', b: [tokP('syndicate', 'CeeDee Lamb'), tokP('syndicate', 'Bijan Robinson')] }] : []);
+var offerGroups = [
+{ title: 'Received', items: received, empty: !received.length, emptyTxt: 'No offers waiting on you.' },
+{ title: 'Sent', items: sentItems, empty: !sentItems.length, emptyTxt: 'No open offers.' }
+].concat(rev === '24h' ? [{ title: 'In league review', items: reviewItems, empty: !reviewItems.length, emptyTxt: '' }] : [])
+.concat([{ title: 'Recently completed', items: recentItems, empty: false, emptyTxt: '' }]);
+var trades = Object.assign({
+dyn: dyn, fmtLabel: dyn ? 'Dynasty' : 'Re-draft',
+reviewTxt: rev === 'none' ? 'Trades go through as soon as both teams agree' : 'Accepted trades go to a 24-hour league review',
+tabs: [['block', 'Trade block'], ['rost', 'League rosters'], ['offers', 'Offers']].map(function (t) {
+var n = t[0] === 'offers' ? received.length : 0;
+return { label: t[1], hasN: n > 0, n: n, cls: 'ptab' + (t[0] === tt && (!withK || t[0] !== 'offers') ? ' on' : ''), pick: function () { self.setState({ tt: t[0], with: null, sel: null, drops: [] }); } }; }),
+isBlock: tt === 'block' && !withK, isRost: tt === 'rost' && !withK, isBuild: !!withK, isOffers: tt === 'offers' && !withK,
+blkPos: ['ALL', 'QB', 'RB', 'WR', 'TE'].concat(dyn ? ['PICKS'] : []).map(function (k) { return { label: k === 'PICKS' ? 'Picks' : k, cls: k === blkP ? 'on' : '', pick: function () { self.setState({ blkpos: k }); } }; }),
+blocks: blocks, myOpts: myOpts, myLook: myLook, lookOpts: lookOpts, onLook: function (e) { self.setState({ myLook: e && e.target ? e.target.value : myLook }); },
+pro: pro, noPro: !pro, showFinder: (tt === 'block' || tt === 'rost') && !withK, finds: finds,
+finderSub: 'Built from every roster, the standings and your block' + (myLook ? ' (you want ' + myLook.charAt(0).toLowerCase() + myLook.slice(1) + ')' : ''),
+pros: [['off', 'Off'], ['on', 'On']].map(function (k) { var on = k[0] === 'on' ? pro : !pro; return { label: k[1], cls: on ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ pro: k[0] }); } }; }), editBlock: function () { self.setState({ editBlk: !editing }); }, editTxt: editing ? 'Done' : 'Edit',
+rosters: rosters, offerGroups: offerGroups,
+fmts: [['redraft', 'Re-draft'], ['dynasty', 'Dynasty']].map(function (k) { return { label: k[1], cls: k[0] === fmt ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ fmt: k[0], sel: null, blkpos: 'ALL' }); } }; }),
+revs: [['none', 'No review'], ['24h', '24h league review']].map(function (k) { return { label: k[1], cls: k[0] === rev ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ rev: k[0] }); } }; }),
+toast: !!st.toast, toastTxt: st.toast || '', toastSub: st.toastSub || '', closeToast: function () { self.setState({ toast: null }); }
+}, builder);
+return Object.assign(trades, {
+prem: prem, tiers: [['free', 'Standard'], ['premium', 'Premium']].map(function (k) { return { label: k[1], cls: k[0] === tier ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ tier: k[0] }); } }; }),
+themes: [['dark', 'Dark'], ['light', 'Light']].map(function (k) { return { label: k[1], cls: k[0] === theme ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ theme: k[0] }); } }; }),
+mainCls: isLt ? 'th-lt' : 'th-dk', pageBg: isLt ? '#F2F3F5' : '#0F1218',
+games: games, stripX: (-off * 206) + 'px', canPrev: off > 0, canNext: off < maxOff,
+stripPrev: function () { self.setState({ off: Math.max(0, off - 2) }); },
+stripNext: function () { self.setState({ off: Math.min(maxOff, off + 2) }); },
+leagues: [
+['The Empire League', 'EL', '#b07a1e', 'Live · up 46.1', '#4BE08F', true],
+['Lake Minnetonka Keeper', 'LM', '#1e4f8a', 'Live · down 6.1', '#FF7B7B', false],
+['Dynasty Degenerates', 'DD', '#2f7a46', 'Final · won 131.2–98.0', '#8B93A5', false],
+['Office Pool 2026', 'OP', '#a6335a', 'Kicks off Sun 8:20 PM', '#8B93A5', false],
+['Superflex Syndicate', 'SS', '#7a3b12', 'Dues due Friday', '#FFB547', false],
+['Best Ball Pod #14', 'BB', '#5b2aa6', '3rd of 12', '#8B93A5', false]
+].map(function (l) { return { name: l[0], init: l[1], hue: l[2], st: l[3], sc: l[4], cls: l[5] ? 'lg on' : 'lg' }; }),
+chat: [
+['kelce', 'Airplane is gonna need a miracle on SNF lol', '2m'],
+['airplane', 'I have Jefferson tonight. Relax.', '1m'],
+['syndicate', 'Commish here. Trade deadline is Nov 8.', '2h'],
+['henrys', 'Anyone want Chubb for pennies?', '4h']
+].map(function (c) { return { t: tm(c[0]), txt: c[1], when: c[2] }; }),
+tx: [
+['goff', 'RB', 'Will Shipley', 'PHI', 'RB', 'Demond Claiborne', 'MIN', '1h'],
+['henrys', 'RB', 'Jaylen Warren', 'PIT', 'WR', 'Xavier Legette', 'CAR', '8h'],
+['purdy', 'WR', 'Joshua Palmer', 'BUF', 'WR', 'Romeo Doubs', 'GB', '1d']
+].map(function (x) { return { t: tm(x[0]), ap: x[1], ac: pc[x[1]], an: x[2], at: x[3], dp: x[4], dc: pc[x[4]], dn: x[5], dt: x[6], when: x[7] }; })
+});
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fanball — Home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&amp;family=Onest:wght@400;500;600;700&amp;family=Lato:ital,wght@1,900&amp;family=Limelight&amp;family=Bungee&amp;family=Shrikhand&amp;family=Cinzel:wght@700&amp;family=Bowlby+One&amp;family=Black+Ops+One&amp;family=Russo+One&amp;family=Racing+Sans+One&amp;family=Rye&amp;family=Yellowtail&amp;family=Righteous&amp;family=Fugaz+One&amp;family=Alfa+Slab+One&amp;display=swap">
+<style>
+body{margin:0;background:#0F1218}
+a{color:#6A8CFF;text-decoration:none}a:hover{color:#9DB3FF}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+/* ---------- Team skins ---------- */
+.sk-syndicate{background:repeating-linear-gradient(90deg,rgba(255,214,140,.07) 0 1px,transparent 1px 9px),radial-gradient(130% 160% at 50% 0%,#7a1d1d 0%,#2a0606 72%)}
+.sk-syndicate .pn{font-family:'Limelight',serif;background:linear-gradient(180deg,#fff4c9 0%,#e6b85a 46%,#99661b 54%,#f5dc8f 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #160202)}
+.sk-kelce{background:repeating-linear-gradient(0deg,rgba(255,255,255,.09) 0 1px,transparent 1px 7px),repeating-linear-gradient(90deg,rgba(255,255,255,.09) 0 1px,transparent 1px 7px),linear-gradient(100deg,#ee3b4d 0%,#a8121f 58%,#4f040c 100%)}
+.sk-kelce .pn{font-family:'Bungee',sans-serif;color:#fff;text-shadow:2px 2px 0 #3d0008;font-size:.9em}
+.sk-airplane{background:linear-gradient(90deg,#3b1670 0%,#3b1670 30%,rgba(59,22,112,0) 85%),repeating-conic-gradient(from 0deg at 88% 55%,#ffcf3f 0 9deg,#ff7a2f 9deg 18deg,#d23a8f 18deg 27deg,#5b2aa6 27deg 36deg)}
+.sk-airplane .pn{font-family:'Shrikhand',serif;color:#ffd84d;text-shadow:2px 2px 0 #d23a8f,3px 3px 0 #22093f}
+.sk-jj{background:repeating-linear-gradient(90deg,rgba(233,220,181,.06) 0 1px,transparent 1px 6px),linear-gradient(180deg,#14284f,#0a1631)}
+.sk-jj .pn{font-family:'Cinzel',serif;font-weight:700;color:#efe3bd;letter-spacing:.04em;font-size:.86em}
+.sk-mustards{background:radial-gradient(circle,rgba(150,60,0,.32) 1.1px,transparent 1.5px) 0 0/6px 6px,linear-gradient(90deg,#ffd43f,#eaa000)}
+.sk-mustards .pn{font-family:'Bowlby One',sans-serif;color:#c4161c;text-shadow:-1px -1px 0 #fff6cf,2px 2px 0 #5a1a00;font-size:.88em}
+.sk-hurts{background:radial-gradient(28% 70% at 18% 30%,#56776a 60%,transparent 62%),radial-gradient(22% 60% at 55% 80%,#1d302d 60%,transparent 62%),radial-gradient(18% 55% at 78% 20%,#71907a 60%,transparent 62%),radial-gradient(30% 80% at 40% 10%,#26403b 55%,transparent 58%),#35534b}
+.sk-hurts .pn{font-family:'Black Ops One',sans-serif;color:#eef3ec;text-shadow:0 2px 0 rgba(0,0,0,.55);letter-spacing:.03em}
+.sk-lamb{background:radial-gradient(90% 140% at 85% 50%,rgba(212,175,55,.35),transparent 60%),linear-gradient(180deg,#1a1a1a,#050505)}
+.sk-lamb .pn{font-family:'Russo One',sans-serif;background:linear-gradient(180deg,#fff9d9,#d4af37 50%,#8a6a12 52%,#f3d77a);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.04em;font-size:.9em}
+.sk-henrys{background:linear-gradient(90deg,rgba(26,16,72,.85) 0%,rgba(26,16,72,.2) 80%),repeating-linear-gradient(-55deg,#2b1a6b 0 12px,#4127a0 12px 24px)}
+.sk-henrys .pn{font-family:'Racing Sans One',sans-serif;color:#fff;text-shadow:3px 2px 0 #f28c28;font-style:italic;font-size:1.05em}
+.sk-chubb{background:radial-gradient(120% 120% at 20% 0%,#9a4d1a,#4a200a 70%)}
+.sk-chubb .pn{font-family:'Rye',serif;color:#f6d7a7;text-shadow:0 2px 0 #241002;font-size:.9em}
+.sk-purdy{background:radial-gradient(circle at 80% 30%,rgba(255,255,255,.95) 0 1.5px,transparent 2px),radial-gradient(circle at 90% 70%,rgba(255,255,255,.85) 0 1px,transparent 1.5px),linear-gradient(90deg,#ffe6ea,#f7a6ba 60%,#e2587b)}
+.sk-purdy .pn{font-family:'Yellowtail',cursive;color:#8a1034;font-size:1.25em;text-shadow:1px 1px 0 #fff}
+.sk-puka{background:linear-gradient(180deg,#ffb347 0%,#ff6a5c 52%,#1e4f8a 53%,#0e2c55 100%)}
+.sk-puka .pn{font-family:'Righteous',sans-serif;color:#fff;text-shadow:0 2px 0 #0e2c55,0 0 12px rgba(255,106,92,.6)}
+.sk-goff{background:linear-gradient(180deg,#8fd1ff 0 34%,transparent 34%),repeating-linear-gradient(90deg,#2f8f4e 0 16px,#3aa35c 16px 32px)}
+.sk-goff .pn{font-family:'Fugaz One',sans-serif;color:#fff;text-shadow:2px 2px 0 #14532d;font-style:italic}
+.sk-purdy .un,.sk-mustards .un{color:rgba(60,10,20,.85);text-shadow:none}
+/* ---------- Badges ---------- */
+.bx{position:relative;display:inline-block;flex:0 0 auto;width:28px;height:28px;vertical-align:middle}
+.bx>span{position:absolute}
+.bx .ring{inset:0}
+.bx .in{inset:2px}
+.bx .ic{inset:20%;background-size:contain;background-repeat:no-repeat;background-position:center}
+.s20{width:20px;height:20px}.s20 .in{inset:1.5px}
+.s24{width:24px;height:24px}
+.s28{width:28px;height:28px}
+.s36{width:36px;height:36px}
+.s44{width:44px;height:44px}.s44 .in{inset:2.5px}
+.s60{width:60px;height:60px}.s60 .in{inset:3px}
+.shp-circle .ring,.shp-circle .in{border-radius:50%}
+.shp-square .ring{border-radius:26%}.shp-square .in{border-radius:22%}
+.shp-hex .ring,.shp-hex .in{clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%)}
+.shp-shieldA .ring,.shp-shieldA .in{clip-path:polygon(50% 0,100% 9%,100% 52%,93% 71%,76% 88%,50% 100%,24% 88%,7% 71%,0 52%,0 9%)}
+.shp-shieldB .ring,.shp-shieldB .in{clip-path:polygon(0 7%,22% 0,50% 8%,78% 0,100% 7%,100% 56%,50% 100%,0 56%)}
+.shp-shieldC .ring,.shp-shieldC .in{clip-path:polygon(50% 0,100% 16%,100% 62%,50% 100%,0 62%,0 16%)}
+.shp-shieldA .ic,.shp-shieldB .ic,.shp-shieldC .ic{inset:17% 20% 29% 20%}
+.shp-hex .ic{inset:22%}
+.ic-syndicate{background-image:url(/a/6620792e05f35fa68740bc24df7c61ee.svg)}
+.ic-kelce{background-image:url(/a/a68c807ed60f60bdc676af72e43387f8.svg)}
+.ic-airplane{background-image:url(/a/51b59441fd266a7c8ea6aef6429acf70.svg)}
+.ic-jj{background-image:url(/a/7cf8e5de2b42f41f05fa6d320330dfac.svg)}
+.ic-mustards{background-image:url(/a/134f1db1b44f4066e769d265e3b3ba91.svg)}
+.ic-hurts{background-image:url(/a/78f90d423a65f4f4dc1806d54a0ed219.svg)}
+.ic-lamb{background-image:url(/a/3ce630101181ee5c485c2e8135cadbce.svg)}
+.ic-henrys{background-image:url(/a/a8d350d6607bbbbff37d324ee3099237.svg)}
+.ic-chubb{background-image:url(/a/5316d699414f0067a5ca8d3f3c13a087.svg)}
+.ic-purdy{background-image:url(/a/1997667c68e3f31393bc3ca55a9197f4.svg)}
+.ic-puka{background-image:url(/a/a1ee853acec05aece928976e9f470406.svg)}
+.ic-goff{background-image:url(/a/29f184c04e3a5bfe2a475523be98fcb1.svg)}
+.fbd{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;border-radius:50%;font-family:'Onest',sans-serif;font-weight:700;color:#fff;font-size:10px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2)}
+.fbd.s20{font-size:8px}.fbd.s24{font-size:9px}.fbd.s36{font-size:12px}.fbd.s44{font-size:15px}.fbd.s60{font-size:20px}
+/* ---------- Headshots ---------- */
+.hs{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background-color:#1E232D;background-repeat:no-repeat;background-size:185% auto;background-position:50% 8%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.hs-hurts{background-image:url(/a/7195bcb1b33e188749ef31c32a596397.webp)}
+.hs-taylor{background-image:url(/a/4a22590f13307462b64b61e5ed8d0ecb.webp)}
+.hs-lamb{background-image:url(/a/c1f91fb437907f22852a481a7a466763.webp)}
+.hs-bijan{background-image:url(/a/fb2ca679c8a995ab44f725b0f3da3050.webp)}
+.hs-none{background-image:url(/a/4170e5c447395148b28bf4ffbdf45275.svg);background-size:100% 100%;background-position:center bottom}
+/* ---------- Matchup tile ---------- */
+.mtile{position:relative;display:flex;height:92px;border-radius:12px;overflow:hidden;box-shadow:0 10px 24px -16px rgba(0,0,0,.9)}
+.half{position:relative;flex:1 1 50%;min-width:0;display:flex;align-items:center;gap:12px;padding:0 42px 0 16px;font-size:30px}
+.half.r{flex-direction:row-reverse;padding:0 16px 0 42px}
+.half .nm{position:relative;z-index:1;display:flex;flex-direction:column;gap:5px;min-width:0}
+.half.r .nm{align-items:flex-end}
+.half .pn{line-height:1;white-space:nowrap}
+.un{font-family:'Onest',sans-serif;font-size:12px;font-weight:600;font-style:normal;color:rgba(255,255,255,.8);text-shadow:0 1px 2px rgba(0,0,0,.55);white-space:nowrap;letter-spacing:0}
+.half .sc{position:relative;z-index:1;margin-left:auto;font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:38px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.55);font-variant-numeric:tabular-nums}
+.half.r .sc{margin-left:0;margin-right:auto}
+.half .sc.lose{color:rgba(255,255,255,.6)}
+.half .bx,.half .fbd{position:relative;z-index:1}
+.flat::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(0,0,0,.3))}
+.flat .pn{font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;color:#fff;font-size:1.1em}
+.seam{position:absolute;left:50%;top:50%;z-index:3;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;min-width:46px;height:26px;padding:0 10px;border-radius:999px;background:#0A0C10;color:#EEF1F6;font-size:11px;font-weight:700;box-shadow:0 0 0 3px rgba(10,12,16,.35)}
+.seam.live{color:#fff;background:#2F5BFF}
+.mtile.big{height:124px}
+.mtile.big .half{font-size:44px;gap:16px}
+.mtile.big .half .sc{font-size:58px}
+.mtile.big .un{font-size:13px}
+/* ---------- Win probability ---------- */
+.wp{display:flex;align-items:center;gap:12px;margin-top:10px}
+.wp .pa,.wp .pb{min-width:46px;font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:22px;line-height:1;font-variant-numeric:tabular-nums}
+.wp .pb{text-align:right}
+.segs{flex:1;display:flex;gap:3px;height:12px;padding:0 4px}
+.seg{flex:1;transform:skewX(-22deg);border-radius:1px}
+.seg.dim{opacity:.55}
+.wpline{flex:1;display:flex;gap:3px;height:10px;margin:0 4px;min-width:0}.wpline .wpa{border-radius:999px 0 0 999px}.wpline .wpb{flex:1;border-radius:0 999px 999px 0}.segs2{flex:1;display:flex;gap:28px;min-width:0}.segs2 .segs{flex:1;gap:5px;height:13px;padding:0 3px}.segs2 .seg{border-radius:3px;transform:skewX(-14deg)}.seg.off{opacity:1}
+.seg.ghost{opacity:.16}
+.wpnote{display:flex;justify-content:space-between;gap:10px;margin-top:6px;font-size:12px;color:#8B93A5}
+/* ---------- League hero ---------- */
+.empire{position:relative;height:300px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(60% 90% at 50% 100%,#4a3414 0%,rgba(74,52,20,0) 70%),linear-gradient(180deg,#06060a 0%,#141019 58%,#24180b 100%)}
+.empire .beams{position:absolute;inset:0;background:conic-gradient(from 150deg at 14% -8%,transparent 0deg,rgba(255,226,150,.2) 7deg,transparent 15deg),conic-gradient(from 195deg at 86% -8%,transparent 0deg,rgba(255,226,150,.2) 7deg,transparent 15deg),conic-gradient(from 172deg at 50% -14%,transparent 0deg,rgba(255,240,200,.12) 8deg,transparent 16deg)}
+.empire .cols{position:absolute;left:0;right:0;bottom:0;height:96px;opacity:.95;background:linear-gradient(#0b0806,#0b0806) 0 0/100% 12px no-repeat,linear-gradient(#0b0806,#0b0806) 0 100%/100% 16px no-repeat,repeating-linear-gradient(90deg,#0b0806 0 20px,rgba(11,8,6,0) 20px 64px);box-shadow:inset 0 1px 0 rgba(255,210,120,.28)}
+.empire .glow{position:absolute;left:50%;top:46%;width:700px;height:240px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(255,196,90,.28),rgba(255,196,90,0))}
+.ttl{position:relative;font-family:'Alfa Slab One',serif;font-size:104px;line-height:.95;letter-spacing:.01em}
+.ttl .back{color:#7a5516;text-shadow:0 1px 0 #6b4a12,0 2px 0 #5e400f,0 3px 0 #52370c,0 4px 0 #462f0a,0 5px 0 #3a2708,0 6px 0 #2e1f06,0 7px 0 #221704,0 14px 22px rgba(0,0,0,.8)}
+.ttl .front{position:absolute;left:0;top:0;background:linear-gradient(180deg,#fff7d6 0%,#f2cf72 36%,#b07a1e 50%,#e9c063 63%,#fff1bd 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cinz{font-family:'Cinzel',serif;font-weight:700;color:#e9c063;letter-spacing:.42em}
+.dv{position:relative;height:50px;border-radius:9px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.dv-silver{background:repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),linear-gradient(180deg,#f1f4f6 0%,#a9b1ba 46%,#5b636c 52%,#9aa2ab 82%,#d5dade 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4),0 2px 0 #2b3036}
+.dv-silver span{font-family:'Bungee',sans-serif;font-size:22px;color:#1b2026;text-shadow:0 1px 0 rgba(255,255,255,.7)}
+.dv-bulls{background:radial-gradient(80% 160% at 50% 130%,#ffb238 0%,#ff5a1f 32%,#8a0f05 62%,#1a0402 100%);box-shadow:inset 0 0 0 1px rgba(255,190,90,.35)}
+.dv-bulls span{font-family:'Bowlby One',sans-serif;font-size:22px;color:#fff3c4;text-shadow:0 0 18px rgba(255,140,40,.95),2px 2px 0 #5a0a02;letter-spacing:.02em}
+/* ---------- Chrome ---------- */
+.ng{font-family:'Onest',sans-serif;color:#EEF1F6}
+.num{font-family:'Big Shoulders Display',sans-serif;font-variant-numeric:tabular-nums}
+.card{background:#161A22;border:1px solid #262B37;border-radius:16px}
+.ribbon{position:relative;z-index:1;display:flex;align-items:center;padding:0 34px 0 22px;margin-right:-18px;font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:28px;letter-spacing:.02em;clip-path:polygon(0 0,100% 0,calc(100% - 18px) 100%,0 100%)}
+.pbtn{border:0;background:transparent;color:#A6AEBF;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.pbtn.on{background:#EEF1F6;color:#0A0C10}
+.ldot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#6A8CFF;box-shadow:0 0 8px #6A8CFF}
+.sec{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
+.sec h2{margin:0;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:30px}
+/* score strip */
+.tics{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.tic{width:4px;height:11px;transform:skewX(-20deg);border-radius:1px}
+.tp{margin-left:4px;font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
+.strip{position:relative;flex:1 1 auto;min-width:0;overflow:hidden;display:flex}
+.striprow{display:flex;transition:transform .35s ease}
+.sarr{position:absolute;top:0;bottom:0;z-index:2;width:44px;border:0;display:flex;align-items:center;justify-content:center;color:#EEF1F6}
+.sarr.l{left:0;background:linear-gradient(90deg,#07080B 55%,rgba(7,8,11,0))}
+.sarr.r{right:0;background:linear-gradient(270deg,#07080B 55%,rgba(7,8,11,0))}
+.sarr:hover{color:#6A8CFF}
+.cell{flex:0 0 auto;width:206px;display:flex;flex-direction:column;border-left:1px solid #1C202A;color:#EEF1F6}
+.cell .ln{display:flex;align-items:center;gap:8px;padding:5px 12px}
+.cell .ab{font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;font-size:17px}
+.cell .s{margin-left:auto;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+.cell .s.lose{color:#6B7386}
+.cell .ft{margin-top:auto;padding:5px 12px;border-top:1px solid #1C202A;font-size:11px;font-weight:600}
+.cell.mine{background:#12151C;box-shadow:inset 0 2px 0 #6A8CFF}
+/* left rail */
+.rail{flex:0 0 288px;background:#08090C;border-right:1px solid #1C202A;display:flex;flex-direction:column}
+.rsec{padding:18px 16px;border-bottom:1px solid #1C202A}
+.rh{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px;padding:0 4px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:20px;color:#EEF1F6}
+.rh a{font-family:'Onest',sans-serif;font-size:12px;font-weight:600}
+.qa{display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:80px;padding:12px;border-radius:14px;border:1px solid #232835;background:#141821;color:#EEF1F6;text-align:left}
+.qa:hover{border-color:#3A4152;background:#181D27}
+.qa .qt{font-weight:700;font-size:14px}
+.qa .qs{font-size:12px;color:#8B93A5}
+.qa.hot{background:#2F5BFF;border-color:#2F5BFF;color:#fff}
+.qa.hot .qs{color:rgba(255,255,255,.8)}
+.al{display:grid;grid-template-columns:28px minmax(0,1fr);align-items:center;gap:10px;padding:8px 10px;border-radius:11px;background:#12151C;border:1px solid #1E232D}
+.al .ai{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px}
+.al .at{font-size:13px;font-weight:700;line-height:1.25}
+.al .as{font-size:12px;color:#8B93A5}
+.lg{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:10px;color:#EEF1F6}
+.lg:hover{background:#151922}
+.lg.on{background:#171B24;box-shadow:inset 3px 0 0 #6A8CFF}
+.cm{display:grid;grid-template-columns:24px minmax(0,1fr);gap:9px;align-items:start}
+.tx{display:flex;flex-direction:column;gap:5px;padding:10px 4px;border-top:1px solid #1C202A}
+.tx:first-of-type{border-top:0}
+.txl{display:flex;align-items:center;gap:7px;font-size:13px;line-height:1.3}
+.tag{display:inline-flex;align-items:center;justify-content:center;width:54px;height:18px;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:.04em}
+.tag.add{background:rgba(47,210,122,.15);color:#4BE08F}
+.tag.drop{background:rgba(255,90,90,.15);color:#FF7B7B}
+/* light top bar */
+.tnav{display:flex;align-items:center;gap:6px;padding:10px 13px;border-radius:9px;color:#3B4150;font-size:15px;font-weight:600}
+.tnav:hover{color:#0E1116;background:#F1F2F4}
+.tnav.on{color:#0E1116;background:#EDEFF2;box-shadow:inset 0 -2px 0 #0E1116}
+/* tabs */
+.tabs{display:flex;align-items:flex-end;gap:28px;padding:0 24px;border-bottom:1px solid #20242F;flex-wrap:wrap}
+.tab{display:flex;align-items:center;gap:10px;padding:18px 2px 14px;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;background:transparent;color:#8B93A5;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:26px}
+.tab:hover{color:#EEF1F6}
+.tab.on{color:var(--tx);border-bottom-color:#2F5BFF}
+.tab .tsub{font-family:'Onest',sans-serif;font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;background:#1B202A;color:#A6AEBF}
+.tab.on .tsub{background:rgba(106,140,255,.16);color:var(--vt)}
+/* position chips */
+.pos{display:inline-flex;align-items:center;justify-content:center;min-width:50px;height:24px;padding:0 9px 3px;font-size:11px;font-weight:800;letter-spacing:.02em;color:#EEF1F6;background:#2A303D;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
+.p-QB{background:linear-gradient(#FF7A93,#FF7A93) left bottom/100% 4px no-repeat,#2A303D}
+.p-RB{background:linear-gradient(#3EE0B4,#3EE0B4) left bottom/100% 4px no-repeat,#2A303D}
+.p-WR{background:linear-gradient(#62B0FF,#62B0FF) left bottom/100% 4px no-repeat,#2A303D}
+.p-TE{background:linear-gradient(#FFAE5C,#FFAE5C) left bottom/100% 4px no-repeat,#2A303D}
+.p-K{background:linear-gradient(#E8D867,#E8D867) left bottom/100% 4px no-repeat,#2A303D}
+.p-DST{background:linear-gradient(#A3ADC2,#A3ADC2) left bottom/100% 4px no-repeat,#2A303D}
+.pos.flx{color:#EEF1F6;padding-bottom:3px;background:linear-gradient(90deg,#3EE0B4 0 33.3%,#62B0FF 33.3% 66.6%,#FFAE5C 66.6%) left bottom/100% 4px no-repeat,#2A303D}
+.pos.sflx{color:#EEF1F6;padding-bottom:3px;background:linear-gradient(90deg,#FF7A93 0 25%,#3EE0B4 25% 50%,#62B0FF 50% 75%,#FFAE5C 75%) left bottom/100% 4px no-repeat,#2A303D}
+.pos.bn{background:#2A303D;color:#A6AEBF;padding-bottom:0}
+/* head-to-head */
+.h2h{display:grid;grid-template-columns:minmax(0,1fr) 76px minmax(0,1fr);align-items:center;gap:8px}
+.pc{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:12px;min-height:60px;padding:8px 14px 8px 16px;border-radius:11px;background:#1C212B;border:1px solid #2A303C}
+.pc.r{grid-template-columns:auto minmax(0,1fr) 42px;text-align:right;padding:8px 16px 8px 14px}
+.pc.live{border-color:rgba(106,140,255,.4);background:linear-gradient(90deg,rgba(106,140,255,.08),rgba(106,140,255,0) 50%),#1C212B}
+.pc.r.live{background:linear-gradient(270deg,rgba(106,140,255,.08),rgba(106,140,255,0) 50%),#1C212B}
+.pts{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:26px;line-height:1;font-variant-numeric:tabular-nums}
+.pc.pend .pts{color:#5A6275}
+.pn1{font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pm{font-size:12px;color:#8B93A5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scrollbox{max-height:760px;overflow-y:auto;padding-right:6px;display:flex;flex-direction:column;gap:6px}
+.benchdiv{position:sticky;top:0;z-index:2;display:grid;grid-template-columns:minmax(0,1fr) 76px minmax(0,1fr);align-items:center;gap:8px;padding:12px 0 8px;background:#161A22}
+/* lineup table */
+.lt{display:grid;grid-template-columns:62px minmax(230px,1.7fr) minmax(120px,1fr) 120px 64px 64px 64px 100px;align-items:center;gap:14px;padding:9px 14px 9px 18px;border-radius:12px;background:#1C212B;border:1px solid #2A303C}
+.lt.hd{background:transparent;border-color:transparent;padding-top:2px;padding-bottom:2px;font-size:12px;color:#6B7386}
+.lt .n{font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:20px;text-align:right;font-variant-numeric:tabular-nums}
+.rk{display:inline-flex;justify-content:center;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.rk.good{background:rgba(47,210,122,.14);color:#4BE08F}
+.rk.mid{background:#1E232E;color:#A6AEBF}
+.rk.bad{background:rgba(255,90,90,.14);color:#FF7B7B}
+.act{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:34px;padding:0 14px;border-radius:9px;font-size:13px;font-weight:700;border:1.5px solid var(--vt);background:transparent;color:var(--vt)}
+.act.lock{border-color:transparent;color:#6B7386;background:#1A1E27;cursor:default}
+.act.bye{border-color:transparent;color:#6B7386;background:transparent;cursor:default}
+/* standings */
+.srow{display:grid;grid-template-columns:20px 4px 28px minmax(0,1fr) 44px 60px 34px;align-items:center;gap:10px;padding:7px 10px;border-radius:10px}
+.srow.me{background:rgba(106,140,255,.08);box-shadow:inset 0 0 0 1px rgba(106,140,255,.3)}
+.tick{width:4px;height:26px;border-radius:2px}
+.st-w{color:#4BE08F}.st-l{color:#FF7B7B}
+.feed{display:grid;grid-template-columns:28px minmax(0,1fr) 34px;align-items:start;gap:12px;padding:12px 0;border-top:1px solid #1C202A;font-size:14px;line-height:1.45}
+/* content themes (main area only; rail, scoreboard and hero stay dark) */
+.th-dk{--tx:#EEF1F6;--mut:#8B93A5;--mut2:#A6AEBF;--dim:#6B7386;--vt:#6A8CFF;--up:#4BE08F;--dn:#FF7B7B;--amb:#FFB547;--card:#161A22;--sub:#171B24;--row2:#191E27;--ln:#232835;--ln2:#2C3240;color:#EEF1F6}
+.th-lt{--tx:#12151B;--mut:#5C6370;--mut2:#4A515E;--dim:#8A909C;--vt:#2449D8;--up:#14894A;--dn:#D63B3B;--amb:#B86E00;--card:#fff;--sub:#F3F4F6;--row2:#F8F9FA;--ln:#E3E6EB;--ln2:#CDD2DA;color:#12151B}
+.th-lt .card{background:#fff;border-color:#E3E6EB;box-shadow:0 1px 2px rgba(16,20,28,.05)}
+.th-lt .tabs{border-bottom-color:#E3E6EB}
+.th-lt .tab{color:#5C6370}
+.th-lt .tab:hover{color:#12151B}
+.th-lt .tab .tsub{background:#EEF0F3;color:#4A515E}
+.th-lt .tab.on .tsub{background:rgba(47,91,255,.10);color:#2449D8}
+.th-lt .pc{background:#fff;border-color:#E3E6EB;box-shadow:0 1px 2px rgba(16,20,28,.04)}
+.th-lt .pc.live{border-color:#AFC0FF;background:linear-gradient(90deg,rgba(47,91,255,.10),rgba(47,91,255,0) 55%),#fff}
+.th-lt .pc.r.live{background:linear-gradient(270deg,rgba(47,91,255,.10),rgba(47,91,255,0) 55%),#fff}
+.th-lt .pc.pend .pts{color:#A0A6B1}
+.th-lt .pm{color:#5C6370}
+.th-lt .hs{background-color:#E9EBEF;box-shadow:none}
+.th-lt .benchdiv{background:#fff}
+.th-lt .wpnote{color:#5C6370}
+.th-lt .lt{background:#fff;border-color:#E3E6EB}
+.th-lt .lt.hd{background:transparent;border-color:transparent;color:#8A909C}
+.th-lt .rk.good{background:rgba(20,137,74,.10);color:#14894A}
+.th-lt .rk.mid{background:#EEF0F3;color:#4A515E}
+.th-lt .rk.bad{background:rgba(214,59,59,.10);color:#C62F2F}
+.th-lt .act{border-color:#2F5BFF;color:#2449D8}
+.th-lt .act.lock{background:#F0F2F5;color:#8A909C;border-color:transparent}
+.th-lt .act.bye{color:#8A909C}
+.th-lt .srow.me{background:rgba(47,91,255,.06);box-shadow:inset 0 0 0 1px rgba(47,91,255,.25)}
+.th-lt .st-w{color:#14894A}.th-lt .st-l{color:#D63B3B}
+.th-lt .feed{border-top-color:#E3E6EB}
+.th-lt .seam:not(.live){background:#12151B;color:#fff}
+.th-lt .mtile{box-shadow:0 8px 18px -12px rgba(16,20,28,.45)}
+.mcard{padding:10px 10px 12px;border-radius:16px;background:var(--card);border:1px solid var(--ln)}
+.mcard .wp{margin-top:12px;padding:0 4px}
+.mcard .wpnote{padding:0 6px}
+.th-lt .mcard{box-shadow:0 1px 2px rgba(16,20,28,.05)}
+.th-lt .mcard .mtile{box-shadow:none}
+/* rail: cross-league tools */
+.xl{margin-top:12px;padding:12px 8px 8px;border-radius:14px;background:#14171E;border:1px solid #242936}
+.xlh{display:block;padding:0 6px 8px;font-size:11px;font-weight:800;letter-spacing:.06em;color:#8B93A5}
+.xt{position:relative;display:flex;align-items:center;gap:11px;padding:10px;border-radius:11px;color:#EEF1F6;text-decoration:none}
+.xt:hover{background:#1B1F28}
+.xt .ico{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:#1E2430;color:#9DB3FF}
+.xt b{display:block;font-size:14px}
+.xt small{display:block;font-size:12px;color:#8B93A5}
+.xb{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#FFB547;color:#0A0C10;font-size:12px;font-weight:800}
+.xpro{display:inline-flex;align-items:center;height:16px;padding:0 5px;margin-left:5px;border-radius:4px;background:linear-gradient(90deg,#2F5BFF,#7B5CFF);color:#fff;font-size:9px;font-weight:800;letter-spacing:.04em;vertical-align:2px}
+.ci .xbd{position:absolute;top:2px;right:2px;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#FFB547;color:#0A0C10;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+/* ===== Position tags: Baseline tab, ink blue body, 4px underline (final) ===== */
+:root{--tagbg:#1A2340}
+.th-dk{--tagbg:#1F2A4D}
+.pos,.pos2{clip-path:none !important;width:max-content;min-width:46px !important;height:24px !important;padding:0 8px 4px !important;border-radius:4px 4px 2px 2px;font-size:11px !important;font-weight:800;letter-spacing:.03em;color:#fff !important}
+.p-QB{background:linear-gradient(#FF7A93,#FF7A93) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-RB{background:linear-gradient(#3EE0B4,#3EE0B4) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-WR{background:linear-gradient(#62B0FF,#62B0FF) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-TE{background:linear-gradient(#FFAE5C,#FFAE5C) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-K{background:linear-gradient(#E8D867,#E8D867) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-DST{background:linear-gradient(#B9A6FF,#B9A6FF) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.flx,.pos2.flx{background:linear-gradient(90deg,#3EE0B4 0 33.3%,#62B0FF 33.3% 66.6%,#FFAE5C 66.6%) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.sflx,.pos2.sflx{background:linear-gradient(90deg,#FF7A93 0 25%,#3EE0B4 25% 50%,#62B0FF 50% 75%,#FFAE5C 75%) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.bn,.pos2.bn{background:linear-gradient(#5A6275,#5A6275) left bottom/100% 4px no-repeat,var(--tagbg) !important;color:rgba(255,255,255,.6) !important}
+.ctslot{display:inline-flex;align-items:center;justify-content:center;width:max-content;min-width:46px;height:24px;padding:0 8px 4px;border-radius:4px 4px 2px 2px;color:#fff;font-size:11px;font-weight:800;letter-spacing:.03em;background:linear-gradient(var(--pc),var(--pc)) left bottom/100% 4px no-repeat,var(--tagbg);box-shadow:none}
+/* ===== Position tags: smaller size (final) ===== */
+.pos,.pos2{min-width:34px !important;height:18px !important;padding:0 5px 3px !important;border-radius:3px 3px 1px 1px;font-size:9.5px !important;letter-spacing:.04em;background-size:100% 3px,auto !important}
+.ctslot{min-width:34px;height:18px;padding:0 5px 3px;border-radius:3px 3px 1px 1px;font-size:9.5px;letter-spacing:.04em;background-size:100% 3px,auto}
+/* ===== Home refresh ===== */
+.toast{position:fixed;left:50%;bottom:28px;z-index:30;transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:14px;background:#0E1116;color:#EEF1F6;font-size:14px;box-shadow:0 18px 40px -14px rgba(0,0,0,.6)}
+.okc{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#1E9E57;color:#fff;font-weight:800}
+.lnk{border:0;background:transparent;padding:0;color:var(--vt);font:inherit;font-weight:700;font-size:13px;cursor:pointer}
+.hmatw{border-radius:16px;background:var(--card);box-shadow:inset 0 0 0 1.5px rgba(229,72,77,.4);overflow:hidden}
+.hmatw.clear{box-shadow:inset 0 0 0 1.5px rgba(30,158,87,.4)}
+.hmath{display:flex;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--ln)}
+.hmath b{font-size:15px}.hmath .dot{width:9px;height:9px;border-radius:50%;background:#E5484D}
+.hmatw.clear .hmath .dot{background:#1E9E57}
+.hmatg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.hmat{display:flex;flex-direction:column;gap:4px;padding:14px 18px;border-left:1px solid var(--ln)}
+.hmat:first-child{border-left:0}
+.hmat small{font-size:10.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.hmat b{font-size:14.5px;line-height:1.3}.hmat p{margin:0;font-size:12.5px;line-height:1.45;color:var(--mut)}
+.hmat.done{background:var(--sub)}
+.hmacts{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.hmb{height:32px;padding:0 12px;border:0;border-radius:9px;background:var(--sub);color:var(--tx);font:inherit;font-size:12.5px;font-weight:700;box-shadow:inset 0 0 0 1px var(--ln2);cursor:pointer}
+.hmb.p{background:#2F5BFF;color:#fff;box-shadow:none}
+.hmdone{margin-top:8px;font-size:12.5px;font-weight:700;color:var(--up)}
+.hmrow{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:start}
+.hmside{display:flex;flex-direction:column;gap:20px;min-width:0}
+.hmpr{display:grid;grid-template-columns:30px 30px minmax(0,1fr) 54px 70px 74px;gap:10px;align-items:center;min-height:42px;padding:0 6px;border-radius:10px}
+.hmpr.hd{min-height:26px;font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--dim)}
+.hmpr.me{background:var(--tint)}
+.hmpr .sd{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;background:var(--sub);font-size:13px;font-weight:900;color:var(--mut)}
+.hmpr.in .sd{background:var(--tint);color:var(--vt)}
+.hmpr .nm{font-weight:600;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hmpr .r{text-align:right}.hmpr .cut{font-size:12.5px;font-weight:800;color:var(--mut);text-align:right}
+.hmln{position:relative;height:22px;display:flex;align-items:center;padding:0 6px}
+.hmln::before{content:'';position:absolute;left:6px;right:6px;top:50%;border-top:2px dashed var(--tintbd)}
+.hmln span{position:relative;padding-right:8px;background:var(--card);font-size:9.5px;font-weight:900;letter-spacing:.1em;color:var(--vt)}
+.hmmini{padding:18px 20px}
+.hmmini h3{margin:0 0 10px;font-size:18px}
+.hmrec{display:flex;align-items:baseline;gap:8px}.hmrec b{font-size:34px;font-weight:900;line-height:1}.hmrec span{font-size:13px;color:var(--mut)}
+.hmbar{position:relative;height:8px;margin:10px 0 6px;border-radius:4px;background:var(--sub);overflow:hidden}.hmbar i{display:block;height:100%;background:linear-gradient(90deg,#2F5BFF,#E9C063)}
+.hmkv{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--ln);font-size:13px}.hmkv span{color:var(--mut)}.hmkv b{text-align:right}
+.hmls{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;background:#0E1116;color:#4BE08F;font-weight:900;font-size:12px}
+/* playoffs card */
+.hmpo{padding:22px 24px;border-radius:18px;color:#fff;background:radial-gradient(80% 140% at 15% 0%,#2a3d8f 0%,rgba(42,61,143,0) 60%),linear-gradient(135deg,#0b1030,#141a3d);box-shadow:var(--sh)}
+.hmpoh{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.hmpoh small{font-size:11px;font-weight:900;letter-spacing:.14em;color:#9DB3FF}.hmpoh h2{margin:2px 0 0;font-size:30px;font-weight:900}
+.hmpaths{display:flex;gap:6px;margin-left:auto}
+.hmpath{display:flex;flex-direction:column;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.08);font-size:12px;color:#C9CDD6}.hmpath b{color:#fff;font-size:13px}
+.hmpath.done{background:rgba(30,158,87,.3)}.hmpath.now{background:#2F5BFF}
+.hmsemis{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.hmsemi{padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1)}
+.hmsemi.me{box-shadow:inset 0 0 0 2px #6A8CFF;background:rgba(106,140,255,.12)}
+.hmsr{display:flex;align-items:center;gap:10px;padding:6px 0}.hmsr .sn{width:14px;font-size:11px;font-weight:900;color:#8B93A5}.hmsr .nm{flex:1;font-weight:700}.hmsr b{font-size:22px;font-weight:900}
+.hmsemi small{display:block;margin-top:6px;font-size:12px;font-weight:700;color:#9DB3FF}
+.hmpob{display:flex;gap:8px;margin-top:16px}.hmpob .hmb{background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)}.hmpob .hmb.p{background:#fff;color:#0b1030}
+/* offseason card */
+.hmoff{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+.hmch{display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:16px;color:#fff;background:radial-gradient(80% 140% at 15% 0%,#5a4212 0%,rgba(90,66,18,0) 60%),linear-gradient(135deg,#0d0b07,#2a1d07);box-shadow:inset 0 0 0 1.5px rgba(233,192,99,.5)}
+.hmch small{font-size:11px;font-weight:900;letter-spacing:.14em;color:#F4D58A}.hmch b{display:block;font-size:22px;font-weight:900}
+.hmch span.d{font-size:13px;color:#D9CDB0}
+.hmnext{display:flex;align-items:center;gap:16px;padding:18px 20px}
+.hmnext .big{font-size:44px;font-weight:900;line-height:1;color:var(--vt)}
+.ostd{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--ln)}
+.ostdc{display:inline-flex;align-items:center;justify-content:center;flex:0 0 24px;width:24px;height:24px;border-radius:50%;box-shadow:inset 0 0 0 2px var(--ln2);color:transparent;font-size:12px;font-weight:900}
+.ostd.done .ostdc{background:#1E9E57;color:#fff;box-shadow:none}.ostd.done b{color:var(--mut)}
+.ostd .ctpn small,.hmoff small.s{display:block;font-size:12px;color:var(--mut)}
+.hmst{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.hmst>div{padding:10px 12px;border-radius:12px;background:var(--sub)}.hmst small{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--dim);text-transform:uppercase}.hmst b{font-size:22px;font-weight:900}
+</style>
+</helmet>
+<div class="ng" style="min-height: 100vh; background: #0F1218">
+<!-- Prototype controls -->
+<div style="display: flex; justify-content: center; align-items: center; gap: 18px; padding: 8px 16px; background: #000; border-bottom: 1px solid #1C202A; flex-wrap: wrap">
+<span style="font-size: 12px; color: #8B93A5">Prototype</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{modes}}" as="m" hint-placeholder-count="3"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<span style="font-size: 12px; color: #8B93A5; padding: 0 6px 0 8px; align-self: center">Content</span><sc-for list="{{themes}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<span style="font-size: 12px; color: #8B93A5; padding: 0 6px 0 8px; align-self: center">Moment</span><sc-for list="{{moments}}" as="m" hint-placeholder-count="3"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<span style="font-size: 12px; color: #8B93A5; padding: 0 6px 0 8px; align-self: center">Viewing as</span><sc-for list="{{hwhos}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+</div>
+<!-- Top band: brand cell (rail width) + league score strip -->
+<div style="display: flex; align-items: stretch; background: #07080B; border-bottom: 1px solid #1C202A">
+<a href="#" aria-label="Fanball home" style="flex: 0 0 288px; display: flex; align-items: center; gap: 10px; padding: 0 20px; border-right: 1px solid #1C202A; color: #fff; text-decoration: none">
+<sc-if value="{{logoVolt}}"><img src="/a/20263cb3f76abedf3e7ffa9054e14bc7.webp" alt="Fanball" style="height: 52px; width: auto; display: block"></sc-if>
+<sc-if value="{{logoAqua}}"><img src="/a/6d0fd2687e0f4e908cbe7777ef1d6bd1.webp" alt="Fanball" style="height: 52px; width: auto; display: block"></sc-if>
+</a>
+<div style="flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; gap: 3px; padding: 10px 18px; border-right: 1px solid #1C202A; line-height: 1">
+<span class="num" style="font-size: 20px; font-weight: 900; letter-spacing: .02em; color: #EEF1F6">WEEK 7</span>
+<span class="num" style="font-size: 14px; font-weight: 800; letter-spacing: .06em; color: #8B93A5">SCOREBOARD</span>
+</div>
+<div class="strip">
+<div class="striprow" style="transform: translateX({{stripX}})">
+<sc-for list="{{games}}" as="g" hint-placeholder-count="6">
+<a href="#" class="{{g.cellCls}}">
+<span class="ln">
+<sc-if value="{{g.ta.b}}"><span class="bx s20 shp-{{g.ta.shape}}"><span class="ring" style="background: {{g.ta.ring}}"></span><span class="in sk-{{g.ta.key}}"></span><span class="ic ic-{{g.ta.key}}"></span></span></sc-if>
+<sc-if value="{{g.ta.nb}}"><span class="fbd s20" style="background: {{g.ta.hue}}">{{g.ta.init}}</span></sc-if>
+<span class="ab">{{g.ta.abbr}}</span><span class="tics"><sc-for list="{{g.at}}" as="k" hint-placeholder-count="2"><span class="tic" style="background: {{k}}"></span></sc-for><span class="tp" style="color: {{g.atc}}">{{g.ap}}</span></span><span class="{{g.aS}}">{{g.as}}</span>
+</span>
+<span class="ln" style="padding-top: 0">
+<sc-if value="{{g.tb.b}}"><span class="bx s20 shp-{{g.tb.shape}}"><span class="ring" style="background: {{g.tb.ring}}"></span><span class="in sk-{{g.tb.key}}"></span><span class="ic ic-{{g.tb.key}}"></span></span></sc-if>
+<sc-if value="{{g.tb.nb}}"><span class="fbd s20" style="background: {{g.tb.hue}}">{{g.tb.init}}</span></sc-if>
+<span class="ab">{{g.tb.abbr}}</span><span class="tics"><sc-for list="{{g.bt}}" as="k" hint-placeholder-count="2"><span class="tic" style="background: {{k}}"></span></sc-for><span class="tp" style="color: {{g.btc}}">{{g.bp}}</span></span><span class="{{g.bS}}">{{g.bs}}</span>
+</span>
+<span class="ft" style="color: {{g.stColor}}">{{g.st}}</span>
+</a>
+</sc-for>
+</div>
+<sc-if value="{{canPrev}}"><button class="sarr l" onClick="{{stripPrev}}" aria-label="Earlier matchups"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button></sc-if>
+<sc-if value="{{canNext}}"><button class="sarr r" onClick="{{stripNext}}" aria-label="More matchups"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button></sc-if>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: stretch">
+<!-- ===== LEFT RAIL: leagues → actions → chat → transactions ===== -->
+<aside class="rail">
+<!-- 1. Your leagues (account-level, set apart) -->
+<div style="padding: 14px 12px 16px; border-bottom: 1px solid #1C202A">
+<div style="border-radius: 14px; background: #14171E; border: 1px solid #242936; padding: 12px 8px 6px">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 0 6px 8px">
+<span style="display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; color: #A6AEBF"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg>All your leagues · 9</span>
+<a href="#" style="font-size: 12px; font-weight: 600">+ Join</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<sc-for list="{{leagues}}" as="l" hint-placeholder-count="6">
+<a href="#" class="{{l.cls}}">
+<span class="fbd s36" style="background: {{l.hue}}; border-radius: 10px">{{l.init}}</span>
+<span style="min-width: 0">
+<span style="display: block; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{l.name}}</span>
+<span style="display: block; font-size: 12px; color: {{l.sc}}">{{l.st}}</span>
+</span>
+</a>
+</sc-for>
+<a href="#" style="padding: 8px; font-size: 13px; font-weight: 600; color: #A6AEBF">Show 3 more leagues</a>
+</div>
+</div>
+<div class="xl">
+<span class="xlh">ACROSS ALL LEAGUES</span>
+<a href="#" class="xt"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="17" r="2.6"></circle><path d="M4 4l4 4M8 4 4 8"></path><path d="M16 15l4 4M20 15l-4 4"></path><path d="M9 15c3-6 6-8 9-9"></path><path d="m15 5 3 1-1 3"></path></svg></span><span><b>Game Plan <span class="xpro">PRO</span></b><small>Set every lineup at once</small></span><span class="xb">4</span></a>
+<a href="#" class="xt"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"></path></svg></span><span><b>The Wire</b><small>Adds, drops and claims · claims run Wed</small></span></a>
+</div>
+</div>
+<!-- 2. League actions + alerts -->
+<div class="rsec">
+<div style="display: flex; align-items: center; gap: 10px; margin: 0 0 12px; padding: 0 4px">
+<span class="fbd s28" style="background: #b07a1e; border-radius: 8px">EL</span>
+<span style="display: flex; flex-direction: column; line-height: 1.15"><span style="font-size: 11px; font-weight: 600; color: #8B93A5">You're viewing</span><b style="font-size: 14px">The Empire League</b></span>
+</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px">
+<button class="qa hot" onClick="{{goLineup}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 7h11"></path><path d="M4 12h16"></path><path d="M4 17h8"></path><path d="m17 4 3 3-3 3"></path></svg><span><span class="qt" style="display: block">Set lineup</span><span class="qs">2 yet to lock</span></span></button>
+<button class="qa" onClick="{{goMatch}}"><span class="ldot"></span><span><span class="qt" style="display: block">Live scoring</span><span class="qs">139.6 – 93.5</span></span></button>
+<a href="#" class="qa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 20V10"></path><path d="M12 20V4"></path><path d="M18 20v-7"></path></svg><span><span class="qt" style="display: block">Standings</span><span class="qs">1st · 6-1</span></span></a>
+<a href="#" class="qa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10" cy="8" r="4"></circle><path d="M3 20c0-3.3 3.1-6 7-6"></path><path d="M18 14v6"></path><path d="M15 17h6"></path></svg><span><span class="qt" style="display: block">Add players</span><span class="qs">$247 FAAB</span></span></a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px">
+<div class="al">
+<span class="ai" style="background: rgba(98,176,255,.14); color: #62B0FF"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
+<span><span class="at" style="display: block">Waivers run Wed 3:00 AM</span><span class="as">1 claim pending</span></span>
+</div>
+<div class="al">
+<span class="ai" style="background: rgba(255,181,71,.14); color: #FFB547"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 7h13l-4-4"></path><path d="M17 17H4l4 4"></path></svg></span>
+<span><span class="at" style="display: block">Trade deadline Nov 8</span><span class="as">16 days left</span></span>
+</div>
+</div>
+</div>
+<!-- 3. League chat -->
+<div class="rsec">
+<div class="rh">League chat <span style="font-family: 'Onest', sans-serif; font-size: 12px; font-weight: 500; color: #8B93A5"><span class="ldot" style="margin-right: 5px; vertical-align: 1px"></span>3 online</span></div>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{chat}}" as="c" hint-placeholder-count="6">
+<div class="cm">
+<sc-if value="{{c.t.b}}"><span class="bx s24 shp-{{c.t.shape}}"><span class="ring" style="background: {{c.t.ring}}"></span><span class="in sk-{{c.t.key}}"></span><span class="ic ic-{{c.t.key}}"></span></span></sc-if>
+<sc-if value="{{c.t.nb}}"><span class="fbd s24" style="background: {{c.t.hue}}">{{c.t.init}}</span></sc-if>
+<div style="min-width: 0">
+<div style="font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"><b>{{c.t.user}}</b> <span style="color: #6B7386">{{c.when}}</span></div>
+<div style="font-size: 13px; color: #D3D8E2; line-height: 1.4">{{c.txt}}</div>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; gap: 6px; margin-top: 14px">
+<label for="v6-msg" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Message the league</label>
+<input id="v6-msg" placeholder="Message the league" style="flex: 1; min-width: 0; height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid #2C3240; background: #0A0C10; color: #EEF1F6; font: inherit; font-size: 13px">
+<button aria-label="Send" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: #2F5BFF; color: #fff; display: flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></button>
+</div>
+</div>
+<!-- 4. Transactions -->
+<div class="rsec" style="border-bottom: 0">
+<div class="rh">Transactions <a href="#">All</a></div>
+<sc-for list="{{tx}}" as="x" hint-placeholder-count="5">
+<div class="tx">
+<div style="display: flex; align-items: center; gap: 8px">
+<sc-if value="{{x.t.b}}"><span class="bx s20 shp-{{x.t.shape}}"><span class="ring" style="background: {{x.t.ring}}"></span><span class="in sk-{{x.t.key}}"></span><span class="ic ic-{{x.t.key}}"></span></span></sc-if>
+<sc-if value="{{x.t.nb}}"><span class="fbd s20" style="background: {{x.t.hue}}">{{x.t.init}}</span></sc-if>
+<b style="flex: 1; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{x.t.name}}</b>
+<span style="font-size: 11px; color: #6B7386">{{x.when}}</span>
+</div>
+<div class="txl"><span class="tag add">ADDED</span><span style="font-weight: 700; font-size: 11px; color: {{x.ac}}">{{x.ap}}</span><span>{{x.an}}</span><span style="color: #8B93A5">{{x.at}}</span></div>
+<div class="txl"><span class="tag drop">DROPPED</span><span style="font-weight: 700; font-size: 11px; color: {{x.dc}}">{{x.dp}}</span><span>{{x.dn}}</span><span style="color: #8B93A5">{{x.dt}}</span></div>
+</div>
+</sc-for>
+</div>
+</aside>
+<!-- ===== CONTENT ===== -->
+<div style="flex: 999 1 640px; min-width: 0; background: {{pageBg}}">
+<!-- Light top nav: this league's pages -->
+<header style="background: #fff; color: #0E1116; border-bottom: 1px solid #E3E6EB">
+<div style="padding: 10px 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+<span style="display: flex; align-items: center; gap: 10px; padding-right: 8px">
+<span class="fbd s36" style="background: #b07a1e; border-radius: 10px">EL</span>
+<span style="display: flex; flex-direction: column; line-height: 1.15"><b style="font-size: 15px">The Empire League</b><span style="font-size: 12px; color: #5C6370">12 teams · Dynasty · SF PPR</span></span>
+</span>
+<nav style="display: flex; gap: 2px; flex-wrap: wrap; flex: 1 1 auto">
+<a href="#" class="tnav on">Home</a>
+<a href="#" class="tnav">My Franchise</a>
+<a href="#" class="tnav">Scores</a>
+<a href="#" class="tnav">Players</a>
+<a href="#" class="tnav">Standings</a>
+<a href="#" class="tnav">Trades</a>
+<a href="#" class="tnav">Clubhouse</a>
+</nav>
+<div style="display: flex; align-items: center; gap: 6px">
+<button aria-label="Search" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: #0E1116; display: flex; align-items: center; justify-content: center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
+<button aria-label="Notifications" style="width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; color: #0E1116; display: flex; align-items: center; justify-content: center"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg></button>
+<span style="display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: #0E1116; color: #fff; font-weight: 700; font-size: 13px">CP</span>
+</div>
+</div>
+</header>
+<!-- HERO -->
+<sc-if value="{{heroB}}">
+<section class="empire">
+<div class="beams"></div>
+<div class="glow"></div>
+<div class="cols"></div>
+<div class="cinz" style="position: relative; font-size: 16px; margin-bottom: 6px">THE</div>
+<div class="ttl"><span class="back">EMPIRE</span><span class="front">EMPIRE</span></div>
+<div class="cinz" style="position: relative; font-size: 20px; margin-top: 12px">LEAGUE</div>
+</section>
+</sc-if>
+<sc-if value="{{heroNB}}">
+<section style="position: relative; height: 220px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: radial-gradient(70% 120% at 50% 0%, #18202A 0%, #0A0C10 70%)">
+<h1 class="num" style="position: relative; margin: 0; font-size: 80px; font-weight: 900; line-height: .9">The Empire League</h1>
+<span style="position: relative; font-size: 13px; color: #A6AEBF">Commissioner: <a href="#" style="font-weight: 600">design a league banner</a></span>
+</section>
+</sc-if>
+<main class="{{mainCls}}" style="max-width: 1240px; margin: 0 auto; padding: 28px 32px 72px; display: flex; flex-direction: column; gap: 28px">
+<!-- Needs your attention -->
+<sc-if value="{{hasAtt}}">
+<section class="{{attCls}}">
+<div class="hmath"><span class="dot"></span><b>{{attHd}}</b><span style="flex: 1"></span><a href="#" style="font-size: 13px; font-weight: 600">All notifications</a></div>
+<div class="hmatg"><sc-for list="{{attention}}" as="a" hint-placeholder-count="3"><div class="{{a.cls}}"><small style="color: {{a.col}}">{{a.tag}}</small><b>{{a.t}}</b><p>{{a.d}}</p><sc-if value="{{a.notDone}}"><div class="hmacts"><sc-for list="{{a.acts}}" as="x" hint-placeholder-count="2"><button class="{{x.cls}}" onClick="{{x.go}}">{{x.label}}</button></sc-for></div></sc-if><sc-if value="{{a.done}}"><div class="hmdone">{{a.doneTxt}}</div></sc-if></div></sc-for></div>
+</section>
+</sc-if>
+<!-- Playoffs moment -->
+<sc-if value="{{isPo}}">
+<section class="hmpo">
+<div class="hmpoh"><div><small>PLAYOFFS · SEMIFINALS · LIVE</small><h2>You’re one win from the final</h2></div><div class="hmpaths"><sc-for list="{{po.path}}" as="p" hint-placeholder-count="3"><div class="{{p.cls}}"><b>{{p.t}}</b><span>{{p.d}}</span></div></sc-for></div></div>
+<div class="hmsemis"><sc-for list="{{po.semis}}" as="s" hint-placeholder-count="2"><div class="{{s.cls}}">
+<div class="hmsr"><span class="sn">{{s.sa}}</span><sc-if value="{{s.a.b}}"><span class="bx s28 shp-{{s.a.shape}}"><span class="ring" style="background: {{s.a.ring}}"></span><span class="in sk-{{s.a.key}}"></span><span class="ic ic-{{s.a.key}}"></span></span></sc-if><sc-if value="{{s.a.nb}}"><span class="fbd s28" style="background: {{s.a.hue}}">{{s.a.init}}</span></sc-if><span class="nm">{{s.a.name}}</span><b class="num">{{s.as}}</b></div>
+<div class="hmsr"><span class="sn">{{s.sb}}</span><sc-if value="{{s.b.b}}"><span class="bx s28 shp-{{s.b.shape}}"><span class="ring" style="background: {{s.b.ring}}"></span><span class="in sk-{{s.b.key}}"></span><span class="ic ic-{{s.b.key}}"></span></span></sc-if><sc-if value="{{s.b.nb}}"><span class="fbd s28" style="background: {{s.b.hue}}">{{s.b.init}}</span></sc-if><span class="nm">{{s.b.name}}</span><b class="num">{{s.bs}}</b></div>
+<small>{{s.wp}}</small>
+</div></sc-for></div>
+<div class="hmpob"><button class="hmb p" onClick="{{goPlayoffs}}">Open the bracket</button><button class="hmb" onClick="{{goPlayoffs}}">See both lineups</button><span style="flex: 1"></span><span style="align-self: center; font-size: 12.5px; color: #C9CDD6">Toilet Bowl: you’re safe. Goff Ball and Jefferson’s Airplane play to avoid last.</span></div>
+</section>
+</sc-if>
+<!-- Offseason moment -->
+<sc-if value="{{isOff}}">
+<div class="hmoff">
+<div style="display: flex; flex-direction: column; gap: 20px; min-width: 0">
+<div class="hmch"><span style="display: inline-flex; color: #F4D58A"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4v6a6 6 0 0 0 12 0V4M6 4H3v3a3 3 0 0 0 3 3M18 4h3v3a3 3 0 0 1-3 3M12 16v4M8 20h8"></path></svg></span><div style="flex: 1"><small>2026 CHAMPIONS</small><b>The Gridiron Syndicate</b><span class="d">Beat Certified Lamb Daddy 141.8–127.3 in the final</span></div><button class="hmb" style="background: rgba(255,255,255,.12); color: #F4D58A" onClick="{{goHist}}">Record book</button></div>
+<section class="card hmnext"><span class="big num">54</span><div style="flex: 1"><b style="font-size: 17px">days until the rookie draft</b><small class="s">Sat, May 8 · 7:00 PM ET · you pick 1.05 and 1.12</small></div><button class="hmb p" onClick="{{goOff}}">Offseason hub</button></section>
+<section class="card hmmini"><h3>Your offseason to-do</h3><sc-for list="{{off.todo}}" as="t" hint-placeholder-count="4"><div class="{{t.cls}}"><span class="ostdc">✓</span><span class="ctpn"><b>{{t.t}}</b><small>{{t.d}}</small></span></div></sc-for></section>
+</div>
+<div class="hmside">
+<section class="card hmmini"><h3>League status for 2027</h3><div class="hmst"><sc-for list="{{off.stats}}" as="x" hint-placeholder-count="3"><div><small>{{x.k}}</small><b class="num">{{x.v}}</b></div></sc-for></div></section>
+<section class="card hmmini"><h3>Around the league</h3><sc-for list="{{off.feed}}" as="f" hint-placeholder-count="3"><div class="hmkv" style="display: block"><b style="display: block; text-align: left">{{f.t}}</b><span>{{f.d}}</span></div></sc-for></section>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{isReg}}">
+<!-- Main tabbed panel -->
+<section class="card" style="overflow: hidden">
+<div class="tabs">
+<button class="{{tabM}}" onClick="{{goMatch}}">Matchup <span class="tsub"><span class="ldot"></span> Live</span></button>
+<button class="{{tabL}}" onClick="{{goLineup}}">Set lineup <span class="tsub">2 yet to lock</span></button>
+<span style="margin-left: auto; padding-bottom: 16px; font-size: 13px; color: var(--mut)">Tue–Sat this opens on Set lineup</span>
+</div>
+<!-- Matchup -->
+<sc-if value="{{isMatch}}">
+<div style="padding: 24px">
+<div class="mtile big">
+<sc-if value="{{me.b}}"><div class="half sk-syndicate"><span class="bx s60 shp-{{me.shape}}"><span class="ring" style="background: {{me.ring}}"></span><span class="in sk-syndicate"></span><span class="ic ic-syndicate"></span></span><span class="nm"><span class="pn">SYN</span><span class="un">@coolerheads</span></span><span class="sc">139.6</span></div></sc-if>
+<sc-if value="{{me.nb}}"><div class="half flat" style="background: {{me.hue}}"><span class="fbd s60" style="background: rgba(0,0,0,.25)">GS</span><span class="nm"><span class="pn">SYN</span><span class="un">@coolerheads</span></span><span class="sc">139.6</span></div></sc-if>
+<sc-if value="{{opp.b}}"><div class="half r sk-hurts"><span class="bx s60 shp-{{opp.shape}}"><span class="ring" style="background: {{opp.ring}}"></span><span class="in sk-hurts"></span><span class="ic ic-hurts"></span></span><span class="nm"><span class="pn">HRT</span><span class="un">@mscott44</span></span><span class="sc lose">93.5</span></div></sc-if>
+<sc-if value="{{opp.nb}}"><div class="half r flat" style="background: {{opp.hue}}"><span class="fbd s60" style="background: rgba(0,0,0,.25)">HL</span><span class="nm"><span class="pn">HRT</span><span class="un">@mscott44</span></span><span class="sc lose">93.5</span></div></sc-if>
+<span class="seam live">LIVE</span>
+</div>
+<div class="wp">
+<span class="pa" style="color: {{myWp.ca}}">{{myWp.pa}}</span>
+<div class="wpline" role="img" aria-label="Win probability {{myWp.pa}} to {{myWp.pb}}"><span class="wpa" style="width: {{myWp.wA}}; background: {{myWp.ca}}"></span><span class="wpb" style="background: {{myWp.cb}}"></span></div>
+<span class="pb" style="color: {{myWp.cb}}">{{myWp.pb}}</span>
+</div>
+<div class="wpnote"><span><b style="color: var(--tx)">The Gridiron Syndicate</b> · 6-1 · proj 172.0</span><span style="color: var(--up); font-weight: 700">▲ 21 since kickoff</span><span style="text-align: right"><b style="color: var(--tx)">Hurts Locker</b> · 2-5 · proj 118.0</span></div>
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin: 26px 0 10px">
+<span class="num" style="font-size: 22px; font-weight: 800">Starters</span>
+<span style="font-size: 13px; color: var(--mut)">You: 2 yet to play · Them: 1 yet to play · scroll for benches</span>
+</div>
+<div class="scrollbox">
+<sc-for list="{{h2h}}" as="row" hint-placeholder-count="11">
+<div class="h2h">
+<div class="{{row.l.cls}}" style="box-shadow: inset 4px 0 0 {{row.l.c}}">
+<span class="hs hs-{{row.l.hs}}"></span>
+<div style="min-width: 0"><div class="pn1">{{row.l.name}}</div><div class="pm">{{row.l.pos}} · {{row.l.meta}} · <span style="color: {{row.l.stc}}">{{row.l.st}}</span></div></div>
+<span class="pts">{{row.l.pts}}</span>
+</div>
+<div style="display: flex; flex-direction: column; align-items: center; gap: 5px">
+<span class="{{row.chip}}">{{row.slot}}</span>
+<span class="num" style="font-size: 14px; font-weight: 800; line-height: 1; color: {{row.dc}}">{{row.diff}}</span>
+</div>
+<div class="{{row.r.cls}}" style="box-shadow: inset -4px 0 0 {{row.r.c}}">
+<span class="pts">{{row.r.pts}}</span>
+<div style="min-width: 0"><div class="pn1">{{row.r.name}}</div><div class="pm"><span style="color: {{row.r.stc}}">{{row.r.st}}</span> · {{row.r.meta}} · {{row.r.pos}}</div></div>
+<span class="hs hs-{{row.r.hs}}"></span>
+</div>
+</div>
+</sc-for>
+<div class="benchdiv">
+<span class="num" style="font-size: 20px; font-weight: 800">Your bench <span style="font-family: 'Onest', sans-serif; font-size: 12px; font-weight: 500; color: var(--mut)">66.1 proj</span></span>
+<span></span>
+<span class="num" style="font-size: 20px; font-weight: 800; text-align: right"><span style="font-family: 'Onest', sans-serif; font-size: 12px; font-weight: 500; color: var(--mut)">58.4 proj</span> Their bench</span>
+</div>
+<sc-for list="{{bh2h}}" as="row" hint-placeholder-count="7">
+<div class="h2h">
+<div class="{{row.l.cls}}" style="box-shadow: inset 4px 0 0 {{row.l.c}}">
+<span class="hs hs-{{row.l.hs}}"></span>
+<div style="min-width: 0"><div class="pn1">{{row.l.name}}</div><div class="pm">{{row.l.pos}} · {{row.l.meta}} · <span style="color: {{row.l.stc}}">{{row.l.st}}</span></div></div>
+<span class="pts">{{row.l.pts}}</span>
+</div>
+<div style="display: flex; justify-content: center"><span class="pos bn">BN</span></div>
+<div class="{{row.r.cls}}" style="box-shadow: inset -4px 0 0 {{row.r.c}}">
+<span class="pts">{{row.r.pts}}</span>
+<div style="min-width: 0"><div class="pn1">{{row.r.name}}</div><div class="pm"><span style="color: {{row.r.stc}}">{{row.r.st}}</span> · {{row.r.meta}} · {{row.r.pos}}</div></div>
+<span class="hs hs-{{row.r.hs}}"></span>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<!-- Set lineup -->
+<sc-if value="{{isLineup}}">
+<div style="padding: 24px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px">
+<div>
+<div style="font-weight: 700; font-size: 16px">Week 7 lineup · players lock at their kickoff</div>
+<div style="font-size: 13px; color: var(--mut)">Projected 172.0 · Tucker and Ravens D/ST lock Sun 8:20 PM</div>
+</div>
+<div style="display: flex; gap: 8px">
+<button style="height: 42px; padding: 0 16px; border-radius: 10px; border: 1.5px solid var(--ln2); background: transparent; color: var(--tx); font-weight: 700; font-size: 14px">Optimize</button>
+<button style="height: 42px; padding: 0 18px; border-radius: 10px; border: 0; background: #2F5BFF; color: #fff; font-weight: 700; font-size: 14px">Save lineup</button>
+</div>
+</div>
+<div style="overflow-x: auto">
+<div style="min-width: 980px; display: flex; flex-direction: column; gap: 6px">
+<div class="lt hd"><span>Slot</span><span>Player</span><span>Opponent</span><span>Opp. rank</span><span style="text-align: right">Proj</span><span style="text-align: right">Avg</span><span style="text-align: right">YTD</span><span></span></div>
+<sc-for list="{{lt}}" as="p" hint-placeholder-count="11">
+<div class="lt" style="box-shadow: inset 4px 0 0 {{p.pc}}">
+<span class="{{p.chip}}">{{p.slot}}</span>
+<div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+<span class="hs hs-{{p.hs}}"></span>
+<div style="min-width: 0"><div class="pn1" style="font-size: 15px">{{p.name}}</div><div class="pm">{{p.team}} · <span style="color: {{p.pc}}; font-weight: 700">{{p.pos}}</span>{{p.elig}}</div></div>
+</div>
+<div><div style="font-size: 14px; font-weight: 600">{{p.opp}}</div><div class="pm" style="color: {{p.kc}}">{{p.kick}}</div></div>
+<span><span class="{{p.rkCls}}">{{p.rank}}</span></span>
+<span class="n">{{p.proj}}</span>
+<span class="n" style="color: var(--mut2)">{{p.avg}}</span>
+<span class="n" style="color: var(--mut2)">{{p.ytd}}</span>
+<span style="text-align: right"><button class="{{p.actCls}}">{{p.act}}</button></span>
+</div>
+</sc-for>
+<div style="display: flex; align-items: center; gap: 10px; margin: 14px 0 4px"><span class="num" style="font-size: 20px; font-weight: 800">Bench</span><span style="flex: 1; height: 1px; background: var(--ln)"></span></div>
+<sc-for list="{{lb}}" as="p" hint-placeholder-count="7">
+<div class="lt" style="background: var(--row2); box-shadow: inset 4px 0 0 {{p.pc}}">
+<span class="pos bn">BN</span>
+<div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+<span class="hs hs-{{p.hs}}"></span>
+<div style="min-width: 0"><div class="pn1" style="font-size: 15px">{{p.name}}</div><div class="pm">{{p.team}} · <span style="color: {{p.pc}}; font-weight: 700">{{p.pos}}</span></div></div>
+</div>
+<div><div style="font-size: 14px; font-weight: 600">{{p.opp}}</div><div class="pm" style="color: {{p.kc}}">{{p.kick}}</div></div>
+<span><span class="{{p.rkCls}}">{{p.rank}}</span></span>
+<span class="n">{{p.proj}}</span>
+<span class="n" style="color: var(--mut2)">{{p.avg}}</span>
+<span class="n" style="color: var(--mut2)">{{p.ytd}}</span>
+<span style="text-align: right"><button class="{{p.actCls}}">{{p.act}}</button></span>
+</div>
+</sc-for>
+</div>
+</div>
+<p style="margin: 12px 0 0; font-size: 12px; color: var(--dim)">Opp. rank = fantasy points that defense allows to the position (1st = toughest, 32nd = easiest).</p>
+</div>
+</sc-if>
+</section>
+<!-- This week's matchups -->
+<section>
+<div class="sec"><h2>This week's matchups</h2><a href="#" style="font-size: 14px; font-weight: 600">All scores</a></div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 20px">
+<sc-for list="{{games}}" as="g" hint-placeholder-count="6">
+<div class="mcard">
+<a href="#" class="mtile" style="color: #EEF1F6">
+<sc-if value="{{g.ta.b}}"><div class="half sk-{{g.ta.key}}"><span class="bx s44 shp-{{g.ta.shape}}"><span class="ring" style="background: {{g.ta.ring}}"></span><span class="in sk-{{g.ta.key}}"></span><span class="ic ic-{{g.ta.key}}"></span></span><span class="nm"><span class="pn">{{g.ta.abbr}}</span><span class="un">{{g.ta.user}}</span></span><span class="{{g.aT}}">{{g.as}}</span></div></sc-if>
+<sc-if value="{{g.ta.nb}}"><div class="half flat" style="background: {{g.ta.hue}}"><span class="fbd s44" style="background: rgba(0,0,0,.25)">{{g.ta.init}}</span><span class="nm"><span class="pn">{{g.ta.abbr}}</span><span class="un">{{g.ta.user}}</span></span><span class="{{g.aT}}">{{g.as}}</span></div></sc-if>
+<sc-if value="{{g.tb.b}}"><div class="half r sk-{{g.tb.key}}"><span class="bx s44 shp-{{g.tb.shape}}"><span class="ring" style="background: {{g.tb.ring}}"></span><span class="in sk-{{g.tb.key}}"></span><span class="ic ic-{{g.tb.key}}"></span></span><span class="nm"><span class="pn">{{g.tb.abbr}}</span><span class="un">{{g.tb.user}}</span></span><span class="{{g.bT}}">{{g.bs}}</span></div></sc-if>
+<sc-if value="{{g.tb.nb}}"><div class="half r flat" style="background: {{g.tb.hue}}"><span class="fbd s44" style="background: rgba(0,0,0,.25)">{{g.tb.init}}</span><span class="nm"><span class="pn">{{g.tb.abbr}}</span><span class="un">{{g.tb.user}}</span></span><span class="{{g.bT}}">{{g.bs}}</span></div></sc-if>
+<span class="{{g.seamCls}}">{{g.seam}}</span>
+</a>
+<div class="wp">
+<span class="pa" style="color: {{g.ca}}">{{g.pa}}</span>
+<div class="wpline" role="img" aria-label="Win probability {{g.pa}} to {{g.pb}}"><span class="wpa" style="width: {{g.wA}}; background: {{g.ca}}"></span><span class="wpb" style="background: {{g.cb}}"></span></div>
+<span class="pb" style="color: {{g.cb}}">{{g.pb}}</span>
+</div>
+<div class="wpnote"><span>{{g.ta.name}} · {{g.ta.rec}}</span><span style="color: {{g.nc}}; font-weight: 700">{{g.note}}</span><span style="text-align: right">{{g.tb.name}} · {{g.tb.rec}}</span></div>
+</div>
+</sc-for>
+</div>
+</section>
+<div class="hmrow">
+<section class="card" style="min-width: 0; padding: 22px">
+<div class="sec"><h2>If the playoffs started today</h2><a href="#" style="font-size: 14px; font-weight: 600" onClick="{{goPlayoffs}}">Playoff picture</a></div>
+<div class="hmpr hd"><span>SEED</span><span></span><span>TEAM</span><span class="r">W-L</span><span class="r">PF</span><span class="r">VS. CUT</span></div>
+<sc-for list="{{picture}}" as="p" hint-placeholder-count="14">
+<sc-if value="{{p.isLine}}"><div class="hmln"><span>{{p.line}}</span></div></sc-if>
+<sc-if value="{{p.isRow}}"><div class="{{p.cls}}"><span class="sd num">{{p.seed}}</span><sc-if value="{{p.t.b}}"><span class="bx s28 shp-{{p.t.shape}}"><span class="ring" style="background: {{p.t.ring}}"></span><span class="in sk-{{p.t.key}}"></span><span class="ic ic-{{p.t.key}}"></span></span></sc-if><sc-if value="{{p.t.nb}}"><span class="fbd s28" style="background: {{p.t.hue}}">{{p.t.init}}</span></sc-if><span class="nm">{{p.t.name}}</span><span class="num r" style="font-size: 16px; font-weight: 700">{{p.rec}}</span><span class="num r" style="color: var(--mut2)">{{p.pf}}</span><span class="cut">{{p.cut}}</span></div></sc-if>
+</sc-for>
+</section>
+<div class="hmside">
+<section class="card" style="min-width: 0; padding: 20px 22px">
+<div class="sec" style="margin-bottom: 6px"><h2 style="font-size: 26px">League news</h2><a href="#" style="font-size: 14px; font-weight: 600">All</a></div>
+<sc-for list="{{feed}}" as="f" hint-placeholder-count="4">
+<div class="feed">
+<sc-if value="{{f.t.b}}"><span class="bx s28 shp-{{f.t.shape}}"><span class="ring" style="background: {{f.t.ring}}"></span><span class="in sk-{{f.t.key}}"></span><span class="ic ic-{{f.t.key}}"></span></span></sc-if>
+<sc-if value="{{f.t.nb}}"><span class="fbd s28" style="background: {{f.t.hue}}">{{f.t.init}}</span></sc-if>
+<span><b style="font-size: 12px; color: {{f.c}}">{{f.type}}</b><br>{{f.txt}}</span>
+<span style="font-size: 12px; color: var(--dim); text-align: right">{{f.when}}</span>
+</div>
+</sc-for>
+</section>
+<section class="card hmmini">
+<div class="sec" style="margin-bottom: 6px"><h3 style="margin: 0">Record watch</h3><button class="lnk" onClick="{{goHist}}">Record book</button></div>
+<div class="hmrec"><b class="num">{{record.now}}</b><span>your score, live</span></div>
+<div class="hmbar"><i style="width: 82%"></i></div>
+<div style="font-size: 13px; color: var(--mut)"><b style="color: var(--tx)">{{record.gapTxt}}</b><span>{{record.rest}}</span></div>
+</section>
+<section class="card hmmini">
+<div class="sec" style="margin-bottom: 8px"><span style="display: flex; align-items: center; gap: 10px"><span class="hmls">LS</span><h3 style="margin: 0">LeagueSafe</h3></span><button class="lnk" onClick="{{goLS}}">Details</button></div>
+<sc-for list="{{lsRows}}" as="r" hint-placeholder-count="4"><div class="hmkv"><span>{{r.k}}</span><b>{{r.v}}</b></div></sc-for>
+</section>
+</div>
+</div>
+</sc-if>
+<footer style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 20px; border-top: 1px solid var(--ln); font-size: 13px; color: var(--dim)">
+<span>LMP · Your league, your way</span>
+<span>Payments secured by LeagueSafe · © 2026 RSports Interactive</span>
+</footer>
+<sc-if value="{{toast}}">
+<div class="toast"><span class="okc">✓</span><span><b>{{toastTxt}}</b><span style="display: block; font-size: 12px; color: #A6AEBF">{{toastSub}}</span></span><button class="lnk" style="color: #9DB3FF" onClick="{{closeToast}}">Dismiss</button></div>
+</sc-if>
+</main>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"mode":{"editor":"enum","options":["Free","Mixed","Premium"],"default":"Premium"},"tab":{"editor":"enum","options":["match","lineup"],"default":"match"},"$preview":{"width":1440,"height":2900}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this;
+var st = this.state || {};
+var mode = st.mode || this.props.mode || 'Premium';
+var tab = st.tab || this.props.tab || 'match';
+var theme = st.theme || 'light', isLt = theme === 'light';
+var VT = 'var(--vt)', MUT = 'var(--mut)', UP = 'var(--up)', DN = 'var(--dn)';
+var mixed = ['syndicate', 'airplane', 'hurts', 'henrys', 'puka'];
+function isB(k) { return mode === 'Premium' || (mode === 'Mixed' && mixed.indexOf(k) > -1); }
+// name, abbr, free hue, record, initials, shape, ring, accent, username
+var T = {
+syndicate: ['The Gridiron Syndicate', 'SYN', '#7a2323', '6-1', 'GS', 'shieldA', '#c9a24a', '#C9A24A', '@coolerheads'],
+kelce: ["Kelce's Anatomy", 'KEL', '#b3202f', '5-2', 'KA', 'circle', '#ffffff', '#EE3B4D', '@kapp_attack'],
+airplane: ["Jefferson's Airplane", 'JEF', '#5b2aa6', '4-3', 'JA', 'hex', '#ffd84d', '#FFCF3F', '@jetpackjeff'],
+jj: ['Johnson & Johnson LLP', 'J&J', '#1d3768', '4-3', 'JJ', 'shieldB', '#efe3bd', '#8FA9D9', '@jj_esq'],
+mustards: ['The Bijan Mustards', 'BIJ', '#9a6f08', '3-4', 'BM', 'square', '#c4161c', '#FFD43F', '@relishmore'],
+hurts: ['Hurts Locker', 'HRT', '#35534b', '2-5', 'HL', 'shieldC', '#f2c230', '#7FB59A', '@mscott44'],
+lamb: ['Certified Lamb Daddy', 'CLD', '#3d3d3d', '5-2', 'CL', 'hex', '#d4af37', '#D4AF37', '@baaadboy'],
+henrys: ["Henry's Holes", 'HEN', '#3b2590', '5-2', 'HH', 'circle', '#f28c28', '#9C7DFF', '@hhenry'],
+chubb: ['Chubb Club', 'CHB', '#7a3b12', '4-3', 'CC', 'shieldA', '#f6d7a7', '#E07B35', '@cigarnick'],
+purdy: ['Purdy Good Team', 'PGT', '#a6335a', '3-4', 'PG', 'circle', '#ffffff', '#F7A6BA', '@ninerfaithful'],
+puka: ['The Puka Principle', 'PKA', '#1e4f8a', '2-5', 'PP', 'square', '#ffe89a', '#FF8A5C', '@aloha_ppr'],
+goff: ['Goff Ball', 'GOF', '#2f7a46', '1-6', 'GB', 'shieldB', '#ffffff', '#3FBF6A', '@fore_and_out']
+};
+function tm(k) { var b = isB(k); var r = T[k]; return { key: k, name: r[0], abbr: r[1], hue: r[2], rec: r[3], init: r[4], shape: r[5], ring: r[6], acc: r[7], user: r[8], b: b, nb: !b }; }
+var GREEN = '#2FD27A', LGREEN = '#9BD94A', RED = '#FF5A5A', ORANGE = '#FF8A4C', YELLOW = '#F5C542';
+// win-probability bar colors: deeper set on the light content area (score strip above stays bright)
+var WG = isLt ? '#1E9E57' : GREEN, WLG = isLt ? '#5E9E1A' : LGREEN, WR = isLt ? '#D63A3A' : RED, WO = isLt ? '#E0661F' : ORANGE, WY = isLt ? '#C99A06' : YELLOW;
+function wp(pa, final) {
+// two bars: each team fills its own 10 segments, from the outside in
+var OFF = isLt ? '#E3E6EB' : '#262B37', A = [], B = [], i;
+if (final) {
+for (i = 0; i < 10; i++) { A.push({ c: WG, cls: 'seg' }); B.push({ c: OFF, cls: 'seg off' }); }
+return { ca: WG, cb: isLt ? '#C46A6A' : '#B04848', segsA: A, segsB: B, pa: 'W', pb: 'L', wA: '100%' };
+}
+var ca, cb, even = pa >= 45 && pa <= 55;
+if (even) { ca = WY; cb = WY; }
+else {
+var fav = Math.max(pa, 100 - pa);
+var fc = fav >= 70 ? WG : WLG, dc = fav >= 70 ? WR : WO;
+ca = pa > 50 ? fc : dc; cb = pa > 50 ? dc : fc;
+}
+var n = Math.round(pa / 10), m = 10 - n;
+for (i = 0; i < 10; i++) { A.push(i < n ? { c: ca, cls: 'seg' } : { c: OFF, cls: 'seg off' }); B.push(i >= 10 - m ? { c: cb, cls: 'seg' } : { c: OFF, cls: 'seg off' }); }
+return { ca: ca, cb: cb, segsA: A, segsB: B, pa: pa + '%', pb: (100 - pa) + '%', wA: pa + '%' };
+}
+function div(rows) {
+return rows.map(function (r, i) {
+var t = tm(r[0]);
+t.rank = i + 1; t.pf = r[1]; t.strk = r[2];
+t.sc = r[2].charAt(0) === 'W' ? 'w' : 'l';
+t.rowCls = r[0] === 'syndicate' ? 'srow me' : 'srow';
+return t;
+});
+}
+var div1 = div([['syndicate', '1024.2', 'W4'], ['kelce', '978.6', 'W2'], ['airplane', '901.2', 'L1'], ['jj', '889.1', 'W1'], ['mustards', '845.5', 'L2'], ['hurts', '798.3', 'L3']]);
+var div2 = div([['lamb', '1003.8', 'W3'], ['henrys', '956.2', 'W1'], ['chubb', '912.4', 'L1'], ['purdy', '876.9', 'W1'], ['puka', '821.5', 'L2'], ['goff', '761.8', 'L4']]);
+var games = [
+['syndicate', '139.6', 'hurts', '93.5', 'Live · 4th quarter', 'LIVE', true, true, 88, '▲ 21 since kickoff', 'up'],
+['kelce', '112.8', 'airplane', '108.6', 'Live · 4th quarter', 'LIVE', true, false, 52, 'Coin flip · ▼ 9 in the last hour', 'flat'],
+['lamb', '124.9', 'goff', '67.3', 'Final', 'FINAL', false, false, 100, 'Won by 57.6', ''],
+['henrys', '98.7', 'puka', '76.4', 'Final', 'FINAL', false, false, 100, 'Won by 22.3', ''],
+['chubb', '104.5', 'jj', '91.2', 'Final', 'FINAL', false, false, 100, 'Won by 13.3', ''],
+['purdy', '86.1', 'mustards', '83.0', 'Final', 'FINAL', false, false, 100, 'Won by 3.1', '']
+].map(function (g) {
+var ta = tm(g[0]), tb = tm(g[2]);
+var aw = parseFloat(g[1]) > parseFloat(g[3]);
+var w = wp(g[8], !g[6]);
+// Score-strip tics: 40-60 = 2 gold each; 61-70 = 1; 71-80 = 2; 81+ = 3 (green favorite / red underdog)
+var at = [], bt = [], atc = '', btc = '', ap = '', bp = '';
+if (g[6]) {
+var p = g[8], fav = Math.max(p, 100 - p), n, i;
+if (fav <= 60) { for (i = 0; i < 2; i++) { at.push(YELLOW); bt.push(YELLOW); } atc = btc = YELLOW; }
+else {
+n = fav <= 70 ? 1 : (fav <= 80 ? 2 : 3);
+var aFav = p > 50;
+for (i = 0; i < n; i++) { at.push(aFav ? GREEN : RED); bt.push(aFav ? RED : GREEN); }
+atc = aFav ? GREEN : RED; btc = aFav ? RED : GREEN;
+}
+ap = p + '%'; bp = (100 - p) + '%';
+}
+return {
+at: at, bt: bt, atc: atc, btc: btc, ap: ap, bp: bp,
+ta: ta, as: g[1], tb: tb, bs: g[3], st: g[4], seam: g[5],
+seamCls: g[6] ? 'seam live' : 'seam', stColor: g[6] ? '#6A8CFF' : '#8B93A5',
+cellCls: g[7] ? 'cell mine' : 'cell',
+aS: aw ? 's' : 's lose', bS: aw ? 's lose' : 's', aT: aw ? 'sc' : 'sc lose', bT: aw ? 'sc lose' : 'sc',
+pa: w.pa, pb: w.pb, ca: w.ca, cb: w.cb, segsA: w.segsA, segsB: w.segsB, wA: w.wA,
+note: g[9], nc: g[10] === 'up' ? UP : (g[10] === 'flat' ? (isLt ? '#B88A00' : '#F5C542') : MUT)
+};
+});
+var pc = { QB: '#FF7A93', RB: '#3EE0B4', WR: '#62B0FF', TE: '#FFAE5C', K: '#E8D867', DST: '#A3ADC2' };
+var pcd = isLt ? { QB: '#E0446A', RB: '#0FA37E', WR: '#2B80D9', TE: '#E07A16', K: '#A8960F', DST: '#77819A' } : pc;
+function chipFor(slot) { return slot === 'FLEX' ? 'pos flx' : (slot === 'SFLEX' ? 'pos sflx' : (slot === 'BN' ? 'pos bn' : 'pos p-' + slot)); }
+function pl(r, side) {
+var k = r[6];
+return { name: r[0], hs: r[1], pos: r[2], c: pcd[r[2]], meta: r[3], st: r[4], pts: r[5],
+cls: 'pc' + (side ? ' r' : '') + (k === 'l' ? ' live' : (k === 'p' ? ' pend' : '')),
+stc: k === 'l' ? VT : MUT };
+}
+var mine = [
+['Jalen Hurts', 'hurts', 'QB', 'PHI vs NYG', 'Final', '22.4', 'f'],
+['Bijan Robinson', 'bijan', 'RB', 'ATL vs TB', 'Final', '19.2', 'f'],
+['Jonathan Taylor', 'taylor', 'RB', 'IND vs MIA', 'Final', '14.2', 'f'],
+['CeeDee Lamb', 'lamb', 'WR', 'DAL at SF', 'Final', '15.7', 'f'],
+['Tyreek Hill', 'none', 'WR', 'MIA at IND', 'Final', '21.4', 'f'],
+['DK Metcalf', 'none', 'WR', 'SEA vs ARI', 'Q4 3:12', '8.6', 'l'],
+['Travis Kelce', 'none', 'TE', 'KC at DEN', 'Q4 1:40', '14.2', 'l'],
+['Jahmyr Gibbs', 'none', 'RB', 'DET vs CHI', 'Q2 4:51', '9.6', 'l'],
+['C.J. Stroud', 'none', 'QB', 'HOU vs NE', 'Q2 8:02', '14.3', 'l'],
+['Justin Tucker', 'none', 'K', 'BAL vs CLE', 'Sun 8:20 PM', '8.5', 'p'],
+['Ravens D/ST', 'none', 'DST', 'BAL vs CLE', 'Sun 8:20 PM', '7.2', 'p']
+];
+var theirs = [
+['Tua Tagovailoa', 'none', 'QB', 'MIA at IND', 'Final', '15.8', 'f'],
+['Travis Etienne', 'none', 'RB', 'JAX vs TEN', 'Final', '12.1', 'f'],
+["De'Von Achane", 'none', 'RB', 'MIA at IND', 'Final', '8.2', 'f'],
+['Amari Cooper', 'none', 'WR', 'BUF vs NYJ', 'Final', '9.4', 'f'],
+['Stefon Diggs', 'none', 'WR', 'NE at HOU', 'Q2 8:02', '6.8', 'l'],
+['DJ Moore', 'none', 'WR', 'CHI at DET', 'Q2 4:51', '6.2', 'l'],
+['Mark Andrews', 'none', 'TE', 'BAL vs CLE', 'Sun 8:20 PM', '9.0', 'p'],
+['Khalil Herbert', 'none', 'RB', 'CHI at DET', 'Q2 4:51', '4.1', 'l'],
+['Gardner Minshew', 'none', 'QB', 'LV vs LAC', 'Final', '18.4', 'f'],
+['Younghoe Koo', 'none', 'K', 'ATL vs TB', 'Final', '9.0', 'f'],
+['Steelers D/ST', 'none', 'DST', 'PIT vs CIN', 'Final', '3.5', 'f']
+];
+var slots = ['QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE', 'FLEX', 'SFLEX', 'K', 'DST'];
+var h2h = slots.map(function (s, i) {
+var l = mine[i], r = theirs[i];
+var diff = '', dc = MUT;
+if (l[6] !== 'p' && r[6] !== 'p') {
+var d = parseFloat(l[5]) - parseFloat(r[5]);
+diff = (d > 0 ? '+' : '') + d.toFixed(1);
+dc = d > 0 ? UP : (d < 0 ? DN : MUT);
+}
+return { slot: s, chip: chipFor(s), l: pl(l, false), r: pl(r, true), diff: diff, dc: dc };
+});
+var myBench = [
+['Saquon Barkley', 'none', 'RB', 'PHI vs NYG', 'Final', '17.1', 'f'],
+['Dak Prescott', 'none', 'QB', 'DAL at SF', 'Final', '18.6', 'f'],
+['James Cook', 'none', 'RB', 'BUF vs NYJ', 'Final', '14.7', 'f'],
+['Sam LaPorta', 'none', 'TE', 'DET vs CHI', 'Q2 4:51', '3.4', 'l'],
+['Rashod Bateman', 'none', 'WR', 'BAL vs CLE', 'Sun 8:20 PM', '8.2', 'p'],
+["Ja'Marr Chase", 'none', 'WR', 'CIN', 'Bye', '—', 'p'],
+['Chase Brown', 'none', 'RB', 'CIN', 'Bye', '—', 'p']
+];
+var oppBench = [
+['Bryce Young', 'none', 'QB', 'CAR vs NO', 'Final', '11.2', 'f'],
+['Zach Charbonnet', 'none', 'RB', 'SEA vs ARI', 'Q4 3:12', '4.3', 'l'],
+['Tyjae Spears', 'none', 'RB', 'TEN at JAX', 'Final', '6.4', 'f'],
+['Dalton Kincaid', 'none', 'TE', 'BUF vs NYJ', 'Final', '5.6', 'f'],
+['Jerry Jeudy', 'none', 'WR', 'CLE at BAL', 'Sun 8:20 PM', '7.0', 'p'],
+['Jakobi Meyers', 'none', 'WR', 'LV vs LAC', 'Final', '7.9', 'f'],
+['Rome Odunze', 'none', 'WR', 'CHI at DET', 'Q2 4:51', '5.1', 'l']
+];
+var bh2h = myBench.map(function (l, i) { return { l: pl(l, false), r: pl(oppBench[i], true) }; });
+function ltRow(r) {
+var act = r[13];
+return {
+slot: r[0], chip: chipFor(r[0]), name: r[1], hs: r[2], team: r[3], pos: r[4], pc: pcd[r[4]],
+elig: r[0] === 'FLEX' ? ' · fills FLEX (RB/WR/TE)' : (r[0] === 'SFLEX' ? ' · fills SUPERFLEX (QB/RB/WR/TE)' : ''),
+opp: r[5], kick: r[6], kc: r[7] === 'l' ? VT : MUT, rank: r[8], rkCls: 'rk ' + r[9], proj: r[10], avg: r[11], ytd: r[12],
+act: act === 'lock' ? 'Locked' : (act === 'bye' ? 'Bye' : (act === 'start' ? 'Start' : 'Move')),
+actCls: act === 'lock' ? 'act lock' : (act === 'bye' ? 'act bye' : 'act')
+};
+}
+var lt = [
+['QB', 'Jalen Hurts', 'hurts', 'PHI', 'QB', 'vs NYG', 'Final', 'f', '24th vs QB', 'good', '21.0', '22.8', '136.8', 'lock'],
+['RB', 'Bijan Robinson', 'bijan', 'ATL', 'RB', 'vs TB', 'Final', 'f', '12th vs RB', 'mid', '17.6', '19.4', '116.4', 'lock'],
+['RB', 'Jonathan Taylor', 'taylor', 'IND', 'RB', 'vs MIA', 'Final', 'f', '27th vs RB', 'good', '15.1', '16.2', '97.2', 'lock'],
+['WR', 'CeeDee Lamb', 'lamb', 'DAL', 'WR', 'at SF', 'Final', 'f', '5th vs WR', 'bad', '16.4', '17.1', '102.6', 'lock'],
+['WR', 'Tyreek Hill', 'none', 'MIA', 'WR', 'at IND', 'Final', 'f', '18th vs WR', 'mid', '15.8', '14.9', '89.4', 'lock'],
+['WR', 'DK Metcalf', 'none', 'SEA', 'WR', 'vs ARI', 'Q4 3:12', 'l', '30th vs WR', 'good', '13.2', '12.6', '75.6', 'lock'],
+['TE', 'Travis Kelce', 'none', 'KC', 'TE', 'at DEN', 'Q4 1:40', 'l', '3rd vs TE', 'bad', '16.0', '13.8', '82.8', 'lock'],
+['FLEX', 'Jahmyr Gibbs', 'none', 'DET', 'RB', 'vs CHI', 'Q2 4:51', 'l', '22nd vs RB', 'good', '18.9', '20.3', '121.8', 'lock'],
+['SFLEX', 'C.J. Stroud', 'none', 'HOU', 'QB', 'vs NE', 'Q2 8:02', 'l', '9th vs QB', 'mid', '24.1', '19.7', '118.2', 'lock'],
+['K', 'Justin Tucker', 'none', 'BAL', 'K', 'vs CLE', 'Sun 8:20 PM', 'p', '15th vs K', 'mid', '8.5', '8.9', '53.4', 'move'],
+['DST', 'Ravens D/ST', 'none', 'BAL', 'DST', 'vs CLE', 'Sun 8:20 PM', 'p', '29th offense', 'good', '7.2', '7.8', '46.8', 'move']
+].map(ltRow);
+var lb = [
+['BN', 'Saquon Barkley', 'none', 'PHI', 'RB', 'vs NYG', 'Final', 'f', '26th vs RB', 'good', '16.8', '18.1', '108.6', 'lock'],
+['BN', 'Dak Prescott', 'none', 'DAL', 'QB', 'at SF', 'Final', 'f', '4th vs QB', 'bad', '18.6', '17.9', '107.4', 'lock'],
+['BN', 'James Cook', 'none', 'BUF', 'RB', 'vs NYJ', 'Final', 'f', '6th vs RB', 'bad', '14.7', '15.5', '93.0', 'lock'],
+['BN', 'Sam LaPorta', 'none', 'DET', 'TE', 'vs CHI', 'Q2 4:51', 'l', '19th vs TE', 'mid', '9.4', '10.1', '60.6', 'lock'],
+['BN', 'Rashod Bateman', 'none', 'BAL', 'WR', 'vs CLE', 'Sun 8:20 PM', 'p', '21st vs WR', 'good', '8.2', '7.4', '44.4', 'start'],
+['BN', "Ja'Marr Chase", 'none', 'CIN', 'WR', 'Bye week', '—', 'p', '—', 'mid', '0.0', '19.2', '115.2', 'bye'],
+['BN', 'Chase Brown', 'none', 'CIN', 'RB', 'Bye week', '—', 'p', '—', 'mid', '0.0', '13.2', '79.2', 'bye']
+].map(ltRow);
+var feed = [
+['syndicate', 'Trade', VT, "The Gridiron Syndicate and Kelce's Anatomy agreed to a trade.", '2h'],
+['puka', 'Injury', DN, 'Puka Nacua (WR, LAR) is questionable for Week 7.', '12h'],
+['syndicate', 'Commissioner', 'var(--amb)', 'Trade deadline is Nov 8. Get your moves in.', '1d'],
+['lamb', 'Record', pcd.WR, 'Certified Lamb Daddy posted the high score of the week: 124.9.', '1d']
+].map(function (f) { return { t: tm(f[0]), type: f[1], c: f[2], txt: f[3], when: f[4] }; });
+var chat = [
+['kelce', "Airplane is gonna need a miracle on SNF lol", '2m'],
+['airplane', "I have Jefferson tonight. Relax.", '1m'],
+['syndicate', 'Commish here. Trade deadline is Nov 8, get your moves in before the drop.', '2h'],
+['henrys', 'Anyone want Chubb for pennies? Falling off a cliff rn.', '4h'],
+['chubb', 'Not funny.', '4h'],
+['purdy', 'Kicker streaming tier this week: Tucker, Butker, McPherson. Discuss.', '1d']
+].map(function (c) { return { t: tm(c[0]), txt: c[1], when: c[2] }; });
+var tx = [
+['goff', 'RB', 'Will Shipley', 'PHI', 'RB', 'Demond Claiborne', 'MIN', '1h'],
+['henrys', 'RB', 'Jaylen Warren', 'PIT', 'WR', 'Xavier Legette', 'CAR', '8h'],
+['purdy', 'WR', 'Joshua Palmer', 'BUF', 'WR', 'Romeo Doubs', 'GB', '1d'],
+['mustards', 'TE', 'Brenton Strange', 'JAX', 'TE', 'Cade Otton', 'TB', '2d'],
+['chubb', 'K', 'Cam Little', 'JAX', 'K', 'Jake Moody', 'SF', '2d']
+].map(function (x) { return { t: tm(x[0]), ap: x[1], ac: pc[x[1]], an: x[2], at: x[3], dp: x[4], dc: pc[x[4]], dn: x[5], dt: x[6], when: x[7] }; });
+var leagues = [
+['The Empire League', 'EL', '#b07a1e', 'Live · up 46.1', '#4BE08F', true],
+['Lake Minnetonka Keeper', 'LM', '#1e4f8a', 'Live · down 6.1', '#FF7B7B', false],
+['Dynasty Degenerates', 'DD', '#2f7a46', 'Final · won 131.2–98.0', '#8B93A5', false],
+['Office Pool 2026', 'OP', '#a6335a', 'Kicks off Sun 8:20 PM', '#8B93A5', false],
+['Superflex Syndicate', 'SS', '#7a3b12', 'Dues due Friday', '#FFB547', false],
+['Best Ball Pod #14', 'BB', '#5b2aa6', '3rd of 12', '#8B93A5', false]
+].map(function (l) { return { name: l[0], init: l[1], hue: l[2], st: l[3], sc: l[4], cls: l[5] ? 'lg on' : 'lg' }; });
+var modes = ['Free', 'Mixed', 'Premium'].map(function (m) {
+return { label: m, cls: m === mode ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ mode: m }); } };
+});
+var off = st.off || 0, maxOff = games.length - 2;
+var stripX = (-off * 206) + 'px';
+var stripPrev = function () { self.setState({ off: Math.max(0, off - 2) }); };
+var stripNext = function () { self.setState({ off: Math.min(maxOff, off + 2) }); };
+var logo = st.logo || 'aqua';
+var logos = [['volt', 'Flag: yellow-green'], ['aqua', 'Flag: original aqua']].map(function (l) {
+return { label: l[1], cls: l[0] === logo ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ logo: l[0] }); } };
+});
+var me = tm('syndicate'), opp = tm('hurts');
+// ===================== HOME REFRESH =====================
+var moment = st.moment || 'reg', who = st.who || 'commish', isComm = who === 'commish', hdone = st.hdone || {};
+function hset(o) { self.setState(o); }
+function cr(k) { var t = tm(k); return { key: k, shape: t.shape, ring: t.ring, b: t.b, nb: t.nb, hue: t.hue, init: t.init, name: t.name, user: t.user }; }
+var ATT = [
+['a1', 'Lineup', '#F59E0B', 'Justin Tucker is questionable tonight', 'Plays at 8:20 PM in your K slot. Free agent Ka’imi Fairbairn projects 8.1.', [['Swap in Fairbairn', 1, 'Done. Fairbairn is your kicker; Tucker was dropped.'], ['Keep Tucker', 0, 'Got it. Tucker stays in your lineup.']], 'all'],
+['a2', 'Trade offer', '#8B5CF6', '@kapp_attack sent you an offer', 'Rashee Rice and a 2027 2nd for Puka Nacua. Expires in 22 hours.', [['Review', 1, null], ['Decline', 0, 'Declined. @kapp_attack was notified.']], 'all'],
+['a3', 'Commissioner', '#C9A24A', 'A trade needs your review', 'Chubb Club and Henry’s Holes. Review window ends Mon 8:00 PM.', [['Approve', 1, 'Approved and posted to the league.'], ['Veto', 0, null]], 'comm'],
+['a4', 'Waivers', '#14B8A6', '1 waiver claim pending', 'Tyler Allgeier for $14 FAAB. Waivers run Wed at 3:00 AM.', [['Review claims', 0, null]], 'mem']
+].filter(function (a) { return a[6] === 'all' || (a[6] === 'comm') === isComm; });
+var attention = ATT.map(function (a) { var d = hdone[a[0]];
+return { tag: a[1], col: a[2], t: a[3], d: a[4], done: !!d, notDone: !d, doneTxt: d ? '✓ ' + d : '', cls: 'hmat' + (d ? ' done' : ''),
+acts: a[5].map(function (b) { return { label: b[0], cls: b[1] ? 'hmb p' : 'hmb', go: function () { if (b[2]) { var n = Object.assign({}, hdone); n[a[0]] = b[2]; hset({ hdone: n }); } else hset({ toast: b[0], toastSub: a[3] }); } }; }) }; });
+var attN = attention.filter(function (a) { return a.notDone; }).length;
+// playoff picture (if the playoffs started today)
+var PFX = { syndicate: 1024.2, kelce: 978.6, airplane: 901.2, jj: 889.1, mustards: 845.5, hurts: 798.3, lamb: 1003.8, henrys: 956.2, chubb: 912.4, purdy: 876.9, puka: 821.5, goff: 761.8 };
+var seedK = Object.keys(PFX).sort(function (x, y) { var a = +T[x][3].split('-')[0], b = +T[y][3].split('-')[0]; return (b - a) || (PFX[y] - PFX[x]); });
+var cutW = +T[seedK[5]][3].split('-')[0], outW = +T[seedK[6]][3].split('-')[0];
+var picture = []; seedK.forEach(function (k, i) { var w = +T[k][3].split('-')[0], t = cr(k);
+picture.push({ isRow: true, isLine: false, seed: String(i + 1), t: t, rec: T[k][3], pf: PFX[k].toFixed(1), cut: i < 6 ? (w - outW > 0 ? (w - outW) + ' up' : 'Tied, in') : (cutW - w > 0 ? (cutW - w) + ' back' : 'Tied, out'), cls: 'hmpr' + (k === 'syndicate' ? ' me' : '') + (i < 6 ? ' in' : ''), line: '' });
+if (i === 1) picture.push({ isRow: false, isLine: true, line: 'BYE LINE' }); if (i === 5) picture.push({ isRow: false, isLine: true, line: 'PLAYOFF LINE' }); });
+var HM = {
+moments: [['reg', 'Week 7'], ['po', 'Playoffs · Week 16'], ['off', 'Offseason']].map(function (k) { return { label: k[1], cls: k[0] === moment ? 'pbtn on' : 'pbtn', pick: function () { hset({ moment: k[0] }); } }; }),
+hwhos: [['commish', 'Commissioner'], ['member', 'Member']].map(function (k) { return { label: k[1], cls: k[0] === who ? 'pbtn on' : 'pbtn', pick: function () { hset({ who: k[0] }); } }; }),
+isReg: moment === 'reg', isPo: moment === 'po', isOff: moment === 'off',
+attention: attention, hasAtt: moment === 'reg', attHd: attN ? attN + ' thing' + (attN === 1 ? '' : 's') + ' need you' : 'You’re all set', attCls: 'hmatw' + (attN ? '' : ' clear'),
+picture: picture, goPlayoffs: function () { hset({ toast: 'Playoffs', toastSub: 'Opens the full playoff picture' }); },
+record: { now: '139.6', gapTxt: '30.5 short ', rest: 'of the league’s single-game record: 170.1, Coolerheads FC, 2021.' },
+lsRows: [['League pot', '$3,000 · held by LeagueSafe'], ['Dues', '12 of 12 paid'], ['Weekly high score', '$40 · Week 6: you, 161.1'], ['Prizes', '1st $1,400 · 2nd $600 · 3rd $200']].map(function (x) { return { k: x[0], v: x[1] }; }),
+// playoffs moment
+po: { semis: [[cr('syndicate'), '83.0', cr('henrys'), '98.5', 'SYN 69% to win', 1, '1', '5'], [cr('kelce'), '99.1', cr('lamb'), '90.6', 'CLD 58% to win', 0, '2', '3']].map(function (s) { return { a: s[0], as: s[1], b: s[2], bs: s[3], wp: s[4], cls: 'hmsemi' + (s[5] ? ' me' : ''), sa: s[6], sb: s[7] }; }),
+path: [['Bye', 'Week 15', 'done'], ['Semifinal', 'Live now', 'now'], ['Championship', 'Sun, Dec 27', '']].map(function (p) { return { t: p[0], d: p[1], cls: 'hmpath ' + p[2] }; }) },
+// offseason moment
+off: { todo: [['You’re back for 2027', 'Confirmed Feb 1', true], ['2027 dues paid', 'Paid Feb 2', true], ['Rookie draft: Sat, May 8', 'Your picks: 1.05, 1.12, 2.12, 3.12', false], ['Vote on 2 rule changes', 'Closes Apr 1', false]].map(function (x) { return { t: x[0], d: x[1], cls: 'ostd' + (x[2] ? ' done' : '') }; }),
+stats: [['Coming back', '9 of 12'], ['2027 dues paid', '7 of 12'], ['Open teams', '1']].map(function (x) { return { k: x[0], v: x[1] }; }),
+feed: [['Kelce’s Anatomy traded the 2027 1.09 to The Bijan Mustards', 'Mar 12'], ['TE premium passed 9–2', 'Feb 20 · now in 2027 settings'], ['@fore_and_out is leaving after this season', 'Feb 14 · Goff Ball needs a new owner']].map(function (f) { return { t: f[0], d: f[1] }; }) },
+goOff: function () { hset({ toast: 'Offseason', toastSub: 'Opens the offseason hub' }); }, goHist: function () { hset({ toast: 'Record book', toastSub: 'Opens History & Record Book' }); }, goLS: function () { hset({ toast: 'LeagueSafe', toastSub: 'Opens the Clubhouse LeagueSafe tab' }); },
+toast: !!st.toast, toastTxt: st.toast || '', toastSub: st.toastSub || '', closeToast: function () { hset({ toast: null }); }
+};
+return Object.assign({
+stripX: stripX, stripPrev: stripPrev, stripNext: stripNext, canPrev: off > 0, canNext: off < maxOff,
+modes: modes, logos: logos,
+themes: [['dark', 'Dark'], ['light', 'Light']].map(function (k) { return { label: k[1], cls: k[0] === theme ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ theme: k[0] }); } }; }),
+mainCls: isLt ? 'th-lt' : 'th-dk', pageBg: isLt ? '#F2F3F5' : '#0F1218', logoVolt: logo === 'volt', logoAqua: logo === 'aqua',
+isMatch: tab === 'match', isLineup: tab === 'lineup',
+tabM: tab === 'match' ? 'tab on' : 'tab', tabL: tab === 'lineup' ? 'tab on' : 'tab',
+goMatch: function () { self.setState({ tab: 'match' }); },
+goLineup: function () { self.setState({ tab: 'lineup' }); },
+heroB: mode === 'Premium', heroNB: mode !== 'Premium', divB: mode === 'Premium', divNB: mode !== 'Premium',
+proof: mode === 'Mixed',
+me: me, opp: opp, myWp: wp(88, false),
+div1: div1, div2: div2, games: games, h2h: h2h, bh2h: bh2h, lt: lt, lb: lb, feed: feed, chat: chat, tx: tx, leagues: leagues
+}, HM);
+}
+}
+</script>
+</body>
+</html>

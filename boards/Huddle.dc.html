@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fanball — Game Plan</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&amp;family=Onest:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#0F1218}
+a{color:#6A8CFF;text-decoration:none}a:hover{color:#9DB3FF}
+*{box-sizing:border-box}
+button{font-family:inherit;cursor:pointer}
+/* team art (badge interiors) */
+.sk-syndicate{background:repeating-linear-gradient(90deg,rgba(255,214,140,.07) 0 1px,transparent 1px 9px),radial-gradient(130% 160% at 50% 0%,#7a1d1d 0%,#2a0606 72%)}
+.sk-kelce{background:repeating-linear-gradient(0deg,rgba(255,255,255,.09) 0 1px,transparent 1px 7px),repeating-linear-gradient(90deg,rgba(255,255,255,.09) 0 1px,transparent 1px 7px),linear-gradient(100deg,#ee3b4d 0%,#a8121f 58%,#4f040c 100%)}
+.sk-airplane{background:linear-gradient(90deg,#3b1670 0%,#3b1670 30%,rgba(59,22,112,0) 85%),repeating-conic-gradient(from 0deg at 88% 55%,#ffcf3f 0 9deg,#ff7a2f 9deg 18deg,#d23a8f 18deg 27deg,#5b2aa6 27deg 36deg)}
+.sk-jj{background:linear-gradient(180deg,#14284f,#0a1631)}
+.sk-mustards{background:radial-gradient(circle,rgba(150,60,0,.32) 1.1px,transparent 1.5px) 0 0/6px 6px,linear-gradient(90deg,#ffd43f,#eaa000)}
+.sk-hurts{background:radial-gradient(28% 70% at 18% 30%,#56776a 60%,transparent 62%),radial-gradient(22% 60% at 55% 80%,#1d302d 60%,transparent 62%),#35534b}
+.sk-lamb{background:radial-gradient(90% 140% at 85% 50%,rgba(212,175,55,.35),transparent 60%),linear-gradient(180deg,#1a1a1a,#050505)}
+.sk-henrys{background:repeating-linear-gradient(-55deg,#2b1a6b 0 12px,#4127a0 12px 24px)}
+.sk-chubb{background:radial-gradient(120% 120% at 20% 0%,#9a4d1a,#4a200a 70%)}
+.sk-purdy{background:linear-gradient(90deg,#ffe6ea,#f7a6ba 60%,#e2587b)}
+.sk-puka{background:linear-gradient(180deg,#ffb347 0%,#ff6a5c 52%,#1e4f8a 53%,#0e2c55 100%)}
+.sk-goff{background:linear-gradient(180deg,#8fd1ff 0 34%,transparent 34%),repeating-linear-gradient(90deg,#2f8f4e 0 16px,#3aa35c 16px 32px)}
+/* badges */
+.bx{position:relative;display:inline-block;flex:0 0 auto;width:28px;height:28px;vertical-align:middle}
+.bx>span{position:absolute}
+.bx .ring{inset:0}
+.bx .in{inset:2px}
+.bx .ic{inset:20%;background-size:contain;background-repeat:no-repeat;background-position:center}
+.s20{width:20px;height:20px}.s20 .in{inset:1.5px}
+.s24{width:24px;height:24px}
+.shp-circle .ring,.shp-circle .in{border-radius:50%}
+.shp-square .ring{border-radius:26%}.shp-square .in{border-radius:22%}
+.shp-hex .ring,.shp-hex .in{clip-path:polygon(25% 4%,75% 4%,100% 50%,75% 96%,25% 96%,0 50%)}
+.shp-shieldA .ring,.shp-shieldA .in{clip-path:polygon(50% 0,100% 9%,100% 52%,93% 71%,76% 88%,50% 100%,24% 88%,7% 71%,0 52%,0 9%)}
+.shp-shieldB .ring,.shp-shieldB .in{clip-path:polygon(0 7%,22% 0,50% 8%,78% 0,100% 7%,100% 56%,50% 100%,0 56%)}
+.shp-shieldC .ring,.shp-shieldC .in{clip-path:polygon(50% 0,100% 16%,100% 62%,50% 100%,0 62%,0 16%)}
+.shp-shieldA .ic,.shp-shieldB .ic,.shp-shieldC .ic{inset:17% 20% 29% 20%}
+.shp-hex .ic{inset:22%}
+.ic-syndicate{background-image:url(/a/6620792e05f35fa68740bc24df7c61ee.svg)}
+.ic-kelce{background-image:url(/a/a68c807ed60f60bdc676af72e43387f8.svg)}
+.ic-airplane{background-image:url(/a/51b59441fd266a7c8ea6aef6429acf70.svg)}
+.ic-jj{background-image:url(/a/7cf8e5de2b42f41f05fa6d320330dfac.svg)}
+.ic-mustards{background-image:url(/a/134f1db1b44f4066e769d265e3b3ba91.svg)}
+.ic-hurts{background-image:url(/a/78f90d423a65f4f4dc1806d54a0ed219.svg)}
+.ic-lamb{background-image:url(/a/3ce630101181ee5c485c2e8135cadbce.svg)}
+.ic-henrys{background-image:url(/a/a8d350d6607bbbbff37d324ee3099237.svg)}
+.ic-chubb{background-image:url(/a/5316d699414f0067a5ca8d3f3c13a087.svg)}
+.ic-purdy{background-image:url(/a/1997667c68e3f31393bc3ca55a9197f4.svg)}
+.ic-puka{background-image:url(/a/a1ee853acec05aece928976e9f470406.svg)}
+.ic-goff{background-image:url(/a/29f184c04e3a5bfe2a475523be98fcb1.svg)}
+.fbd{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;border-radius:50%;font-family:'Onest',sans-serif;font-weight:700;color:#fff;font-size:10px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.2)}
+/* shell */
+.ng{font-family:'Onest',sans-serif;color:#EEF1F6}
+.num{font-family:'Big Shoulders Display',sans-serif;font-variant-numeric:tabular-nums}
+.ldot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#6A8CFF;box-shadow:0 0 8px #6A8CFF}
+.strip{position:relative;flex:1 1 auto;min-width:0;overflow:hidden;display:flex}
+.striprow{display:flex;transition:transform .35s ease}
+.sarr{position:absolute;top:0;bottom:0;z-index:2;width:44px;border:0;display:flex;align-items:center;justify-content:center;color:#EEF1F6}
+.sarr.l{left:0;background:linear-gradient(90deg,#07080B 55%,rgba(7,8,11,0))}
+.sarr.r{right:0;background:linear-gradient(270deg,#07080B 55%,rgba(7,8,11,0))}
+.sarr:hover{color:#6A8CFF}
+.tics{display:inline-flex;align-items:center;gap:2px;margin-left:4px}
+.tic{width:4px;height:11px;transform:skewX(-20deg);border-radius:1px}
+.tp{margin-left:4px;font-size:10px;font-weight:700;font-variant-numeric:tabular-nums}
+.cell{flex:0 0 auto;width:206px;display:flex;flex-direction:column;border-left:1px solid #1C202A;color:#EEF1F6}
+.cell .ln{display:flex;align-items:center;gap:8px;padding:5px 12px}
+.cell .ab{font-family:'Big Shoulders Display',sans-serif;font-style:italic;font-weight:900;font-size:17px}
+.cell .s{margin-left:auto;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:17px;font-variant-numeric:tabular-nums}
+.cell .s.lose{color:#6B7386}
+.cell .ft{margin-top:auto;padding:5px 12px;border-top:1px solid #1C202A;font-size:11px;font-weight:600}
+.cell.mine{background:#12151C;box-shadow:inset 0 2px 0 #6A8CFF}
+.rail{flex:0 0 288px;background:#08090C;border-right:1px solid #1C202A;display:flex;flex-direction:column}
+.rsec{padding:18px 16px;border-bottom:1px solid #1C202A}
+.rh{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px;padding:0 4px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:20px;color:#EEF1F6}
+.rh a{font-family:'Onest',sans-serif;font-size:12px;font-weight:600}
+.qa{display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:80px;padding:12px;border-radius:14px;border:1px solid #232835;background:#141821;color:#EEF1F6;text-align:left}
+.qa .qt{font-weight:700;font-size:14px}
+.qa .qs{font-size:12px;color:#8B93A5}
+.qa.hot{background:#2F5BFF;border-color:#2F5BFF;color:#fff}
+.qa.hot .qs{color:rgba(255,255,255,.8)}
+.al{display:grid;grid-template-columns:28px minmax(0,1fr);align-items:center;gap:10px;padding:8px 10px;border-radius:11px;background:#12151C;border:1px solid #1E232D}
+.al .ai{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px}
+.al .at{font-size:13px;font-weight:700;line-height:1.25}
+.al .as{font-size:12px;color:#8B93A5}
+.lg{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:10px;color:#EEF1F6}
+.lg.on{background:#1B1F28;box-shadow:inset 3px 0 0 #6A8CFF}
+.cm{display:grid;grid-template-columns:24px minmax(0,1fr);gap:9px;align-items:start}
+.tx{display:flex;flex-direction:column;gap:5px;padding:10px 4px;border-top:1px solid #1C202A}
+.txl{display:flex;align-items:center;gap:7px;font-size:13px;line-height:1.3}
+.tag{display:inline-flex;align-items:center;justify-content:center;width:54px;height:18px;border-radius:5px;font-size:10px;font-weight:800;letter-spacing:.04em}
+.tag.add{background:rgba(47,210,122,.15);color:#4BE08F}
+.tag.drop{background:rgba(255,90,90,.15);color:#FF7B7B}
+.tnav{display:flex;align-items:center;gap:6px;padding:10px 13px;border-radius:9px;color:#3B4150;font-size:15px;font-weight:600}
+.tnav:hover{color:#0E1116;background:#F1F2F4}
+.tnav.on{color:#0E1116;background:#EDEFF2;box-shadow:inset 0 -2px 0 #0E1116}
+.slot{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed var(--slot);border-radius:16px;color:var(--dim);font-size:13px;text-align:center;padding:24px}
+.slot b{color:var(--mut2);font-size:14px}
+.pbtn{border:0;background:transparent;color:#A6AEBF;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600}
+.pbtn.on{background:#EEF1F6;color:#0A0C10}
+/* content themes: rail, top band and any hero stay dark */
+.th-dk{--tx:#EEF1F6;--mut:#8B93A5;--mut2:#A6AEBF;--dim:#6B7386;--ln:#1C202A;--ln2:#2C3240;--slot:#343B4A;color:#EEF1F6}
+.th-lt{--tx:#12151B;--mut:#5C6370;--mut2:#4A515E;--dim:#8A909C;--ln:#E3E6EB;--ln2:#CDD2DA;--slot:#C4C9D2;color:#12151B}
+/* ---- The Huddle ---- */
+.th-dk{--card:#161A22;--row:#1C212B;--sub:#12151C;--soft:#1B202A;--vt:#6A8CFF;--up:#4BE08F;--dn:#FF7B7B;--tint:rgba(106,140,255,.10);--tintbd:rgba(106,140,255,.45);--sh:none}
+.th-lt{--card:#FFFFFF;--row:#FFFFFF;--sub:#F6F7F9;--soft:#EEF0F3;--vt:#2449D8;--up:#14894A;--dn:#D63B3B;--tint:rgba(47,91,255,.07);--tintbd:#AFC0FF;--sh:0 1px 2px rgba(16,20,28,.05)}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:16px;box-shadow:var(--sh)}
+.h2{margin:0;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:24px;line-height:1}
+.btnp{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 18px;border:0;border-radius:10px;background:#2F5BFF;color:#fff;font-weight:700;font-size:14px}
+.btns{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:10px;border:1.5px solid var(--ln2);background:transparent;color:var(--tx);font-weight:700;font-size:14px}
+.lnk{border:0;background:transparent;padding:0;color:var(--vt);font-weight:700;font-size:13px}
+.seg{display:inline-flex;gap:2px;padding:3px;border-radius:12px;background:var(--soft)}
+.seg button{border:0;background:transparent;color:var(--mut2);height:32px;padding:0 12px;border-radius:9px;font-size:13px;font-weight:700}
+.seg button.on{background:var(--card);color:var(--tx);box-shadow:0 1px 3px rgba(0,0,0,.15),inset 0 -2px 0 #2F5BFF}
+.lsq{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:24px;height:24px;border-radius:6px;color:#fff;font-size:10px;font-weight:800}
+.lsq.sm{width:18px;height:18px;font-size:8px;border-radius:4px}
+.lsq.lg{width:38px;height:38px;font-size:13px;border-radius:10px}
+/* rail: cross-league tools */
+.xl{margin-top:12px;padding:12px 8px 8px;border-radius:14px;background:#14171E;border:1px solid #242936}
+.xlh{display:block;padding:0 6px 8px;font-size:11px;font-weight:800;letter-spacing:.06em;color:#8B93A5}
+.xt{position:relative;display:flex;align-items:center;gap:11px;padding:10px;border-radius:11px;color:#EEF1F6}
+.xt:hover{background:#1B1F28}
+.xt .ico{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;background:#1E2430;color:#9DB3FF}
+.xt b{display:block;font-size:14px}
+.xt small{display:block;font-size:12px;color:#8B93A5}
+.xt.on{background:linear-gradient(90deg,#2F5BFF,#2448cc);color:#fff;box-shadow:0 6px 18px -8px rgba(47,91,255,.8)}
+.xt.on .ico{background:rgba(255,255,255,.18);color:#fff}
+.xt.on small{color:rgba(255,255,255,.8)}
+.xb{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#FFB547;color:#0A0C10;font-size:12px;font-weight:800}
+.xt.on .xb{background:#fff;color:#2448cc}
+/* status strip */
+.lstrip{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.ltile{display:flex;flex-direction:column;gap:6px;padding:11px 12px;border-radius:12px;background:var(--card);border:1px solid var(--ln);color:var(--tx);box-shadow:var(--sh)}
+.ltile.bad{box-shadow:inset 0 3px 0 #FFB547,var(--sh)}
+.ltile.good{box-shadow:inset 0 3px 0 #1E9E57,var(--sh)}
+.nm1{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pj{font-size:20px;font-weight:900;line-height:1}
+.stc{align-self:flex-start;display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:999px;font-size:11px;font-weight:800}
+.stc.ok{background:rgba(20,137,74,.12);color:var(--up)}
+.stc.bad{background:rgba(255,181,71,.18);color:#9A6100}
+.th-dk .stc.bad{color:#FFB547}
+.stc.auto{background:var(--soft);color:var(--mut2)}
+/* fix panel */
+.fixc{padding:16px 20px 8px;box-shadow:inset 4px 0 0 #FFB547,var(--sh)}
+.fixc.ok{display:flex;align-items:center;gap:10px;padding:14px 20px;box-shadow:inset 4px 0 0 #1E9E57,var(--sh);font-size:14px}
+.okc{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#1E9E57;color:#fff;font-weight:800}
+.warn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:#FFB547;color:#0A0C10;font-weight:900}
+.fixr{display:grid;grid-template-columns:64px minmax(0,1fr) auto auto;gap:14px;align-items:center;padding:11px 0;border-top:1px solid var(--ln);font-size:14px}
+.fixr:first-of-type{border-top:0}
+.lgs{display:inline-flex;gap:4px;margin-left:8px;vertical-align:-3px}
+.itag{display:inline-flex;align-items:center;justify-content:center;height:22px;padding:0 7px;border-radius:5px;font-size:11px;font-weight:800;letter-spacing:.04em}
+.itag.bye{background:#3B414D;color:#fff}
+.itag.out{background:#D63A3A;color:#fff}
+.itag.empty{background:transparent;color:var(--dn);box-shadow:inset 0 0 0 1.5px var(--dn)}
+.itag.q{background:rgba(255,181,71,.2);color:#9A6100}
+.th-dk .itag.q{color:#FFB547}
+.itag.done{background:rgba(20,137,74,.12);color:var(--up)}
+/* league cards */
+.lgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.lcard{padding:14px 14px 10px}
+.lch{display:flex;align-items:center;gap:12px;padding:0 4px 12px;margin-bottom:6px;border-bottom:1px solid var(--ln)}
+.lrow{display:grid;grid-template-columns:50px minmax(0,1fr) 88px 40px 30px;gap:9px;align-items:center;padding:6px 6px 6px 4px;border-radius:9px}
+.lrow+.lrow{margin-top:2px}
+.lrow{padding-left:12px}
+.lrow.issue{background:rgba(255,181,71,.14)}
+.lrow.issue.out{background:rgba(214,58,58,.09)}
+.lrow.fixed{background:rgba(30,158,87,.10)}
+.bdiv{display:flex;align-items:center;gap:10px;margin:10px 4px 4px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:16px;color:var(--mut)}
+.bdiv i{flex:1;height:1px;background:var(--ln)}
+.pro{display:inline-flex;align-items:center;height:18px;padding:0 6px;margin-left:6px;border-radius:5px;background:linear-gradient(90deg,#2F5BFF,#7B5CFF);color:#fff;font-size:10px;font-weight:800;letter-spacing:.04em;vertical-align:2px}
+.pro.sm{height:15px;font-size:9px;padding:0 4px;margin-left:4px}
+.xt.on .pro{background:rgba(255,255,255,.25)}
+.promo{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:12px;background:var(--tint);box-shadow:inset 0 0 0 1px var(--tintbd);font-size:13px}
+.promo .pro{margin-left:0}
+.promo.lockd{background:linear-gradient(90deg,rgba(47,91,255,.10),rgba(123,92,255,.10));box-shadow:inset 0 0 0 1px rgba(123,92,255,.4)}
+.lcard.locked{position:relative;opacity:.55;filter:grayscale(.7)}
+.lcard.locked .swp{visibility:hidden}
+.lcard.locked .lrow{pointer-events:none}
+.lrow.bn{opacity:.85}
+.pnm{display:flex;align-items:center;gap:6px;min-width:0;font-size:14px;font-weight:700}
+.nmx{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pmeta{display:block;font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pj2{font-size:18px;font-weight:800;text-align:right}
+.swp{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:0;border-radius:8px;background:var(--soft);color:var(--mut2)}
+.swp:hover{color:var(--vt)}
+.lcf{display:flex;align-items:center;gap:14px;padding:10px 4px 2px;margin-top:6px;border-top:1px solid var(--ln)}
+.sv{font-size:12px;font-weight:700;color:var(--mut)}
+.sv.dirty{color:#2F5BFF}
+.bench{margin-top:8px;padding-top:8px;border-top:1px dashed var(--ln)}
+.auto{padding:14px 6px 8px;font-size:13px;color:var(--mut);line-height:1.45}
+.auto b{color:var(--tx)}
+.pos{display:inline-flex;align-items:center;justify-content:center;min-width:46px;height:24px;padding:0 7px 3px;font-size:11px;font-weight:800;letter-spacing:.02em;color:#EEF1F6;background:#2A303D;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
+.p-QB{background:linear-gradient(#FF7A93,#FF7A93) left bottom/100% 4px no-repeat,#2A303D}
+.p-RB{background:linear-gradient(#3EE0B4,#3EE0B4) left bottom/100% 4px no-repeat,#2A303D}
+.p-WR{background:linear-gradient(#62B0FF,#62B0FF) left bottom/100% 4px no-repeat,#2A303D}
+.p-TE{background:linear-gradient(#FFAE5C,#FFAE5C) left bottom/100% 4px no-repeat,#2A303D}
+.p-K{background:linear-gradient(#E8D867,#E8D867) left bottom/100% 4px no-repeat,#2A303D}
+.p-DST{background:linear-gradient(#A3ADC2,#A3ADC2) left bottom/100% 4px no-repeat,#2A303D}
+.pos.flx{background:linear-gradient(90deg,#3EE0B4 0 33.3%,#62B0FF 33.3% 66.6%,#FFAE5C 66.6%) left bottom/100% 4px no-repeat,#2A303D}
+.pos.sflx{background:linear-gradient(90deg,#FF7A93 0 25%,#3EE0B4 25% 50%,#62B0FF 50% 75%,#FFAE5C 75%) left bottom/100% 4px no-repeat,#2A303D}
+.pos.bn{background:#2A303D;color:#A6AEBF;padding-bottom:0}
+.rk{display:inline-flex;justify-content:center;max-width:100%;padding:3px 7px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.th-dk .rk.good{background:rgba(47,210,122,.14);color:#4BE08F}
+.th-dk .rk.mid{background:#1E232E;color:#A6AEBF}
+.th-dk .rk.bad{background:rgba(255,90,90,.14);color:#FF7B7B}
+.th-lt .rk.good{background:rgba(20,137,74,.10);color:#14894A}
+.th-lt .rk.mid{background:#EEF0F3;color:#4A515E}
+.th-lt .rk.bad{background:rgba(214,59,59,.10);color:#C62F2F}
+.rk.none{background:transparent;color:var(--dim)}
+.savebar{position:sticky;bottom:16px;z-index:5;display:flex;align-items:center;gap:12px;max-width:1176px;margin:-72px auto 24px;padding:12px 14px 12px 20px;border-radius:14px;background:#0E1116;color:#EEF1F6;box-shadow:0 18px 40px -14px rgba(0,0,0,.6)}
+.savebar>span{flex:1;font-size:14px}
+/* ===== Position tags: Baseline tab, ink blue body, 4px underline (final) ===== */
+:root{--tagbg:#1A2340}
+.th-dk{--tagbg:#1F2A4D}
+.pos,.pos2{clip-path:none !important;width:max-content;min-width:46px !important;height:24px !important;padding:0 8px 4px !important;border-radius:4px 4px 2px 2px;font-size:11px !important;font-weight:800;letter-spacing:.03em;color:#fff !important}
+.p-QB{background:linear-gradient(#FF7A93,#FF7A93) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-RB{background:linear-gradient(#3EE0B4,#3EE0B4) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-WR{background:linear-gradient(#62B0FF,#62B0FF) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-TE{background:linear-gradient(#FFAE5C,#FFAE5C) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-K{background:linear-gradient(#E8D867,#E8D867) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.p-DST{background:linear-gradient(#B9A6FF,#B9A6FF) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.flx,.pos2.flx{background:linear-gradient(90deg,#3EE0B4 0 33.3%,#62B0FF 33.3% 66.6%,#FFAE5C 66.6%) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.sflx,.pos2.sflx{background:linear-gradient(90deg,#FF7A93 0 25%,#3EE0B4 25% 50%,#62B0FF 50% 75%,#FFAE5C 75%) left bottom/100% 4px no-repeat,var(--tagbg) !important}
+.pos.bn,.pos2.bn{background:linear-gradient(#5A6275,#5A6275) left bottom/100% 4px no-repeat,var(--tagbg) !important;color:rgba(255,255,255,.6) !important}
+/* ===== Position tags: smaller size (final) ===== */
+.pos,.pos2{min-width:34px !important;height:18px !important;padding:0 5px 3px !important;border-radius:3px 3px 1px 1px;font-size:9.5px !important;letter-spacing:.04em;background-size:100% 3px,auto !important}
+</style>
+</helmet>
+<div class="ng" style="min-height: 100vh; background: #0F1218">
+<!-- Prototype controls -->
+<div style="display: flex; justify-content: center; align-items: center; gap: 10px; padding: 8px 16px; background: #000; border-bottom: 1px solid #1C202A">
+<span style="font-size: 12px; color: #8B93A5">Content</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{themes}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+<span style="font-size: 12px; color: #8B93A5; margin-left: 10px">Plan</span>
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: #151922">
+<sc-for list="{{plans}}" as="m" hint-placeholder-count="2"><button class="{{m.cls}}" onClick="{{m.pick}}">{{m.label}}</button></sc-for>
+</div>
+</div>
+<!-- 1. TOP BAND (static on every page) -->
+<div style="display: flex; align-items: stretch; background: #07080B; border-bottom: 1px solid #1C202A">
+<a href="#" aria-label="Fanball home" style="flex: 0 0 288px; display: flex; align-items: center; padding: 0 20px; border-right: 1px solid #1C202A">
+<img src="/a/6d0fd2687e0f4e908cbe7777ef1d6bd1.webp" alt="Fanball" style="height: 52px; width: auto; display: block">
+</a>
+<div style="flex: 0 0 auto; display: flex; flex-direction: column; justify-content: center; gap: 3px; padding: 10px 18px; border-right: 1px solid #1C202A; line-height: 1">
+<span class="num" style="font-size: 20px; font-weight: 900; letter-spacing: .02em">WEEK 7</span>
+<span class="num" style="font-size: 14px; font-weight: 800; letter-spacing: .06em; color: #8B93A5">SCOREBOARD</span>
+</div>
+<div class="strip">
+<div class="striprow" style="transform: translateX({{stripX}})">
+<sc-for list="{{games}}" as="g" hint-placeholder-count="6">
+<a href="#" class="{{g.cellCls}}">
+<span class="ln"><span class="bx s20 shp-{{g.ta.shape}}"><span class="ring" style="background: {{g.ta.ring}}"></span><span class="in sk-{{g.ta.key}}"></span><span class="ic ic-{{g.ta.key}}"></span></span><span class="ab">{{g.ta.abbr}}</span><span class="tics"><sc-for list="{{g.at}}" as="k" hint-placeholder-count="2"><span class="tic" style="background: {{k}}"></span></sc-for><span class="tp" style="color: {{g.atc}}">{{g.ap}}</span></span><span class="{{g.aS}}">{{g.as}}</span></span>
+<span class="ln" style="padding-top: 0"><span class="bx s20 shp-{{g.tb.shape}}"><span class="ring" style="background: {{g.tb.ring}}"></span><span class="in sk-{{g.tb.key}}"></span><span class="ic ic-{{g.tb.key}}"></span></span><span class="ab">{{g.tb.abbr}}</span><span class="tics"><sc-for list="{{g.bt}}" as="k" hint-placeholder-count="2"><span class="tic" style="background: {{k}}"></span></sc-for><span class="tp" style="color: {{g.btc}}">{{g.bp}}</span></span><span class="{{g.bS}}">{{g.bs}}</span></span>
+<span class="ft" style="color: {{g.stColor}}">{{g.st}}</span>
+</a>
+</sc-for>
+</div>
+<sc-if value="{{canPrev}}"><button class="sarr l" onClick="{{stripPrev}}" aria-label="Earlier matchups"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m15 6-6 6 6 6"></path></svg></button></sc-if>
+<sc-if value="{{canNext}}"><button class="sarr r" onClick="{{stripNext}}" aria-label="More matchups"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m9 6 6 6-6 6"></path></svg></button></sc-if>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: stretch">
+<!-- 2. LEFT RAIL (static on every page) -->
+<aside class="rail">
+<div style="padding: 14px 12px 16px; border-bottom: 1px solid #1C202A">
+<div style="border-radius: 14px; background: #14171E; border: 1px solid #242936; padding: 12px 8px 6px">
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 0 6px 8px">
+<span style="font-size: 12px; font-weight: 700; color: #A6AEBF">All your leagues · 9</span>
+<a href="#" style="font-size: 12px; font-weight: 600">+ Join</a>
+</div>
+<sc-for list="{{leagues}}" as="l" hint-placeholder-count="6">
+<a href="#" class="{{l.cls}}">
+<span class="fbd" style="width: 36px; height: 36px; font-size: 12px; background: {{l.hue}}; border-radius: 10px">{{l.init}}</span>
+<span style="min-width: 0"><span style="display: block; font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{l.name}}</span><span style="display: block; font-size: 12px; color: {{l.sc}}">{{l.st}}</span></span>
+</a>
+</sc-for>
+<a href="#" style="display: block; padding: 8px; font-size: 13px; font-weight: 600; color: #A6AEBF">Show 3 more leagues</a>
+</div>
+<div class="xl">
+<span class="xlh">ACROSS ALL LEAGUES</span>
+<a href="#" class="xt on"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="17" r="2.6"></circle><path d="M4 4l4 4M8 4 4 8"></path><path d="M16 15l4 4M20 15l-4 4"></path><path d="M9 15c3-6 6-8 9-9"></path><path d="m15 5 3 1-1 3"></path></svg></span><span><b>Game Plan <span class="pro sm">PRO</span></b><small>Set every lineup at once</small></span><span class="xb">{{openCount}}</span></a>
+<a href="#" class="xt"><span class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M3 12h4l3-7 4 14 3-7h4"></path></svg></span><span><b>The Wire</b><small>Adds, drops and claims · claims run Wed</small></span></a>
+</div>
+</div>
+</aside>
+<!-- 3. CONTENT COLUMN -->
+<div style="flex: 999 1 640px; min-width: 0; background: {{pageBg}}">
+<!-- League bar (static; active item changes per page) -->
+<header style="background: #fff; color: #0E1116; border-bottom: 1px solid #E3E6EB">
+<div style="padding: 10px 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap">
+<span style="display: flex; align-items: center; gap: 10px">
+<span style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; background: #2F5BFF; color: #fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="17" r="2.6"></circle><path d="M4 4l4 4M8 4 4 8"></path><path d="M16 15l4 4M20 15l-4 4"></path><path d="M9 15c3-6 6-8 9-9"></path><path d="m15 5 3 1-1 3"></path></svg></span>
+<span style="display: flex; flex-direction: column; line-height: 1.15"><b style="font-size: 15px">Game Plan</b> <span class="pro">PRO · free through Week 3</span><span style="font-size: 12px; color: #5C6370">Week 8 lineups · all 6 of your leagues · first lock Thu 7:15 PM</span></span>
+</span>
+<span style="flex: 1"></span>
+<span style="display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: #0E1116; color: #fff; font-weight: 700; font-size: 13px">CP</span>
+</div>
+</header>
+<!-- Page area (changes per page) -->
+<main class="{{mainCls}}" style="max-width: 1240px; margin: 0 auto; padding: 24px 32px 96px; display: flex; flex-direction: column; gap: 20px">
+<sc-if value="{{isPro}}">
+<div class="promo"><span class="pro">PRO</span><span><b>Game Plan is free for everyone through Week 3.</b> After that it's part of Fanball Pro, along with lineup suggestions, the optimizer and trade analysis.</span><a href="#" class="lnk" style="margin-left: auto; white-space: nowrap">See Pro</a></div>
+</sc-if>
+<sc-if value="{{isFree}}"><div class="promo lockd"><span class="pro">PRO</span><span><b>Your free Game Plan preview ended after Week 3.</b> You can still see every alert below. Upgrade to fix them in one click and set all your lineups from here.</span><button class="btnp" style="margin-left: auto; height: 34px; white-space: nowrap">Upgrade to Pro</button></div></sc-if>
+<!-- league status strip -->
+<div class="lstrip">
+<sc-for list="{{tiles}}" as="t" hint-placeholder-count="6">
+<a href="#" class="{{t.cls}}">
+<span style="display: flex; align-items: center; gap: 8px; min-width: 0"><span class="lsq" style="background: {{t.hue}}">{{t.init}}</span><b class="nm1">{{t.short}}</b></span>
+<span class="num pj">{{t.proj}}</span>
+<span class="{{t.stCls}}">{{t.st}}</span>
+</a>
+</sc-for>
+</div>
+<!-- cross-league fixes -->
+<sc-if value="{{hasIssues}}">
+<section class="card fixc">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 6px">
+<div style="display: flex; align-items: center; gap: 10px"><span class="warn">!</span><h2 class="h2">Fix these before kickoff</h2><span style="font-size: 13px; color: var(--mut)">{{issueCount}} lineup problems across {{issueLeagues}} leagues</span></div>
+<sc-if value="{{isPro}}"><button class="btnp" onClick="{{fixAll}}">Fix all {{issueCount}}</button></sc-if>
+</div>
+<sc-for list="{{issues}}" as="i" hint-placeholder-count="3">
+<div class="fixr">
+<span class="{{i.tagCls}}">{{i.tag}}</span>
+<span style="min-width: 0"><b>{{i.title}}</b> <span style="color: var(--mut)">{{i.sub}}</span>
+<span class="lgs"><sc-for list="{{i.lgs}}" as="l" hint-placeholder-count="2"><span class="lsq sm" style="background: {{l.hue}}" title="{{l.name}}">{{l.init}}</span></sc-for></span>
+</span>
+<span style="font-size: 13px; color: var(--mut)">{{i.fixTxt}}</span>
+<sc-if value="{{isPro}}"><button class="btns" style="height: 34px; padding: 0 14px; font-size: 13px" onClick="{{i.fix}}">{{i.btn}}</button></sc-if><sc-if value="{{isFree}}"><a href="#" class="lnk" style="white-space: nowrap">Fix in league</a></sc-if>
+</div>
+</sc-for>
+</section>
+</sc-if>
+<sc-if value="{{allClear}}">
+<section class="card fixc ok"><span class="okc">✓</span><b>Every lineup is set.</b> <span style="color: var(--mut)">No byes, injuries or empty slots in your starting lineups. Don't forget to save.</span></section>
+</sc-if>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap">
+<div class="seg sm"><sc-for list="{{filters}}" as="f" hint-placeholder-count="2"><button class="{{f.cls}}" onClick="{{f.pick}}">{{f.label}}</button></sc-for></div>
+<span style="font-size: 12px; color: var(--mut)">Opp. rank = how many points that defense allows to the position (32nd = easiest)</span>
+</div>
+<!-- one card per league -->
+<div class="lgrid">
+<sc-for list="{{cards}}" as="c" hint-placeholder-count="5">
+<section class="{{lcardCls}}">
+<div class="lch">
+<span class="lsq lg" style="background: {{c.hue}}">{{c.init}}</span>
+<span style="min-width: 0; flex: 1">
+<b style="display: block; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{c.name}}</b>
+<span style="display: block; font-size: 12px; color: var(--mut)">{{c.team}} vs {{c.opp}} · {{c.fmt}}</span>
+</span>
+<span style="text-align: right"><span class="num" style="display: block; font-size: 22px; font-weight: 900; line-height: 1">{{c.proj}}</span><span style="font-size: 11px; color: var(--mut)">proj · {{c.oproj}} opp</span></span>
+</div>
+<sc-if value="{{c.isAuto}}">
+<div class="auto"><b>Best ball: nothing to set.</b> Your highest scorers count automatically each week. Projected 3rd of 12.</div>
+</sc-if>
+<sc-for list="{{c.rows}}" as="r" hint-placeholder-count="9">
+<div class="{{r.cls}}" style="box-shadow: inset 4px 0 0 {{r.pc}}">
+<span class="{{r.chip}}">{{r.slot}}</span>
+<span style="min-width: 0">
+<span class="pnm"><span class="nmx">{{r.name}}</span><sc-if value="{{r.hasTag}}"><span class="{{r.tagCls}}">{{r.tag}}</span></sc-if></span>
+<span class="pmeta">{{r.opp}} · {{r.kick}}</span>
+</span>
+<span><span class="{{r.rkCls}}">{{r.rank}}</span></span>
+<span class="num pj2">{{r.proj}}</span>
+<button class="swp" title="Swap with a bench player" aria-label="Swap"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"></path></svg></button>
+</div>
+</sc-for>
+<sc-if value="{{c.hasRows}}">
+<div class="bdiv"><span>Bench</span><i></i></div>
+<sc-for list="{{c.bench}}" as="r" hint-placeholder-count="4">
+<div class="{{r.cls}}" style="box-shadow: inset 4px 0 0 {{r.pc}}">
+<span class="pos bn">BN</span>
+<span style="min-width: 0"><span class="pnm"><span class="nmx">{{r.name}}</span><sc-if value="{{r.hasTag}}"><span class="{{r.tagCls}}">{{r.tag}}</span></sc-if></span><span class="pmeta">{{r.opp}} · {{r.kick}}</span></span>
+<span><span class="{{r.rkCls}}">{{r.rank}}</span></span>
+<span class="num pj2" style="color: var(--mut2)">{{r.proj}}</span>
+<button class="swp" aria-label="Move into lineup" title="Move into lineup"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"></path></svg></button>
+</div>
+</sc-for>
+<div class="lcf">
+<a href="#" class="lnk">Full lineup page</a>
+<span class="{{c.saveCls}}" style="margin-left: auto">{{c.saveTxt}}</span>
+</div>
+</sc-if>
+</section>
+</sc-for>
+</div>
+</main>
+<!-- sticky save bar -->
+<sc-if value="{{isPro}}"><div class="savebar">
+<span><b>{{changeCount}} unsaved changes</b> <span style="color: #A6AEBF">across {{changeLeagues}} leagues · first lock Thu 7:15 PM</span></span>
+<button class="btns" style="height: 40px; border-color: #3A4152; color: #EEF1F6">Discard</button>
+<button class="btnp" style="height: 40px">Save all lineups</button>
+</div></sc-if>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+renderVals() {
+var self = this, st = this.state || {};
+var theme = st.theme || 'light', isLt = theme === 'light';
+var T = {
+syndicate: ['The Gridiron Syndicate', 'SYN', 'shieldA', '#c9a24a', '@coolerheads'],
+kelce: ["Kelce's Anatomy", 'KEL', 'circle', '#ffffff', '@kapp_attack'],
+airplane: ["Jefferson's Airplane", 'JEF', 'hex', '#ffd84d', '@jetpackjeff'],
+jj: ['Johnson & Johnson LLP', 'J&J', 'shieldB', '#efe3bd', '@jj_esq'],
+mustards: ['The Bijan Mustards', 'BIJ', 'square', '#c4161c', '@relishmore'],
+hurts: ['Hurts Locker', 'HRT', 'shieldC', '#f2c230', '@mscott44'],
+lamb: ['Certified Lamb Daddy', 'CLD', 'hex', '#d4af37', '@baaadboy'],
+henrys: ["Henry's Holes", 'HEN', 'circle', '#f28c28', '@hhenry'],
+chubb: ['Chubb Club', 'CHB', 'shieldA', '#f6d7a7', '@cigarnick'],
+purdy: ['Purdy Good Team', 'PGT', 'circle', '#ffffff', '@ninerfaithful'],
+puka: ['The Puka Principle', 'PKA', 'square', '#ffe89a', '@aloha_ppr'],
+goff: ['Goff Ball', 'GOF', 'shieldB', '#ffffff', '@fore_and_out']
+};
+function tm(k) { var r = T[k]; return { key: k, name: r[0], abbr: r[1], shape: r[2], ring: r[3], user: r[4] }; }
+var GREEN = '#2FD27A', RED = '#FF5A5A', YELLOW = '#F5C542';
+var games = [
+['syndicate', '139.6', 'hurts', '93.5', 'Live · 4th quarter', true, true, 88],
+['kelce', '112.8', 'airplane', '108.6', 'Live · 4th quarter', true, false, 52],
+['lamb', '124.9', 'goff', '67.3', 'Final', false, false, 100],
+['henrys', '98.7', 'puka', '76.4', 'Final', false, false, 100],
+['chubb', '104.5', 'jj', '91.2', 'Final', false, false, 100],
+['purdy', '86.1', 'mustards', '83.0', 'Final', false, false, 100]
+].map(function (g) {
+var aw = parseFloat(g[1]) > parseFloat(g[3]);
+var at = [], bt = [], atc = '', btc = '', ap = '', bp = '';
+if (g[5]) {
+var p = g[7], fav = Math.max(p, 100 - p), i;
+if (fav <= 60) { for (i = 0; i < 2; i++) { at.push(YELLOW); bt.push(YELLOW); } atc = btc = YELLOW; }
+else {
+var n = fav <= 70 ? 1 : (fav <= 80 ? 2 : 3), aFav = p > 50;
+for (i = 0; i < n; i++) { at.push(aFav ? GREEN : RED); bt.push(aFav ? RED : GREEN); }
+atc = aFav ? GREEN : RED; btc = aFav ? RED : GREEN;
+}
+ap = p + '%'; bp = (100 - p) + '%';
+}
+return { ta: tm(g[0]), as: g[1], tb: tm(g[2]), bs: g[3], st: g[4], stColor: g[5] ? '#6A8CFF' : '#8B93A5', cellCls: g[6] ? 'cell mine' : 'cell',
+aS: aw ? 's' : 's lose', bS: aw ? 's lose' : 's', at: at, bt: bt, atc: atc, btc: btc, ap: ap, bp: bp };
+});
+var off = st.off || 0, maxOff = games.length - 2;
+var pc = { QB: '#FF7A93', RB: '#3EE0B4', WR: '#62B0FF', TE: '#FFAE5C', K: '#E8D867' };
+// ===== The Huddle: every lineup, every league =====
+var plan = st.plan || 'pro', isPro = plan === 'pro';
+var fixed = isPro ? (st.fixed || {}) : {}, benchOpen = st.bench || {}, hf = st.hf || 'all';
+var pcH = isLt ? { QB: '#E0446A', RB: '#0FA37E', WR: '#2B80D9', TE: '#E07A16', K: '#A8960F', DST: '#77819A' }
+: { QB: '#FF7A93', RB: '#3EE0B4', WR: '#62B0FF', TE: '#FFAE5C', K: '#E8D867', DST: '#A3ADC2' };
+function chipH(s) { return s === 'FLEX' ? 'pos flx' : (s === 'SFLEX' ? 'pos sflx' : 'pos p-' + s); }
+// [slot, name, pos, team, opp, kick, oppRank, rankClass, proj, issueId]
+var LG = [
+{ k: 'EL', name: 'The Empire League', short: 'Empire', hue: '#b07a1e', team: 'Gridiron Syndicate', opp: "Bijan Mustards", fmt: 'SF PPR', oproj: 124.3, rows: [
+['QB', 'Jalen Hurts', 'QB', 'PHI', 'vs WAS', 'Sun 1:00 PM', '22nd vs QB', 'good', 22.1],
+['RB', 'Bijan Robinson', 'RB', 'ATL', 'at CAR', 'Sun 1:00 PM', '28th vs RB', 'good', 19.8],
+['RB', 'Jonathan Taylor', 'RB', 'IND', 'vs HOU', 'Sun 1:00 PM', '14th vs RB', 'mid', 15.4],
+['WR', 'CeeDee Lamb', 'WR', 'DAL', 'BYE', 'no game this week', '—', 'none', 0, 'lamb'],
+['WR', 'Tyreek Hill', 'WR', 'MIA', 'at ARI', 'Sun 4:05 PM', '9th vs WR', 'mid', 14.6],
+['WR', 'DK Metcalf', 'WR', 'SEA', 'vs LAR', 'Sun 4:25 PM', '25th vs WR', 'good', 13.4],
+['TE', 'Travis Kelce', 'TE', 'KC', 'at LV', 'Sun 4:25 PM', '20th vs TE', 'mid', 13.9, 'kelce'],
+['FLEX', 'Jahmyr Gibbs', 'RB', 'DET', 'vs GB', 'Sun 1:00 PM', '6th vs RB', 'bad', 17.2],
+['SFLEX', 'C.J. Stroud', 'QB', 'HOU', 'at IND', 'Sun 1:00 PM', '17th vs QB', 'mid', 19.6],
+['K', 'Justin Tucker', 'K', 'BAL', 'at PIT', 'Thu 7:15 PM', '16th vs K', 'mid', 8.1],
+['DST', 'Ravens D/ST', 'DST', 'BAL', 'at PIT', 'Thu 7:15 PM', '27th offense', 'good', 7.4]],
+bench: [['Rashod Bateman', 'WR', 'BAL', 'at PIT', '30th vs WR', 'good', 9.8], ['Sam LaPorta', 'TE', 'DET', 'vs GB', '24th vs TE', 'good', 9.1], ['Saquon Barkley', 'RB', 'PHI', 'vs WAS', '19th vs RB', 'mid', 16.9], ['Dak Prescott', 'QB', 'DAL', 'BYE', '—', 'none', 0, 'BYE']] },
+{ k: 'LM', name: 'Lake Minnetonka Keeper', short: 'Minnetonka', hue: '#1e4f8a', team: 'Loon Lake Lunkers', opp: 'Wayzata Whalers', fmt: 'Half PPR', oproj: 118.9, rows: [
+['QB', 'Kyler Murray', 'QB', 'ARI', 'vs MIA', 'Sun 4:05 PM', '26th vs QB', 'good', 20.4],
+['RB', 'Kyren Williams', 'RB', 'LAR', 'at SEA', 'Sun 4:25 PM', '11th vs RB', 'mid', 15.2],
+['RB', "De'Von Achane", 'RB', 'MIA', 'at ARI', 'Sun 4:05 PM', '21st vs RB', 'good', 14.8],
+['WR', 'Garrett Wilson', 'WR', 'NYJ', 'vs NE', 'Sun 1:00 PM', '29th vs WR', 'good', 13.1],
+['WR', 'Drake London', 'WR', 'ATL', 'at CAR', 'Sun 1:00 PM', '31st vs WR', 'good', 13.9],
+['TE', 'Trey McBride', 'TE', 'ARI', 'vs MIA', 'Sun 4:05 PM', '12th vs TE', 'mid', 11.6],
+['FLEX', 'Jaylen Warren', 'RB', 'PIT', 'vs BAL', 'Thu 7:15 PM', '3rd vs RB', 'bad', 9.4],
+['K', 'Harrison Butker', 'K', 'KC', 'at LV', 'Sun 4:25 PM', '8th vs K', 'mid', 8.3],
+['DST', 'Bills D/ST', 'DST', 'BUF', 'vs TEN', 'Sun 1:00 PM', '30th offense', 'good', 8.9]],
+bench: [['Tank Bigsby', 'RB', 'JAX', 'vs CHI', '18th vs RB', 'mid', 8.8], ['Jakobi Meyers', 'WR', 'LV', 'vs KC', '10th vs WR', 'mid', 9.2]] },
+{ k: 'DD', name: 'Dynasty Degenerates', short: 'Dynasty Degens', hue: '#2f7a46', team: 'Degen Dynasty', opp: 'Brooklyn Bruisers', fmt: 'PPR', oproj: 131.5, rows: [
+['QB', 'Lamar Jackson', 'QB', 'BAL', 'at PIT', 'Thu 7:15 PM', '7th vs QB', 'bad', 23.6],
+['RB', 'Breece Hall', 'RB', 'NYJ', 'vs NE', 'Sun 1:00 PM', '26th vs RB', 'good', 16.7],
+['RB', 'James Conner', 'RB', 'ARI', 'vs MIA', 'Sun 4:05 PM', '15th vs RB', 'mid', 14.1],
+['WR', 'CeeDee Lamb', 'WR', 'DAL', 'BYE', 'no game this week', '—', 'none', 0, 'lamb'],
+['WR', 'Nico Collins', 'WR', 'HOU', 'at IND', 'Sun 1:00 PM', '20th vs WR', 'mid', 15.9],
+['TE', 'Brock Bowers', 'TE', 'LV', 'vs KC', 'Sun 4:25 PM', '13th vs TE', 'mid', 13.2],
+['FLEX', 'Courtland Sutton', 'WR', 'DEN', 'vs NO', 'Sun 4:05 PM', '27th vs WR', 'good', 12.4],
+['K', 'Jake Bates', 'K', 'DET', 'vs GB', 'Sun 1:00 PM', '21st vs K', 'good', 8.6],
+['DST', 'Steelers D/ST', 'DST', 'PIT', 'vs BAL', 'Thu 7:15 PM', '4th offense', 'bad', 5.2]],
+bench: [['Jaylen Waddle', 'WR', 'MIA', 'at ARI', '29th vs WR', 'good', 12.8], ['Tony Pollard', 'RB', 'TEN', 'at BUF', '9th vs RB', 'mid', 10.1]] },
+{ k: 'SS', name: 'Superflex Syndicate', short: 'Superflex', hue: '#7a3b12', team: 'Superflexers', opp: 'Two-QB Tuesdays', fmt: 'Superflex', oproj: 127.2, rows: [
+['QB', 'Caleb Williams', 'QB', 'CHI', 'vs NO', 'Sun 1:00 PM', '29th vs QB', 'good', 19.9],
+['RB', 'Josh Jacobs', 'RB', 'GB', 'at DET', 'Sun 1:00 PM', '4th vs RB', 'bad', 13.8],
+['RB', 'Kenneth Walker III', 'RB', 'SEA', 'vs LAR', 'Sun 4:25 PM', '23rd vs RB', 'good', 15.6],
+['WR', 'Malik Nabers', 'WR', 'NYG', 'at PHI', 'Sun 1:00 PM', '16th vs WR', 'mid', 16.2],
+['WR', 'Tee Higgins', 'WR', 'CIN', 'vs CLE', 'Sun 1:00 PM', '24th vs WR', 'good', 13.7],
+['TE', 'Travis Kelce', 'TE', 'KC', 'at LV', 'Sun 4:25 PM', '20th vs TE', 'mid', 13.9, 'kelce'],
+['FLEX', 'DJ Moore', 'WR', 'CHI', 'vs NO', 'Sun 1:00 PM', '28th vs WR', 'good', 12.9],
+['SFLEX', 'Bo Nix', 'QB', 'DEN', 'vs NO', 'Sun 4:05 PM', '25th vs QB', 'good', 18.8],
+['K', 'Jake Elliott', 'K', 'PHI', 'vs NYG', 'Sun 1:00 PM', '10th vs K', 'mid', 7.9],
+['DST', 'Empty slot', 'DST', '—', 'No player', 'fill before Sun 1:00 PM', '—', 'none', 0, 'dst']],
+bench: [['Bears D/ST', 'DST', 'CHI', 'vs NO', '31st offense', 'good', 8.2], ['Sam LaPorta', 'TE', 'DET', 'vs GB', '24th vs TE', 'good', 9.1], ['Gus Edwards', 'RB', 'LAC', 'at CLE', '17th vs RB', 'mid', 6.4]] },
+{ k: 'OP', name: 'Office Pool 2026', short: 'Office Pool', hue: '#a6335a', team: 'CP Accounts Payable', opp: 'HR Bombers', fmt: 'Standard', oproj: 101.8, rows: [
+['QB', 'Jayden Daniels', 'QB', 'WAS', 'at PHI', 'Sun 1:00 PM', '12th vs QB', 'mid', 21.2],
+['RB', 'Alvin Kamara', 'RB', 'NO', 'at CHI', 'Sun 1:00 PM', '19th vs RB', 'mid', 13.4],
+['RB', 'Rhamondre Stevenson', 'RB', 'NE', 'at NYJ', 'Sun 1:00 PM', '8th vs RB', 'bad', 9.6],
+['WR', 'Puka Nacua', 'WR', 'LAR', 'at SEA', 'Sun 4:25 PM', '22nd vs WR', 'good', 0, 'puka'],
+['WR', 'Amon-Ra St. Brown', 'WR', 'DET', 'vs GB', 'Sun 1:00 PM', '11th vs WR', 'mid', 12.8],
+['TE', 'Dalton Kincaid', 'TE', 'BUF', 'vs TEN', 'Sun 1:00 PM', '26th vs TE', 'good', 7.9],
+['FLEX', 'Rome Odunze', 'WR', 'CHI', 'vs NO', 'Sun 1:00 PM', '28th vs WR', 'good', 9.3],
+['K', 'Brandon McManus', 'K', 'GB', 'at DET', 'Sun 1:00 PM', '5th vs K', 'bad', 7.6],
+['DST', 'Eagles D/ST', 'DST', 'PHI', 'vs WAS', 'Sun 1:00 PM', '9th offense', 'mid', 6.8]],
+bench: [['Romeo Doubs', 'WR', 'GB', 'at DET', '19th vs WR', 'mid', 8.1], ['Zack Moss', 'RB', 'CIN', 'vs CLE', '25th vs RB', 'good', 7.2]] },
+{ k: 'BB', name: 'Best Ball Pod #14', short: 'Best Ball', hue: '#5b2aa6', team: 'Ball So Hard', opp: '11 others', fmt: 'Best ball', oproj: 0, auto: true, rows: [], bench: [] }
+];
+// what each fix does: issue -> per-league replacement starter [name, pos, team, opp, kick, rank, rankCls, proj]
+var ISS = {
+lamb: { tag: 'BYE', tagCls: 'itag bye', title: 'CeeDee Lamb is on bye', sub: 'and starting in 2 leagues', btn: 'Fix both', fixTxt: 'Start Bateman · Waddle',
+repl: { EL: ['Rashod Bateman', 'WR', 'BAL', 'at PIT', 'Thu 7:15 PM', '30th vs WR', 'good', 9.8], DD: ['Jaylen Waddle', 'WR', 'MIA', 'at ARI', 'Sun 4:05 PM', '29th vs WR', 'good', 12.8] } },
+puka: { tag: 'OUT', tagCls: 'itag out', title: 'Puka Nacua is out (hamstring)', sub: 'starting in Office Pool', btn: 'Fix', fixTxt: 'Start Romeo Doubs',
+repl: { OP: ['Romeo Doubs', 'WR', 'GB', 'at DET', 'Sun 1:00 PM', '19th vs WR', 'mid', 8.1] } },
+dst: { tag: 'EMPTY', tagCls: 'itag empty', title: 'Empty D/ST slot', sub: 'in Superflex Syndicate', btn: 'Fill', fixTxt: 'Start Bears D/ST',
+repl: { SS: ['Bears D/ST', 'DST', 'CHI', 'vs NO', 'Sun 1:00 PM', '31st offense', 'good', 8.2] } },
+kelce: { tag: 'Q', tagCls: 'itag q', title: 'Travis Kelce is questionable', sub: 'Sun 4:25 game · starting in 2 leagues', btn: 'Swap both', fixTxt: 'Start LaPorta instead',
+repl: { EL: ['Sam LaPorta', 'TE', 'DET', 'vs GB', 'Sun 1:00 PM', '24th vs TE', 'good', 9.1], SS: ['Sam LaPorta', 'TE', 'DET', 'vs GB', 'Sun 1:00 PM', '24th vs TE', 'good', 9.1] } }
+};
+var ISSUE_ORDER = ['lamb', 'puka', 'dst', 'kelce'];
+function fixer(ids) { return function () { var f = Object.assign({}, fixed); ids.forEach(function (i) { f[i] = true; }); self.setState({ fixed: f }); }; }
+var openIds = ISSUE_ORDER.filter(function (i) { return !fixed[i]; });
+var issues = openIds.map(function (id) {
+var d = ISS[id], lgs = LG.filter(function (l) { return d.repl[l.k]; }).map(function (l) { return { init: l.k, hue: l.hue, name: l.name }; });
+return { tag: d.tag, tagCls: d.tagCls, title: d.title, sub: d.sub, btn: d.btn, fixTxt: d.fixTxt, lgs: lgs, fix: fixer([id]) };
+});
+var changes = 0, changeL = {};
+var cards = LG.map(function (l) {
+var open = 0, proj = 0;
+var rows = l.rows.map(function (r) {
+var iss = r[9], isFixed = iss && fixed[iss], d = iss ? ISS[iss] : null, x = r;
+if (isFixed) { var p = d.repl[l.k]; x = [r[0], p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7]]; changes++; changeL[l.k] = 1; }
+else if (iss) open++;
+proj += x[8];
+return { slot: x[0], chip: chipH(x[0]), name: x[1], pos: x[2], pc: pcH[x[2]], team: x[3], opp: x[4], kick: x[5], rank: x[6], rkCls: 'rk ' + x[7], proj: x[8] ? x[8].toFixed(1) : '—',
+hasTag: !!iss, tag: isFixed ? 'SWAPPED' : d && d.tag, tagCls: isFixed ? 'itag done' : (d ? d.tagCls : ''),
+cls: 'lrow' + (isFixed ? ' fixed' : (iss ? (iss === 'puka' || iss === 'dst' ? ' issue out' : ' issue') : '')) };
+});
+var used = {}; Object.keys(ISS).forEach(function (i) { if (fixed[i] && ISS[i].repl[l.k]) used[ISS[i].repl[l.k][0]] = 1; });
+var KICK = { 'at PIT': 'Thu 7:15 PM', 'vs PIT': 'Thu 7:15 PM', 'vs BAL': 'Thu 7:15 PM', 'at SEA': 'Sun 4:25 PM', 'vs LAR': 'Sun 4:25 PM', 'at LV': 'Sun 4:25 PM', 'vs KC': 'Sun 4:25 PM', 'at ARI': 'Sun 4:05 PM', 'vs MIA': 'Sun 4:05 PM', 'vs NO': 'Sun 1:00 PM' };
+var bench = l.bench.filter(function (b) { return !used[b[0]]; }).map(function (b) { return { name: b[0], pos: b[1], pc: pcH[b[1]], team: b[2], opp: b[3], kick: b[3] === 'BYE' ? 'no game' : (KICK[b[3]] || 'Sun 1:00 PM'), rank: b[4], rkCls: 'rk ' + b[5], proj: b[6] ? b[6].toFixed(1) : '—', hasTag: !!b[7], tag: b[7] || '', tagCls: 'itag bye', cls: 'lrow bn' }; });
+var bo = !!benchOpen[l.k];
+return { k: l.k, init: l.k, hue: l.hue, name: l.name, short: l.short, team: l.team, opp: l.opp, fmt: l.fmt, isAuto: !!l.auto, hasRows: !l.auto,
+proj: l.auto ? '3rd' : proj.toFixed(1), oproj: l.auto ? 'of 12' : l.oproj.toFixed(1), rows: rows, bench: bench, open: open,
+benchOpen: bo, benchLbl: bo ? 'Hide bench' : 'Bench (' + bench.length + ')',
+toggleBench: function () { var b = Object.assign({}, benchOpen); b[l.k] = !b[l.k]; self.setState({ bench: b }); },
+saveCls: changeL[l.k] ? 'sv dirty' : 'sv', saveTxt: changeL[l.k] ? 'Unsaved changes' : 'Saved' };
+});
+var tiles = cards.map(function (c) {
+return { init: c.init, hue: c.hue, short: c.short, proj: c.isAuto ? '3rd of 12' : c.proj + ' – ' + c.oproj,
+st: c.isAuto ? 'Auto' : (c.open ? c.open + (c.open === 1 ? ' fix' : ' fixes') : 'Ready'), stCls: 'stc ' + (c.isAuto ? 'auto' : (c.open ? 'bad' : 'ok')),
+cls: 'ltile ' + (c.isAuto ? '' : (c.open ? 'bad' : 'good')) };
+});
+var shownCards = hf === 'attn' ? cards.filter(function (c) { return c.open > 0; }) : cards;
+var openLeagues = cards.filter(function (c) { return c.open > 0; }).length;
+return {
+isPro: isPro, isFree: !isPro, lcardCls: 'card lcard' + (isPro ? '' : ' locked'),
+plans: [['pro', 'Pro'], ['free', 'Free (after Week 3)']].map(function (k) { return { label: k[1], cls: k[0] === plan ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ plan: k[0] }); } }; }),
+tiles: tiles, issues: issues, hasIssues: issues.length > 0, allClear: issues.length === 0, issueCount: issues.length, issueLeagues: openLeagues, openCount: issues.length || '✓',
+fixAll: fixer(ISSUE_ORDER), cards: shownCards, changeCount: changes, changeLeagues: Object.keys(changeL).length,
+filters: [['all', 'All leagues'], ['attn', 'Needs attention']].map(function (f) { return { label: f[1], cls: f[0] === hf ? 'on' : '', pick: function () { self.setState({ hf: f[0] }); } }; }),
+themes: [['dark', 'Dark'], ['light', 'Light']].map(function (k) { return { label: k[1], cls: k[0] === theme ? 'pbtn on' : 'pbtn', pick: function () { self.setState({ theme: k[0] }); } }; }),
+mainCls: isLt ? 'th-lt' : 'th-dk', pageBg: isLt ? '#F2F3F5' : '#0F1218',
+games: games, stripX: (-off * 206) + 'px', canPrev: off > 0, canNext: off < maxOff,
+stripPrev: function () { self.setState({ off: Math.max(0, off - 2) }); },
+stripNext: function () { self.setState({ off: Math.min(maxOff, off + 2) }); },
+leagues: [
+['The Empire League', 'EL', '#b07a1e', 'Live · up 46.1', '#4BE08F', true],
+['Lake Minnetonka Keeper', 'LM', '#1e4f8a', 'Live · down 6.1', '#FF7B7B', false],
+['Dynasty Degenerates', 'DD', '#2f7a46', 'Final · won 131.2–98.0', '#8B93A5', false],
+['Office Pool 2026', 'OP', '#a6335a', 'Kicks off Sun 8:20 PM', '#8B93A5', false],
+['Superflex Syndicate', 'SS', '#7a3b12', 'Dues due Friday', '#FFB547', false],
+['Best Ball Pod #14', 'BB', '#5b2aa6', '3rd of 12', '#8B93A5', false]
+].map(function (l) { return { name: l[0], init: l[1], hue: l[2], st: l[3], sc: l[4], cls: 'lg' }; }),
+chat: [
+['kelce', 'Airplane is gonna need a miracle on SNF lol', '2m'],
+['airplane', 'I have Jefferson tonight. Relax.', '1m'],
+['syndicate', 'Commish here. Trade deadline is Nov 8.', '2h'],
+['henrys', 'Anyone want Chubb for pennies?', '4h']
+].map(function (c) { return { t: tm(c[0]), txt: c[1], when: c[2] }; }),
+tx: [
+['goff', 'RB', 'Will Shipley', 'PHI', 'RB', 'Demond Claiborne', 'MIN', '1h'],
+['henrys', 'RB', 'Jaylen Warren', 'PIT', 'WR', 'Xavier Legette', 'CAR', '8h'],
+['purdy', 'WR', 'Joshua Palmer', 'BUF', 'WR', 'Romeo Doubs', 'GB', '1d']
+].map(function (x) { return { t: tm(x[0]), ap: x[1], ac: pc[x[1]], an: x[2], at: x[3], dp: x[4], dc: pc[x[4]], dn: x[5], dt: x[6], when: x[7] }; })
+};
+}
+}
+</script>
+</body>
+</html>

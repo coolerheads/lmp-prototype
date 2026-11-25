@@ -1,16 +1,28 @@
-# React + Vite
+# Fanball LMP prototype
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live: https://lmp-prototype.vercel.app (passcode gate). Vercel deploys every push to `main`.
 
-Currently, two official plugins are available:
+**This repo is the source of truth.** Until Nov 2026 the live site was uploaded straight to Vercel from
+Claude Design, so GitHub fell behind. This branch restores the exact live site (22 pages) as readable source.
+Any change, from Claude Code or Claude Design, should land here as a commit, never as a direct Vercel upload.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Layout
 
-## React Compiler
+- `boards/<Page>.dc.html` - one file per page, in Claude Design's board format. Edit these.
+- `boards/order.json` - page list; add new pages here.
+- `site/` - runtime (`rt.js`), nav, styles, images, passcode page (`index.html`), app shell (`app.html`).
+- `site/extra.js` - Game Day links from Live Scoring, appended to `rt.js` at build time.
+- `vercel.json` - routes (`/home`, `/live`, `/commish`, ...) all serve `app.html`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Build
 
-## Expanding the ESLint configuration
+```bash
+node build.js
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Writes `out/`. No `npm install` needed.
+
+## History
+
+- `main` before this: the April 2026 Vite/React version (still in git history).
+- `fanball` branch: the in-progress "Restrained" redesign of Home, Live Scoring and My Franchise.
