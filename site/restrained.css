@@ -67,3 +67,25 @@ body.rs.lb-ink header .tnav.on::after { background: #7D9BFF; }
 body.rs .rs-chip { display: inline-flex !important; align-self: flex-start; align-items: center; height: 22px; padding: 0 9px; border-radius: 6px; font-size: 11px !important; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 4px; }
 /* the per-page "THE EMPIRE LEAGUE" stage strip is retired: the league's art lives in the Home hero and the bar tint */
 body.rs section.empire.compact { display: none !important; }
+
+/* ---------- position color lives only on the slot tag ---------- */
+body.rs { --qb: #D6335E; --rb: #0E9A73; --wr: #2275CC; --te: #C96A0A; --k: #8C7D06; --dst: #636D83; --tagn: #D5DAE2; --tagtx: #12151B; }
+body.rs.th-dark { --qb: #FF7A93; --rb: #3EE0B4; --wr: #62B0FF; --te: #FFAE5C; --k: #E8D867; --dst: #A3ADC2; --tagn: #2B313D; --tagtx: #EEF1F6; }
+body.rs .pos { min-width: 44px; height: 26px !important; padding: 0 8px !important; border-radius: 7px !important; font: 700 13px 'Saira', sans-serif !important; letter-spacing: .02em; display: inline-flex !important; align-items: center; justify-content: center; box-shadow: none !important; }
+body.rs .pos.p-QB  { background: color-mix(in srgb, var(--qb) 17%, transparent) !important; color: var(--qb) !important; }
+body.rs .pos.p-RB  { background: color-mix(in srgb, var(--rb) 17%, transparent) !important; color: var(--rb) !important; }
+body.rs .pos.p-WR  { background: color-mix(in srgb, var(--wr) 17%, transparent) !important; color: var(--wr) !important; }
+body.rs .pos.p-TE  { background: color-mix(in srgb, var(--te) 17%, transparent) !important; color: var(--te) !important; }
+body.rs .pos.p-K   { background: color-mix(in srgb, var(--k) 20%, transparent) !important; color: var(--k) !important; }
+body.rs .pos.p-DST, body.rs .pos.p-DEF { background: color-mix(in srgb, var(--dst) 20%, transparent) !important; color: var(--dst) !important; }
+body.rs .pos.flx, body.rs .pos.sflx, body.rs .pos.bn { background: var(--tagn) !important; color: var(--tagtx) !important; }
+body.rs .pos.bn { opacity: .7; }
+/* small position label (lists without a slot column) */
+body.rs .rs-pt { display: inline-flex; align-items: center; height: 18px; padding: 0 5px; border-radius: 4px; font-size: 11px !important; font-weight: 700 !important; letter-spacing: .02em;
+  color: color-mix(in srgb, var(--pc) 72%, #000) !important; background: color-mix(in srgb, var(--pc) 16%, transparent); }
+body.rs.th-dark .rs-pt { color: var(--pc) !important; }
+/* tags that used a side bar as the position cue: tint them instead */
+body.rs .ctslot, body.rs .mkpos { background: color-mix(in srgb, var(--pc) 18%, transparent) !important; }
+/* the score/projection columns read first */
+body.rs .lu .n { font: 800 20px 'Saira Condensed', sans-serif !important; }
+body.rs .lu .pn1 { font-size: 16px !important; font-weight: 600; }

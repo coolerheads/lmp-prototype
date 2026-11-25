@@ -363,7 +363,7 @@ button{font-family:inherit;cursor:pointer}
 <div class="auto"><b>Best ball: nothing to set.</b> Your highest scorers count automatically each week. Projected 3rd of 12.</div>
 </sc-if>
 <sc-for list="{{c.rows}}" as="r" hint-placeholder-count="9">
-<div class="{{r.cls}}" style="box-shadow: inset 4px 0 0 {{r.pc}}">
+<div class="{{r.cls}}" style="box-shadow: none">
 <span class="{{r.chip}}">{{r.slot}}</span>
 <span style="min-width: 0">
 <span class="pnm"><span class="nmx">{{r.name}}</span><sc-if value="{{r.hasTag}}"><span class="{{r.tagCls}}">{{r.tag}}</span></sc-if></span>
@@ -377,7 +377,7 @@ button{font-family:inherit;cursor:pointer}
 <sc-if value="{{c.hasRows}}">
 <div class="bdiv"><span>Bench</span><i></i></div>
 <sc-for list="{{c.bench}}" as="r" hint-placeholder-count="4">
-<div class="{{r.cls}}" style="box-shadow: inset 4px 0 0 {{r.pc}}">
+<div class="{{r.cls}}" style="box-shadow: none">
 <span class="pos bn">BN</span>
 <span style="min-width: 0"><span class="pnm"><span class="nmx">{{r.name}}</span><sc-if value="{{r.hasTag}}"><span class="{{r.tagCls}}">{{r.tag}}</span></sc-if></span><span class="pmeta">{{r.opp}} · {{r.kick}}</span></span>
 <span><span class="{{r.rkCls}}">{{r.rank}}</span></span>

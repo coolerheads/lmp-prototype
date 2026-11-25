@@ -234,7 +234,7 @@ button{font-family:inherit;cursor:pointer}
 .srch{flex:1 1 240px;display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:10px;background:var(--card);color:var(--mut);box-shadow:inset 0 0 0 1px var(--ln)}
 .srch input{flex:1;min-width:0;border:0;background:transparent;color:var(--tx);font:inherit;font-size:14px;outline:none}
 .seg.sm button{height:30px}
-.wgrid{display:grid;grid-template-columns:minmax(240px,1fr) 70px 80px repeat(var(--nl,6),84px);gap:6px;align-items:center;min-width:max-content;padding-right:14px;padding:8px 0;border-top:1px solid var(--ln);box-shadow:inset 3px 0 0 var(--pc)}
+.wgrid{display:grid;grid-template-columns:minmax(240px,1fr) 70px 80px repeat(var(--nl,6),84px);gap:6px;align-items:center;min-width:max-content;padding-right:14px;padding:8px 0;border-top:1px solid var(--ln);box-shadow:none}
 .wgrid.hd{border-top:0;box-shadow:none;padding:8px 0 6px;font-size:11px;font-weight:700;color:var(--dim)}
 .lch{display:flex;justify-content:center}
 .wpn{display:flex;flex-direction:column;padding-left:18px;min-width:0}
@@ -265,7 +265,7 @@ button{font-family:inherit;cursor:pointer}
 .wdt{align-self:stretch;display:flex;flex-direction:column;justify-content:center;padding:0 18px 0 10px;background:#D63B3B;color:#fff;line-height:1.1;clip-path:polygon(0 0,100% 0,calc(100% - 8px) 100%,0 100%)}
 .wdt b{font-size:12px;font-weight:800;letter-spacing:.06em}
 .wdt small{font-size:9px;font-weight:700;letter-spacing:.06em;opacity:.85}
-.wva{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 8px 6px 10px;border-radius:8px;background:var(--card);box-shadow:inset 3px 0 0 var(--pc);font-size:13px}
+.wva{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 8px 6px 10px;border-radius:8px;background:var(--card);box-shadow:none;font-size:13px}
 .wrn{font-family:'Saira Condensed',sans-serif;font-weight:800;font-size:14px;color:var(--dim);text-align:center}
 .wbid{font-size:17px;font-weight:900}
 .cempty{padding:14px;border-radius:10px;border:1.5px dashed var(--ln2);color:var(--mut);font-size:13px}
@@ -335,7 +335,7 @@ main{font-family:'Saira',sans-serif}
 .lg1.mine{background:#141821;box-shadow:inset 0 0 0 1.5px #c9a24a}
 .wmod{top:auto;width:680px}
 .mlr .md{white-space:normal;height:auto;padding:2px 7px;line-height:1.3}
-.wgrid .wpn.stk{margin:-8px 0;padding:8px 0 8px 18px;box-shadow:inset 3px 0 0 var(--pc)}
+.wgrid .wpn.stk{margin:-8px 0;padding:8px 0 8px 18px;box-shadow:none}
 /* ===== Position tags: Baseline tab, ink blue body, 4px underline (final) ===== */
 :root{--tagbg:#1A2340}
 .th-dk{--tagbg:#1F2A4D}
@@ -453,7 +453,7 @@ main{font-family:'Saira',sans-serif}
 </div>
 <sc-for list="{{rows}}" as="r" hint-placeholder-count="12">
 <div class="wgrid" style="--pc: {{r.pc}}">
-<span class="wpn stk"><span class="wpnm"><b>{{r.name}}</b><sc-if value="{{r.hasInj}}"><span class="inj2">{{r.inj}}</span></sc-if></span><span class="wpm"><b style="color: {{r.pc}}">{{r.pos}}</b> {{r.team}} · {{r.game}}</span></span>
+<span class="wpn stk"><span class="wpnm"><b>{{r.name}}</b><sc-if value="{{r.hasInj}}"><span class="inj2">{{r.inj}}</span></sc-if></span><span class="wpm"><b class="rs-pt" style="--pc: {{r.pc}}">{{r.pos}}</b> {{r.team}} · {{r.game}}</span></span>
 <span class="num" style="text-align: right; font-size: 15px">{{r.own}}</span>
 <span style="text-align: right; font-size: 12px; font-weight: 800; color: var(--up)">{{r.trend}}</span>
 <sc-for list="{{r.cells}}" as="c" hint-placeholder-count="6">
@@ -491,7 +491,7 @@ main{font-family:'Saira',sans-serif}
 <div class="war">
 <span class="lsq" style="background: {{x.hue}}">{{x.k}}</span>
 <span class="{{x.stCls}}">{{x.st}}</span>
-<div class="toks"><sc-for list="{{x.toks}}" as="t" hint-placeholder-count="2"><span class="{{t.cls}}"><b>{{t.s}}</b>{{t.name}}<span style="color: {{t.pc}}; font-weight: 800; font-size: 11px; margin-left: 5px">{{t.pos}}</span></span></sc-for></div>
+<div class="toks"><sc-for list="{{x.toks}}" as="t" hint-placeholder-count="2"><span class="{{t.cls}}"><b>{{t.s}}</b>{{t.name}}<span class="rs-pt" style="--pc: {{t.pc}}; margin-left: 5px">{{t.pos}}</span></span></sc-for></div>
 <span style="font-size: 12px; color: var(--mut)">{{x.note}}</span>
 <span style="font-size: 12px; color: var(--dim); text-align: right">{{x.when}}</span>
 </div>
@@ -506,7 +506,7 @@ main{font-family:'Saira',sans-serif}
 <div style="flex: 1"><h2 class="h2">{{m.title}}</h2><div style="margin-top: 4px; font-size: 13px; color: var(--mut)">{{m.sub}}</div></div>
 <button class="xbtn" onClick="{{mClose}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
 </div>
-<div class="mlp" style="box-shadow: inset 4px 0 0 {{m.pc}}"><b style="font-size: 16px">{{m.name}}</b><span style="font-size: 12px; color: var(--mut)">{{m.meta}}</span></div>
+<div class="mlp" style="box-shadow: none"><b style="font-size: 16px">{{m.name}}</b><span style="font-size: 12px; color: var(--mut)">{{m.meta}}</span></div>
 <sc-for list="{{m.rows}}" as="r" hint-placeholder-count="4">
 <div class="{{r.cls}}">
 <button class="ck2" onClick="{{r.toggle}}" aria-label="Include this league"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" aria-hidden="true"><path d="m5 12 5 5 9-10"></path></svg></button>

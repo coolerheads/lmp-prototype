@@ -165,13 +165,13 @@ button{font-family:inherit;cursor:pointer}
 .ptab.on{color:var(--tx);border-bottom-color:#2F5BFF}
 .ptab .tc{font-family:'Saira',sans-serif;font-size:12px;font-weight:600;color:var(--mut)}
 .wgh,.wgr{display:grid;gap:4px;align-items:center}
-.wgr{box-shadow:inset 3px 0 0 var(--pc)}
+.wgr{box-shadow:none}
 .wgh>span:nth-child(-n+4),.wgr>span:nth-child(-n+4){position:sticky;z-index:2;background:var(--card);align-self:stretch;display:flex;align-items:center}
 .wgh>span:nth-child(1),.wgr>span:nth-child(1){left:0;justify-content:center}
 .wgh>span:nth-child(2),.wgr>span:nth-child(2){left:40px}
 .wgh>span:nth-child(3),.wgr>span:nth-child(3){left:var(--l3);justify-content:flex-end}
 .wgh>span:nth-child(4),.wgr>span:nth-child(4){left:var(--l4);justify-content:flex-end;padding-right:6px;box-shadow:6px 0 8px -6px rgba(0,0,0,.18)}
-.wgr>span:nth-child(1){box-shadow:inset 3px 0 0 var(--pc)}
+.wgr>span:nth-child(1){box-shadow:none}
 .wgr.mineR>span:nth-child(-n+4){background:linear-gradient(rgba(30,158,87,.07),rgba(30,158,87,.07)),var(--card)}
 .wgh>.c{text-align:center}
 .wgrid.many .wc{font-size:13px;height:28px;border-radius:5px}
@@ -500,7 +500,7 @@ button.wv:hover{background:rgba(255,181,71,.32)}
 <div class="tcard" style="box-shadow: inset 0 3px 0 {{t.pc}}, var(--sh)">
 <div style="display: flex; align-items: center; gap: 10px">
 <span class="hs"></span>
-<span style="min-width: 0"><b class="tn">{{t.name}}</b><span class="tm"><span style="color: {{t.pc}}; font-weight: 700">{{t.pos}}</span> {{t.team}} · {{t.opp}}</span></span>
+<span style="min-width: 0"><b class="tn">{{t.name}}</b><span class="tm"><span class="rs-pt" style="--pc: {{t.pc}}">{{t.pos}}</span> {{t.team}} · {{t.opp}}</span></span>
 </div>
 <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 8px">
 <span><span class="num tadd">+{{t.add}}%</span><span class="tsub">added this week</span></span>
@@ -549,8 +549,8 @@ button.wv:hover{background:rgba(255,181,71,.32)}
 <sc-for list="{{cols}}" as="c" hint-placeholder-count="14"><button class="{{c.cls}}" onClick="{{c.pick}}" title="{{c.tip}}">{{c.label}}</button></sc-for>
 </div>
 <sc-for list="{{rows}}" as="r" hint-placeholder-count="14">
-<div class="{{r.cls}}" style="box-shadow: inset 3px 0 0 {{r.pc}}">
-<span class="act" style="box-shadow: inset 3px 0 0 {{r.pc}}">
+<div class="{{r.cls}}" style="box-shadow: none">
+<span class="act" style="box-shadow: none">
 <sc-if value="{{r.isFa}}"><button class="addb" onClick="{{r.add}}" aria-label="Add {{r.name}}">+</button></sc-if>
 <sc-if value="{{r.isW}}"><button class="wv" onClick="{{r.add}}" title="On waivers · tap to place a claim">W<small>{{r.wDay}}</small></button></sc-if><sc-if value="{{r.hasClaim}}"><button class="clm" onClick="{{r.add}}" title="{{r.claimTip}}">{{r.claimTxt}}</button></sc-if>
 <sc-if value="{{r.isMine}}"><span class="mine2" title="On your team">✓</span></sc-if>
@@ -560,7 +560,7 @@ button.wv:hover{background:rgba(255,181,71,.32)}
 <button class="{{r.starCls}}" onClick="{{r.star}}" aria-label="Watchlist">★</button>
 <span style="min-width: 0">
 <span class="pn2">{{r.name}}<sc-if value="{{r.hasInj}}"><span class="inj">{{r.inj}}</span></sc-if><sc-if value="{{r.rookie}}"><span class="rk2">R</span></sc-if></span>
-<span class="pm2"><b style="color: {{r.pc}}">{{r.pos}}</b> {{r.team}} ({{r.bye}}) · {{r.opp}} · {{r.kick}}</span>
+<span class="pm2"><b class="rs-pt" style="--pc: {{r.pc}}">{{r.pos}}</b> {{r.team}} ({{r.bye}}) · {{r.opp}} · {{r.kick}}</span>
 <sc-if value="{{r.hasOwner}}"><span class="ownl"><span class="bx s16 shp-{{r.o.shape}}"><span class="ring" style="background: {{r.o.ring}}"></span><span class="in sk-{{r.o.key}}"></span><span class="ic ic-{{r.o.key}}"></span></span>{{r.ownerTxt}}</span></sc-if>
 </span>
 </span>
@@ -586,7 +586,7 @@ button.wv:hover{background:rgba(255,181,71,.32)}
 <span class="who" style="gap: 10px">
 <span style="min-width: 0">
 <span class="pn2">{{r.name}}<sc-if value="{{r.hasInj}}"><span class="inj">{{r.inj}}</span></sc-if></span>
-<span class="pm2"><b style="color: {{r.pc}}">{{r.pos}}</b> {{r.team}}</span>
+<span class="pm2"><b class="rs-pt" style="--pc: {{r.pc}}">{{r.pos}}</b> {{r.team}}</span>
 <sc-if value="{{r.hasOwner}}"><span class="ownl"><span class="bx s16 shp-{{r.o.shape}}"><span class="ring" style="background: {{r.o.ring}}"></span><span class="in sk-{{r.o.key}}"></span><span class="ic ic-{{r.o.key}}"></span></span>{{r.ownerTxt}}</span></sc-if>
 <sc-if value="{{r.isFree}}"><span class="ownl" style="color: var(--up)">Free agent · <button class="lnk" style="font-size: 11px" onClick="{{r.add}}">Add</button></span></sc-if>
 </span>
@@ -609,11 +609,11 @@ button.wv:hover{background:rgba(255,181,71,.32)}
 <div>
 <h3 class="{{col.hcls}}">{{col.title}}</h3>
 <sc-for list="{{col.items}}" as="r" hint-placeholder-count="10">
-<div class="tri" style="box-shadow: inset 3px 0 0 {{r.pc}}">
+<div class="tri" style="box-shadow: none">
 <span class="wrk">{{r.rank}}</span>
 <span style="min-width: 0">
 <span class="pn2">{{r.name}}<sc-if value="{{r.hasInj}}"><span class="inj">{{r.inj}}</span></sc-if></span>
-<span class="pm2"><b style="color: {{r.pc}}">{{r.pos}}</b> {{r.team}} · {{r.own}}% rostered</span>
+<span class="pm2"><b class="rs-pt" style="--pc: {{r.pc}}">{{r.pos}}</b> {{r.team}} · {{r.own}}% rostered</span>
 <sc-if value="{{r.hasOwner}}"><span class="ownl"><span class="bx s16 shp-{{r.o.shape}}"><span class="ring" style="background: {{r.o.ring}}"></span><span class="in sk-{{r.o.key}}"></span><span class="ic ic-{{r.o.key}}"></span></span>{{r.ownerTxt}}</span></sc-if>
 </span>
 <span class="trv"><b class="{{r.vcls}}">{{r.val}}</b><span class="bar3"><i class="{{r.bcls}}" style="width: {{r.w}}"></i></span></span>
@@ -643,7 +643,7 @@ button.wv:hover{background:rgba(255,181,71,.32)}
 <div style="flex: 1"><h2 class="h2" style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap">{{m.title}}<sc-if value="{{m.isClaim}}"><span class="fpill"><b class="num">$62</b> FAAB remaining</span></sc-if></h2><div style="margin-top: 4px; font-size: 13px; color: var(--mut)">{{m.subT}}</div></div>
 <button class="xbtn" onClick="{{closeM}}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button>
 </div>
-<div class="newp" style="box-shadow: inset 4px 0 0 {{m.pc}}">
+<div class="newp" style="box-shadow: none">
 <span class="pos2 bn">BN</span>
 <span style="min-width: 0"><b style="font-size: 15px">{{m.name}}</b> <span style="font-size: 12px; color: var(--mut)">{{m.pos}} · {{m.team}}</span><span style="display: block; font-size: 12px; color: var(--mut)">{{m.opp}} · {{m.kick}}</span></span>
 <sc-if value="{{m.isClaim}}"><span style="display: flex; flex-direction: column; align-items: center; gap: 4px"><span class="bidbox" aria-label="Your bid"><button onClick="{{m.minus}}" aria-label="Lower bid">−</button><span class="num">{{m.bidTxt}}</span><button onClick="{{m.plus}}" aria-label="Raise bid">+</button></span><span style="font-size: 10px; font-weight: 800; letter-spacing: .08em; color: var(--dim)">YOUR BID</span></span></sc-if>
@@ -663,7 +663,7 @@ button.wv:hover{background:rgba(255,181,71,.32)}
 <div class="rlist">
 <sc-for list="{{roster}}" as="p" hint-placeholder-count="18">
 <sc-if value="{{p.benchHead}}"><div class="rsub">Bench</div></sc-if>
-<button class="{{p.cls}}" onClick="{{p.pick}}" style="box-shadow: inset 4px 0 0 {{p.pc}}">
+<button class="{{p.cls}}" onClick="{{p.pick}}" style="box-shadow: none">
 <span class="{{p.chip}}">{{p.slot}}</span>
 <span style="min-width: 0; text-align: left"><b style="font-size: 14px">{{p.name}}</b> <span style="font-size: 11px; color: var(--mut)">{{p.pos}} · {{p.team}}</span><sc-if value="{{p.hasInj}}"><span class="inj">{{p.inj}}</span></sc-if><span style="display: block; font-size: 12px; color: var(--mut)">{{p.game}}</span></span>
 <span class="num" style="text-align: right; font-size: 16px; font-weight: 700">{{p.proj}}</span>
