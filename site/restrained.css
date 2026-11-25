@@ -317,3 +317,12 @@ body.rs .tplate.sk-chubb[class] { background: linear-gradient(90deg, rgba(6,6,8,
 body.rs .tplate.sk-purdy[class] { background: linear-gradient(90deg, rgba(6,6,8,.9) 0%, rgba(6,6,8,.72) 42%, rgba(6,6,8,.25) 72%, rgba(6,6,8,.5) 100%), #111 url(/a/t-purdy-hero.webp) right 38% / 150% auto no-repeat !important; }
 body.rs .tplate.sk-goff[class] { background: linear-gradient(90deg, rgba(6,6,8,.9) 0%, rgba(6,6,8,.72) 42%, rgba(6,6,8,.25) 72%, rgba(6,6,8,.5) 100%), #111 url(/a/t-goff-hero.webp) right 38% / 150% auto no-repeat !important; }
 body.rs .tplate.sk-hurts[class] { background: linear-gradient(90deg, rgba(6,6,8,.9) 0%, rgba(6,6,8,.72) 42%, rgba(6,6,8,.25) 72%, rgba(6,6,8,.5) 100%), #111 url(/a/t-hurts-hero.webp) right 38% / 150% auto no-repeat !important; }
+
+/* ---------- Standings: division banners from the league kit; column headers repeat under each division ---------- */
+body.rs .dban.dv-barb, body.rs .dban.dv-glad { height: 120px !important; margin: 26px 0 4px !important; padding: 0 26px !important; box-shadow: none !important; }
+body.rs .dban.dv-barb { background: linear-gradient(90deg, #0b0a09 0%, #0b0a09 calc(100% - 600px), rgba(11,10,9,0) calc(100% - 380px)), #0b0a09 url(/a/div-barb.webp) right 55% / auto 165% no-repeat !important; }
+body.rs .dban.dv-glad { background: linear-gradient(90deg, #150605 0%, #150605 calc(100% - 600px), rgba(21,6,5,0) calc(100% - 380px)), #150605 url(/a/div-glad.webp) right 45% / auto 165% no-repeat !important; }
+body.rs .dban.dv-barb > svg, body.rs .dban.dv-glad > svg { display: none; }
+body.rs .dban .dn { font-size: 40px !important; }
+body.rs .dban .ds { margin-left: 24px !important; margin-right: auto; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+body.rs .dban + .sth, body.rs .divh + .sth { margin-top: 6px; }
